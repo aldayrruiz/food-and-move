@@ -1,0 +1,47 @@
+<div class="box__dialog">
+    <h1 class="title">{{(consult.created_at | date: 'dd/MM/YYYY')}}</h1>
+    <div class="section">
+        <p class="text">{{consult.comments}}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="section section-top">
+        <div class="list">
+            <div class="list__item list__item-between" *ngIf="consult.masa != undefined">
+                <p class="text">Masa [Kg]</p>
+                <p class="text">{{consult.masa}}</p>
+            </div>
+            <div class="list__item list__item-between" *ngIf="consult.imc != undefined">
+                <p class="text">IMC [Kg/m2]</p>
+                <p class="text">{{consult.imc}}</p>
+            </div>
+            <div class="list__item list__item-between" *ngIf="consult.per_abdominal != undefined">
+                <p class="text">Perímetro Abdominal [cm]</p>
+                <p class="text">{{consult.per_abdominal}}</p>
+            </div>
+            <div class="list__item list__item-between" *ngIf="consult.tension != undefined">
+                <p class="text">Tensión Arterial [mmHg]</p>
+                <p class="text">{{consult.tension}}</p>
+            </div>
+            <div class="list__item list__item-between" *ngIf="consult.trigliceridos != undefined">
+                <p class="text">Triglicéridos Séricos</p>
+                <p class="text">{{consult.trigliceridos}}</p>
+            </div>
+            <div class="list__item list__item-between" *ngIf="consult.hdl != undefined">
+                <p class="text">HDL - Colesterol</p>
+                <p class="text">{{consult.hdl}}</p>
+            </div>
+            <div class="list__item list__item-between" *ngIf="consult.ldl != undefined">
+                <p class="text">LDL - Colesterol</p>
+                <p class="text">{{consult.ldl}}</p>
+            </div>
+            <div class="list__item list__item-between" *ngIf="consult.hemoglobina != undefined">
+                <p class="text">Hemoglobina Glicosilada (hba1c)</p>
+                <p class="text">{{consult.hemoglobina}}</p>
+            </div>
+            <div class="list__item list__item-between" *ngIf="consult.glucosa != undefined">
+                <p class="text">Glucosa en Plasma</p>
+                <p class="text">{{consult.glucosa}}</p>
+            </div>
+        </div>
+    </div>
+</div>

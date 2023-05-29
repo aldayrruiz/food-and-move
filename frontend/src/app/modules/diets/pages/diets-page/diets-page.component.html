@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="btn__add" *ngIf="isSmall">
+        <button mat-fab color="primary" (click)="addDiet()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+    <div class="crud__header">
+        <p class="header__subtitle">Dietas Semanales</p>
+        <mat-form-field appearance="standard" class="input__search">
+            <mat-label>Buscar</mat-label>
+            <input matInput (keyup)="applyFilter()" placeholder="Ej. Menu 1" #input autocomplete="off" [(ngModel)]="search">
+        </mat-form-field>
+        <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addDiet()">Agregar Dieta Semanal</button>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="crud__main">
+        <app-table
+            [tableStructure]="tableStructure"
+            [indexDisplay]="indexDisplay"
+            [dataSource]="dataSource"
+            [loading]="isLoadingResults"
+            [limit]="limit"
+            [page]="page"
+            [total]="total"
+            [sortActive]="'title'"
+            [viewInfo]="false"
+            (onClick)="editDiet($event)"
+            (reset)="resetTable()"
+            (changePage)="changePage($event)"
+            (changeSort)="changeSort($event)"
+            (info)="openInfoDiet($event)"
+            (edit)="editDiet($event)"
+            (delete)="deleteDiet($event)">
+        </app-table>
+    </div>
+</div>

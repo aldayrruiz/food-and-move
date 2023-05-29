@@ -1,0 +1,20 @@
+<div class="container">
+    <h1>Agregar Dieta Semanal</h1>
+    <form [formGroup]="form" (ngSubmit)="addDiet()">
+        <div class="form__inputs">
+            <mat-form-field class="input__field">
+                <mat-label>Título</mat-label>
+                <input type="text" matInput autocomplete="off" formControlName="title" tabindex="4">
+            </mat-form-field>
+            <mat-form-field class="input__field">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput type="text" matInput autocomplete="off" formControlName="description" tabindex="10" #description maxlength="155"></textarea>
+                <mat-hint align="end">{{description.value.length}}/155</mat-hint>
+            </mat-form-field>
+        </div>
+        <div mat-dialog-actions class="buttons">
+            <button type="button" mat-button [mat-dialog-close]="false">Cancelar</button>
+            <button type="submit" mat-raised-button color="primary" [mat-dialog-close]="true">Agregar</button>
+        </div>
+    </form>
+</div>

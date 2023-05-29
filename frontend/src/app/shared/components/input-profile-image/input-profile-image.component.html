@@ -1,0 +1,7 @@
+<input type="file" id="fileUpload" #fileUpload style="display: none" accept="image/png,image/jpg,image/jpeg,image/gif" (change)="onSelectFile($event)">
+<div class="box-picture pointer" [style.width]="size" [style.height]="size" (click)="onClick()">
+    <div class="hover-box-picure">
+        <mat-icon>more_horiz</mat-icon>
+    </div>
+    <img [src]="url" class="image">
+</div>

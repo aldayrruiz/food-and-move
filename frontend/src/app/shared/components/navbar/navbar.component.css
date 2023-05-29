@@ -1,0 +1,100 @@
+mat-toolbar {
+    border-radius: 0 0 3px 3px;
+}
+
+.logo {
+    margin-left: 10px;
+    width: 160px;
+    cursor: pointer;
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 97;
+}
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    height: 100%;
+    max-width: 200px;
+    user-select: none;
+}
+
+.profile__name {
+    font-size: 15px;
+    font-weight: normal;
+    padding: 0;
+    margin: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.profile__panel {
+    position: absolute;
+    width: 350px;
+    box-shadow: 0 3px 6px 1px rgba(0,0,0,0.2);
+    background-color: white;
+    top: 65px;
+    right: 0;
+    padding: 10px 10px 20px 10px;
+    box-sizing: border-box;
+    z-index: 99;
+}
+
+.click__out {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.05);
+    width: 100vw;
+    height: 100vh;
+    z-index: 98;
+}
+
+.profile__buttons {
+    width: 100%;
+    text-align: right;
+}
+
+.profile__info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.profile__info-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile__info-main p {
+    padding: 0;
+    margin: 0;
+    text-overflow: ellipsis;
+}
+
+.main__name {
+    font-size: 18px;
+}
+
+.main__email {
+    font-size: 14px;
+    color: var(--gray-text);
+}
+
+@media(max-width: 959px) {
+    mat-toolbar {
+        border-radius: 0;
+    }
+
+    .title {
+        margin-left: 20px;
+    }
+}

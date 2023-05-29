@@ -1,0 +1,20 @@
+<div class="header">
+    <h1 class="title">Configuración</h1>
+    <mat-divider></mat-divider>
+</div>
+<div class="main">
+    <div class="edit__profile configuration__section">
+        <div class="section__title">
+            <mat-icon>person</mat-icon>
+            <p>Editar Perfil</p>
+        </div>
+        <app-profile-settings [employee]="employee" (setEmployee)="setEmployee($event)"></app-profile-settings>
+    </div>
+    <div class="change__password configuration__section">
+        <div class="section__title">
+            <mat-icon>lock_outline</mat-icon>
+            <p>Cambiar Contraseña</p>
+        </div>
+        <app-change-password-settings [employee]="employee" (setEmployee)="setEmployee($event)"></app-change-password-settings>
+    </div>
+</div>

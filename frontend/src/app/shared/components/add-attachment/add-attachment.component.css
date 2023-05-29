@@ -1,0 +1,31 @@
+.input__field {
+    width: 100%;
+}
+
+.file-input {
+    display: none;
+}
+
+.file-upload {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+.file-upload p {
+    margin: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.buttons {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 5px;
+}

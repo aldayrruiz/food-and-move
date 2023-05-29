@@ -1,0 +1,17 @@
+@import "../node_modules/@angular/material/theming";
+
+$custom-typography: mat-typography-config(
+    $font-family: 'Rubik'
+);
+
+@include mat-core($custom-typography);
+
+//$my-primary: mat-palette($mat-blue-grey, 500);
+//$my-accent: mat-palette($mat-brown, 300);
+
+$my-primary: mat-palette($mat-orange, 300);
+$my-accent: mat-palette($mat-amber, 300);
+
+$my-theme: mat-light-theme($my-primary, $my-accent);
+
+@include angular-material-theme($my-theme);

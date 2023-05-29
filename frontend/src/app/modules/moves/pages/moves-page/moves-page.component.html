@@ -1,0 +1,13 @@
+<app-header-patient [patient]="patient" title="Ejercicios"></app-header-patient>
+<div class="food__main">
+    <div class="main__date">
+        <button mat-icon-button class="btn__date" (click)="changeDateRange(-1)">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <p class="date">{{dateRange.startDate | date : 'dd/MM/yy'}} - {{dateRange.endDate | date: 'dd/MM/yy'}}</p>
+        <button mat-icon-button class="btn__date" (click)="changeDateRange(1)">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+    </div>
+    <app-weekly-calendar [days]="days" [type]="weeklyCalendarType.Move" (add)="addMove($event.date)" (edit)="editMove($event.item)" (delete)="deleteMove($event.item)"></app-weekly-calendar>
+</div>

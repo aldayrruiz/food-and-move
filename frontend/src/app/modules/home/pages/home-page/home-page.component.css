@@ -1,0 +1,19 @@
+mat-sidenav-container, mat-sidenav-content, mad-sidenav {
+    height: 100%;
+}
+
+mat-sidenav {
+    width: 250px;
+}
+
+main {
+    margin-top: 75px;
+    margin-bottom: 50px;
+    padding: 20px;
+}
+
+@media(max-width: 959px) {
+    main {
+        margin-top: 50px;
+    }
+}

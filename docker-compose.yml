@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  nestjs:
+    image: node:16.19.1
+    working_dir: /app
+    restart: always
+    volumes:
+      - ./backend:/app
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/nestjs
+      JWT_ACCESS_SECRET: your_access_secret
+      JWT_REFRESH_SECRET: your_refresh_secret
+      MAIL_HOST: your_smpt_host
+      MAIL_USER: your_sender_email
+      MAIL_PASSWORD: your_sender_password
+      MAIL_FROM: your_sender_email
+    ports:
+      - 3001:3000
+    command: bash -c "npm i && npm run build && npm run start:prod"
+
+  angular:
+    image: node:16.19.1
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    command: bash -c "npm i && npm run build"
+
+  mongodb:
+    image: mongo:4.4.20
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:

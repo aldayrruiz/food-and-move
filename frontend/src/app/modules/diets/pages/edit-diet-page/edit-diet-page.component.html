@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="header">
+        <button type="button" mat-icon-button matTooltip="Volver" (click)="exit()">
+            <mat-icon>clear</mat-icon>
+        </button>
+        <p class="title">{{diet?.title}}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="main">
+        <app-weekly-calendar [days]="(days)" [showDate]="false" [showRating]="false" [type]="weeklyCalendarType.Food" (add)="addRecipe($event)" (edit)="editRecipe($event.day, $event.item)" (delete)="deleteRecipe($event.day, $event.item)"></app-weekly-calendar>
+    </div>
+</div>

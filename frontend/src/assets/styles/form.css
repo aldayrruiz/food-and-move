@@ -1,0 +1,182 @@
+/* HEADER */
+
+.form__header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.header__left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: 10px;
+    flex: wrap;
+}
+
+.btn__exit {
+    margin-right: 10px;
+}
+
+.header__subtitle {
+    font-size: 28px;
+    text-align: left;
+    margin: 0;
+}
+
+/* MAIN */
+
+.form__main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.main__primary {
+    width: 100%;
+    max-width: 900px;
+}
+
+.main__secondary {
+    margin-left: 20px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form__input {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    width: 100%;
+}
+
+.input__icon {
+    float: left;
+    opacity: 0.5;
+    margin-top: 14px;
+    margin-right: 20px;
+}
+
+.fake__icon {
+    width: 45px;
+}
+
+.fake__clear {
+    width: 40px;
+}
+
+.input__field {
+    width: 85%;
+}
+
+.btn__clear {
+    opacity: 0.5;
+}
+
+/* Calendar */
+
+.form__calendar {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.calendar {
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Form Box */
+
+.form__box {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    max-width: 1000px;
+    width: 100%;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.form__profile-image {
+    height: 100%;
+    position: relative;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.form__profile-image p {
+    font-size: 18px;
+}
+
+/* Form Date */
+
+.header__date {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form__date {
+    margin: 0;
+    font-size: 24px;
+    margin-left: 20px;
+}
+
+/**/
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.buttons button {
+    width: 30%;
+    max-width: 200px;
+}
+
+@media(max-width: 959px) {
+    .header__subtitle {
+        font-size: 20px;
+    }
+
+    .form__main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main__secondary {
+        margin-top: 20px;
+        margin-left: 0;
+    }
+
+    .form__profile-image {
+        margin-bottom: 20px;
+    }
+
+    .form__box {
+        padding: 50px 10px;
+        flex-direction: column;
+    }
+}

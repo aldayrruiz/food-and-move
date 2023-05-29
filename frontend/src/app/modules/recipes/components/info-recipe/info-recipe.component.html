@@ -1,0 +1,76 @@
+<div class="dialog__box">
+    <h1 class="title">{{recipe.title}}</h1>
+    <div class="header">
+        <p class="subtitle">General</p>
+        <mat-divider></mat-divider>
+    </div>
+    <div class="section">
+        <div class="item">
+            <p class="text">{{recipe.description}}</p>
+        </div>
+        <div class="item">
+            <mat-icon class="icon">restaurant</mat-icon>
+            <p class="text">{{recipe.meal}} - {{recipe.dish}}</p>
+        </div>
+    </div>
+    <div class="header">
+        <p class="subtitle">Links</p>
+        <mat-divider></mat-divider>
+    </div>
+    <div class="section" [ngSwitch]="recipe.links.length">
+        <div class="list__not-exist" *ngSwitchCase="0">
+            <p class="text">No existe ningún link</p>
+        </div>
+        <div class="list" *ngSwitchDefault>
+            <a [href]="link" *ngFor="let link of recipe.links" class="list__item list__item-normal">
+                <mat-icon class="icon">link</mat-icon>
+                <p class="url text">{{link}}</p>
+            </a>
+        </div>
+    </div>
+    <div class="header">
+        <p class="subtitle">Vídeos</p>
+        <mat-divider></mat-divider>
+    </div>
+    <div class="section" [ngSwitch]="recipe.videos.length">
+        <div class="list__not-exist" *ngSwitchCase="0">
+            <p class="text">No existe ningún vídeo</p>
+        </div>
+        <div class="list" *ngSwitchDefault>
+            <a [href]="video" *ngFor="let video of recipe.videos" class="list__item list__item-normal">
+                <mat-icon class="icon">video_library</mat-icon>
+                <p class="url text">{{video}}</p> 
+            </a>
+        </div>
+    </div>
+    <div class="header">
+        <p class="subtitle">Ingredientes</p>
+        <mat-divider></mat-divider>
+    </div>
+    <div class="section" [ngSwitch]="recipe.ingredients">
+        <div class="list__not-exist" *ngSwitchCase="0">
+            <p class="text">No existe ningún ingrediente</p>
+        </div>
+        <div class="list" *ngSwitchDefault>
+            <div *ngFor="let ingredient of recipe.ingredients" class="list__item list__item-between">
+                <p class="text">{{ingredient.name}}</p>
+                <p class="text">{{ingredient.quantity != 0 ? ingredient.quantity : ''}} {{ingredient.unit}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        <p class="subtitle">PDF</p>
+        <mat-divider></mat-divider>
+    </div>
+    <div class="section" [ngSwitch]="recipe.attachment">
+        <div class="list__not-exist" *ngSwitchCase="null">
+            <p class="text">No existe ningún PDF</p>
+        </div>
+        <div class="list" *ngSwitchDefault>
+            <a [href]="getAttachmentUrl()" class="list__item list__item-normal">
+                <mat-icon class="icon">video_library</mat-icon>
+                <p class="url text">{{attachment?.title || 'archivo'}}</p> 
+            </a>
+        </div>
+    </div>
+</div>

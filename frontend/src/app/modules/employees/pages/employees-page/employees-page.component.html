@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="btn__add" *ngIf="isSmall">
+        <button mat-fab color="primary" (click)="addEmployee()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+    <div class="crud__header">
+        <p class="header__subtitle">Profesionales</p>
+        <mat-form-field appearance="standard" class="input__search">
+            <mat-label>Buscar</mat-label>
+            <input matInput (keyup)="applyFilter()" placeholder="Ej. Juan" #input autocomplete="off" [(ngModel)]="search">
+        </mat-form-field>
+        <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addEmployee()">Agregar Profesional</button>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="crud__main">
+        <app-table
+            [tableStructure]="tableStructure"
+            [indexDisplay]="indexDisplay"
+            [dataSource]="dataSource"
+            [loading]="isLoadingResults"
+            [limit]="limit"
+            [page]="page"
+            [total]="total"
+            [sortActive]="'name'"
+            (onClick)="openInfoEmployee($event)"
+            (reset)="resetTable()"
+            (changePage)="changePage($event)"
+            (changeSort)="changeSort($event)"
+            (info)="openInfoEmployee($event)"
+            (edit)="editEmployee($event)"
+            (delete)="deleteEmployee($event)">
+        </app-table>
+    </div>
+</div>
