@@ -1,3 +1,2 @@
-'./**/*.{js, ts,tsx}':
+"**/*.{js,jsx,ts,tsx}":
   - npm run format
-  - npm run lint

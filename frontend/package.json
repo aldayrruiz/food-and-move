@@ -8,8 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "format": "prettier --write \"{src, e2e}/**/*.{ts,js,css}\"",
-    "lint": "eslint \"{src,apps,libs,test, e2e}/**/*.{ts, js}\" --fix",
-    "prepare": "cd .. && husky install frontend/.husky"
+    "lint": "eslint \"{src,apps,libs,test, e2e}/**/*.{ts, js}\" --fix"
   },
   "private": true,
   "dependencies": {

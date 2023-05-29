@@ -10,10 +10,6 @@ import { AttachmentSchema } from './schemas/attachment.schema';
       {
         name: 'attachments',
         schema: AttachmentSchema,
-
-
-
-
       },
     ]),
   ],

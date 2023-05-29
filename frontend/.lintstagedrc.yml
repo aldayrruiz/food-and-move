@@ -1,4 +1,2 @@
-'./**/*.{js, ts,tsx}':
-  - echo "hello"
+"**/*.{js,jsx,ts,tsx}":
   - npm run format
-  - npm run lint
