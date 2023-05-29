@@ -1,38 +1,38 @@
 .btn__add {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 99;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 99;
 }
 
 .crud__header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header__subtitle {
-    font-size: 28px;
-    text-align: left;
-    margin: 0;
+  font-size: 28px;
+  text-align: left;
+  margin: 0;
 }
 
 .input__search {
-    width: 100%;
-    max-width: 600px;
+  width: 100%;
+  max-width: 600px;
 }
 
 .crud__main {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
-@media(max-width: 959px) {
-    .crud__header {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: left;
-        margin-top: 25px;
-    }
+@media (max-width: 959px) {
+  .crud__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    margin-top: 25px;
+  }
 }

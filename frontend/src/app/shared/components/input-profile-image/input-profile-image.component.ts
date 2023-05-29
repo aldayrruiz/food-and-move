@@ -10,7 +10,7 @@ import { InputProfileEvent } from './enums/input-profile-event';
   styleUrls: ['./input-profile-image.component.css'],
 })
 export class InputProfileImageComponent implements OnInit {
-  @Input() size: string = '100px';
+  @Input() size = '100px';
   @Input() url: string = URL_PROFILE_IMAGE;
 
   @Output() onSelect = new EventEmitter<any>();

@@ -1,26 +1,26 @@
 .configuration__section {
-    margin: 20px 0 30px 0;
+  margin: 20px 0 30px 0;
 }
 
 .section__title {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
-    border-bottom: 1px solid gray;
-    padding-bottom: 10px;
-    margin-bottom: 30px;
-    padding-left: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  border-bottom: 1px solid gray;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  padding-left: 10px;
 }
 
 .section__title p {
-    margin: 0;
-    font-size: 21px;
+  margin: 0;
+  font-size: 21px;
 }
 
 .section__title mat-icon {
-    --size: 25px;
-    width: var(--size);
-    height: var(--size);
-    font-size: var(--size);
+  --size: 25px;
+  width: var(--size);
+  height: var(--size);
+  font-size: var(--size);
 }

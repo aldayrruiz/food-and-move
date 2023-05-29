@@ -15,7 +15,7 @@ export class RecoverPasswordComponent implements OnInit {
   form!: FormGroup;
   loading = false;
 
-  token: string = '';
+  token = '';
 
   constructor(
     private readonly fb: FormBuilder,

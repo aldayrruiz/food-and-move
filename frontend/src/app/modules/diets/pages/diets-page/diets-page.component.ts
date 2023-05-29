@@ -22,8 +22,8 @@ import { DEFAULT_LIMIT } from 'src/app/constants/app.constants';
 })
 export class DietsPageComponent implements OnInit {
   listDiets: DietModel[] = [];
-  isSmall: boolean = false;
-  isLoadingResults: boolean = false;
+  isSmall = false;
+  isLoadingResults = false;
 
   dataSource!: MatTableDataSource<any>;
 
@@ -31,13 +31,13 @@ export class DietsPageComponent implements OnInit {
     { index: 1, field: 'title', header: 'Título', sort: true },
     { index: 2, field: 'description', header: 'Descripción', sort: true },
   ];
-  indexDisplay: number = 2;
+  indexDisplay = 2;
 
-  search: string = '';
+  search = '';
   searchFields: string[] = ['title'];
 
-  sortField: string = 'title';
-  sortDirection: string = 'asc';
+  sortField = 'title';
+  sortDirection = 'asc';
 
   limit = DEFAULT_LIMIT;
   page = 0;

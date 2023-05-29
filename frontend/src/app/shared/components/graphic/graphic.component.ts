@@ -11,7 +11,7 @@ import { GraphicColor } from './types/types';
 export class GraphicComponent implements OnInit {
   @Input() timeData?: TimeData;
   @Input() color: GraphicColor = [0, 0, 0];
-  @Input() loading: boolean = false;
+  @Input() loading = false;
 
   constructor() {}
 

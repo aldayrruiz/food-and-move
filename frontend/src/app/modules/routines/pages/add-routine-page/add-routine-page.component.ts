@@ -21,7 +21,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class AddRoutinePageComponent implements OnInit {
   form!: FormGroup;
-  edit: boolean = false;
+  edit = false;
   routine: RoutineModel | null = null;
 
   links: Array<LinkStructure> = [];
@@ -167,7 +167,7 @@ export class AddRoutinePageComponent implements OnInit {
       );
   }
 
-  getRoutineRequest(edit: boolean = false): RoutineRequestModel {
+  getRoutineRequest(edit = false): RoutineRequestModel {
     const request = {
       title: this.title,
       description: this.description,

@@ -1,101 +1,101 @@
 .container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 30px;
 }
 
 .day {
-    min-height: 200px;
-    width: 100%;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px 1px rgba(0,0,0,0.1);
-    display: 200px;
-    overflow: hidden;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
+  min-height: 200px;
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.1);
+  display: 200px;
+  overflow: hidden;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
 }
 
 .day .day__header {
-    text-align: center;
-    padding: 5px 10px;
-    background-color: rgba(0,0,0,0.05);
-    display: flex;
-    align-items: center;
-    flex-direction: row;
+  text-align: center;
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
 .day p {
-    margin: 0;
+  margin: 0;
 }
 
 .day__header .day_of_week {
-    font-size: 18px;
-    width: 100%;
+  font-size: 18px;
+  width: 100%;
 }
 
 .day__main {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
 }
 
 .day__item {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 20px;
-    background-color: rgba(0, 255, 0, 0.2);
-    transition: all 0.3s;
-    cursor: pointer;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background-color: rgba(0, 255, 0, 0.2);
+  transition: all 0.3s;
+  cursor: pointer;
 }
 
 .day__item:hover {
-    transform: scale(1.01);
+  transform: scale(1.01);
 }
 
 .day__item .item__icon {
-    min-width: 25px;
+  min-width: 25px;
 }
 
 .day__item .item__title {
-    margin: 0;
-    text-align: left;
-    width: 100%;
-    margin-left: 20px;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+  margin-left: 20px;
 }
 
 .day__item .item__rating {
-    width: 25px;
-    margin-right: 5px;
+  width: 25px;
+  margin-right: 5px;
 }
 
 .day__item .item__delete {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
 .day__item .item__delete:hover {
-    color: red;
+  color: red;
 }
 
 .add__day {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 100%;
 }

@@ -1,58 +1,58 @@
 .form__list-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
 .form__list-box .header {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .form__list-box .header p {
-    margin: 0;
-    font-size: 15px;
+  margin: 0;
+  font-size: 15px;
 }
 
 .form__list-box .header .subtitle {
-    color: var(--gray-text);
+  color: var(--gray-text);
 }
 
 .form__list-box .header .icon {
-    color: var(--gray-text);
+  color: var(--gray-text);
 }
 
 .form__list-box .form__list {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .form__list-box .form__list .input {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .form__list-box .list {
-    width: 100%;
+  width: 100%;
 }
 
 .form__list-box .list .item {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .form__list-box .list .item:hover {
-    background-color: #EEE;
+  background-color: #eee;
 }
 
 .form__list-box .list .item * {
-    text-decoration: none;
-    color: #555;
-    margin-bottom: 0;
-    overflow: auto;
+  text-decoration: none;
+  color: #555;
+  margin-bottom: 0;
+  overflow: auto;
 }

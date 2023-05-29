@@ -7,7 +7,7 @@ import { PatientModel } from '../../core/models/patient.model';
 export class PatientPipe implements PipeTransform {
   transform(patient: PatientModel): PatientModel {
     try {
-      let newPatient: PatientModel = Object.assign({}, patient);
+      const newPatient: PatientModel = Object.assign({}, patient);
       if (patient.birth != undefined) newPatient.birth = new Date(patient.birth);
       return newPatient;
     } catch (e) {

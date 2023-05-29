@@ -1,31 +1,31 @@
 .item_menu mat-icon {
-    margin-right: 10px;
-    color: #555;
+  margin-right: 10px;
+  color: #555;
 }
 
 .profile {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 10px;
-    margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .profile p {
-    margin: 0;
+  margin: 0;
 }
 
 .profile__info {
-    padding: 0 10px;
+  padding: 0 10px;
 }
 
 .profile__name {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .profile__email {
-    font-size: 14px;
-    color: var(--gray-text);
+  font-size: 14px;
+  color: var(--gray-text);
 }

@@ -6,8 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./profile-picture.component.css'],
 })
 export class ProfilePictureComponent implements OnInit {
-  @Input() url: string = '';
-  @Input() size: string = '50px';
+  @Input() url = '';
+  @Input() size = '50px';
 
   constructor() {}
 

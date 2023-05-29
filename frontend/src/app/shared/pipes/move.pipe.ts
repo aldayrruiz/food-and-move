@@ -7,7 +7,7 @@ import { MoveModel } from '@core/models/move.model';
 export class MovePipe implements PipeTransform {
   transform(move: MoveModel): MoveModel {
     try {
-      let newMove: MoveModel = Object.assign({}, move);
+      const newMove: MoveModel = Object.assign({}, move);
       if (move.date != undefined) newMove.date = new Date(move.date);
       return newMove;
     } catch (e) {

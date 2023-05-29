@@ -17,7 +17,7 @@ import { OptionalPipe } from '../../../../shared/pipes/optional.pipe';
 })
 export class AddEmployeePageComponent implements OnInit {
   form!: FormGroup;
-  edit: boolean = false;
+  edit = false;
   employee: EmployeeModel | null = null;
 
   buttonClear = {
@@ -29,7 +29,7 @@ export class AddEmployeePageComponent implements OnInit {
 
   imageFile?: string = '';
   selectedFile?: File;
-  removeProfileImage: boolean = false;
+  removeProfileImage = false;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -196,7 +196,7 @@ export class AddEmployeePageComponent implements OnInit {
       );
   }
 
-  private getEmployeeRequest(edit: boolean = false): EmployeeRequestModel {
+  private getEmployeeRequest(edit = false): EmployeeRequestModel {
     const request = {
       name: this.name,
       surname: this.surname,

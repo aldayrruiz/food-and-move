@@ -1,71 +1,71 @@
 .main {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .box__dates {
-    background-color: white;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-    align-items: center;
+  background-color: white;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
 }
 
 .box__dates .buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
 }
 
 .box__dates .buttons button {
-    min-width: 120px;
+  min-width: 120px;
 }
 
 .date__range {
-    width: 300px;
+  width: 300px;
 }
 
 .date__range mat-datepicker-toggle {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-75%);
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-75%);
 }
 
 .graphics {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    row-gap: 20px;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  row-gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 .graphic {
-    min-width: 450px;
+  min-width: 450px;
 }
 
 @media (max-width: 800px) {
-    .graphics {
-        display: flex;
-        flex-wrap: nowrap;
-        flex-direction: column;
-        align-items: center;
-    }
+  .graphics {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .graphic {
-        width: 100%;
-        min-width: none;
-    }
+  .graphic {
+    width: 100%;
+    min-width: none;
+  }
 }

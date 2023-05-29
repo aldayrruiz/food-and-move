@@ -22,8 +22,8 @@ import { DEFAULT_LIMIT } from 'src/app/constants/app.constants';
 })
 export class RecipesPageComponent implements OnInit {
   listRecipes: RecipeModel[] = [];
-  isSmall: boolean = false;
-  isLoadingResults: boolean = false;
+  isSmall = false;
+  isLoadingResults = false;
 
   dataSource!: MatTableDataSource<any>;
 
@@ -33,17 +33,17 @@ export class RecipesPageComponent implements OnInit {
     { index: 3, field: 'dish', header: 'Plato', sort: true },
     { index: 4, field: 'description', header: 'Descripción', sort: true },
   ];
-  indexDisplay: number = 4;
+  indexDisplay = 4;
 
-  search: string = '';
+  search = '';
   searchFields: string[] = ['title', 'meal', 'dish'];
 
-  sortField: string = 'title';
-  sortDirection: string = 'asc';
+  sortField = 'title';
+  sortDirection = 'asc';
 
   limit: number = DEFAULT_LIMIT;
-  total: number = 0;
-  page: number = 0;
+  total = 0;
+  page = 0;
 
   constructor(
     private readonly breakpointObserver: BreakpointObserver,

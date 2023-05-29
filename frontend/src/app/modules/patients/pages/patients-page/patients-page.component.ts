@@ -26,8 +26,8 @@ import { ViewPatientService } from '../../../../core/services/view-patient.servi
 })
 export class PatientsPageComponent implements OnInit {
   listPatients: PatientModel[] = [];
-  isSmall: boolean = false;
-  isLoadingResults: boolean = false;
+  isSmall = false;
+  isLoadingResults = false;
   user: EmployeeModel | null = null;
 
   dataSource!: MatTableDataSource<any>;
@@ -39,17 +39,17 @@ export class PatientsPageComponent implements OnInit {
     { index: 3, field: 'email', header: 'Email', sort: true },
     { index: 4, field: 'birth', header: 'Nacimiento', sort: true, type: ColumnType.DATE },
   ];
-  indexDisplay: number = 4;
+  indexDisplay = 4;
 
-  search: string = '';
+  search = '';
   searchFields: string[] = ['name', 'surname', 'email', 'phone'];
 
-  sortField: string = 'name';
-  sortDirection: string = 'asc';
+  sortField = 'name';
+  sortDirection = 'asc';
 
-  page: number = 0;
+  page = 0;
   limit: number = DEFAULT_LIMIT;
-  total: number = 0;
+  total = 0;
 
   constructor(
     private readonly authService: AuthService,

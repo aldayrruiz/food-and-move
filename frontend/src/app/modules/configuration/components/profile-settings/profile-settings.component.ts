@@ -29,7 +29,7 @@ export class ProfileSettingsComponent implements OnInit {
 
   imageFile?: string = '';
   selectedFile?: File;
-  removeProfileImage: boolean = false;
+  removeProfileImage = false;
 
   constructor(
     private readonly employeesService: EmployeesService,
@@ -148,7 +148,7 @@ export class ProfileSettingsComponent implements OnInit {
       );
   }
 
-  private getEmployeeRequest(edit: boolean = false): EmployeeRequestModel {
+  private getEmployeeRequest(edit = false): EmployeeRequestModel {
     const request = {
       name: this.name,
       surname: this.surname,

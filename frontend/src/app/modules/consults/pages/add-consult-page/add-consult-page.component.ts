@@ -21,7 +21,7 @@ import { OptionalPipe } from '../../../../shared/pipes/optional.pipe';
 })
 export class AddConsultPageComponent implements OnInit {
   form!: FormGroup;
-  edit: boolean = false;
+  edit = false;
   patient: PatientModel | null = null;
   consult: ConsultModel | null = null;
 
@@ -228,7 +228,7 @@ export class AddConsultPageComponent implements OnInit {
       );
   }
 
-  getConsultRequest(edit: boolean = false): ConsultRequestModel {
+  getConsultRequest(edit = false): ConsultRequestModel {
     const request = {
       patient: this.patient?._id,
       masa: this.masa,

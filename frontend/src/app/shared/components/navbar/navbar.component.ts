@@ -12,10 +12,10 @@ import { EmployeeModel } from '../../../core/models/employee.model';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  isSmall: boolean = false;
+  isSmall = false;
   employee: EmployeeModel | null = null;
 
-  showProfilePanel: boolean = false;
+  showProfilePanel = false;
 
   @Output() public sidenavToggle = new EventEmitter();
 

@@ -3,55 +3,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-    --color-1: #0000008A;
-    --color-2: #5F91DE;
-    --gray-text: #888;
-    --font-size-1: 14px;
+  --color-1: #0000008a;
+  --color-2: #5f91de;
+  --gray-text: #888;
+  --font-size-1: 14px;
 }
 
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
 
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .successful-color-snackbar {
-    background-color: rgb(65, 252, 134);
+  background-color: rgb(65, 252, 134);
 }
 
 .error-color-snackbar {
-    background-color: #F44336;
+  background-color: #f44336;
 }
 
 .box__shadow {
-    box-shadow: 0px 3px 6px 3px rgba(0, 0, 0, 0.2);
-    border-radius: 15px;
-    overflow: auto;
-    background-color: white;
+  box-shadow: 0px 3px 6px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  overflow: auto;
+  background-color: white;
 }
 
 .app__dialog {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    z-index: 100;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
 }
 
 .one-line {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: pre;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: pre;
 }

@@ -10,24 +10,24 @@ import { TableStructure } from '@shared/components/table/interfaces/table-struct
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent implements OnInit {
-  @Input() loading: boolean = false;
+  @Input() loading = false;
   @Input() dataSource: MatTableDataSource<any> = new MatTableDataSource();
   @Input() tableStructure: TableStructure[] = [];
-  @Input() indexDisplay: number = 10;
+  @Input() indexDisplay = 10;
 
-  @Input() limit: number = 0;
-  @Input() total: number = 0;
-  @Input() page: number = 0;
-  @Input() sortActive: string = 'name';
+  @Input() limit = 0;
+  @Input() total = 0;
+  @Input() page = 0;
+  @Input() sortActive = 'name';
 
-  @Input() offItem: boolean = false;
-  @Input() keyOffItem: string = '';
+  @Input() offItem = false;
+  @Input() keyOffItem = '';
   @Input() valueOffItem: any = null;
 
-  @Input() viewShow: boolean = false;
-  @Input() viewInfo: boolean = true;
-  @Input() viewEdit: boolean = true;
-  @Input() viewDelete: boolean = true;
+  @Input() viewShow = false;
+  @Input() viewInfo = true;
+  @Input() viewEdit = true;
+  @Input() viewDelete = true;
 
   @Output() onClick = new EventEmitter<any>();
   @Output() reset = new EventEmitter<boolean>();

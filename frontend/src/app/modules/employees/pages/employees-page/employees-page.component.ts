@@ -22,12 +22,12 @@ import { TableStructure } from '../../../../shared/components/table/interfaces/t
 })
 export class EmployeesPageComponent implements OnInit {
   listEmployees: EmployeeModel[] = [];
-  isSmall: boolean = false;
-  isLoadingResults: boolean = false;
+  isSmall = false;
+  isLoadingResults = false;
 
   dataSource!: MatTableDataSource<any>;
 
-  indexDisplay: number = 4;
+  indexDisplay = 4;
   tableStructure: TableStructure[] = [
     { index: 0, field: 'profile_image', header: '', sort: false },
     { index: 1, field: 'name', header: 'Nombre', sort: true, type: ColumnType.NAME },
@@ -36,15 +36,15 @@ export class EmployeesPageComponent implements OnInit {
     { index: 4, field: 'admin', header: '', sort: true, type: ColumnType.ADMIN },
   ];
 
-  search: string = '';
+  search = '';
   searchFields: string[] = ['name', 'surname', 'email', 'phone'];
 
-  sortField: string = 'name';
-  sortDirection: string = 'asc';
+  sortField = 'name';
+  sortDirection = 'asc';
 
-  page: number = 0;
+  page = 0;
   limit: number = DEFAULT_LIMIT;
-  total: number = 0;
+  total = 0;
 
   constructor(
     private readonly dialog: MatDialog,

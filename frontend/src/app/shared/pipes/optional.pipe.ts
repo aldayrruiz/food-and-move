@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class OptionalPipe implements PipeTransform {
   transform(data: any): any {
     try {
-      let newData = Object.assign({}, data);
+      const newData = Object.assign({}, data);
       Object.keys(newData).forEach((key) => {
         if (newData[key] === null) delete newData[key];
       });

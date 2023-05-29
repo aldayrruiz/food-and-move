@@ -9,7 +9,7 @@ import { RouterService } from '../../../core/services/router.service';
 })
 export class HeaderPatientComponent implements OnInit {
   @Input() patient: PatientModel | null = null;
-  @Input() title: string = '';
+  @Input() title = '';
 
   constructor(private readonly routerService: RouterService) {}
 

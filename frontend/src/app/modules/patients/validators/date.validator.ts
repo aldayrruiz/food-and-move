@@ -6,10 +6,10 @@ export function birthDateValidator(): ValidatorFn {
       return null;
     }
     if (control.value !== undefined && control.value !== '' && control.value != null) {
-      var day = null;
-      var month = null;
-      var year = null;
-      var res = control.value.split('/');
+      let day = null;
+      let month = null;
+      let year = null;
+      const res = control.value.split('/');
       if (res.length > 1) {
         day = res[0];
         month = res[1];
@@ -33,7 +33,7 @@ export function birthDateValidator(): ValidatorFn {
       }
       if (month == 2) {
         // check for february 29th
-        var isleap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+        const isleap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
         if (day > 29 || (day === 29 && !isleap)) {
           return { dateInvalid: true };
         }

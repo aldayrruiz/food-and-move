@@ -21,7 +21,7 @@ import { OptionalPipe } from '../../../../shared/pipes/optional.pipe';
 })
 export class AddPatientPageComponent implements OnInit {
   form!: FormGroup;
-  edit: boolean = false;
+  edit = false;
   patient: PatientModel | null = null;
   user: EmployeeModel | null = null;
 
@@ -37,7 +37,7 @@ export class AddPatientPageComponent implements OnInit {
 
   imageFile?: string = '';
   selectedFile?: File;
-  removeProfileImage: boolean = false;
+  removeProfileImage = false;
 
   constructor(
     private readonly authService: AuthService,
@@ -256,7 +256,7 @@ export class AddPatientPageComponent implements OnInit {
       );
   }
 
-  private getPatientRequest(edit: boolean = false): PatientRequestModel {
+  private getPatientRequest(edit = false): PatientRequestModel {
     const request = {
       name: this.name,
       surname: this.surname,

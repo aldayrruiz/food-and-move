@@ -35,7 +35,7 @@ export class AddFoodPageComponent implements OnInit {
   date: Date = new Date();
 
   form!: FormGroup;
-  edit: boolean = false;
+  edit = false;
   food: FoodModel | null = null;
 
   links: Array<LinkStructure> = [];
@@ -282,7 +282,7 @@ export class AddFoodPageComponent implements OnInit {
       );
   }
 
-  getFoodRequest(edit: boolean = false): FoodRequestModel {
+  getFoodRequest(edit = false): FoodRequestModel {
     const request = {
       patient: this.patient?._id,
       date: this.date,

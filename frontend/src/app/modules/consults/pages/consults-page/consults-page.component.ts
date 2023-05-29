@@ -29,8 +29,8 @@ export class ConsultsPageComponent implements OnInit {
   patient: PatientModel | null = null;
 
   listConsults: ConsultModel[] = [];
-  isSmall: boolean = false;
-  isLoadingResults: boolean = false;
+  isSmall = false;
+  isLoadingResults = false;
 
   dataSource!: MatTableDataSource<any>;
 
@@ -46,14 +46,14 @@ export class ConsultsPageComponent implements OnInit {
     { index: 9, field: 'hemoglobina', header: 'Hemoglobina', sort: true },
     { index: 10, field: 'glucosa', header: 'Glucosa', sort: true },
   ];
-  indexDisplay: number = 10;
+  indexDisplay = 10;
 
-  sortField: string = 'created_at';
-  sortDirection: string = 'desc';
+  sortField = 'created_at';
+  sortDirection = 'desc';
 
   limit: number = DEFAULT_LIMIT;
-  page: number = 0;
-  total: number = 0;
+  page = 0;
+  total = 0;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,

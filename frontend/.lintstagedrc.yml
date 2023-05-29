@@ -1,3 +1,4 @@
-'./frontend/**/*.{js, ts,tsx}':
+'./**/*.{js, ts,tsx}':
+  - echo "hello"
   - npm run format
   - npm run lint

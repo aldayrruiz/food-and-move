@@ -32,7 +32,7 @@ export class AddMovePageComponent implements OnInit {
   date = new Date();
 
   form!: FormGroup;
-  edit: boolean = false;
+  edit = false;
   move: MoveModel | null = null;
 
   links: Array<LinkStructure> = [];
@@ -244,7 +244,7 @@ export class AddMovePageComponent implements OnInit {
       );
   }
 
-  getMoveRequest(edit: boolean = false): MoveRequestModel {
+  getMoveRequest(edit = false): MoveRequestModel {
     const request = {
       patient: this.patient?._id,
       date: this.date,

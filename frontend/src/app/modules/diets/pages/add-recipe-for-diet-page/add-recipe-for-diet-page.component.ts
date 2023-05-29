@@ -32,7 +32,7 @@ export class AddRecipeForDietPageComponent implements OnInit {
   day: DayOfWeek | null = null;
 
   form!: FormGroup;
-  edit: boolean = false;
+  edit = false;
   recipe: RecipeModel | null = null;
 
   links: Array<LinkStructure> = [];
@@ -224,7 +224,7 @@ export class AddRecipeForDietPageComponent implements OnInit {
       );
   }
 
-  getRecipeRequest(edit: boolean = false): RecipeRequestModel {
+  getRecipeRequest(edit = false): RecipeRequestModel {
     const request = {
       title: this.title,
       description: this.description,

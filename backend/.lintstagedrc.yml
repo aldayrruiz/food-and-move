@@ -1,3 +1,3 @@
-'./backend/**/*.{js, ts,tsx}':
+'./**/*.{js, ts,tsx}':
   - npm run format
   - npm run lint
