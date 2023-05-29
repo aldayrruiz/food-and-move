@@ -1,35 +1,45 @@
 <div class="container">
-    <div class="btn__add" *ngIf="isSmall">
-        <button mat-fab color="primary" (click)="addRoutine()">
-            <mat-icon>add</mat-icon>
-        </button>
-    </div>
-    <div class="crud__header">
-        <p class="header__subtitle">Rutinas</p>
-        <mat-form-field appearance="standard" class="input__search">
-            <mat-label>Buscar</mat-label>
-            <input matInput (keyup)="applyFilter()" placeholder="Ej. Bicicleta" #input autocomplete="off" [(ngModel)]="search">
-        </mat-form-field>
-        <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addRoutine()">Agregar Rutina</button>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="crud__main">
-        <app-table
-            [tableStructure]="tableStructure"
-            [indexDisplay]="indexDisplay"
-            [dataSource]="dataSource"
-            [loading]="isLoadingResults"
-            [limit]="limit"
-            [page]="page"
-            [total]="total"
-            [sortActive]="'title'"
-            (onClick)="openInfoRoutine($event)"
-            (reset)="resetTable()"
-            (changePage)="changePage($event)"
-            (changeSort)="changeSort($event)"
-            (info)="openInfoRoutine($event)"
-            (edit)="editRoutine($event)"
-            (delete)="deleteRoutine($event)">
-        </app-table>
-    </div>
+  <div class="btn__add" *ngIf="isSmall">
+    <button mat-fab color="primary" (click)="addRoutine()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="crud__header">
+    <p class="header__subtitle">Rutinas</p>
+    <mat-form-field appearance="standard" class="input__search">
+      <mat-label>Buscar</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter()"
+        placeholder="Ej. Bicicleta"
+        #input
+        autocomplete="off"
+        [(ngModel)]="search"
+      />
+    </mat-form-field>
+    <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addRoutine()">
+      Agregar Rutina
+    </button>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="crud__main">
+    <app-table
+      [tableStructure]="tableStructure"
+      [indexDisplay]="indexDisplay"
+      [dataSource]="dataSource"
+      [loading]="isLoadingResults"
+      [limit]="limit"
+      [page]="page"
+      [total]="total"
+      [sortActive]="'title'"
+      (onClick)="openInfoRoutine($event)"
+      (reset)="resetTable()"
+      (changePage)="changePage($event)"
+      (changeSort)="changeSort($event)"
+      (info)="openInfoRoutine($event)"
+      (edit)="editRoutine($event)"
+      (delete)="deleteRoutine($event)"
+    >
+    </app-table>
+  </div>
 </div>

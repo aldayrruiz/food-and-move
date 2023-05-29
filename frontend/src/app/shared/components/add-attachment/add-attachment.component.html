@@ -1,18 +1,30 @@
 <h1>Agregar PDF</h1>
 <form [formGroup]="form" (ngSubmit)="addPDF()">
-    <mat-form-field class="input__field">
-        <mat-label>Título</mat-label>
-        <input type="text" matInput autocomplete="off" formControlName="title" tabindex="1">
-    </mat-form-field>
-    <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload accept=".pdf">
-    <div class="file-upload">
-        <p>{{selectedFile?.name || "Ningún archivo seleccionado"}}</p>
-        <button type="button" mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
-            <mat-icon>attach_file</mat-icon>
-        </button>
-    </div>
-    <div class="buttons">
-        <button type="button" mat-button (click)="exit()">Cancelar</button>
-        <button type="submit" mat-button color="primary">Agregar</button>
-    </div>
+  <mat-form-field class="input__field">
+    <mat-label>Título</mat-label>
+    <input type="text" matInput autocomplete="off" formControlName="title" tabindex="1" />
+  </mat-form-field>
+  <input
+    type="file"
+    class="file-input"
+    (change)="onFileSelected($event)"
+    #fileUpload
+    accept=".pdf"
+  />
+  <div class="file-upload">
+    <p>{{ selectedFile?.name || 'Ningún archivo seleccionado' }}</p>
+    <button
+      type="button"
+      mat-mini-fab
+      color="primary"
+      class="upload-btn"
+      (click)="fileUpload.click()"
+    >
+      <mat-icon>attach_file</mat-icon>
+    </button>
+  </div>
+  <div class="buttons">
+    <button type="button" mat-button (click)="exit()">Cancelar</button>
+    <button type="submit" mat-button color="primary">Agregar</button>
+  </div>
 </form>

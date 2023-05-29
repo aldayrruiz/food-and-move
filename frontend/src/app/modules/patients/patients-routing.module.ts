@@ -10,6 +10,7 @@ const routes: Routes = [
     component: PatientsComponent,
     children: [
       { path: '', component: PatientsPageComponent },
+
       { path: 'add-patient', component: AddPatientPageComponent },
       { path: 'edit-patient/:id', component: AddPatientPageComponent },
       { path: '**', redirectTo: '' },

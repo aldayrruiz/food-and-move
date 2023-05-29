@@ -5,19 +5,19 @@ import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { ConsultModel } from '@core/models/consult.model';
 import { PatientModel } from '@core/models/patient.model';
 import { ConsultsService } from '@core/services/consults.service';
+import { DialogService } from '@core/services/dialog.service';
 import { LoaderService } from '@core/services/loader.service';
 import { PatientsService } from '@core/services/patients.service';
+import { RouterService } from '@core/services/router.service';
+import { SnackerService } from '@core/services/snacker.service';
+import { ViewPatientService } from '@core/services/view-patient.service';
 import { ColumnType } from '@shared/components/table/enums/column-type';
 import { TableStructure } from '@shared/components/table/interfaces/table-structure';
 import { finalize } from 'rxjs/operators';
 import { DEFAULT_LIMIT } from 'src/app/constants/app.constants';
-import { ConsultModel } from '../../../../core/models/consult.model';
-import { DialogService } from '../../../../core/services/dialog.service';
-import { RouterService } from '../../../../core/services/router.service';
-import { SnackerService } from '../../../../core/services/snacker.service';
-import { ViewPatientService } from '../../../../core/services/view-patient.service';
 import { InfoConsultComponent } from '../../components/info-consult/info-consult.component';
 
 @Component({

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminGuard } from '../../core/guards/admin.guard';
+import { AdminGuard } from '@core/guards/admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'patients', pathMatch: 'full' },

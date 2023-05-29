@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 import { FilterRecipeDto } from './dto/filter-recipe.dto';
 import { QueryRecipeDto } from './dto/query-recipe.dto';
 import { RecipeDto } from './dto/recipe.dto';

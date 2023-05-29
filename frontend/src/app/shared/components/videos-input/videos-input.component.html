@@ -1,27 +1,27 @@
 <div class="form__list-box box__shadow">
-    <div class="header">
-        <p class="title">Vídeos</p>
-        <p class="subtitle">Agregar vídeo</p>
-        <mat-icon class="icon">video_library</mat-icon>
-    </div>
-    <div class="form__list">
-        <mat-form-field class="input">
-            <mat-label>URL</mat-label>
-            <input matInput #url>
-        </mat-form-field>
-        <button mat-icon-button type="button" (click)="addVideo(url.value); url.value = ''">
-            <mat-icon>add</mat-icon>
+  <div class="header">
+    <p class="title">Vídeos</p>
+    <p class="subtitle">Agregar vídeo</p>
+    <mat-icon class="icon">video_library</mat-icon>
+  </div>
+  <div class="form__list">
+    <mat-form-field class="input">
+      <mat-label>URL</mat-label>
+      <input matInput #url />
+    </mat-form-field>
+    <button mat-icon-button type="button" (click)="addVideo(url.value); url.value = ''">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="list">
+    <div *ngFor="let video of videos">
+      <div class="item">
+        <a [href]="video.url">{{ video.url }}</a>
+        <button mat-icon-button type="button" (click)="removeVideo(video.id)">
+          <mat-icon>clear</mat-icon>
         </button>
+      </div>
+      <mat-divider></mat-divider>
     </div>
-    <div class="list">
-        <div *ngFor="let video of videos">
-            <div class="item">
-                <a [href]="video.url">{{video.url}}</a>
-                <button mat-icon-button type="button" (click)="removeVideo(video.id)">
-                    <mat-icon>clear</mat-icon>
-                </button>
-            </div>
-            <mat-divider></mat-divider>
-        </div>  
-    </div>
+  </div>
 </div>

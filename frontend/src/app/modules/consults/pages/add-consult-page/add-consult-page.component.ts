@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ConsultRequestModel } from '@core/models/consult-request.model';
 import { ConsultModel } from '@core/models/consult.model';
 import { PatientModel } from '@core/models/patient.model';
 import { ConsultsService } from '@core/services/consults.service';
@@ -8,11 +9,10 @@ import { LoaderService } from '@core/services/loader.service';
 import { PatientsService } from '@core/services/patients.service';
 import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
+import { ViewPatientService } from '@core/services/view-patient.service';
 import { getDateUTC } from '@core/utils/date-utils';
+import { OptionalPipe } from '@shared/pipes/optional.pipe';
 import { finalize } from 'rxjs/operators';
-import { ConsultRequestModel } from '../../../../core/models/consult-request.model';
-import { ViewPatientService } from '../../../../core/services/view-patient.service';
-import { OptionalPipe } from '../../../../shared/pipes/optional.pipe';
 
 @Component({
   selector: 'app-add-consult-page',

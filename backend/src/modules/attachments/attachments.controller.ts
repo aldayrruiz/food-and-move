@@ -14,7 +14,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 import { AttachmentStorage, MAX_SIZE_ATTACHMENT } from '../../constants/uploads.constants';
 import { AttachmentsService } from './attachments.service';
 
@@ -41,10 +41,7 @@ export class AttachmentsController {
     @Param('title') title: string,
     @UploadedFile(
       new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: MAX_SIZE_ATTACHMENT }),
-          new FileTypeValidator({ fileType: 'application/pdf' }),
-        ],
+        validators: [new MaxFileSizeValidator({ maxSize: MAX_SIZE_ATTACHMENT }), new FileTypeValidator({ fileType: 'application/pdf' })],
       })
     )
     file: Express.Multer.File

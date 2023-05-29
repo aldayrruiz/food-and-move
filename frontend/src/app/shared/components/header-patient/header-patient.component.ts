@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PatientModel } from '../../../core/models/patient.model';
-import { RouterService } from '../../../core/services/router.service';
+import { PatientModel } from '@core/models/patient.model';
+import { RouterService } from '@core/services/router.service';
 
 @Component({
   selector: 'app-header-patient',

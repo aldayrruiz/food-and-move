@@ -1,29 +1,54 @@
 <div class="header">
-    <div class="header__left">
-        <button type="button" mat-icon-button matTooltip="Volver" (click)="exit()">
-            <mat-icon>clear</mat-icon>
-        </button>
-        <div class="profile">
-            <app-profile-picture [url]="(patient?.profile_image | photo)" size="60px"></app-profile-picture>
-            <div class="profile__text">
-                <p class="profile__name">{{patient | name}}</p>
-                <p class="profile__phone">{{patient?.phone}}</p>
-            </div>
-        </div>
-    </div><p class="header__title">{{title}}</p>
-    <div class="header__nav">
-        <button mat-icon-button color="primary" matTooltip="Gráficas" (click)="goToGraphics()" class="nav__item">
-            <mat-icon>assessment</mat-icon>
-        </button>
-        <button mat-icon-button color="primary" matTooltip="Consultas" (click)="goToConsults()" class="nav__item">
-            <mat-icon>local_hospital</mat-icon>
-        </button>
-        <button mat-icon-button color="primary" matTooltip="Comidas" (click)="goToFoods()" class="nav__item">
-            <mat-icon>fastfood</mat-icon>
-        </button>
-        <button mat-icon-button color="primary" matTooltip="Ejercicios" (click)="goToMoves()" class="nav__item">
-            <mat-icon>fitness_center</mat-icon>
-        </button>
+  <div class="header__left">
+    <button type="button" mat-icon-button matTooltip="Volver" (click)="exit()">
+      <mat-icon>clear</mat-icon>
+    </button>
+    <div class="profile">
+      <app-profile-picture [url]="patient?.profile_image | photo" size="60px"></app-profile-picture>
+      <div class="profile__text">
+        <p class="profile__name">{{ patient | name }}</p>
+        <p class="profile__phone">{{ patient?.phone }}</p>
+      </div>
     </div>
+  </div>
+  <p class="header__title">{{ title }}</p>
+  <div class="header__nav">
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Gráficas"
+      (click)="goToGraphics()"
+      class="nav__item"
+    >
+      <mat-icon>assessment</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Consultas"
+      (click)="goToConsults()"
+      class="nav__item"
+    >
+      <mat-icon>local_hospital</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Comidas"
+      (click)="goToFoods()"
+      class="nav__item"
+    >
+      <mat-icon>fastfood</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Ejercicios"
+      (click)="goToMoves()"
+      class="nav__item"
+    >
+      <mat-icon>fitness_center</mat-icon>
+    </button>
+  </div>
 </div>
 <mat-divider></mat-divider>

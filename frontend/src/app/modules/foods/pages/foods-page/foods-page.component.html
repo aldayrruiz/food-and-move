@@ -1,17 +1,27 @@
 <app-header-patient [patient]="patient" title="Comidas"></app-header-patient>
 <div class="food__main">
-    <div class="header__main">
-        <div></div>
-        <div class="main__date">
-            <button mat-icon-button class="btn__date" (click)="changeDateRange(-1)">
-                <mat-icon>keyboard_arrow_left</mat-icon>
-            </button>
-            <p class="date">{{dateRange.startDate | date : 'dd/MM/yy'}} - {{dateRange.endDate | date: 'dd/MM/yy'}}</p>
-            <button mat-icon-button class="btn__date" (click)="changeDateRange(1)">
-                <mat-icon>keyboard_arrow_right</mat-icon>
-            </button>
-        </div>
-        <button mat-stroked-button color="primary" type="button" (click)="importDiet()">Importar Dieta</button>
+  <div class="header__main">
+    <div></div>
+    <div class="main__date">
+      <button mat-icon-button class="btn__date" (click)="changeDateRange(-1)">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      <p class="date">
+        {{ dateRange.startDate | date : 'dd/MM/yy' }} - {{ dateRange.endDate | date : 'dd/MM/yy' }}
+      </p>
+      <button mat-icon-button class="btn__date" (click)="changeDateRange(1)">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
     </div>
-    <app-weekly-calendar [days]="days" [type]="weeklyCalendarType.Food" (add)="addFood($event.date)" (edit)="editFood($event.item)" (delete)="deleteFood($event.item)"></app-weekly-calendar>
+    <button mat-stroked-button color="primary" type="button" (click)="importDiet()">
+      Importar Dieta
+    </button>
+  </div>
+  <app-weekly-calendar
+    [days]="days"
+    [type]="weeklyCalendarType.Food"
+    (add)="addFood($event.date)"
+    (edit)="editFood($event.item)"
+    (delete)="deleteFood($event.item)"
+  ></app-weekly-calendar>
 </div>

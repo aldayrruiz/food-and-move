@@ -2,9 +2,9 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatModule } from '@shared/modules/mat/mat.module';
+import { PhotoPipe } from '@shared/pipes/photo.pipe';
 import { SharedModule } from '@shared/shared.module';
-import { MatModule } from '../../shared/modules/mat/mat.module';
-import { PhotoPipe } from '../../shared/pipes/photo.pipe';
 import { PatientsComponent } from '../patients/patients.component';
 import { InfoPatientComponent } from './components/info-patient/info-patient.component';
 import { AddPatientPageComponent } from './pages/add-patient-page/add-patient-page.component';

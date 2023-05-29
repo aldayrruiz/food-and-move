@@ -15,9 +15,9 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ChangePasswordDto } from '@shared/dto/change-password.dto';
+import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 import { Storage } from 'src/constants/uploads.constants';
-import { ChangePasswordDto } from 'src/shared/dto/change-password.dto';
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
 import { MAX_SIZE_IMAGE } from '../../constants/uploads.constants';
 import { EmployeeDto } from './dto/employee.dto';
 import { FilterEmployeeDto } from './dto/filter-employee.dto';
@@ -75,10 +75,7 @@ export class EmployeesController {
     @Param('id') id: string,
     @UploadedFile(
       new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: MAX_SIZE_IMAGE }),
-          new FileTypeValidator({ fileType: 'image/*' }),
-        ],
+        validators: [new MaxFileSizeValidator({ maxSize: MAX_SIZE_IMAGE }), new FileTypeValidator({ fileType: 'image/*' })],
       })
     )
     file: Express.Multer.File
@@ -105,9 +102,6 @@ export class EmployeesController {
 
   @Post('recoverPassword')
   async recoverPassword(@Body() recoverPasswordDto: RecoverPasswordDto) {
-    return await this.employeesService.recoverPassword(
-      recoverPasswordDto.token,
-      recoverPasswordDto.password
-    );
+    return await this.employeesService.recoverPassword(recoverPasswordDto.token, recoverPasswordDto.password);
   }
 }

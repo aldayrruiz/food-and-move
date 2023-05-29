@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { DateRangeDto } from 'src/shared/dto/date-range.dto';
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
+import { DateRangeDto } from '@shared/dto/date-range.dto';
+import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 import { ConsultsService } from './consults.service';
 import { ConsultDto } from './dto/consult.dto';
 import { FilterConsultDto } from './dto/filter-consult.dto';
@@ -46,11 +46,7 @@ export class ConsultsController {
   }
 
   @Post('getValues/:id/:key')
-  async getValues(
-    @Param('id') id: string,
-    @Param('key') key: string,
-    @Body() dateRangeDto: DateRangeDto
-  ) {
+  async getValues(@Param('id') id: string, @Param('key') key: string, @Body() dateRangeDto: DateRangeDto) {
     return await this.consultsService.getValues(id, key, dateRangeDto);
   }
 }

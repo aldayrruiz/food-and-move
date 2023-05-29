@@ -1,4 +1,4 @@
-import { DateRangeDto } from 'src/shared/dto/date-range.dto';
+import { DateRangeDto } from '@shared/dto/date-range.dto';
 
 export type FilterDate = { $gte?: Date; $lte?: Date };
 

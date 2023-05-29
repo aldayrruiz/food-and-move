@@ -1,4 +1,4 @@
-import { DayOfWeek } from '../../../../core/enums/day-of-week';
+import { DayOfWeek } from '@core/enums/day-of-week';
 import { Day } from '../interfaces/day';
 
 export const daysInit: Day[] = [

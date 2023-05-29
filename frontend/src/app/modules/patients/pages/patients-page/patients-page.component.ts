@@ -12,12 +12,12 @@ import { LoaderService } from '@core/services/loader.service';
 import { PatientsService } from '@core/services/patients.service';
 import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
+import { ViewPatientService } from '@core/services/view-patient.service';
 import { InfoPatientComponent } from '@modules/patients/components/info-patient/info-patient.component';
 import { ColumnType } from '@shared/components/table/enums/column-type';
 import { TableStructure } from '@shared/components/table/interfaces/table-structure';
 import { finalize } from 'rxjs/operators';
 import { DEFAULT_LIMIT } from 'src/app/constants/app.constants';
-import { ViewPatientService } from '../../../../core/services/view-patient.service';
 
 @Component({
   selector: 'app-patients-page',

@@ -15,8 +15,8 @@ import {
 import { UseInterceptors } from '@nestjs/common/decorators';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 import { Storage } from 'src/constants/uploads.constants';
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
 import { FilterPatientDto } from './dto/filter-patient.dto';
 import { PatientDto } from './dto/patient.dto';
 import { QueryPatientDto } from './dto/query-patient.dto';
@@ -61,10 +61,7 @@ export class PatientsController {
     @Param('id') id: string,
     @UploadedFile(
       new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 10000000 }),
-          new FileTypeValidator({ fileType: 'image/' }),
-        ],
+        validators: [new MaxFileSizeValidator({ maxSize: 10000000 }), new FileTypeValidator({ fileType: 'image/' })],
       })
     )
     file: Express.Multer.File

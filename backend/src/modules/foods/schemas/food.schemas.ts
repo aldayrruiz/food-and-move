@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Rating } from '@shared/enums/rating';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 import { Recipe } from 'src/modules/recipes/schemas/recipe.schemas';
-import { Rating } from '../../../shared/enums/rating';
 
 export type FoodDocument = Food & Document;
 

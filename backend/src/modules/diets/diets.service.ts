@@ -1,8 +1,8 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { DayOfWeek } from '@shared/enums/day-of-week';
 import { Model } from 'mongoose';
 import { CustomQueryService } from 'src/services/custom-query.service';
-import { DayOfWeek } from 'src/shared/enums/day-of-week';
 import { RecipeDto } from '../recipes/dto/recipe.dto';
 import { UpdateRecipeDto } from '../recipes/dto/update-recipe.dto';
 import { DietDto } from './dto/diet.dto';
@@ -111,12 +111,7 @@ export class DietsService {
     return await this.dietsModel.findByIdAndUpdate(dietId, update, { new: true });
   }
 
-  async updateRecipe(
-    dietId: string,
-    day: DayOfWeek,
-    recipeId: string,
-    updateRecipe: UpdateRecipeDto
-  ) {
+  async updateRecipe(dietId: string, day: DayOfWeek, recipeId: string, updateRecipe: UpdateRecipeDto) {
     const diet = await this.dietsModel.findById(dietId);
     if (!diet) throw new NotFoundException('No se ha encontrado la dieta');
     const dayItems = this.getDayItems(day, diet);

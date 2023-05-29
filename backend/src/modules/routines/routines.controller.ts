@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 import { FilterRoutineDto } from './dto/filter-routine.dto';
 import { QueryRoutineDto } from './dto/query-routine.dto';
 import { RoutineDto } from './dto/routine.dto';

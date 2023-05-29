@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { DateRange } from '@core/interfaces/date-range';
+import { DietModel } from '@core/models/diet';
 import { FoodModel } from '@core/models/food.model';
 import { PatientModel } from '@core/models/patient.model';
 import { DialogService } from '@core/services/dialog.service';
@@ -17,7 +18,6 @@ import { daysInit } from '@shared/components/weekly-calendar/constant/days-init'
 import { WeeklyCalendarType } from '@shared/components/weekly-calendar/enums/weekly-calendar-type';
 import { Day } from '@shared/components/weekly-calendar/interfaces/day';
 import { finalize } from 'rxjs/operators';
-import { DietModel } from '../../../../core/models/diet';
 
 @Component({
   selector: 'app-foods-page',

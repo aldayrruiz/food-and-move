@@ -1,4 +1,4 @@
-import { DayOfWeek } from '../../../../core/enums/day-of-week';
+import { DayOfWeek } from '@core/enums/day-of-week';
 
 export interface Day {
   day: DayOfWeek;

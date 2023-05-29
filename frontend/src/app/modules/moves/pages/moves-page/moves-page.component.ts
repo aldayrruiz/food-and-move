@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DateRange } from '@core/interfaces/date-range';
+import { MoveModel } from '@core/models/move.model';
 import { PatientModel } from '@core/models/patient.model';
+import { DialogService } from '@core/services/dialog.service';
 import { LoaderService } from '@core/services/loader.service';
 import { MovesService } from '@core/services/moves.service';
+import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
+import { ViewPatientService } from '@core/services/view-patient.service';
 import { addDay, getDateRange, getDay } from '@core/utils/date-utils';
 import { daysInit } from '@shared/components/weekly-calendar/constant/days-init';
 import { WeeklyCalendarType } from '@shared/components/weekly-calendar/enums/weekly-calendar-type';
 import { Day } from '@shared/components/weekly-calendar/interfaces/day';
 import { finalize } from 'rxjs/operators';
-import { MoveModel } from '../../../../core/models/move.model';
-import { DialogService } from '../../../../core/services/dialog.service';
-import { RouterService } from '../../../../core/services/router.service';
-import { ViewPatientService } from '../../../../core/services/view-patient.service';
 
 @Component({
   selector: 'app-moves-page',

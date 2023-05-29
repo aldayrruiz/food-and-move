@@ -1,21 +1,21 @@
 <div class="box__dialog">
-    <div class="info__profile-image">
-        <app-profile-picture size="150px" [url]="(employee.profile_image | photo)"></app-profile-picture>
+  <div class="info__profile-image">
+    <app-profile-picture size="150px" [url]="employee.profile_image | photo"></app-profile-picture>
+  </div>
+  <h1 class="title text-center">{{ employee | name }}</h1>
+  <mat-divider></mat-divider>
+  <div class="section section-top">
+    <div class="item">
+      <mat-icon class="icon">email</mat-icon>
+      <p class="text">{{ employee.email }}</p>
     </div>
-    <h1 class="title text-center">{{(employee | name)}}</h1>
-    <mat-divider></mat-divider>
-    <div class="section section-top">
-        <div class="item">
-            <mat-icon class="icon">email</mat-icon>
-            <p class="text">{{employee.email}}</p>
-        </div>
-        <div class="item" *ngIf="employee.phone">
-            <mat-icon class="icon">phone</mat-icon>
-            <p class="text">{{employee.phone}}</p>
-        </div>
-        <div class="item" *ngIf="employee.admin">
-            <mat-icon class="icon">assignment_ind</mat-icon>
-            <p class="text">Administrador</p>
-        </div>
+    <div class="item" *ngIf="employee.phone">
+      <mat-icon class="icon">phone</mat-icon>
+      <p class="text">{{ employee.phone }}</p>
     </div>
+    <div class="item" *ngIf="employee.admin">
+      <mat-icon class="icon">assignment_ind</mat-icon>
+      <p class="text">Administrador</p>
+    </div>
+  </div>
 </div>

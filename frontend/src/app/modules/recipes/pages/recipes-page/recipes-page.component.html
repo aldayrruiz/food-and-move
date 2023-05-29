@@ -1,35 +1,45 @@
 <div class="container">
-    <div class="btn__add" *ngIf="isSmall">
-        <button mat-fab color="primary" (click)="addRecipe()">
-            <mat-icon>add</mat-icon>
-        </button>
-    </div>
-    <div class="crud__header">
-        <p class="header__subtitle">Recetas</p>
-        <mat-form-field appearance="standard" class="input__search">
-            <mat-label>Buscar</mat-label>
-            <input matInput (keyup)="applyFilter()" placeholder="Ej. Macarrones" #input autocomplete="off" [(ngModel)]="search">
-        </mat-form-field>
-        <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addRecipe()">Agregar Receta</button>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="crud__main">
-        <app-table
-            [tableStructure]="tableStructure"
-            [indexDisplay]="indexDisplay"
-            [dataSource]="dataSource"
-            [loading]="isLoadingResults"
-            [limit]="limit"
-            [page]="page"
-            [total]="total"
-            [sortActive]="'title'"
-            (onClick)="openInfoRecipe($event)"
-            (reset)="resetTable()"
-            (changePage)="changePage($event)"
-            (changeSort)="changeSort($event)"
-            (info)="openInfoRecipe($event)"
-            (edit)="editRecipe($event)"
-            (delete)="deleteRecipe($event)">
-        </app-table>
-    </div>
+  <div class="btn__add" *ngIf="isSmall">
+    <button mat-fab color="primary" (click)="addRecipe()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="crud__header">
+    <p class="header__subtitle">Recetas</p>
+    <mat-form-field appearance="standard" class="input__search">
+      <mat-label>Buscar</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter()"
+        placeholder="Ej. Macarrones"
+        #input
+        autocomplete="off"
+        [(ngModel)]="search"
+      />
+    </mat-form-field>
+    <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addRecipe()">
+      Agregar Receta
+    </button>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="crud__main">
+    <app-table
+      [tableStructure]="tableStructure"
+      [indexDisplay]="indexDisplay"
+      [dataSource]="dataSource"
+      [loading]="isLoadingResults"
+      [limit]="limit"
+      [page]="page"
+      [total]="total"
+      [sortActive]="'title'"
+      (onClick)="openInfoRecipe($event)"
+      (reset)="resetTable()"
+      (changePage)="changePage($event)"
+      (changeSort)="changeSort($event)"
+      (info)="openInfoRecipe($event)"
+      (edit)="editRecipe($event)"
+      (delete)="deleteRecipe($event)"
+    >
+    </app-table>
+  </div>
 </div>

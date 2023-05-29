@@ -1,25 +1,25 @@
 <div class="box__dialog">
-    <div class="info__profile-image">
-        <app-profile-picture size="150px" [url]="(patient.profile_image | photo)"></app-profile-picture>
+  <div class="info__profile-image">
+    <app-profile-picture size="150px" [url]="patient.profile_image | photo"></app-profile-picture>
+  </div>
+  <h1 class="title text-center">{{ patient | name }}</h1>
+  <mat-divider></mat-divider>
+  <div class="section section-top">
+    <div class="item">
+      <mat-icon class="icon">email</mat-icon>
+      <p class="text">{{ patient.email }}</p>
     </div>
-    <h1 class="title text-center">{{(patient | name)}}</h1>
-    <mat-divider></mat-divider>
-    <div class="section section-top">
-        <div class="item">
-            <mat-icon class="icon">email</mat-icon>
-            <p class="text">{{patient.email}}</p>
-        </div>
-        <div class="item" *ngIf="patient.phone">
-            <mat-icon class="icon">phone</mat-icon>
-            <p class="text">{{patient.phone}}</p>
-        </div>
-        <div class="item" *ngIf="patient.height">
-            <mat-icon class="icon">straighten</mat-icon>
-            <p class="text">{{patient.height}} cm</p>
-        </div>
-        <div class="item" *ngIf="patient.birth">
-            <mat-icon class="icon">cake</mat-icon>
-            <p class="text">{{patient.birth ? (patient.birth | date: 'dd/MM/YYYY') : ""}}</p>
-        </div>
+    <div class="item" *ngIf="patient.phone">
+      <mat-icon class="icon">phone</mat-icon>
+      <p class="text">{{ patient.phone }}</p>
     </div>
+    <div class="item" *ngIf="patient.height">
+      <mat-icon class="icon">straighten</mat-icon>
+      <p class="text">{{ patient.height }} cm</p>
+    </div>
+    <div class="item" *ngIf="patient.birth">
+      <mat-icon class="icon">cake</mat-icon>
+      <p class="text">{{ patient.birth ? (patient.birth | date : 'dd/MM/YYYY') : '' }}</p>
+    </div>
+  </div>
 </div>

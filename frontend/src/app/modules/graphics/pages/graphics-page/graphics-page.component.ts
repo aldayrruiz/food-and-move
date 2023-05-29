@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DateRange } from '@core/interfaces/date-range';
+import { PatientModel } from '@core/models/patient.model';
 import { ConsultsService } from '@core/services/consults.service';
+import { LoaderService } from '@core/services/loader.service';
+import { PatientsService } from '@core/services/patients.service';
+import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
+import { ViewPatientService } from '@core/services/view-patient.service';
 import { GraphicStructure } from '@modules/graphics/interfaces/graphic-structure.interface';
 import { measures2PointsData, newTimeData } from '@shared/components/graphic/utils/graphic-utils';
 import { OptionalPipe } from '@shared/pipes/optional.pipe';
 import 'chartjs-adapter-luxon';
 import { finalize } from 'rxjs';
-import { PatientModel } from '../../../../core/models/patient.model';
-import { LoaderService } from '../../../../core/services/loader.service';
-import { PatientsService } from '../../../../core/services/patients.service';
-import { RouterService } from '../../../../core/services/router.service';
-import { ViewPatientService } from '../../../../core/services/view-patient.service';
 
 @Component({
   selector: 'app-graphics-page',
