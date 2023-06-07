@@ -7,8 +7,8 @@ import { EmployeesService } from '@core/services/employees.service';
 import { LoaderService } from '@core/services/loader.service';
 import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
+import { OptionalPipe } from '@shared/pipes/optional.pipe';
 import { finalize } from 'rxjs/operators';
-import { OptionalPipe } from '../../../../shared/pipes/optional.pipe';
 
 @Component({
   selector: 'app-add-employee-page',

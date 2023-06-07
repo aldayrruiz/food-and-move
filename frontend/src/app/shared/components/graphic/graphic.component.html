@@ -1,10 +1,19 @@
 <div class="box__shadow box__graphic">
-    <canvas baseChart class="chart"
+  <canvas
+    baseChart
+    class="chart"
     [data]="lineChartData"
     [options]="lineChartOptions"
-    [type]="lineChartType" [style]="loading ? 'opacity: 0;' : 'opacity: 1;'"></canvas>
-    <p *ngIf="(timeData ? timeData.data ? timeData.data.length == 0 : true : true) && !loading" class="notdata">No hay datos</p>
-    <div class="spinner" *ngIf="loading">
-        <mat-spinner diameter="50"></mat-spinner>
-    </div>
+    [type]="lineChartType"
+    [style]="loading ? 'opacity: 0;' : 'opacity: 1;'"
+  ></canvas>
+  <p
+    *ngIf="(timeData ? (timeData.data ? timeData.data.length == 0 : true) : true) && !loading"
+    class="notdata"
+  >
+    No hay datos
+  </p>
+  <div class="spinner" *ngIf="loading">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
 </div>

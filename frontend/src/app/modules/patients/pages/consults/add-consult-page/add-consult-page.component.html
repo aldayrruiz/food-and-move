@@ -1,0 +1,318 @@
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="edit ? editConsult() : addConsult()">
+    <div class="form__header">
+      <div class="header__left">
+        <button type="button" mat-icon-button matTooltip="Volver" (click)="exit()">
+          <mat-icon>clear</mat-icon>
+        </button>
+        <p class="header__subtitle">{{ edit ? 'Editar ' : 'Agregar ' }} Consulta</p>
+      </div>
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="form.invalid"
+        tabindex="11"
+      >
+        Guardar
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="form__main">
+      <div class="form__box box__shadow">
+        <div class="main__primary">
+          <div
+            class="form__input"
+            (mouseenter)="buttonClear.masa = true"
+            (mouseleave)="buttonClear.masa = false"
+          >
+            <div class="fake__icon"></div>
+            <mat-form-field class="input__field">
+              <mat-label>Masa [Kg]</mat-label>
+              <input
+                type="number"
+                matInput
+                autocomplete="off"
+                formControlName="masa"
+                tabindex="1"
+              />
+              <mat-error *ngIf="form.controls['masa'].hasError('min')"
+                >El valor no puede ser negativo</mat-error
+              >
+            </mat-form-field>
+            <div class="fake__clear" *ngIf="!buttonClear.masa"></div>
+            <button
+              type="button"
+              mat-icon-button
+              *ngIf="buttonClear.masa"
+              (click)="clearField('masa')"
+              class="btn__clear"
+            >
+              <mat-icon mat-list-icon>clear</mat-icon>
+            </button>
+          </div>
+          <div
+            class="form__input"
+            (mouseenter)="buttonClear.imc = true"
+            (mouseleave)="buttonClear.imc = false"
+          >
+            <div class="fake__icon"></div>
+            <mat-form-field class="input__field">
+              <mat-label>Índice de Masa Corporal (IMC) [Kg/m2]</mat-label>
+              <input type="number" matInput autocomplete="off" formControlName="imc" tabindex="2" />
+              <mat-error *ngIf="form.controls['imc'].hasError('min')"
+                >El valor no puede ser negativo</mat-error
+              >
+            </mat-form-field>
+            <div class="fake__clear" *ngIf="!buttonClear.imc"></div>
+            <button
+              type="button"
+              mat-icon-button
+              *ngIf="buttonClear.imc"
+              (click)="clearField('imc')"
+              class="btn__clear"
+            >
+              <mat-icon mat-list-icon>clear</mat-icon>
+            </button>
+          </div>
+          <div
+            class="form__input"
+            (mouseenter)="buttonClear.per_abdominal = true"
+            (mouseleave)="buttonClear.per_abdominal = false"
+          >
+            <div class="fake__icon"></div>
+            <mat-form-field class="input__field">
+              <mat-label>Perímetro Abdominal [cm]</mat-label>
+              <input
+                type="number"
+                matInput
+                autocomplete="off"
+                formControlName="per_abdominal"
+                tabindex="3"
+              />
+              <mat-error *ngIf="form.controls['per_abdominal'].hasError('min')"
+                >El valor no puede ser negativo</mat-error
+              >
+            </mat-form-field>
+            <div class="fake__clear" *ngIf="!buttonClear.per_abdominal"></div>
+            <button
+              type="button"
+              mat-icon-button
+              *ngIf="buttonClear.per_abdominal"
+              (click)="clearField('per_abdominal')"
+              class="btn__clear"
+            >
+              <mat-icon mat-list-icon>clear</mat-icon>
+            </button>
+          </div>
+          <div
+            class="form__input"
+            (mouseenter)="buttonClear.tension = true"
+            (mouseleave)="buttonClear.tension = false"
+          >
+            <div class="fake__icon"></div>
+            <mat-form-field class="input__field">
+              <mat-label>Tensión Arterial [mmHg]</mat-label>
+              <input
+                type="number"
+                matInput
+                autocomplete="off"
+                formControlName="tension"
+                tabindex="4"
+              />
+              <mat-error *ngIf="form.controls['tension'].hasError('min')"
+                >El valor no puede ser negativo</mat-error
+              >
+            </mat-form-field>
+            <div class="fake__clear" *ngIf="!buttonClear.tension"></div>
+            <button
+              type="button"
+              mat-icon-button
+              *ngIf="buttonClear.tension"
+              (click)="clearField('tension')"
+              class="btn__clear"
+            >
+              <mat-icon mat-list-icon>clear</mat-icon>
+            </button>
+          </div>
+          <div
+            class="form__input"
+            (mouseenter)="buttonClear.trigliceridos = true"
+            (mouseleave)="buttonClear.trigliceridos = false"
+          >
+            <div class="fake__icon"></div>
+            <mat-form-field class="input__field">
+              <mat-label>Triglicéridos Séricos</mat-label>
+              <input
+                type="number"
+                matInput
+                autocomplete="off"
+                formControlName="trigliceridos"
+                tabindex="5"
+              />
+              <mat-error *ngIf="form.controls['trigliceridos'].hasError('min')"
+                >El valor no puede ser negativo</mat-error
+              >
+            </mat-form-field>
+            <div class="fake__clear" *ngIf="!buttonClear.trigliceridos"></div>
+            <button
+              type="button"
+              mat-icon-button
+              *ngIf="buttonClear.trigliceridos"
+              (click)="clearField('trigliceridos')"
+              class="btn__clear"
+            >
+              <mat-icon mat-list-icon>clear</mat-icon>
+            </button>
+          </div>
+          <div
+            class="form__input"
+            (mouseenter)="buttonClear.hdl = true"
+            (mouseleave)="buttonClear.hdl = false"
+          >
+            <div class="fake__icon"></div>
+            <mat-form-field class="input__field">
+              <mat-label>HDL - Colesterol</mat-label>
+              <input type="number" matInput autocomplete="off" formControlName="hdl" tabindex="6" />
+              <mat-error *ngIf="form.controls['hdl'].hasError('min')"
+                >El valor no puede ser negativo</mat-error
+              >
+            </mat-form-field>
+            <div class="fake__clear" *ngIf="!buttonClear.hdl"></div>
+            <button
+              type="button"
+              mat-icon-button
+              *ngIf="buttonClear.hdl"
+              (click)="clearField('hdl')"
+              class="btn__clear"
+            >
+              <mat-icon mat-list-icon>clear</mat-icon>
+            </button>
+          </div>
+          <div
+            class="form__input"
+            (mouseenter)="buttonClear.ldl = true"
+            (mouseleave)="buttonClear.ldl = false"
+          >
+            <div class="fake__icon"></div>
+            <mat-form-field class="input__field">
+              <mat-label>LDL - Colesterol</mat-label>
+              <input type="number" matInput autocomplete="off" formControlName="ldl" tabindex="7" />
+              <mat-error *ngIf="form.controls['ldl'].hasError('min')"
+                >El valor no puede ser negativo</mat-error
+              >
+            </mat-form-field>
+            <div class="fake__clear" *ngIf="!buttonClear.ldl"></div>
+            <button
+              type="button"
+              mat-icon-button
+              *ngIf="buttonClear.ldl"
+              (click)="clearField('ldl')"
+              class="btn__clear"
+            >
+              <mat-icon mat-list-icon>clear</mat-icon>
+            </button>
+          </div>
+          <div
+            class="form__input"
+            (mouseenter)="buttonClear.hemoglobina = true"
+            (mouseleave)="buttonClear.hemoglobina = false"
+          >
+            <div class="fake__icon"></div>
+            <mat-form-field class="input__field">
+              <mat-label>Hemoglobina Glicosilada (hba1c)</mat-label>
+              <input
+                type="number"
+                matInput
+                autocomplete="off"
+                formControlName="hemoglobina"
+                tabindex="8"
+              />
+              <mat-error *ngIf="form.controls['hemoglobina'].hasError('min')"
+                >El valor no puede ser negativo</mat-error
+              >
+            </mat-form-field>
+            <div class="fake__clear" *ngIf="!buttonClear.hemoglobina"></div>
+            <button
+              type="button"
+              mat-icon-button
+              *ngIf="buttonClear.hemoglobina"
+              (click)="clearField('hemoglobina')"
+              class="btn__clear"
+            >
+              <mat-icon mat-list-icon>clear</mat-icon>
+            </button>
+          </div>
+          <div
+            class="form__input"
+            (mouseenter)="buttonClear.glucosa = true"
+            (mouseleave)="buttonClear.glucosa = false"
+          >
+            <div class="fake__icon"></div>
+            <mat-form-field class="input__field">
+              <mat-label>Glucosa en Plasma</mat-label>
+              <input
+                type="number"
+                matInput
+                autocomplete="off"
+                formControlName="glucosa"
+                tabindex="9"
+              />
+              <mat-error *ngIf="form.controls['glucosa'].hasError('min')"
+                >El valor no puede ser negativo</mat-error
+              >
+            </mat-form-field>
+            <div class="fake__clear" *ngIf="!buttonClear.glucosa"></div>
+            <button
+              type="button"
+              mat-icon-button
+              *ngIf="buttonClear.glucosa"
+              (click)="clearField('glucosa')"
+              class="btn__clear"
+            >
+              <mat-icon mat-list-icon>clear</mat-icon>
+            </button>
+          </div>
+          <div
+            class="form__input"
+            (mouseenter)="buttonClear.comments = true"
+            (mouseleave)="buttonClear.comments = false"
+          >
+            <div class="fake__icon"></div>
+            <mat-form-field class="input__field">
+              <mat-label>Comentarios</mat-label>
+              <textarea
+                matInput
+                type="text"
+                matInput
+                autocomplete="off"
+                formControlName="comments"
+                tabindex="10"
+                #comments
+                maxlength="155"
+              ></textarea>
+              <mat-hint align="end">{{ comments.value.length }}/155</mat-hint>
+            </mat-form-field>
+            <div class="fake__clear" *ngIf="!buttonClear.comments"></div>
+            <button
+              type="button"
+              mat-icon-button
+              *ngIf="buttonClear.comments"
+              (click)="clearField('comments')"
+              class="btn__clear"
+            >
+              <mat-icon mat-list-icon>clear</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="main__secondary">
+        <div class="form__calendar">
+          <mat-card class="calendar">
+            <mat-calendar [(selected)]="created_at"></mat-calendar>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

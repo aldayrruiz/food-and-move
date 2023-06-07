@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Rating } from '@shared/enums/rating';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 import { Routine } from 'src/modules/routines/schemas/routine.schemas';
-import { Rating } from 'src/shared/enums/rating';
 
 export type MoveDocument = Move & Document;
 

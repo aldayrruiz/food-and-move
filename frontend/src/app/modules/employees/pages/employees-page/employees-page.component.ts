@@ -12,9 +12,9 @@ import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
 import { InfoEmployeeComponent } from '@modules/employees/components/info-employee/info-employee.component';
 import { ColumnType } from '@shared/components/table/enums/column-type';
+import { TableStructure } from '@shared/components/table/interfaces/table-structure';
 import { finalize } from 'rxjs/operators';
 import { DEFAULT_LIMIT } from 'src/app/constants/app.constants';
-import { TableStructure } from '../../../../shared/components/table/interfaces/table-structure';
 @Component({
   selector: 'app-employees-page',
   templateUrl: './employees-page.component.html',

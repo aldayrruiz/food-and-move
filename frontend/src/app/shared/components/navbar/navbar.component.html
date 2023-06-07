@@ -1,29 +1,76 @@
 <div class="navbar">
-    <mat-progress-bar mode="query" color="primary" *ngIf="loaderService.isLoading | async"></mat-progress-bar>
-    <p>
-        <mat-toolbar color="primary">
-          <button mat-icon-button (click)="onToggleSidenav()" *ngIf="isSmall">
-            <mat-icon>menu</mat-icon>
-          </button>
-          <!--<span class="title">Food & Move</span>-->
-          <img src="assets/images/logo.png" class="logo" (click)="goToPatients()">
-          <span class="spacer" *ngIf="!isSmall"></span>
-          <div *ngIf="!isSmall">
-            <button mat-button (click)="goToPatients()" [style.background]="isActive('patients') ? 'rgba(0,0,0,0.1)' : ''" style="transition: all .3s;">Pacientes</button>
-            <button mat-button (click)="goToEmployees()" *ngIf="isAdmin()" [style.background]="isActive('employees') ? 'rgba(0,0,0,0.1)' : ''" style="transition: all .3s;">Profesionales</button>
-            <button mat-button (click)="goToRecipes()" [style.background]="isActive('recipes') ? 'rgba(0,0,0,0.1)' : ''" style="transition: all .3s;">Recetas</button>
-            <button mat-button (click)="goToDiets()" [style.background]="isActive('diets') ? 'rgba(0,0,0,0.1)' : ''" style="transition: all .3s;">Dietas Semanales</button>
-            <button mat-button (click)="goToRoutines()" [style.background]="isActive('routines') ? 'rgba(0,0,0,0.1)' : ''" style="transition: all .3s;">Rutinas</button>
-          </div>
-          <span class="spacer" *ngIf="!isSmall"></span>
-          <a class="profile pointer" (click)="showProfilePanel = !showProfilePanel" *ngIf="!isSmall">
-            <p class="profile__name">{{employee | name}}</p>
-            <app-profile-picture [url]="(employee?.profile_image | photo)" size="40px"></app-profile-picture>
-          </a>
-        </mat-toolbar>
-    </p>
+  <mat-progress-bar
+    mode="query"
+    color="primary"
+    *ngIf="loaderService.isLoading | async"
+  ></mat-progress-bar>
+  <p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="onToggleSidenav()" *ngIf="isSmall">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <!--<span class="title">Food & Move</span>-->
+      <img src="assets/images/logo.png" class="logo" (click)="goToPatients()" />
+      <span class="spacer" *ngIf="!isSmall"></span>
+      <div *ngIf="!isSmall">
+        <button
+          mat-button
+          (click)="goToPatients()"
+          [style.background]="isActive('patients') ? 'rgba(0,0,0,0.1)' : ''"
+          style="transition: all 0.3s"
+        >
+          Pacientes
+        </button>
+        <button
+          mat-button
+          (click)="goToEmployees()"
+          *ngIf="isAdmin()"
+          [style.background]="isActive('employees') ? 'rgba(0,0,0,0.1)' : ''"
+          style="transition: all 0.3s"
+        >
+          Profesionales
+        </button>
+        <button
+          mat-button
+          (click)="goToRecipes()"
+          [style.background]="isActive('recipes') ? 'rgba(0,0,0,0.1)' : ''"
+          style="transition: all 0.3s"
+        >
+          Recetas
+        </button>
+        <button
+          mat-button
+          (click)="goToDiets()"
+          [style.background]="isActive('diets') ? 'rgba(0,0,0,0.1)' : ''"
+          style="transition: all 0.3s"
+        >
+          Dietas Semanales
+        </button>
+        <button
+          mat-button
+          (click)="goToRoutines()"
+          [style.background]="isActive('routines') ? 'rgba(0,0,0,0.1)' : ''"
+          style="transition: all 0.3s"
+        >
+          Rutinas
+        </button>
+      </div>
+      <span class="spacer" *ngIf="!isSmall"></span>
+      <a class="profile pointer" (click)="showProfilePanel = !showProfilePanel" *ngIf="!isSmall">
+        <p class="profile__name">{{ employee | name }}</p>
+        <app-profile-picture
+          [url]="employee?.profile_image | photo"
+          size="40px"
+        ></app-profile-picture>
+      </a>
+    </mat-toolbar>
+  </p>
 </div>
-<div class="click__out" *ngIf="showProfilePanel && !isSmall" (click)="showProfilePanel = false"></div>
+<div
+  class="click__out"
+  *ngIf="showProfilePanel && !isSmall"
+  (click)="showProfilePanel = false"
+></div>
 <div class="profile__panel" *ngIf="showProfilePanel">
   <div class="profile__buttons">
     <button mat-icon-button (click)="goToConfiguration()">
@@ -35,10 +82,10 @@
   </div>
   <mat-divider style="margin-bottom: 10px"></mat-divider>
   <div class="profile__info">
-    <app-profile-picture [url]="(employee?.profile_image | photo)" size="100px"></app-profile-picture>
+    <app-profile-picture [url]="employee?.profile_image | photo" size="100px"></app-profile-picture>
     <div class="profile__info-main">
-      <p class="main__name">{{(employee | name)}}</p>
-      <p class="main__email">{{employee?.email}}</p>
+      <p class="main__name">{{ employee | name }}</p>
+      <p class="main__email">{{ employee?.email }}</p>
     </div>
   </div>
 </div>

@@ -1,57 +1,57 @@
 <div class="dialog__box">
-    <h1 class="title">{{routine.title}}</h1>
-    <div class="header">
-        <p class="subtitle">General</p>
-        <mat-divider></mat-divider>
+  <h1 class="title">{{ routine.title }}</h1>
+  <div class="header">
+    <p class="subtitle">General</p>
+    <mat-divider></mat-divider>
+  </div>
+  <div class="section">
+    <div class="item">
+      <p class="text">{{ routine.description }}</p>
     </div>
-    <div class="section">
-        <div class="item">
-            <p class="text">{{routine.description}}</p>
-        </div>
+  </div>
+  <div class="header">
+    <p class="subtitle">Links</p>
+    <mat-divider></mat-divider>
+  </div>
+  <div class="section" [ngSwitch]="routine.links.length">
+    <div class="list__not-exist" *ngSwitchCase="0">
+      <p class="text">No existe ningún link</p>
     </div>
-    <div class="header">
-        <p class="subtitle">Links</p>
-        <mat-divider></mat-divider>
+    <div class="list" *ngSwitchDefault>
+      <a [href]="link" *ngFor="let link of routine.links" class="list__item list__item-normal">
+        <mat-icon class="icon">link</mat-icon>
+        <p class="url text">{{ link }}</p>
+      </a>
     </div>
-    <div class="section" [ngSwitch]="routine.links.length">
-        <div class="list__not-exist" *ngSwitchCase="0">
-            <p class="text">No existe ningún link</p>
-        </div>
-        <div class="list" *ngSwitchDefault>
-            <a [href]="link" *ngFor="let link of routine.links" class="list__item list__item-normal">
-                <mat-icon class="icon">link</mat-icon>
-                <p class="url text">{{link}}</p>
-            </a>
-        </div>
+  </div>
+  <div class="header">
+    <p class="subtitle">Vídeos</p>
+    <mat-divider></mat-divider>
+  </div>
+  <div class="section" [ngSwitch]="routine.videos.length">
+    <div class="list__not-exist" *ngSwitchCase="0">
+      <p class="text">No existe ningún vídeo</p>
     </div>
-    <div class="header">
-        <p class="subtitle">Vídeos</p>
-        <mat-divider></mat-divider>
+    <div class="list" *ngSwitchDefault>
+      <a [href]="video" *ngFor="let video of routine.videos" class="list__item list__item-normal">
+        <mat-icon class="icon">video_library</mat-icon>
+        <p class="url text">{{ video }}</p>
+      </a>
     </div>
-    <div class="section" [ngSwitch]="routine.videos.length">
-        <div class="list__not-exist" *ngSwitchCase="0">
-            <p class="text">No existe ningún vídeo</p>
-        </div>
-        <div class="list" *ngSwitchDefault>
-            <a [href]="video" *ngFor="let video of routine.videos" class="list__item list__item-normal">
-                <mat-icon class="icon">video_library</mat-icon>
-                <p class="url text">{{video}}</p> 
-            </a>
-        </div>
+  </div>
+  <div class="header">
+    <p class="subtitle">PDF</p>
+    <mat-divider></mat-divider>
+  </div>
+  <div class="section" [ngSwitch]="routine.attachment">
+    <div class="list__not-exist" *ngSwitchCase="null">
+      <p class="text">No existe ningún PDF</p>
     </div>
-    <div class="header">
-        <p class="subtitle">PDF</p>
-        <mat-divider></mat-divider>
+    <div class="list" *ngSwitchDefault>
+      <a [href]="getAttachmentUrl()" class="list__item list__item-normal">
+        <mat-icon class="icon">video_library</mat-icon>
+        <p class="url text">{{ attachment?.title || 'archivo' }}</p>
+      </a>
     </div>
-    <div class="section" [ngSwitch]="routine.attachment">
-        <div class="list__not-exist" *ngSwitchCase="null">
-            <p class="text">No existe ningún PDF</p>
-        </div>
-        <div class="list" *ngSwitchDefault>
-            <a [href]="getAttachmentUrl()" class="list__item list__item-normal">
-                <mat-icon class="icon">video_library</mat-icon>
-                <p class="url text">{{attachment?.title || 'archivo'}}</p> 
-            </a>
-        </div>
-    </div>
+  </div>
 </div>

@@ -17,7 +17,6 @@ import { ColumnType } from '@shared/components/table/enums/column-type';
 import { TableStructure } from '@shared/components/table/interfaces/table-structure';
 import { finalize } from 'rxjs/operators';
 import { DEFAULT_LIMIT } from 'src/app/constants/app.constants';
-import { ViewPatientService } from '../../../../core/services/view-patient.service';
 
 @Component({
   selector: 'app-patients-page',
@@ -59,8 +58,7 @@ export class PatientsPageComponent implements OnInit {
     private readonly loaderService: LoaderService,
     private readonly snackerService: SnackerService,
     private readonly dialogService: DialogService,
-    private readonly dialog: MatDialog,
-    private readonly viewPatientService: ViewPatientService
+    private readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -217,7 +215,6 @@ export class PatientsPageComponent implements OnInit {
   }
 
   async viewPatient(patient: PatientModel): Promise<void> {
-    await this.viewPatientService.updatePatient(patient._id);
-    this.routerService.goToGraphics();
+    await this.routerService.goToPatientDetails(patient._id);
   }
 }

@@ -1,9 +1,6 @@
 import { Controller, Get, Param, Res } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import {
-  DESTINATION_ATTACHMENTS,
-  DESTINATION_PROFILE_IMAGE,
-} from 'src/constants/uploads.constants';
+import { DESTINATION_ATTACHMENTS, DESTINATION_PROFILE_IMAGE } from 'src/constants/uploads.constants';
 import { FilesService } from './files.service';
 
 @ApiBearerAuth()

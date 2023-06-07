@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { DateRangeDto } from 'src/shared/dto/date-range.dto';
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
+import { DateRangeDto } from '@shared/dto/date-range.dto';
+import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 import { FindMoveDto } from './dto/find-move.dto';
 import { MoveDto } from './dto/move.dto';
 import { UpdateMoveDto } from './dto/update-move.dto';

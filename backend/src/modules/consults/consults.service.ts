@@ -1,8 +1,8 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { DateRangeDto } from '@shared/dto/date-range.dto';
 import { Model } from 'mongoose';
 import { CustomQueryService } from 'src/services/custom-query.service';
-import { DateRangeDto } from 'src/shared/dto/date-range.dto';
 import { getQueryDate } from 'src/utils/filter-dates.utils';
 import { ConsultDto } from './dto/consult.dto';
 import { FilterConsultDto } from './dto/filter-consult.dto';
@@ -65,9 +65,7 @@ export class ConsultsService {
   }
 
   async getValues(id: string, key: string, dateRangeDto: DateRangeDto) {
-    const consults = await this.consultModel.find(
-      getQueryDate({ patient: id }, dateRangeDto, 'created_at')
-    );
+    const consults = await this.consultModel.find(getQueryDate({ patient: id }, dateRangeDto, 'created_at'));
     return consults
       .filter((consult) => consult[key])
       .map((consult) => {

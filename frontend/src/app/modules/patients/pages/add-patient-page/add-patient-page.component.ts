@@ -11,8 +11,8 @@ import { PatientsService } from '@core/services/patients.service';
 import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
 import { birthDateValidator } from '@modules/patients/validators/date.validator';
+import { OptionalPipe } from '@shared/pipes/optional.pipe';
 import { finalize } from 'rxjs/operators';
-import { OptionalPipe } from '../../../../shared/pipes/optional.pipe';
 
 @Component({
   selector: 'app-add-patient-page',

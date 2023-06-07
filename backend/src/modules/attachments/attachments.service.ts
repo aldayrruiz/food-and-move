@@ -8,9 +8,7 @@ import { AttachmentDocument } from './schemas/attachment.schema';
 
 @Injectable()
 export class AttachmentsService {
-  constructor(
-    @InjectModel('attachments') private readonly attachmentModel: Model<AttachmentDocument>
-  ) {}
+  constructor(@InjectModel('attachments') private readonly attachmentModel: Model<AttachmentDocument>) {}
 
   async findAll() {
     return await this.attachmentModel.find({});
@@ -27,9 +25,7 @@ export class AttachmentsService {
   }
 
   async update(id: string, title: string) {
-    const attachments = await (
-      await this.attachmentModel.find({ title })
-    ).filter((attachment) => !attachment._id.equals(id));
+    const attachments = await (await this.attachmentModel.find({ title })).filter((attachment) => !attachment._id.equals(id));
     if (attachments.length > 0) throw new NotFoundException('Ya existe un archivo con ese nombre');
     return await this.attachmentModel.findByIdAndUpdate(id, { title }, { new: true });
   }

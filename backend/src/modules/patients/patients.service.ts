@@ -74,11 +74,7 @@ export class PatientsService {
 
   async upload(id: string, file: Express.Multer.File) {
     await this.removeProfileImage(id, false);
-    return await this.patientModel.findByIdAndUpdate(
-      id,
-      { profile_image: file.filename },
-      { new: true }
-    );
+    return await this.patientModel.findByIdAndUpdate(id, { profile_image: file.filename }, { new: true });
   }
 
   async removeProfileImage(id: string, updatePatient = true) {

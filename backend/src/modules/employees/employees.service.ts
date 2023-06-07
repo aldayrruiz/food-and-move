@@ -2,10 +2,10 @@ import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
+import { ChangePasswordDto } from '@shared/dto/change-password.dto';
 import { compare, hash } from 'bcrypt';
 import { Model } from 'mongoose';
 import { URL_FRONT_DEV, URL_FRONT_PROD } from 'src/constants/app.constants';
-import { ChangePasswordDto } from 'src/shared/dto/change-password.dto';
 import { newRandomPassword } from 'src/utils/utils';
 import { CustomQueryService } from '../../services/custom-query.service';
 import { FilesService } from '../files/files.service';
@@ -79,18 +79,13 @@ export class EmployeesService {
 
   async upload(id: string, file: Express.Multer.File) {
     await this.removeProfileImage(id, false);
-    return await this.employeeModel.findByIdAndUpdate(
-      id,
-      { profile_image: file.filename },
-      { new: true }
-    );
+    return await this.employeeModel.findByIdAndUpdate(id, { profile_image: file.filename }, { new: true });
   }
 
   async removeProfileImage(id: string, updateEmployee = true) {
     const employee = await this.employeeModel.findById(id);
     await this.filesService.removeProfileImage(employee.profile_image);
-    if (updateEmployee)
-      await this.employeeModel.findByIdAndUpdate(id, { profile_image: undefined });
+    if (updateEmployee) await this.employeeModel.findByIdAndUpdate(id, { profile_image: undefined });
   }
 
   async login(email: string, password: string) {
@@ -108,11 +103,7 @@ export class EmployeesService {
     const isMatch = await compare(password, employee.password);
     if (!isMatch) throw new NotFoundException('Contraseña incorrecta');
     const hashPassword = await hash(newPassword, 10);
-    return await this.employeeModel.findByIdAndUpdate(
-      id,
-      { password: hashPassword },
-      { new: true }
-    );
+    return await this.employeeModel.findByIdAndUpdate(id, { password: hashPassword }, { new: true });
   }
 
   async forgotPassword(email: string) {
@@ -134,11 +125,7 @@ export class EmployeesService {
       const employee = await this.employeeModel.findOne({ email });
       if (!employee) throw new NotFoundException('No se ha encontrado al profesional');
       const hashPassword = await hash(password, 10);
-      return await this.employeeModel.findOneAndUpdate(
-        { email },
-        { password: hashPassword },
-        { new: true }
-      );
+      return await this.employeeModel.findOneAndUpdate({ email }, { password: hashPassword }, { new: true });
     } catch (error) {
       console.log(error);
       throw new NotFoundException('Token no válido');

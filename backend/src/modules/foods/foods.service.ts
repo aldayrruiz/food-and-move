@@ -1,10 +1,10 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { DateRangeDto } from '@shared/dto/date-range.dto';
 import { Model } from 'mongoose';
 import { addDay, getDateRange } from 'src/utils/date-utils';
 import { getQueryDate } from 'src/utils/filter-dates.utils';
 import { asyncForEach } from 'src/utils/utils';
-import { DateRangeDto } from '../../shared/dto/date-range.dto';
 import { DietsService } from '../diets/diets.service';
 import { FindFoodDto } from './dto/find-food.dto';
 import { FoodDto } from './dto/food.dto';
@@ -59,9 +59,7 @@ export class FoodsService {
   }
 
   async findByPatient(idPatient: string, dateRangeDto: DateRangeDto) {
-    const foods = await this.foodModel.find(
-      getQueryDate({ patient: idPatient }, dateRangeDto, 'date')
-    );
+    const foods = await this.foodModel.find(getQueryDate({ patient: idPatient }, dateRangeDto, 'date'));
     return foods;
   }
 
@@ -87,16 +85,10 @@ export class FoodsService {
     return ingredients;
   }
 
-  async setCheckIngredient(
-    idFood: string,
-    nameIngredient: string,
-    isChecked: boolean,
-    change = false
-  ) {
+  async setCheckIngredient(idFood: string, nameIngredient: string, isChecked: boolean, change = false) {
     const food = await this.findOne(idFood);
     const ingredients = food.ingredients.map((ingredient) => {
-      if (ingredient.name == nameIngredient)
-        ingredient.isChecked = change ? !ingredient.isChecked : isChecked;
+      if (ingredient.name == nameIngredient) ingredient.isChecked = change ? !ingredient.isChecked : isChecked;
       return ingredient;
     });
     return await this.update(idFood, { ingredients });

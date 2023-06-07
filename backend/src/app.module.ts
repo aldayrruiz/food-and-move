@@ -22,10 +22,7 @@ import { UploadsService } from './services/uploads.service';
 @Module({
   imports: [
     MongooseModule.forRootAsync({ useClass: MongooseConfigService }),
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development',
-    }),
+    ConfigModule.forRoot({ isGlobal: true }),
     EmployeesModule,
     PatientsModule,
     ConsultsModule,

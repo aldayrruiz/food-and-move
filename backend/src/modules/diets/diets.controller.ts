@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { DayOfWeek } from 'src/shared/enums/day-of-week';
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
+import { DayOfWeek } from '@shared/enums/day-of-week';
+import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 import { RecipeDto } from '../recipes/dto/recipe.dto';
 import { UpdateRecipeDto } from '../recipes/dto/update-recipe.dto';
 import { DietsService } from './diets.service';
@@ -48,20 +48,12 @@ export class DietsController {
   }
 
   @Get('getRecipe/:dietId/:day/:recipeId')
-  async getRecipe(
-    @Param('dietId') dietId: string,
-    @Param('day') day: DayOfWeek,
-    @Param('recipeId') recipeId: string
-  ) {
+  async getRecipe(@Param('dietId') dietId: string, @Param('day') day: DayOfWeek, @Param('recipeId') recipeId: string) {
     return await this.dietsService.getRecipe(dietId, day, recipeId);
   }
 
   @Post('addRecipe/:dietId/:day')
-  async addRecipe(
-    @Param('dietId') dietId: string,
-    @Param('day') day: DayOfWeek,
-    @Body() recipeDto: RecipeDto
-  ) {
+  async addRecipe(@Param('dietId') dietId: string, @Param('day') day: DayOfWeek, @Body() recipeDto: RecipeDto) {
     return await this.dietsService.addRecipe(dietId, day, recipeDto);
   }
 
@@ -76,11 +68,7 @@ export class DietsController {
   }
 
   @Delete('removeRecipe/:dietId/:day/:recipeId')
-  async removeRecipe(
-    @Param('dietId') dietId: string,
-    @Param('day') day: DayOfWeek,
-    @Param('recipeId') recipeId: string
-  ) {
+  async removeRecipe(@Param('dietId') dietId: string, @Param('day') day: DayOfWeek, @Param('recipeId') recipeId: string) {
     return await this.dietsService.removeRecipe(dietId, day, recipeId);
   }
 }

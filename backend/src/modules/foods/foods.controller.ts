@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { DateRangeDto } from 'src/shared/dto/date-range.dto';
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
+import { DateRangeDto } from '@shared/dto/date-range.dto';
+import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 import { FindFoodDto } from './dto/find-food.dto';
 import { FoodDto } from './dto/food.dto';
 import { UpdateFoodDto } from './dto/update-food.dto';
@@ -60,11 +60,7 @@ export class FoodsController {
   }
 
   @Get('importDiet/:dietId/:patientId/:date')
-  async importDiet(
-    @Param('dietId') dietId,
-    @Param('patientId') patientId,
-    @Param('date') date: Date
-  ) {
+  async importDiet(@Param('dietId') dietId, @Param('patientId') patientId, @Param('date') date: Date) {
     return await this.foodsService.importDiet(dietId, patientId, date);
   }
 }

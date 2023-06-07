@@ -15,8 +15,8 @@ import { SnackerService } from '@core/services/snacker.service';
 import { IngredientStructure } from '@shared/components/ingredients-input/interfaces/ingredient-structure';
 import { LinkStructure } from '@shared/components/links-input/interfaces/link-structure';
 import { VideoStructure } from '@shared/components/videos-input/interfaces/video-structure';
+import { OptionalPipe } from '@shared/pipes/optional.pipe';
 import { finalize } from 'rxjs/operators';
-import { OptionalPipe } from '../../../../shared/pipes/optional.pipe';
 
 @Component({
   selector: 'app-add-recipe-page',

@@ -1,27 +1,27 @@
 <div class="form__list-box box__shadow">
-    <div class="header">
-        <p class="title">Links</p>
-        <p class="subtitle">Agregar enlaces</p>
-        <mat-icon class="icon">link</mat-icon>
-    </div>
-    <div class="form__list">
-        <mat-form-field class="input">
-            <mat-label>URL</mat-label>
-            <input matInput #url>
-        </mat-form-field>
-        <button mat-icon-button type="button" (click)="addLink(url.value); url.value = ''">
-            <mat-icon>add</mat-icon>
+  <div class="header">
+    <p class="title">Links</p>
+    <p class="subtitle">Agregar enlaces</p>
+    <mat-icon class="icon">link</mat-icon>
+  </div>
+  <div class="form__list">
+    <mat-form-field class="input">
+      <mat-label>URL</mat-label>
+      <input matInput #url />
+    </mat-form-field>
+    <button mat-icon-button type="button" (click)="addLink(url.value); url.value = ''">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="list">
+    <div *ngFor="let link of links">
+      <div class="item">
+        <a [href]="link.url">{{ link.url }}</a>
+        <button mat-icon-button type="button" (click)="removeLink(link.id)">
+          <mat-icon>clear</mat-icon>
         </button>
+      </div>
+      <mat-divider></mat-divider>
     </div>
-    <div class="list">
-        <div *ngFor="let link of links">
-            <div class="item">
-                <a [href]="link.url">{{link.url}}</a>
-                <button mat-icon-button type="button" (click)="removeLink(link.id)">
-                    <mat-icon>clear</mat-icon>
-                </button>
-            </div>
-            <mat-divider></mat-divider>
-        </div>  
-    </div>
+  </div>
 </div>

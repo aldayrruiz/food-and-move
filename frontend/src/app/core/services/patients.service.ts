@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CustomQuery } from '@core/interfaces/custom-query';
+import { PatientPipe } from '@shared/pipes/patient.pipe';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { PatientPipe } from '../../shared/pipes/patient.pipe';
 import { CustomResponse } from '../interfaces/custom-response';
 import { PatientRequestModel } from '../models/patient-request.model';
 import { PatientModel } from '../models/patient.model';

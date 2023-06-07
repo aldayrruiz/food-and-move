@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FoodModel } from '../../core/models/food.model';
+import { FoodModel } from '@core/models/food.model';
 
 @Pipe({
   name: 'food',
