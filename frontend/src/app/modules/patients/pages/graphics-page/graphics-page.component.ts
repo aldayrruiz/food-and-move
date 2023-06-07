@@ -8,7 +8,6 @@ import { LoaderService } from '@core/services/loader.service';
 import { PatientsService } from '@core/services/patients.service';
 import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
-import { ViewPatientService } from '@core/services/view-patient.service';
 import { GraphicStructure } from '@modules/graphics/interfaces/graphic-structure.interface';
 import { measures2PointsData, newTimeData } from '@shared/components/graphic/utils/graphic-utils';
 import { OptionalPipe } from '@shared/pipes/optional.pipe';
@@ -21,7 +20,7 @@ import { finalize } from 'rxjs';
   styleUrls: ['./graphics-page.component.css'],
 })
 export class GraphicsPageComponent implements OnInit {
-  patient: PatientModel | null = null;
+  patient!: PatientModel;
 
   timeData = newTimeData('prueba', []);
   range = new FormGroup({
@@ -93,22 +92,17 @@ export class GraphicsPageComponent implements OnInit {
     private readonly routerService: RouterService,
     private readonly snackerService: SnackerService,
     private readonly loaderService: LoaderService,
-    private readonly viewPatientService: ViewPatientService,
     private readonly optionalPipe: OptionalPipe
   ) {}
 
   ngOnInit(): void {
-    this.viewPatientService.patient$.subscribe(
-      (res) => {
-        this.patient = res;
+    const patientId = this.activatedRoute.snapshot.params['patientId'];
+    this.patientsService.getPatient(patientId).subscribe({
+      next: (patient) => {
+        this.patient = patient;
         this.loadGraphics();
       },
-      (err) => {
-        console.log(err);
-        this.routerService.goToPatients();
-        this.snackerService.showError('No se ha encontrado al paciente');
-      }
-    );
+    });
   }
 
   loadGraphics(): void {
@@ -119,7 +113,7 @@ export class GraphicsPageComponent implements OnInit {
     });
     graphicsCpy.forEach((graphic, i) => {
       this.consultsService
-        .getValues(this.patient!._id, graphic.key, dateRange)
+        .getValues(this.patient._id, graphic.key, dateRange)
         .pipe(finalize(() => (this.graphics[i].loading = false)))
         .subscribe(
           (res) => {

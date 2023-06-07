@@ -8,9 +8,9 @@ import { PatientModel } from '@core/models/patient.model';
 import { DialogService } from '@core/services/dialog.service';
 import { FoodsService } from '@core/services/foods.service';
 import { LoaderService } from '@core/services/loader.service';
+import { PatientsService } from '@core/services/patients.service';
 import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
-import { ViewPatientService } from '@core/services/view-patient.service';
 import { addDay, getDateRange, getDay } from '@core/utils/date-utils';
 import { ImportType } from '@shared/components/import-dialog/enums/import-type';
 import { ImportDialogComponent } from '@shared/components/import-dialog/import-dialog.component';
@@ -28,7 +28,7 @@ export class FoodsPageComponent implements OnInit {
   days: Day[] = daysInit;
   weeklyCalendarType = WeeklyCalendarType;
 
-  patient: PatientModel | null = null;
+  patient!: PatientModel;
   dateRange: DateRange = getDateRange(new Date());
 
   constructor(
@@ -37,29 +37,27 @@ export class FoodsPageComponent implements OnInit {
     private readonly routerService: RouterService,
     private readonly snackerService: SnackerService,
     private readonly loaderService: LoaderService,
-    private readonly viewPatientService: ViewPatientService,
     private readonly dialogService: DialogService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly patientsService: PatientsService
   ) {}
 
   ngOnInit(): void {
-    this.viewPatientService.patient$.subscribe(
-      (res) => {
-        this.patient = res;
-        const params = this.activatedRoute.snapshot.params;
-        if (params['date']) this.dateRange = getDateRange(new Date(params['date']));
+    const params = this.activatedRoute.snapshot.params;
+    const patientId = params['patientId'];
+    if (params['date']) {
+      this.dateRange = getDateRange(new Date(params['date']));
+    }
+    this.patientsService.getPatient(patientId).subscribe({
+      next: (patient) => {
+        this.patient = patient;
         this.loadFoods();
       },
-      (err) => {
-        console.log(err);
-        this.routerService.goToPatients();
-        this.snackerService.showError('No se ha encontrado al paciente');
-      }
-    );
+    });
   }
 
   changeDateRange(nWeeks: number): void {
-    const date = addDay(this.dateRange.startDate!, 7 * nWeeks);
+    const date = addDay(this.dateRange.startDate, 7 * nWeeks);
     this.dateRange = getDateRange(date);
     this.loadFoods();
   }
@@ -67,16 +65,16 @@ export class FoodsPageComponent implements OnInit {
   loadFoods(): void {
     this.loaderService.isLoading.next(true);
     this.foodsService
-      .getFoods(this.patient!._id, this.dateRange)
+      .getFoods(this.patient?._id, this.dateRange)
       .pipe(finalize(() => this.loaderService.isLoading.next(false)))
-      .subscribe(
-        (res) => {
+      .subscribe({
+        next: (res) => {
           this.setFoods(res);
         },
-        (err) => {
+        error: (err) => {
           console.log(err);
-        }
-      );
+        },
+      });
   }
 
   setFoods(foods: FoodModel[]): void {
@@ -84,16 +82,17 @@ export class FoodsPageComponent implements OnInit {
       this.days[i].items = foods.filter((foodItem) => {
         return getDay(foodItem.date) - 1 == i;
       });
-      this.days[i].date = addDay(this.dateRange.startDate!, i);
+      this.days[i].date = addDay(this.dateRange.startDate, i);
     });
   }
 
-  addFood(date: Date): void {
-    this.routerService.goToAddFood(date);
+  async addFood(date: Date) {
+    await this.routerService.goToAddFood(this.patient._id, date);
   }
 
-  editFood(food: FoodModel): void {
-    this.routerService.goToEditFood(food._id);
+  async editFood(food: FoodModel) {
+    console.log(`Edit food ${food._id}`);
+    await this.routerService.goToEditFood(this.patient._id, food._id);
   }
 
   deleteFood(food: FoodModel): void {

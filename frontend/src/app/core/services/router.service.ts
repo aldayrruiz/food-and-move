@@ -31,7 +31,7 @@ export class RouterService {
   // Patients
 
   async goToPatients(): Promise<void> {
-    await this.router.navigate(['patients']);
+    await this.router.navigate(['patients/table']);
   }
 
   async goToAddPatient(): Promise<void> {
@@ -104,49 +104,54 @@ export class RouterService {
 
   // Patient
 
-  async goToGraphics(): Promise<void> {
-    await this.router.navigate(['patient/graphics']);
+  async goToPatientDetails(patientId: string): Promise<void> {
+    await this.router.navigate([`patients/${patientId}/graphics`]);
   }
 
-  async goToConsults(): Promise<void> {
-    await this.router.navigate(['patient/consults']);
+  async goToGraphics(patientId: string): Promise<void> {
+    await this.router.navigate([`patients/${patientId}/graphics`]);
   }
 
-  async goToAddConsult(): Promise<void> {
-    await this.router.navigate(['patient/consults/add-consult']);
+  async goToConsults(patientId: string): Promise<void> {
+    await this.router.navigate([`patients/${patientId}/consults`]);
   }
 
-  async goToEditConsult(idcon: string): Promise<void> {
-    await this.router.navigate(['patient/consults/edit-consult', idcon]);
+  async goToAddConsult(patientId: string): Promise<void> {
+    await this.router.navigate([`patients/${patientId}/consults/add-consult`]);
   }
 
-  async goToFoods(date?: Date): Promise<void> {
-    await this.router.navigate([
-      'patient/foods',
-      date ? date.toDateString() : new Date().toDateString(),
-    ]);
+  async goToEditConsult(consultId: string): Promise<void> {
+    await this.router.navigate(['patients/consults/edit-consult', consultId]);
   }
 
-  async goToAddFood(date: Date): Promise<void> {
-    await this.router.navigate(['patient/foods/add-food', date.toDateString()]);
+  async goToFoods(patientId: string, date?: Date): Promise<void> {
+    const urlDate = date ? date.toDateString() : new Date().toDateString();
+    const url = `patients/${patientId}/foods/${urlDate}`;
+    await this.router.navigate([url]);
   }
 
-  async goToEditFood(id: string): Promise<void> {
-    await this.router.navigate(['patient/foods/edit-food', id]);
+  async goToAddFood(patientId: string, date: Date): Promise<void> {
+    await this.router.navigate([`patients/${patientId}/foods/add-food`, date.toDateString()]);
   }
 
-  async goToMoves(date?: Date): Promise<void> {
-    await this.router.navigate([
-      'patient/moves',
-      date ? date.toDateString() : new Date().toDateString(),
-    ]);
+  async goToEditFood(patientId: string, foodId: string): Promise<void> {
+    await this.router.navigate([`patients/${patientId}/foods/edit-food/${foodId}`]);
   }
 
-  async goToAddMove(date: Date): Promise<void> {
-    await this.router.navigate(['patient/moves/add-move', date.toDateString()]);
+  async goToMoves(patientId: string, date?: Date): Promise<void> {
+    const dateUrl = date ? date.toDateString() : new Date().toDateString();
+    const url = `patients/${patientId}/moves/${dateUrl}`;
+    await this.router.navigate([url]);
   }
 
-  async goToEditMove(id: string): Promise<void> {
-    await this.router.navigate(['patient/moves/edit-move', id]);
+  async goToAddMove(patientId: string, date: Date): Promise<void> {
+    const dateUrl = date.toDateString();
+    const url = `patients/${patientId}/moves/add-move/${dateUrl}`;
+    await this.router.navigate([url]);
+  }
+
+  async goToEditMove(patientId: string, moveId: string): Promise<void> {
+    const url = `patients/${patientId}/moves/edit-move/${moveId}`;
+    await this.router.navigate([url]);
   }
 }

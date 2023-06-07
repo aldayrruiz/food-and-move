@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { WeeklyCalendarType } from './enums/weekly-calendar-type';
 import { Day } from './interfaces/day';
 
@@ -7,7 +7,7 @@ import { Day } from './interfaces/day';
   templateUrl: './weekly-calendar.component.html',
   styleUrls: ['./weekly-calendar.component.css'],
 })
-export class WeeklyCalendarComponent implements OnInit {
+export class WeeklyCalendarComponent {
   @Input() days: Day[] = [];
   @Input() type: WeeklyCalendarType = WeeklyCalendarType.Food;
   @Input() showDate = true;
@@ -18,10 +18,6 @@ export class WeeklyCalendarComponent implements OnInit {
   @Output() delete = new EventEmitter<{ day: Day; item: any }>();
 
   weeklyCalendarType = WeeklyCalendarType;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 
   addItem(weekday: Day) {
     this.add.emit(weekday);

@@ -6,9 +6,9 @@ import { PatientModel } from '@core/models/patient.model';
 import { DialogService } from '@core/services/dialog.service';
 import { LoaderService } from '@core/services/loader.service';
 import { MovesService } from '@core/services/moves.service';
+import { PatientsService } from '@core/services/patients.service';
 import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
-import { ViewPatientService } from '@core/services/view-patient.service';
 import { addDay, getDateRange, getDay } from '@core/utils/date-utils';
 import { daysInit } from '@shared/components/weekly-calendar/constant/days-init';
 import { WeeklyCalendarType } from '@shared/components/weekly-calendar/enums/weekly-calendar-type';
@@ -24,33 +24,28 @@ export class MovesPageComponent implements OnInit {
   days: Day[] = daysInit;
   weeklyCalendarType = WeeklyCalendarType;
 
-  patient: PatientModel | null = null;
+  patient!: PatientModel;
   dateRange: DateRange = getDateRange(new Date());
 
   constructor(
+    private readonly patientsService: PatientsService,
     private readonly movesService: MovesService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly routerService: RouterService,
     private readonly snackerService: SnackerService,
     private readonly loaderService: LoaderService,
-    private readonly viewPatientService: ViewPatientService,
     private readonly dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
-    this.viewPatientService.patient$.subscribe(
-      (res) => {
-        this.patient = res;
+    this.patientsService.getPatient(this.activatedRoute.snapshot.params['patientId']).subscribe({
+      next: (patient) => {
+        this.patient = patient;
         const params = this.activatedRoute.snapshot.params;
         if (params['date']) this.dateRange = getDateRange(new Date(params['date']));
         this.loadMoves();
       },
-      (err) => {
-        console.log(err);
-        this.routerService.goToPatients();
-        this.snackerService.showError('No se ha encontrado al paciente');
-      }
-    );
+    });
   }
 
   changeDateRange(nWeeks: number): void {
@@ -80,11 +75,11 @@ export class MovesPageComponent implements OnInit {
   }
 
   addMove(date: Date): void {
-    this.routerService.goToAddMove(date);
+    this.routerService.goToAddMove(this.patient._id, date);
   }
 
   editMove(move: MoveModel): void {
-    this.routerService.goToEditMove(move._id);
+    this.routerService.goToEditMove(this.patient._id, move._id);
   }
 
   deleteMove(move: MoveModel): void {

@@ -9,7 +9,6 @@ import { LoaderService } from '@core/services/loader.service';
 import { PatientsService } from '@core/services/patients.service';
 import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
-import { ViewPatientService } from '@core/services/view-patient.service';
 import { getDateUTC } from '@core/utils/date-utils';
 import { OptionalPipe } from '@shared/pipes/optional.pipe';
 import { finalize } from 'rxjs/operators';
@@ -17,13 +16,13 @@ import { finalize } from 'rxjs/operators';
 @Component({
   selector: 'app-add-consult-page',
   templateUrl: './add-consult-page.component.html',
-  styleUrls: ['./add-consult-page.component.css', '../../../../../assets/styles/form.css'],
+  styleUrls: ['./add-consult-page.component.css', '../../../../../../assets/styles/form.css'],
 })
 export class AddConsultPageComponent implements OnInit {
   form!: FormGroup;
   edit = false;
-  patient: PatientModel | null = null;
-  consult: ConsultModel | null = null;
+  patient!: PatientModel;
+  consult!: ConsultModel;
 
   created_at: Date = getDateUTC(new Date());
 
@@ -48,99 +47,74 @@ export class AddConsultPageComponent implements OnInit {
     private readonly optionalPipe: OptionalPipe,
     private readonly routerService: RouterService,
     private readonly loaderService: LoaderService,
-    private readonly snackerService: SnackerService,
-    private readonly viewPatientService: ViewPatientService
+    private readonly snackerService: SnackerService
   ) {}
 
   ngOnInit(): void {
-    const params = this.activatedRoute.snapshot.params;
-    this.viewPatientService.patient$.subscribe(
-      (res) => {
-        this.patient = res;
-        if (params['idcon']) {
-          this.loaderService.isLoading.next(true);
-          this.consultsService
-            .getConsult(params['idcon'])
-            .pipe(finalize(() => this.loaderService.isLoading.next(false)))
-            .subscribe(
-              (res) => {
-                this.edit = true;
-                this.consult = res;
-                this.initForm();
-              },
-              (err) => {
-                console.log(err);
-                this.exit();
-                this.snackerService.showError('Algo no ha sucedido como se esperaba');
-              }
-            );
-        } else {
-          this.initForm();
-        }
+    const patientId = this.activatedRoute.snapshot.params['patientId'];
+    this.patientsService.getPatient(patientId).subscribe({
+      next: (patient) => {
+        this.patient = patient;
       },
-      (err) => {
-        console.log(err);
-        this.routerService.goToPatients();
-        this.snackerService.showError('No se ha encontrado al paciente');
-      }
-    );
+    });
+    this.initForm();
   }
 
   initForm(): void {
     this.form = this.fb.group({
       masa: [
-        this.edit ? (this.consult!.masa != undefined ? this.consult!.masa : null) : null,
+        this.edit ? (this.consult?.masa != undefined ? this.consult?.masa : null) : null,
         [Validators.min(0)],
       ],
       imc: [
-        this.edit ? (this.consult!.imc != undefined ? this.consult!.imc : null) : null,
+        this.edit ? (this.consult?.imc != undefined ? this.consult?.imc : null) : null,
         [Validators.min(0)],
       ],
       per_abdominal: [
         this.edit
-          ? this.consult!.per_abdominal != undefined
-            ? this.consult!.per_abdominal
+          ? this.consult?.per_abdominal != undefined
+            ? this.consult?.per_abdominal
             : null
           : null,
         [Validators.min(0)],
       ],
       tension: [
-        this.edit ? (this.consult!.tension != undefined ? this.consult!.tension : null) : null,
+        this.edit ? (this.consult?.tension != undefined ? this.consult?.tension : null) : null,
         [Validators.min(0)],
       ],
       trigliceridos: [
         this.edit
-          ? this.consult!.trigliceridos != undefined
-            ? this.consult!.trigliceridos
+          ? this.consult?.trigliceridos != undefined
+            ? this.consult?.trigliceridos
             : null
           : null,
         [Validators.min(0)],
       ],
       hdl: [
-        this.edit ? (this.consult!.hdl != undefined ? this.consult!.hdl : null) : null,
+        this.edit ? (this.consult?.hdl != undefined ? this.consult?.hdl : null) : null,
         [Validators.min(0)],
       ],
       ldl: [
-        this.edit ? (this.consult!.ldl != undefined ? this.consult!.ldl : null) : null,
+        this.edit ? (this.consult?.ldl != undefined ? this.consult?.ldl : null) : null,
         [Validators.min(0)],
       ],
       hemoglobina: [
         this.edit
-          ? this.consult!.hemoglobina != undefined
-            ? this.consult!.hemoglobina
+          ? this.consult?.hemoglobina != undefined
+            ? this.consult?.hemoglobina
             : null
           : null,
         [Validators.min(0)],
       ],
       glucosa: [
-        this.edit ? (this.consult!.glucosa != undefined ? this.consult!.glucosa : null) : null,
+        this.edit ? (this.consult?.glucosa != undefined ? this.consult?.glucosa : null) : null,
         [Validators.min(0)],
       ],
       comments: [
-        this.edit ? (this.consult!.comments != undefined ? this.consult!.comments : null) : null,
+        this.edit ? (this.consult?.comments != undefined ? this.consult?.comments : null) : null,
       ],
     });
-    if (this.edit) this.created_at = this.consult!.created_at;
+    if (this.edit) this.created_at = this.consult?.created_at;
   }
 
   get masa(): number | null {
@@ -188,8 +162,8 @@ export class AddConsultPageComponent implements OnInit {
     this.form.reset(this.form.value);
   }
 
-  exit(): void {
-    this.routerService.goToConsults();
+  async exit() {
+    await this.routerService.goToConsults(this.patient?._id);
   }
 
   addConsult(): void {
@@ -198,34 +172,34 @@ export class AddConsultPageComponent implements OnInit {
     this.consultsService
       .createConsult(consult)
       .pipe(finalize(() => this.loaderService.isLoading.next(false)))
-      .subscribe(
-        (res) => {
-          this.exit();
+      .subscribe({
+        next: async () => {
+          await this.exit();
           this.snackerService.showSuccessful('Consulta creada con éxito');
         },
-        (err) => {
+        error: (err) => {
           console.log(err);
           this.snackerService.showError(err.error.message);
-        }
-      );
+        },
+      });
   }
 
   editConsult(): void {
     const consult = this.getConsultRequest(true);
     this.loaderService.isLoading.next(true);
     this.consultsService
-      .updateConsult(this.consult!._id, consult)
+      .updateConsult(this.consult?._id, consult)
       .pipe(finalize(() => this.loaderService.isLoading.next(false)))
-      .subscribe(
-        (res) => {
-          this.exit();
+      .subscribe({
+        next: async () => {
+          await this.exit();
           this.snackerService.showSuccessful('Consulta edita con éxito');
         },
-        (err) => {
+        error: (err) => {
           console.log(err);
           this.snackerService.showError(err.error.message);
-        }
-      );
+        },
+      });
   }
 
   getConsultRequest(edit = false): ConsultRequestModel {

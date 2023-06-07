@@ -13,26 +13,25 @@ import { LoaderService } from '@core/services/loader.service';
 import { PatientsService } from '@core/services/patients.service';
 import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
-import { ViewPatientService } from '@core/services/view-patient.service';
+import { InfoConsultComponent } from '@modules/patients/components/info-consult/info-consult.component';
 import { ColumnType } from '@shared/components/table/enums/column-type';
 import { TableStructure } from '@shared/components/table/interfaces/table-structure';
 import { finalize } from 'rxjs/operators';
-import { DEFAULT_LIMIT } from 'src/app/constants/app.constants';
-import { InfoConsultComponent } from '../../components/info-consult/info-consult.component';
+import { DEFAULT_LIMIT } from '../../../../../constants/app.constants';
 
 @Component({
   selector: 'app-consults-page',
   templateUrl: './consults-page.component.html',
-  styleUrls: ['./consults-page.component.css', '../../../../../assets/styles/crud.css'],
+  styleUrls: ['./consults-page.component.css', '../../../../../../assets/styles/crud.css'],
 })
 export class ConsultsPageComponent implements OnInit {
-  patient: PatientModel | null = null;
+  patient!: PatientModel;
 
   listConsults: ConsultModel[] = [];
   isSmall = false;
   isLoadingResults = false;
 
-  dataSource!: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
   tableStructure: TableStructure[] = [
     { index: 1, field: 'created_at', header: 'Fecha', sort: true, type: ColumnType.DATE },
@@ -64,23 +63,18 @@ export class ConsultsPageComponent implements OnInit {
     private readonly routerService: RouterService,
     private readonly snackerService: SnackerService,
     private readonly dialogService: DialogService,
-    private readonly loaderService: LoaderService,
-    private readonly viewPatientService: ViewPatientService
+    private readonly loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
-    this.viewPatientService.patient$.subscribe(
-      (res) => {
-        this.patient = res;
+    const patientId = this.activatedRoute.snapshot.params['patientId'];
+    this.patientsService.getPatient(patientId).subscribe({
+      next: (patient) => {
+        this.patient = patient;
         this.loadConsults();
         this.setColumnsBySize();
       },
-      (err) => {
-        console.log(err);
-        this.routerService.goToPatients();
-        this.snackerService.showError('No se ha encontrado al paciente');
-      }
-    );
+    });
   }
 
   loadConsults(): void {
@@ -90,7 +84,7 @@ export class ConsultsPageComponent implements OnInit {
       .filter({
         paging: { page: this.page + 1, limit: this.limit },
         sorting: [{ field: this.sortField, direction: this.sortDirection }],
-        filter: { patient: this.patient!._id },
+        filter: { patient: this.patient?._id },
       })
       .pipe(
         finalize(() => {
@@ -170,7 +164,7 @@ export class ConsultsPageComponent implements OnInit {
   }
 
   addConsult(): void {
-    this.routerService.goToAddConsult();
+    this.routerService.goToAddConsult(this.patient._id);
   }
 
   editConsult(consult: ConsultModel): void {

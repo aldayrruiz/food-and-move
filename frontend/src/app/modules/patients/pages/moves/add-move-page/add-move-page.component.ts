@@ -10,9 +10,9 @@ import { RoutineModel } from '@core/models/routine.model';
 import { AttachmentsService } from '@core/services/attachments.service';
 import { LoaderService } from '@core/services/loader.service';
 import { MovesService } from '@core/services/moves.service';
+import { PatientsService } from '@core/services/patients.service';
 import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
-import { ViewPatientService } from '@core/services/view-patient.service';
 import { getDateUTC } from '@core/utils/date-utils';
 import { ImportType } from '@shared/components/import-dialog/enums/import-type';
 import { ImportDialogComponent } from '@shared/components/import-dialog/import-dialog.component';
@@ -24,10 +24,10 @@ import { finalize } from 'rxjs';
 @Component({
   selector: 'app-add-move-page',
   templateUrl: './add-move-page.component.html',
-  styleUrls: ['./add-move-page.component.css', '../../../../../assets/styles/form.css'],
+  styleUrls: ['./add-move-page.component.css', '../../../../../../assets/styles/form.css'],
 })
 export class AddMovePageComponent implements OnInit {
-  patient: PatientModel | null = null;
+  patient!: PatientModel;
 
   date = new Date();
 
@@ -47,6 +47,7 @@ export class AddMovePageComponent implements OnInit {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
+    private readonly patientsService: PatientsService,
     private readonly fb: FormBuilder,
     private readonly movesService: MovesService,
     private readonly attachmentsService: AttachmentsService,
@@ -54,47 +55,16 @@ export class AddMovePageComponent implements OnInit {
     private readonly loaderService: LoaderService,
     private readonly snackerService: SnackerService,
     private readonly routerService: RouterService,
-    private readonly viewPatientService: ViewPatientService,
     private readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.viewPatientService.patient$.subscribe(
-      (res) => {
-        this.patient = res;
-        const params = this.activatedRoute.snapshot.params;
-        if (params['date']) this.date = getDateUTC(new Date(params['date']));
-        if (params['id']) {
-          this.edit = true;
-          this.loaderService.isLoading.next(true);
-          this.movesService
-            .getMove(params['id'])
-            .pipe(
-              finalize(() => {
-                this.loaderService.isLoading.next(false);
-              })
-            )
-            .subscribe(
-              (res) => {
-                this.move = res;
-                this.date = this.move.date;
-                this.initForm();
-              },
-              (err) => {
-                this.exit();
-                this.snackerService.showError('Algo no ha sucedido como se esperaba');
-              }
-            );
-        } else {
-          this.initForm();
-        }
-      },
-      (err) => {
-        console.log(err);
-        this.routerService.goToHome();
-        this.snackerService.showError('No se ha encontrado al paciente');
-      }
-    );
+    this.loaderService.isLoading.next(true);
+    this.initDate();
+    this.initPatient();
+    this.initMove();
+    this.initForm();
+    this.loaderService.isLoading.next(false);
   }
 
   initForm(): void {
@@ -150,7 +120,7 @@ export class AddMovePageComponent implements OnInit {
   }
 
   exit(): void {
-    this.routerService.goToMoves(this.date);
+    this.routerService.goToMoves(this.patient._id, this.date);
   }
 
   importRoutine(): void {
@@ -256,5 +226,33 @@ export class AddMovePageComponent implements OnInit {
       attachment: this.attachment ? this.attachment._id : null,
     };
     return edit ? request : this.optionalPipe.transform(request);
+  }
+
+  private initPatient(): void {
+    const patientId = this.activatedRoute.snapshot.params['patientId'];
+    this.patientsService.getPatient(patientId).subscribe({
+      next: (patient) => {
+        this.patient = patient;
+      },
+    });
+  }
+
+  private initDate(): void {
+    const date = this.activatedRoute.snapshot.params['date'];
+    if (date) {
+      this.date = getDateUTC(new Date(date));
+    }
+  }
+
+  private initMove() {
+    const moveId = this.activatedRoute.snapshot.params['moveId'];
+    if (!moveId) {
+      return;
+    }
+    this.edit = true;
+    this.movesService.getMove(moveId).subscribe((res) => {
+      this.move = res;
+      this.date = this.move.date;
+    });
   }
 }

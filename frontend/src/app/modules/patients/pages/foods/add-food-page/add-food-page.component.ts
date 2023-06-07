@@ -12,9 +12,9 @@ import { RecipeModel } from '@core/models/recipe.model';
 import { AttachmentsService } from '@core/services/attachments.service';
 import { FoodsService } from '@core/services/foods.service';
 import { LoaderService } from '@core/services/loader.service';
+import { PatientsService } from '@core/services/patients.service';
 import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
-import { ViewPatientService } from '@core/services/view-patient.service';
 import { getDateUTC } from '@core/utils/date-utils';
 import { ImportType } from '@shared/components/import-dialog/enums/import-type';
 import { ImportDialogComponent } from '@shared/components/import-dialog/import-dialog.component';
@@ -27,16 +27,16 @@ import { finalize } from 'rxjs';
 @Component({
   selector: 'app-add-food-page',
   templateUrl: './add-food-page.component.html',
-  styleUrls: ['./add-food-page.component.css', '../../../../../assets/styles/form.css'],
+  styleUrls: ['./add-food-page.component.css', '../../../../../../assets/styles/form.css'],
 })
 export class AddFoodPageComponent implements OnInit {
-  patient: PatientModel | null = null;
+  patient!: PatientModel;
 
   date: Date = new Date();
 
   form!: FormGroup;
   edit = false;
-  food: FoodModel | null = null;
+  food!: FoodModel;
 
   links: Array<LinkStructure> = [];
   videos: Array<VideoStructure> = [];
@@ -56,6 +56,7 @@ export class AddFoodPageComponent implements OnInit {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
+    private readonly patientsService: PatientsService,
     private readonly foodsService: FoodsService,
     private readonly attachmentsService: AttachmentsService,
     private readonly optionalPipe: OptionalPipe,
@@ -63,64 +64,38 @@ export class AddFoodPageComponent implements OnInit {
     private readonly routerService: RouterService,
     private readonly loaderService: LoaderService,
     private readonly snackerService: SnackerService,
-    private readonly viewPatientService: ViewPatientService,
     private readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.viewPatientService.patient$.subscribe(
-      (res) => {
-        this.patient = res;
-        const params = this.activatedRoute.snapshot.params;
-        if (params['date']) this.date = getDateUTC(new Date(params['date']));
-        if (params['id']) {
-          this.edit = true;
-          this.loaderService.isLoading.next(true);
-          this.foodsService
-            .getFood(params['id'])
-            .pipe(finalize(() => this.loaderService.isLoading.next(false)))
-            .subscribe(
-              (res) => {
-                this.food = res;
-                this.date = res.date;
-                this.initForm();
-              },
-              (err) => {
-                console.log(err);
-              }
-            );
-        } else {
-          this.initForm();
-        }
-      },
-      (err) => {
-        console.log(err);
-        this.routerService.goToHome();
-        this.snackerService.showError('No se ha encontrado al paciente');
-      }
-    );
+    this.loaderService.isLoading.next(true);
+    this.initPatient();
+    this.initDate();
+    this.initFood();
+    this.initForm();
+    this.loaderService.isLoading.next(false);
   }
 
   initForm(): void {
     this.form = this.fb.group({
-      title: [this.edit ? this.food!.title : null, [Validators.required]],
-      description: [this.edit ? this.food!.description : null],
-      comments: [this.edit ? this.food!.comments : null],
+      title: [this.edit ? this.food?.title : null, [Validators.required]],
+      description: [this.edit ? this.food?.description : null],
+      comments: [this.edit ? this.food?.comments : null],
     });
     if (this.edit) {
-      this.meal = this.food!.meal;
+      this.meal = this.food?.meal || Meal.Almuerzo;
       this.changeMeal();
-      this.dish = this.food!.dish;
+      this.dish = this.food?.dish || Dish.Primero;
       this.links =
-        this.food!.links.map((url, id) => {
+        this.food?.links.map((url, id) => {
           return { id, url };
         }) || [];
       this.videos =
-        this.food!.videos.map((url, id) => {
+        this.food?.videos.map((url, id) => {
           return { id, url };
         }) || [];
       this.ingredients =
-        this.food!.ingredients.map((ingredient, id) => {
+        this.food?.ingredients.map((ingredient, id) => {
           return { id, ingredient };
         }) || [];
       if (this.food?.attachment) {
@@ -128,15 +103,15 @@ export class AddFoodPageComponent implements OnInit {
         this.attachmentsService
           .getAttachment(this.food.attachment)
           .pipe(finalize(() => this.loaderService.isLoading.next(false)))
-          .subscribe(
-            (res) => {
+          .subscribe({
+            next: (res) => {
               this.attachment = res;
             },
-            (err) => {
+            error: (err) => {
               this.attachment = null;
               console.log(err);
-            }
-          );
+            },
+          });
       } else {
         this.attachment = null;
       }
@@ -160,8 +135,8 @@ export class AddFoodPageComponent implements OnInit {
     this.form.reset(this.form.value);
   }
 
-  exit(): void {
-    this.routerService.goToFoods(this.date);
+  async exit() {
+    await this.routerService.goToFoods(this.patient._id, this.date);
   }
 
   changeMeal(): void {
@@ -252,34 +227,34 @@ export class AddFoodPageComponent implements OnInit {
           this.loaderService.isLoading.next(false);
         })
       )
-      .subscribe(
-        (res) => {
-          this.exit();
+      .subscribe({
+        next: async () => {
+          await this.exit();
           this.snackerService.showSuccessful('Comida creada con éxito');
         },
-        (err) => {
+        error: (err) => {
           console.log(err);
           this.snackerService.showError(err.error.message);
-        }
-      );
+        },
+      });
   }
 
   editFood(): void {
     this.loaderService.isLoading.next(true);
     const food = this.getFoodRequest(true);
     this.foodsService
-      .updateFood(this.food!._id, food)
+      .updateFood(this.food._id, food)
       .pipe(finalize(() => this.loaderService.isLoading.next(false)))
-      .subscribe(
-        (res) => {
-          this.exit();
+      .subscribe({
+        next: async () => {
+          await this.exit();
           this.snackerService.showSuccessful('Comida editada con éxito');
         },
-        (err) => {
+        error: (err) => {
           console.log(err);
           this.snackerService.showError(err.err.message);
-        }
-      );
+        },
+      });
   }
 
   getFoodRequest(edit = false): FoodRequestModel {
@@ -297,5 +272,33 @@ export class AddFoodPageComponent implements OnInit {
       attachment: this.attachment ? this.attachment._id : null,
     };
     return edit ? request : this.optionalPipe.transform(request);
+  }
+
+  private initPatient(): void {
+    const patientId = this.activatedRoute.snapshot.params['patientId'];
+    this.patientsService.getPatient(patientId).subscribe({
+      next: (patient) => {
+        this.patient = patient;
+      },
+    });
+  }
+
+  private initDate(): void {
+    const date = this.activatedRoute.snapshot.params['date'];
+    if (date) {
+      this.date = getDateUTC(new Date(date));
+    }
+  }
+
+  private initFood(): void {
+    const foodId = this.activatedRoute.snapshot.params['foodId'];
+    if (!foodId) {
+      return;
+    }
+    this.edit = true;
+    this.foodsService.getFood(foodId).subscribe((res) => {
+      this.food = res;
+      this.date = res.date;
+    });
   }
 }
