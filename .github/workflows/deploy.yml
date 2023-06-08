@@ -7,6 +7,7 @@
     deploy:
       runs-on: ubuntu-latest
       steps:
+        - uses: actions/checkout@v3
         - name: Install OpenVPN
           run: |
             sudo apt-get update
@@ -17,7 +18,6 @@
             echo "${{ secrets.USER_CRT }}" > user.crt
             echo "${{ secrets.USER_KEY }}" > user.key
             echo "${{ secrets.SECRET_USERNAME_PASSWORD }}" > secret.txt
-            echo "${{ secrets.TLS_KEY }}" > tls.key
         - name: Connect VPN
           run: sudo openvpn --config ".github/vpn/config.ovpn" --log "vpn.log" --daemon
         - name: Wait for a VPN connection
