@@ -18,6 +18,8 @@
             echo "${{ secrets.USER_CRT }}" > user.crt
             echo "${{ secrets.USER_KEY }}" > user.key
             echo "${{ secrets.SECRET_USERNAME_PASSWORD }}" > secret.txt
+        - name: Show files in current directory
+          run: ls -la
         - name: Connect VPN
           run: sudo openvpn --config ".github/vpn/config.ovpn" --log "vpn.log" --daemon
         - name: Wait for a VPN connection
