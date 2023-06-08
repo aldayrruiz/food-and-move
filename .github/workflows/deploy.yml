@@ -1,36 +1,61 @@
-  name: Deploy on Ubuntu server with vpn
-  on:
-    push:
-      branches:
-        - develop
-  jobs:
-    deploy:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-        - name: Install OpenVPN
-          run: |
-            sudo apt-get update
-            sudo apt-get --assume-yes --no-install-recommends install openvpn
-        - name: Setup VPN config
-          run: |
-            echo "${{ secrets.CA_CRT }}" > ca.crt
-            echo "${{ secrets.USER_CRT }}" > user.crt
-            echo "${{ secrets.USER_KEY }}" > user.key
-            echo "${{ secrets.SECRET_USERNAME_PASSWORD }}" > secret.txt
-        - name: Connect VPN
-          run: sudo openvpn --config ".github/vpn/config.ovpn" --log "vpn.log" --daemon
-        - name: Wait for a VPN connection
-          timeout-minutes: 2
-          run: until ping -c1 "${{secrets.PRODUCTION_SERVER_IP}}"; do sleep 2; done
-        - name: Kill VPN connection
-          if: always()
-          run: |
-            sudo chmod 777 vpn.log
-            sudo killall openvpn
-        - name: Upload VPN logs
-          uses: actions/upload-artifact@v2
-          if: always()
-          with:
-            name: VPN logs
-            path: vpn.log
+name: Deploy on Ubuntu server with vpn
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install OpenVPN
+        run: |
+          sudo apt-get update
+          sudo apt-get --assume-yes --no-install-recommends install openvpn
+
+      - name: Setup VPN config
+        run: |
+          echo "${{ secrets.CA_CRT }}" > ca.crt
+          echo "${{ secrets.USER_CRT }}" > user.crt
+          echo "${{ secrets.USER_KEY }}" > user.key
+          echo "${{ secrets.SECRET_USERNAME_PASSWORD }}" > secret.txt
+
+      - name: Connect VPN
+        run: sudo openvpn --config ".github/vpn/config.ovpn" --log "vpn.log" --daemon
+
+      - name: Wait for a VPN connection
+        timeout-minutes: 2
+        run: until ping -c1 "${{secrets.SERVER_IP}}"; do sleep 2; done
+
+      - name: Configurar SSH
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Conectarse al servidor
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.SERVER_IP}}
+          username: ${{secrets.SERVER_USERNAME}}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+
+      - name: Cambiar directorio
+        run: cd /home/aldayr/food-and-move/
+
+      - name: Reiniciar contenedores Docker
+        run: sudo docker-compose -f docker-compose.prod.yml restart
+
+      - name: Kill VPN connection
+        if: always()
+        run: |
+          sudo chmod 777 vpn.log
+          sudo killall openvpn
+
+      - name: Upload VPN logs
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: VPN logs
+          path: vpn.log
