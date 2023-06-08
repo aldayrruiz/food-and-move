@@ -35,9 +35,9 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-
-      - name: Cambiar directorio
-        run: cd /home/aldayr/food-and-move/
+          script: |
+            cd ${{ PRODUCTION_PROJECT_DIRECTORY }}
+            sudo docker-compose -f docker-compose.prod.yml restart
 
       - name: Reiniciar contenedores Docker
         run: sudo docker-compose -f docker-compose.prod.yml restart
