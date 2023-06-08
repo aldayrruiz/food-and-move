@@ -23,3 +23,6 @@ jobs:
 
       - name: Connect VPN
         run: sudo openvpn --config ".github/vpn/config.ovpn" --log "vpn.log"
+
+      - name: Show vpn.log
+        run: cat vpn.log
