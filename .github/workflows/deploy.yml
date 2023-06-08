@@ -36,7 +36,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S docker compose -f "${{ PRODUCTION_DOCKER_COMPOSE_FILE }}" restart
+            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S docker compose -f "${{ secrets.PRODUCTION_DOCKER_COMPOSE_FILE }}" restart
 
       - name: Kill VPN connection
         if: always()
