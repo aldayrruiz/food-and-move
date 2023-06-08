@@ -36,11 +36,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            cd "${{ secrets.PRODUCTION_PROJECT_DIRECTORY }}"
-            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S docker compose -f "/home/aldayr/food-and-move/docker-compose.prod.yml" restart
-
-      - name: Reiniciar contenedores Docker
-        run: sudo docker-compose -f docker-compose.prod.yml restart
+            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S docker compose -f "${{ PRODUCTION_DOCKER_COMPOSE_FILE }}" restart
 
       - name: Kill VPN connection
         if: always()
