@@ -12,6 +12,9 @@ export class WeeklyCalendarComponent {
   @Input() type: WeeklyCalendarType = WeeklyCalendarType.Food;
   @Input() showDate = true;
   @Input() showRating = true;
+  @Input() showAdd = true;
+  @Input() showEdit = true;
+  @Input() showDelete = true;
 
   @Output() add = new EventEmitter<Day>();
   @Output() edit = new EventEmitter<{ day: Day; item: any }>();

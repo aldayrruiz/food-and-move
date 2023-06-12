@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 4001",
+    "start": "ng serve --port 4200",
+    "start:docker-dev": "ng serve --host 0.0.0.0 --port 4200",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -25,6 +26,7 @@
     "@angular/router": "^14.2.0",
     "chart.js": "^4.2.1",
     "chartjs-adapter-luxon": "^1.3.1",
+    "date-fns": "^2.30.0",
     "luxon": "^3.3.0",
     "ng2-charts": "^4.1.1",
     "rxjs": "~7.5.0",
@@ -33,8 +35,8 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.4",
-    "@angular-eslint/eslint-plugin": "^14.4.0",
     "@angular-eslint/builder": "^14.4.0",
+    "@angular-eslint/eslint-plugin": "^14.4.0",
     "@angular-eslint/eslint-plugin-template": "^14.4.0",
     "@angular-eslint/schematics": "^14.4.0",
     "@angular-eslint/template-parser": "^14.4.0",

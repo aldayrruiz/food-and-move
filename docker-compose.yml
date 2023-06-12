@@ -17,16 +17,17 @@ services:
       MAIL_FROM: your_sender_email
     ports:
       - "3000:3000"
-    command: bash -c "npm i && npm run build && npm run start:dev"
+    command: bash -c "npm i && npm run start:dev"
 
   angular:
     image: node:16.19.1
     working_dir: /app
+    restart: always
     volumes:
       - ./frontend:/app
     ports:
       - "4200:4200"
-    command: bash -c "npm i && npm run build && npm run start"
+    command: bash -c "npm i && npm run start:docker-dev"
 
   mongodb:
     image: mongo:4.4.20

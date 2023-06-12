@@ -148,4 +148,16 @@ export class FoodsService {
     }
     return await this.findByPatient(patientId, range);
   }
+
+  async lastFoodsAssigned(patientId: string, limitDate: string) {
+    const lastFoodAssigned = await this.foodModel
+      .findOne({
+        patient: patientId,
+        date: { $lt: limitDate },
+      })
+      .sort({ date: -1 })
+      .exec();
+    const range = getDateRange(lastFoodAssigned.date);
+    return await this.findByPatient(patientId, range);
+  }
 }
