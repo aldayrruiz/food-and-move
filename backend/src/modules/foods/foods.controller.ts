@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { DateRangeDto } from '@shared/dto/date-range.dto';
 import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
@@ -62,5 +62,10 @@ export class FoodsController {
   @Get('importDiet/:dietId/:patientId/:date')
   async importDiet(@Param('dietId') dietId, @Param('patientId') patientId, @Param('date') date: Date) {
     return await this.foodsService.importDiet(dietId, patientId, date);
+  }
+
+  @Get('lastAssigned/:patientId')
+  async lastFoodsAssigned(@Param('patientId') patientId: string, @Query('limitDate') limitDate: string) {
+    return await this.foodsService.lastFoodsAssigned(patientId, limitDate);
   }
 }

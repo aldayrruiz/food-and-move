@@ -17,7 +17,7 @@ import { ImportDialogComponent } from '@shared/components/import-dialog/import-d
 import { daysInit } from '@shared/components/weekly-calendar/constant/days-init';
 import { WeeklyCalendarType } from '@shared/components/weekly-calendar/enums/weekly-calendar-type';
 import { Day } from '@shared/components/weekly-calendar/interfaces/day';
-import { finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-foods-page',
@@ -69,12 +69,28 @@ export class FoodsPageComponent implements OnInit {
       .pipe(finalize(() => this.loaderService.isLoading.next(false)))
       .subscribe({
         next: (res) => {
-          this.setFoods(res);
+          if (res.length === 0) {
+            this.loadLastAssignedFoods();
+          } else {
+            this.setFoods(res);
+          }
         },
         error: (err) => {
           console.log(err);
         },
       });
+  }
+
+  loadLastAssignedFoods(): void {
+    const limitDate = this.dateRange.startDate.toJSON();
+    this.foodsService.getLastAssignedFoods(this.patient?._id, limitDate).subscribe({
+      next: (res) => {
+        this.setFoods(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   setFoods(foods: FoodModel[]): void {

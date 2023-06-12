@@ -20,6 +20,9 @@
   <app-weekly-calendar
     [days]="days"
     [type]="weeklyCalendarType.Food"
+    [showAdd]="false"
+    [showEdit]="false"
+    [showDelete]="false"
     (add)="addFood($event.date)"
     (edit)="editFood($event.item)"
     (delete)="deleteFood($event.item)"

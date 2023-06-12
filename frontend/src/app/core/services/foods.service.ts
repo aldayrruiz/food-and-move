@@ -33,6 +33,18 @@ export class FoodsService {
       );
   }
 
+  getLastAssignedFoods(patient: string, limitDate: string): Observable<FoodModel[]> {
+    return this.http
+      .get<FoodModel[]>(`${environment.api}/foods/lastAssigned/${patient}?limitDate=${limitDate}`)
+      .pipe(
+        map((data) => {
+          return data.map((food: FoodModel) => {
+            return this.foodPipe.transform(food);
+          });
+        })
+      );
+  }
+
   createFood(foodRequest: FoodRequestModel): Observable<FoodModel> {
     return this.http.post<FoodModel>(`${environment.api}/foods/create`, foodRequest).pipe(
       map((food) => {

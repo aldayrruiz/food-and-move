@@ -138,3 +138,5 @@ fabric.properties
 
 /docker-compose.prod.yml
 /mongo-init.js
+/mongorestore.sh
+/dump/*
