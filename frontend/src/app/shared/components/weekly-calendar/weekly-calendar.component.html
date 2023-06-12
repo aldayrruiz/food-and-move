@@ -26,7 +26,9 @@
         >
       </div>
       <div class="add__day" *ngIf="day.items.length == 0">
-        <button *ngIf="showAdd" mat-stroked-button color="primary" (click)="addItem(day)">Agregar Comida</button>
+        <button *ngIf="showAdd" mat-stroked-button color="primary" (click)="addItem(day)">
+          Agregar Comida
+        </button>
       </div>
     </div>
     <div class="day__main" *ngIf="type == weeklyCalendarType.Move">
@@ -43,7 +45,9 @@
         >
       </div>
       <div class="add__day" *ngIf="day.items.length == 0">
-        <button *ngIf="showAdd" mat-stroked-button color="primary" (click)="addItem(day)">Agregar Ejercicio</button>
+        <button *ngIf="showAdd" mat-stroked-button color="primary" (click)="addItem(day)">
+          Agregar Ejercicio
+        </button>
       </div>
     </div>
   </div>
