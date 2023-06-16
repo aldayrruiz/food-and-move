@@ -44,16 +44,11 @@ export class FoodsPageComponent implements OnInit {
 
   ngOnInit(): void {
     const params = this.activatedRoute.snapshot.params;
-    const patientId = params['patientId'];
     if (params['date']) {
       this.dateRange = getDateRange(new Date(params['date']));
     }
-    this.patientsService.getPatient(patientId).subscribe({
-      next: (patient) => {
-        this.patient = patient;
-        this.loadFoods();
-      },
-    });
+    this.initPatient();
+    this.loadFoods();
   }
 
   changeDateRange(nWeeks: number): void {
@@ -124,16 +119,16 @@ export class FoodsPageComponent implements OnInit {
                 this.loaderService.isLoading.next(false);
               })
             )
-            .subscribe(
-              (res) => {
+            .subscribe({
+              next: () => {
                 this.snackerService.showSuccessful('Comida eliminada con éxito');
                 this.loadFoods();
               },
-              (err) => {
+              error: (err) => {
                 console.log(err);
                 this.snackerService.showError(err.error.message);
-              }
-            );
+              },
+            });
         }
       });
   }
@@ -143,29 +138,47 @@ export class FoodsPageComponent implements OnInit {
       width: '800px',
       data: ImportType.Diet,
     });
-    dialogRef.afterClosed().subscribe(
-      (res) => {
-        if (res) {
-          const diet = res as DietModel;
-          this.loaderService.isLoading.next(true);
-          this.foodsService
-            .importDiet(diet._id, this.patient!._id, this.dateRange.startDate!)
-            .pipe(finalize(() => this.loaderService.isLoading.next(false)))
-            .subscribe(
-              (res) => {
-                this.setFoods(res);
-                this.snackerService.showSuccessful('Dieta importada con éxito.');
-              },
-              (err) => {
-                console.log(err);
-                this.snackerService.showError(err.error);
-              }
-            );
+    dialogRef.afterClosed().subscribe({
+      next: (diet: DietModel) => {
+        if (diet) {
+          this.clearFoods();
+          this.loadDiet(diet);
         }
       },
-      (err) => {
+      error: (err) => {
         console.log(err);
-      }
-    );
+      },
+    });
+  }
+
+  private initPatient() {
+    this.activatedRoute.data.subscribe((data) => {
+      this.patient = data['patient'];
+    });
+  }
+
+  private loadDiet(diet: DietModel) {
+    this.loaderService.isLoading.next(true);
+    this.foodsService
+      .importDiet(diet._id, this.patient!._id, this.dateRange.startDate!)
+      .pipe(finalize(() => this.loaderService.isLoading.next(false)))
+      .subscribe({
+        next: (res) => {
+          this.setFoods(res);
+          this.snackerService.showSuccessful('Dieta importada con éxito.');
+        },
+        error: (err) => {
+          console.log(err);
+          this.snackerService.showError(err.error);
+        },
+      });
+  }
+
+  private clearFoods() {
+    this.loaderService.isLoading.next(false);
+    this.foodsService
+      .clearFoods(this.patient!._id, this.dateRange)
+      .pipe(finalize(() => this.loaderService.isLoading.next(false)))
+      .subscribe();
   }
 }

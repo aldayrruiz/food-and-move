@@ -105,7 +105,7 @@ export class RouterService {
   // Patient
 
   async goToPatientDetails(patientId: string): Promise<void> {
-    await this.router.navigate([`patients/${patientId}/graphics`]);
+    await this.goToConsults(patientId);
   }
 
   async goToGraphics(patientId: string): Promise<void> {
@@ -120,8 +120,8 @@ export class RouterService {
     await this.router.navigate([`patients/${patientId}/consults/add-consult`]);
   }
 
-  async goToEditConsult(consultId: string): Promise<void> {
-    await this.router.navigate(['patients/consults/edit-consult', consultId]);
+  async goToEditConsult(patientId: string, consultId: string): Promise<void> {
+    await this.router.navigate([`patients/${patientId}/consults/edit-consult`, consultId]);
   }
 
   async goToFoods(patientId: string, date?: Date): Promise<void> {

@@ -1,3 +1,4 @@
+import { Employee } from '@modules/employees/schema/employee.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
@@ -8,6 +9,9 @@ export type ConsultDocument = Consult & Document;
 export class Consult {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'patients', required: true })
   patient: mongoose.Schema.Types.ObjectId;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Employee', required: true })
+  owner: Employee;
 
   @Prop({ type: Number })
   masa: number;

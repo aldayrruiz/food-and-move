@@ -81,6 +81,6 @@ export class PatientsController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return await this.patientsService.findOne(id);
+    return await this.patientsService.findById(id);
   }
 }

@@ -4,13 +4,11 @@ import { IsArray, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-vali
 import { IsObjectId } from 'class-validator-mongo-object-id';
 
 export class RoutineDto {
-  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   @MaxLength(100, { message: 'Título no valido, demasiado largo' })
   title: string;
 
-  @ApiProperty()
   @IsString()
   @MaxLength(155, { message: 'Descripción no valido, demasiado largo' })
   @IsOptional()
@@ -26,7 +24,6 @@ export class RoutineDto {
   @Type(() => String)
   videos: string[];
 
-  @ApiProperty()
   @IsObjectId()
   @IsOptional()
   attachment: string;

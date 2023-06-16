@@ -24,7 +24,7 @@ export class PatientsService {
     @InjectModel('patients') private readonly patientModel: Model<PatientDocument>
   ) {}
 
-  async findOne(id: string) {
+  async findById(id: string) {
     const patient = await this.patientModel.findById(id);
     if (!patient) throw new NotFoundException('No se ha encontrado al paciente');
     return patient;
@@ -50,7 +50,7 @@ export class PatientsService {
 
   async update(id: string, updatePatientDto: UpdatePatientDto) {
     if (Object.keys(updatePatientDto).indexOf('phone') >= 0) {
-      const prevPatient = await this.findOne(id);
+      const prevPatient = await this.findById(id);
       if (prevPatient.phone != updatePatientDto.phone) {
         const findUser = await this.lookUp({ phone: updatePatientDto.phone } as FilterPatientDto);
         if (findUser) throw new NotFoundException('Ya existe un usuario con ese teléfono');

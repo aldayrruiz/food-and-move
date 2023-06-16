@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,7 +9,7 @@ import { TableStructure } from '@shared/components/table/interfaces/table-struct
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css'],
 })
-export class TableComponent implements OnInit {
+export class TableComponent {
   @Input() loading = false;
   @Input() dataSource: MatTableDataSource<any> = new MatTableDataSource();
   @Input() tableStructure: TableStructure[] = [];
@@ -39,8 +39,6 @@ export class TableComponent implements OnInit {
   @Output() delete = new EventEmitter<any>();
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   getColumnsToDisplay(): string[] {
     return [
@@ -89,5 +87,23 @@ export class TableComponent implements OnInit {
 
   isOffItem(item: any): boolean {
     return item[this.keyOffItem] != this.valueOffItem;
+  }
+
+  getValue(obj: any, path: string): any {
+    if (path === 'name') {
+      return obj;
+    }
+
+    const ifNotDot = path.indexOf('.') === -1;
+    if (ifNotDot) {
+      return obj[path];
+    }
+
+    const fields = path.split('.');
+    let value = obj;
+    for (const field of fields) {
+      value = value?.[field];
+    }
+    return value;
   }
 }

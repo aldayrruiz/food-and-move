@@ -1,3 +1,4 @@
+import { PatientsModule } from '@modules/patients/patients.module';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -8,14 +9,14 @@ import { MailModule } from '../mail/mail.module';
 import { jwtForgotPassword } from './constants/jwt-forgot-password.constants';
 import { EmployeesController } from './employees.controller';
 import { EmployeesService } from './employees.service';
-import { EmployeeSchema } from './schema/employee.schema';
+import { Employee, EmployeeSchema } from './schema/employee.schema';
 import { JwtForgotPasswordStrategy } from './strategys/jwt-forgot-password.strategy';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       {
-        name: 'employees',
+        name: Employee.name,
         schema: EmployeeSchema,
       },
     ]),
@@ -25,6 +26,7 @@ import { JwtForgotPasswordStrategy } from './strategys/jwt-forgot-password.strat
       signOptions: { expiresIn: jwtForgotPassword.expiresIn },
     }),
     MailModule,
+    PatientsModule,
   ],
   controllers: [EmployeesController],
   providers: [EmployeesService, FilesService, CustomQueryService, JwtForgotPasswordStrategy],

@@ -3,13 +3,13 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CustomQueryService } from 'src/services/custom-query.service';
 import { ConsultsController } from './consults.controller';
 import { ConsultsService } from './consults.service';
-import { ConsultSchema } from './schemas/consult.schema';
+import { Consult, ConsultSchema } from './schemas/consult.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       {
-        name: 'consults',
+        name: Consult.name,
         schema: ConsultSchema,
       },
     ]),

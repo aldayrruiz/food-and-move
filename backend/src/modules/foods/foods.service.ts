@@ -149,6 +149,13 @@ export class FoodsService {
     return await this.findByPatient(patientId, range);
   }
 
+  async clearFoods(patientId: string, date: DateRangeDto) {
+    const foods = await this.findByPatient(patientId, date);
+    foods.forEach(async (food) => {
+      await this.remove(food._id);
+    });
+  }
+
   async lastFoodsAssigned(patientId: string, limitDate: string) {
     const lastFoodAssigned = await this.foodModel
       .findOne({

@@ -1,11 +1,18 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsOptional } from 'class-validator';
-import { IsObjectId } from 'class-validator-mongo-object-id';
+import { PartialType } from '@nestjs/swagger';
+import { IsMongoId, IsOptional } from 'class-validator';
 import { ConsultDto } from './consult.dto';
 
 export class FilterConsultDto extends PartialType(ConsultDto) {
-  @ApiProperty()
-  @IsObjectId()
+  @IsMongoId()
   @IsOptional()
   _id: string;
+
+  @IsOptional()
+  patient: string;
+
+  @IsOptional()
+  owner: string;
+
+  @IsOptional()
+  created_at: Date;
 }

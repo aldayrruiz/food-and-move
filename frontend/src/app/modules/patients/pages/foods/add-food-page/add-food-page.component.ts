@@ -196,15 +196,15 @@ export class AddFoodPageComponent implements OnInit {
             this.attachmentsService
               .getAttachment(recipe.attachment)
               .pipe(finalize(() => this.loaderService.isLoading.next(false)))
-              .subscribe(
-                (res) => {
+              .subscribe({
+                next: (res) => {
                   this.attachment = res;
                 },
-                (err) => {
+                error: (err) => {
                   this.attachment = null;
                   console.log(err);
-                }
-              );
+                },
+              });
           } else {
             this.attachment = null;
           }
@@ -275,11 +275,8 @@ export class AddFoodPageComponent implements OnInit {
   }
 
   private initPatient(): void {
-    const patientId = this.activatedRoute.snapshot.params['patientId'];
-    this.patientsService.getPatient(patientId).subscribe({
-      next: (patient) => {
-        this.patient = patient;
-      },
+    this.activatedRoute.data.subscribe((data) => {
+      this.patient = data['patient'];
     });
   }
 

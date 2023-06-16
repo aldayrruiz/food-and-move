@@ -10,13 +10,13 @@ import { FoodsPageComponent } from '@modules/patients/pages/foods/foods-page/foo
 import { GraphicsPageComponent } from '@modules/patients/pages/graphics-page/graphics-page.component';
 import { AddMovePageComponent } from '@modules/patients/pages/moves/add-move-page/add-move-page.component';
 import { MovesPageComponent } from '@modules/patients/pages/moves/moves-page/moves-page.component';
+import { AddPatientPageComponent } from '@modules/patients/pages/patients/add-patient-page/add-patient-page.component';
+import { PatientsPageComponent } from '@modules/patients/pages/patients/patients-page/patients-page.component';
 import { MatModule } from '@shared/modules/mat/mat.module';
 import { PhotoPipe } from '@shared/pipes/photo.pipe';
 import { SharedModule } from '@shared/shared.module';
 import { PatientsComponent } from '../patients/patients.component';
 import { InfoPatientComponent } from './components/info-patient/info-patient.component';
-import { AddPatientPageComponent } from './pages/add-patient-page/add-patient-page.component';
-import { PatientsPageComponent } from './pages/patients-page/patients-page.component';
 import { PatientsRoutingModule } from './patients-routing.module';
 
 @NgModule({

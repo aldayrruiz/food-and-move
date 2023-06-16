@@ -8,13 +8,13 @@ import { ConsultDto } from './dto/consult.dto';
 import { FilterConsultDto } from './dto/filter-consult.dto';
 import { QueryConsultDto } from './dto/query-consult.dto';
 import { UpdateConsultDto } from './dto/update-consult.dto';
-import { ConsultDocument } from './schemas/consult.schema';
+import { Consult, ConsultDocument } from './schemas/consult.schema';
 
 @Injectable()
 export class ConsultsService {
   constructor(
     @Inject(CustomQueryService) private readonly customQueryService: CustomQueryService,
-    @InjectModel('consults') private readonly consultModel: Model<ConsultDocument>
+    @InjectModel(Consult.name) private readonly consultModel: Model<ConsultDocument>
   ) {}
 
   async findOne(id: string) {
@@ -24,8 +24,7 @@ export class ConsultsService {
   }
 
   async findByPatient(patientId: string) {
-    const consults = await this.consultModel.find({ patient: patientId });
-    return consults;
+    return this.consultModel.find({ patient: patientId });
   }
 
   async lookUp(filterConsultDto: FilterConsultDto) {
@@ -52,15 +51,15 @@ export class ConsultsService {
   }
 
   async remove(id: string) {
-    const deletedConsutl = await this.consultModel.findByIdAndDelete(id);
-    if (!deletedConsutl) throw new NotFoundException('No se ha encontrado la consulta');
-    return deletedConsutl;
+    const deletedConsult = await this.consultModel.findByIdAndDelete(id);
+    if (!deletedConsult) throw new NotFoundException('No se ha encontrado la consulta');
+    return deletedConsult;
   }
 
   async removeByPatient(patientId: string) {
     const consults = await this.consultModel.find({ patient: patientId });
     consults.forEach(async (consult) => {
-      const deletedConsult = await this.consultModel.findByIdAndDelete(consult._id);
+      await this.consultModel.findByIdAndDelete(consult._id);
     });
   }
 

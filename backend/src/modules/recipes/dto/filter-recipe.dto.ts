@@ -1,11 +1,12 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsOptional } from 'class-validator';
-import { IsObjectId } from 'class-validator-mongo-object-id';
+import { PartialType } from '@nestjs/swagger';
+import { IsMongoId, IsOptional } from 'class-validator';
 import { RecipeDto } from './recipe.dto';
 
 export class FilterRecipeDto extends PartialType(RecipeDto) {
-  @ApiProperty()
-  @IsObjectId()
+  @IsMongoId()
   @IsOptional()
-  _id: string;
+  _id?: string;
+
+  @IsOptional()
+  title: string;
 }

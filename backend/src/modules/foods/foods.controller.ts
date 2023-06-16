@@ -64,6 +64,11 @@ export class FoodsController {
     return await this.foodsService.importDiet(dietId, patientId, date);
   }
 
+  @Post('clearFoods/:patientId')
+  async clearFoods(@Param('patientId') patientId: string, @Body() dateRangeDto: DateRangeDto) {
+    return await this.foodsService.clearFoods(patientId, dateRangeDto);
+  }
+
   @Get('lastAssigned/:patientId')
   async lastFoodsAssigned(@Param('patientId') patientId: string, @Query('limitDate') limitDate: string) {
     return await this.foodsService.lastFoodsAssigned(patientId, limitDate);

@@ -3,13 +3,11 @@ import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 import { RecipeDto } from 'src/modules/recipes/dto/recipe.dto';
 
 export class DietDto {
-  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   @MaxLength(100, { message: 'Título no valido, demasiado largo' })
   title: string;
 
-  @ApiProperty()
   @IsOptional()
   @IsString()
   @MaxLength(155, { message: 'Descripción no valida, demasiado largo' })

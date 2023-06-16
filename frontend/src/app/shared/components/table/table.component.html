@@ -19,9 +19,9 @@
           *matHeaderCellDef
           [ngSwitch]="column.sort"
           [ngClass]="{
-            column__photo: column.index == 0,
-            column__primary: column.index == 1,
-            column__secondary: column.index == 2
+            column__photo: column.index === 0,
+            column__primary: column.index === 1,
+            column__secondary: column.index === 2
           }"
         >
           <div mat-sort-header disableClear *ngSwitchCase="true">{{ column.header }}</div>
@@ -34,9 +34,9 @@
           *matCellDef="let element"
           [ngSwitch]="column.index"
           [ngClass]="{
-            column__photo: column.index == 0,
-            column__primary: column.index == 1,
-            column__secondary: column.index == 2
+            column__photo: column.index === 0,
+            column__primary: column.index === 1,
+            column__secondary: column.index === 2
           }"
           [style]="isOffItem(element) ? 'background: rgba(0,0,0,0.07);' : ''"
         >
@@ -47,13 +47,13 @@
           ></app-profile-picture>
           <p class="table__text" *ngSwitchDefault>
             {{
-              column.type == 'date'
-                ? (element[column.field] | date : 'dd/MM/yyyy')
-                : column.type == 'name'
-                ? (element | name)
-                : column.type == 'admin'
-                ? (element[column.field] | admin)
-                : element[column.field]
+            column.type === 'date'
+              ? (getValue(element, column.field) | date : 'dd/MM/yyyy')
+              : column.type === 'name'
+                ? (getValue(element, column.field) | name)
+                : column.type === 'admin'
+                  ? (getValue(element, column.field) | admin)
+                  : getValue(element, column.field)
             }}
           </p>
         </td>

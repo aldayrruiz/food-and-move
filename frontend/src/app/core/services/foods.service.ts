@@ -69,6 +69,18 @@ export class FoodsService {
     );
   }
 
+  clearFoods(patientId: string, dateRange: DateRange): Observable<FoodModel[]> {
+    return this.http
+      .post<FoodModel[]>(`${environment.api}/foods/clearFoods/${patientId}`, dateRange)
+      .pipe(
+        map((data) => {
+          return data.map((food: FoodModel) => {
+            return this.foodPipe.transform(food);
+          });
+        })
+      );
+  }
+
   importDiet(dietId: string, patientId: string, date: Date): Observable<FoodModel[]> {
     return this.http
       .get<FoodModel[]>(`${environment.api}/foods/importDiet/${dietId}/${patientId}/${date}`)

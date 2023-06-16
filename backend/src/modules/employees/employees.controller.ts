@@ -1,3 +1,4 @@
+import { AssignPatientDto } from '@modules/employees/dto/assignPatient.dto';
 import {
   Body,
   Controller,
@@ -103,5 +104,11 @@ export class EmployeesController {
   @Post('recoverPassword')
   async recoverPassword(@Body() recoverPasswordDto: RecoverPasswordDto) {
     return await this.employeesService.recoverPassword(recoverPasswordDto.token, recoverPasswordDto.password);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('assignPatient')
+  async assignPatient(@Body() assignPatientDto: AssignPatientDto) {
+    return await this.employeesService.assignPatient(assignPatientDto);
   }
 }

@@ -4,8 +4,8 @@ import { Model } from 'mongoose';
 @Injectable()
 export class CustomQueryService {
   async filter(customQuery: any, model: Model<any>) {
-    const { filter, search, paging, sorting } = customQuery;
-    const patients = model.find(filter || {});
+    const { filter, search, paging, sorting, populate } = customQuery;
+    const documents = model.find(filter || {});
 
     let options = {};
     if (search) {
@@ -17,7 +17,7 @@ export class CustomQueryService {
         }),
       };
     }
-    const data = patients.find(options);
+    const data = documents.find(options).populate(populate);
 
     if (sorting) {
       const sort = {};

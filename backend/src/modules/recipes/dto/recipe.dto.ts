@@ -1,65 +1,52 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { Dish } from '@shared/enums/dish';
 import { Meal } from '@shared/enums/meal';
 import { Type } from 'class-transformer';
-import { IsArray, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator';
-import { IsObjectId } from 'class-validator-mongo-object-id';
+import { IsArray, IsEnum, IsMongoId, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator';
 
 class Ingredient {
-  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   name: string;
 
-  @ApiProperty()
   @IsNumber()
   @IsOptional()
   quantity: number;
 
-  @ApiProperty()
   @IsString()
   @IsOptional()
   unit: string;
 }
 
 export class RecipeDto {
-  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   @MaxLength(100, { message: 'Título no valido, demasiado largo' })
   title: string;
 
-  @ApiProperty()
   @IsString()
   @MaxLength(155, { message: 'Descripción no valido, demasiado largo' })
   @IsOptional()
-  description: string;
+  description?: string;
 
-  @ApiProperty({ enum: Meal, default: Meal.Almuerzo })
   @IsEnum(Meal)
-  meal: Meal;
+  meal: Meal = Meal.Almuerzo;
 
-  @ApiProperty({ enum: Dish, default: Dish.Primero })
   @IsEnum(Dish)
-  dish: Dish;
+  dish: Dish = Dish.Primero;
 
-  @ApiProperty({ isArray: true, type: String })
   @IsArray()
   @Type(() => String)
   links: string[];
 
-  @ApiProperty({ isArray: true, type: String })
   @IsArray()
   @Type(() => String)
   videos: string[];
 
-  @ApiProperty()
   @ValidateNested({ each: true })
   @Type(() => Ingredient)
   ingredients: Ingredient[];
 
-  @ApiProperty()
-  @IsObjectId()
+  @IsMongoId()
   @IsOptional()
-  attachment: string;
+  attachment?: string;
 }

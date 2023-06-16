@@ -35,15 +35,7 @@ export class ConsultsPageComponent implements OnInit {
 
   tableStructure: TableStructure[] = [
     { index: 1, field: 'created_at', header: 'Fecha', sort: true, type: ColumnType.DATE },
-    { index: 2, field: 'masa', header: 'Masa [Kg]', sort: true },
-    { index: 3, field: 'imc', header: 'IMC [Kg/m2]', sort: true },
-    { index: 4, field: 'per_abdominal', header: 'Perímetro abdominal [cm]', sort: true },
-    { index: 5, field: 'tension', header: 'Tensión Arterial [mmHg]', sort: true },
-    { index: 6, field: 'trigliceridos', header: 'Triglicéridos Séricos', sort: true },
-    { index: 7, field: 'hdl', header: 'HDL', sort: true },
-    { index: 8, field: 'ldl', header: 'LDL', sort: true },
-    { index: 9, field: 'hemoglobina', header: 'Hemoglobina', sort: true },
-    { index: 10, field: 'glucosa', header: 'Glucosa', sort: true },
+    { index: 2, field: 'owner', header: 'Profesional', sort: true, type: ColumnType.NAME },
   ];
   indexDisplay = 10;
 
@@ -67,83 +59,39 @@ export class ConsultsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const patientId = this.activatedRoute.snapshot.params['patientId'];
-    this.patientsService.getPatient(patientId).subscribe({
-      next: (patient) => {
-        this.patient = patient;
-        this.loadConsults();
-        this.setColumnsBySize();
-      },
-    });
+    this.initPatient();
+    this.loadConsults();
   }
 
-  loadConsults(): void {
-    if (!this.patient) return;
-    this.isLoadingResults = true;
-    this.consultsService
-      .filter({
-        paging: { page: this.page + 1, limit: this.limit },
-        sorting: [{ field: this.sortField, direction: this.sortDirection }],
-        filter: { patient: this.patient?._id },
-      })
-      .pipe(
-        finalize(() => {
-          this.isLoadingResults = false;
-        })
-      )
-      .subscribe(
-        (res) => {
-          this.total = res.total;
-          this.listConsults = [...res.items];
-          this.dataSource = new MatTableDataSource(this.listConsults);
-        },
-        (err) => console.log(err)
-      );
+  async editConsult(consult: ConsultModel) {
+    await this.routerService.goToEditConsult(this.patient._id, consult._id);
   }
 
-  setColumnsBySize(): void {
-    this.breakpointObserver.observe(['(max-width: 959px)']).subscribe((result) => {
-      this.isSmall = false;
-      if (result.matches) {
-        this.isSmall = true;
-      }
-    });
-    this.breakpointObserver
-      .observe(['(max-width: 1100px)', '(min-width: 901px)'])
-      .subscribe((result) => {
-        if (result.matches) {
-          this.indexDisplay = 5;
+  deleteConsult(consult: ConsultModel): void {
+    this.dialogService
+      .openConfirmDialog('Eliminar Consulta', 'Seguro que quieres eliminar  la consulta?')
+      .subscribe((res) => {
+        if (res) {
+          this.loaderService.isLoading.next(true);
+          this.consultsService
+            .removeConsult(consult._id)
+            .pipe(
+              finalize(() => {
+                this.loaderService.isLoading.next(false);
+              })
+            )
+            .subscribe({
+              next: () => {
+                this.snackerService.showSuccessful('Consulta eliminado con éxito');
+                this.loadConsults();
+              },
+              error: (err) => {
+                console.log(err);
+                this.snackerService.showError(err.error.message);
+              },
+            });
         }
       });
-    this.breakpointObserver
-      .observe(['(max-width: 900px)', '(min-width:651px)'])
-      .subscribe((result) => {
-        if (result.matches) {
-          this.indexDisplay = 4;
-        }
-      });
-    this.breakpointObserver
-      .observe(['(max-width: 650px)', '(min-width:551px)'])
-      .subscribe((result) => {
-        if (result.matches) {
-          this.indexDisplay = 3;
-        }
-      });
-    this.breakpointObserver.observe(['(max-width: 550px)']).subscribe((result) => {
-      if (result.matches) {
-        this.indexDisplay = 2;
-      }
-    });
-    this.breakpointObserver.observe(['(max-width: 350px)']).subscribe((result) => {
-      if (result.matches) {
-        this.indexDisplay = 1;
-      }
-    });
-    this.breakpointObserver.observe(['(min-width: 1101px)']).subscribe((result) => {
-      if (result.matches) {
-        this.indexDisplay = 10;
-      }
-    });
   }
 
   changeSort(sort: Sort) {
@@ -163,39 +111,8 @@ export class ConsultsPageComponent implements OnInit {
     this.loadConsults();
   }
 
-  addConsult(): void {
-    this.routerService.goToAddConsult(this.patient._id);
-  }
-
-  editConsult(consult: ConsultModel): void {
-    this.routerService.goToEditConsult(consult._id);
-  }
-
-  deleteConsult(consult: ConsultModel): void {
-    this.dialogService
-      .openConfirmDialog('Eliminar Consulta', 'Seguro que quieres eliminar  la consulta?')
-      .subscribe((res) => {
-        if (res) {
-          this.loaderService.isLoading.next(true);
-          this.consultsService
-            .removeConsult(consult._id)
-            .pipe(
-              finalize(() => {
-                this.loaderService.isLoading.next(false);
-              })
-            )
-            .subscribe(
-              (res) => {
-                this.snackerService.showSuccessful('Consulta eliminado con éxito');
-                this.loadConsults();
-              },
-              (err) => {
-                console.log(err);
-                this.snackerService.showError(err.error.message);
-              }
-            );
-        }
-      });
+  async addConsult() {
+    await this.routerService.goToAddConsult(this.patient._id);
   }
 
   openInfoConsult(consult: ConsultModel): void {
@@ -204,5 +121,38 @@ export class ConsultsPageComponent implements OnInit {
       data: consult,
     });
     dialogRef.afterClosed();
+  }
+
+  private initPatient() {
+    this.activatedRoute.data.subscribe({
+      next: (data) => {
+        this.patient = data['patient'];
+      },
+    });
+  }
+
+  private loadConsults(): void {
+    if (!this.patient) return;
+    this.isLoadingResults = true;
+    this.consultsService
+      .filter({
+        paging: { page: this.page + 1, limit: this.limit },
+        sorting: [{ field: this.sortField, direction: this.sortDirection }],
+        filter: { patient: this.patient?._id },
+        populate: ['owner'],
+      })
+      .pipe(
+        finalize(() => {
+          this.isLoadingResults = false;
+        })
+      )
+      .subscribe({
+        next: (res) => {
+          this.total = res.total;
+          this.listConsults = [...res.items];
+          this.dataSource = new MatTableDataSource(this.listConsults);
+        },
+        error: (err) => console.log(err),
+      });
   }
 }

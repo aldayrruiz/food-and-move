@@ -51,70 +51,9 @@ export class AddConsultPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const patientId = this.activatedRoute.snapshot.params['patientId'];
-    this.patientsService.getPatient(patientId).subscribe({
-      next: (patient) => {
-        this.patient = patient;
-      },
-    });
+    this.initPatient();
+    this.initConsult();
     this.initForm();
-  }
-
-  initForm(): void {
-    this.form = this.fb.group({
-      masa: [
-        this.edit ? (this.consult?.masa != undefined ? this.consult?.masa : null) : null,
-        [Validators.min(0)],
-      ],
-      imc: [
-        this.edit ? (this.consult?.imc != undefined ? this.consult?.imc : null) : null,
-        [Validators.min(0)],
-      ],
-      per_abdominal: [
-        this.edit
-          ? this.consult?.per_abdominal != undefined
-            ? this.consult?.per_abdominal
-            : null
-          : null,
-        [Validators.min(0)],
-      ],
-      tension: [
-        this.edit ? (this.consult?.tension != undefined ? this.consult?.tension : null) : null,
-        [Validators.min(0)],
-      ],
-      trigliceridos: [
-        this.edit
-          ? this.consult?.trigliceridos != undefined
-            ? this.consult?.trigliceridos
-            : null
-          : null,
-        [Validators.min(0)],
-      ],
-      hdl: [
-        this.edit ? (this.consult?.hdl != undefined ? this.consult?.hdl : null) : null,
-        [Validators.min(0)],
-      ],
-      ldl: [
-        this.edit ? (this.consult?.ldl != undefined ? this.consult?.ldl : null) : null,
-        [Validators.min(0)],
-      ],
-      hemoglobina: [
-        this.edit
-          ? this.consult?.hemoglobina != undefined
-            ? this.consult?.hemoglobina
-            : null
-          : null,
-        [Validators.min(0)],
-      ],
-      glucosa: [
-        this.edit ? (this.consult?.glucosa != undefined ? this.consult?.glucosa : null) : null,
-        [Validators.min(0)],
-      ],
-      comments: [
-        this.edit ? (this.consult?.comments != undefined ? this.consult?.comments : null) : null,
-      ],
-    });
-    if (this.edit) this.created_at = this.consult?.created_at;
   }
 
   get masa(): number | null {
@@ -218,5 +157,40 @@ export class AddConsultPageComponent implements OnInit {
       created_at: this.created_at,
     };
     return edit ? request : this.optionalPipe.transform(request);
+  }
+
+  private initPatient() {
+    this.activatedRoute.data.subscribe({
+      next: (data) => {
+        this.patient = data['patient'];
+      },
+    });
+  }
+
+  private initConsult() {
+    this.activatedRoute.data.subscribe({
+      next: (data) => {
+        if (data['consult']) {
+          this.edit = true;
+          this.consult = data['consult'];
+          this.created_at = this.consult?.created_at;
+        }
+      },
+    });
+  }
+
+  private initForm(): void {
+    this.form = this.fb.group({
+      masa: [this.consult?.masa, [Validators.min(0)]],
+      imc: [this.consult?.imc, [Validators.min(0)]],
+      per_abdominal: [this.consult?.per_abdominal, [Validators.min(0)]],
+      tension: [this.consult?.tension, [Validators.min(0)]],
+      trigliceridos: [this.consult?.trigliceridos, [Validators.min(0)]],
+      hdl: [this.consult?.hdl, [Validators.min(0)]],
+      ldl: [this.consult?.ldl, [Validators.min(0)]],
+      hemoglobina: [this.consult?.hemoglobina, [Validators.min(0)]],
+      glucosa: [this.consult?.glucosa, [Validators.min(0)]],
+      comments: [this.consult?.comments],
+    });
   }
 }

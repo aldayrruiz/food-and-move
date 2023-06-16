@@ -16,12 +16,12 @@ import { InfoPatientComponent } from '@modules/patients/components/info-patient/
 import { ColumnType } from '@shared/components/table/enums/column-type';
 import { TableStructure } from '@shared/components/table/interfaces/table-structure';
 import { finalize } from 'rxjs/operators';
-import { DEFAULT_LIMIT } from 'src/app/constants/app.constants';
+import { DEFAULT_LIMIT } from '../../../../../constants/app.constants';
 
 @Component({
   selector: 'app-patients-page',
   templateUrl: './patients-page.component.html',
-  styleUrls: ['./patients-page.component.css', '../../../../../assets/styles/crud.css'],
+  styleUrls: ['./patients-page.component.css', '../../../../../../assets/styles/crud.css'],
 })
 export class PatientsPageComponent implements OnInit {
   listPatients: PatientModel[] = [];
@@ -168,8 +168,8 @@ export class PatientsPageComponent implements OnInit {
     this.loadPatients();
   }
 
-  addPatient(): void {
-    this.routerService.goToAddPatient();
+  async addPatient() {
+    await this.routerService.goToAddPatient();
   }
 
   deletePatient(patient: PatientModel): void {
@@ -202,8 +202,8 @@ export class PatientsPageComponent implements OnInit {
       });
   }
 
-  editPatient(patient: PatientModel): void {
-    this.routerService.goToEditPatient(patient._id);
+  async editPatient(patient: PatientModel) {
+    await this.routerService.goToEditPatient(patient._id);
   }
 
   openInfoPatient(patient: PatientModel): void {

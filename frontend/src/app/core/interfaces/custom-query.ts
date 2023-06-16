@@ -7,4 +7,5 @@ export interface CustomQuery {
   paging?: Paging;
   sorting?: Sorting[];
   filter?: any;
+  populate?: string[];
 }

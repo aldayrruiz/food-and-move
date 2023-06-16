@@ -1,3 +1,4 @@
+import { Employee } from '@modules/employees/schema/employee.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
 
@@ -29,8 +30,8 @@ export class Patient {
   @Prop({ type: String, required: true })
   password: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'employees', required: true })
-  employee: mongoose.Schema.Types.ObjectId;
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'employees' }], required: true, default: [] })
+  employees: Employee[];
 }
 
 export const PatientSchema = SchemaFactory.createForClass(Patient);

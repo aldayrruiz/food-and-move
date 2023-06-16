@@ -17,7 +17,7 @@ import { finalize } from 'rxjs/operators';
 @Component({
   selector: 'app-add-patient-page',
   templateUrl: './add-patient-page.component.html',
-  styleUrls: ['./add-patient-page.component.css', '../../../../../assets/styles/form.css'],
+  styleUrls: ['./add-patient-page.component.css', '../../../../../../assets/styles/form.css'],
 })
 export class AddPatientPageComponent implements OnInit {
   form!: FormGroup;
@@ -52,42 +52,8 @@ export class AddPatientPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loaderService.isLoading.next(true);
-    this.authService.user$.subscribe(
-      (res) => {
-        this.user = res;
-        const params = this.activatedRoute.snapshot.params;
-        if (params['id']) {
-          this.patientsService
-            .getPatient(params['id'])
-            .pipe(
-              finalize(() => {
-                this.loaderService.isLoading.next(false);
-              })
-            )
-            .subscribe(
-              (res) => {
-                this.edit = true;
-                this.patient = res;
-                this.initForm();
-              },
-              (err) => {
-                console.log(err);
-                this.exit();
-                this.snackerService.showError('Algo no ha sucedido como se esperaba');
-              }
-            );
-        } else {
-          this.initForm();
-          this.loaderService.isLoading.next(false);
-        }
-      },
-      (err) => {
-        console.log(err);
-        this.authService.logout();
-        this.snackerService.showError('Algo no ha sucedido como se esperaba');
-      }
-    );
+    this.initPatient();
+    this.initForm();
   }
 
   initForm(): void {
@@ -287,5 +253,16 @@ export class AddPatientPageComponent implements OnInit {
     this.removeProfileImage = false;
     this.selectedFile = undefined;
     this.imageFile = '';
+  }
+
+  private initPatient() {
+    this.activatedRoute.data.subscribe({
+      next: (data) => {
+        if (data['patient']) {
+          this.patient = data['patient'];
+          this.edit = true;
+        }
+      },
+    });
   }
 }
