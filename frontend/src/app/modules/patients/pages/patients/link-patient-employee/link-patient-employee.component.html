@@ -4,19 +4,19 @@
   </div>
 
   <mat-divider></mat-divider>
-  <app-autocomplete-field style="width: 500px" label="Profesional" [objectFields]="employeeObjectField" #employeeField>>
+  <app-autocomplete-field
+    style="width: 500px"
+    label="Profesional"
+    [objectFields]="employeeObjectField"
+    #employeeField
+    >>
   </app-autocomplete-field>
   <div>
-    <button
-      mat-raised-button
-      color="primary"
-      tabindex="6"
-      (click)="linkEmployeeToPatient()"
-    >
+    <button mat-raised-button color="primary" tabindex="6" (click)="linkEmployeeToPatient()">
       Vincular
     </button>
     <button
-      style="margin-left: 20px;"
+      style="margin-left: 20px"
       mat-raised-button
       color="primary"
       tabindex="6"

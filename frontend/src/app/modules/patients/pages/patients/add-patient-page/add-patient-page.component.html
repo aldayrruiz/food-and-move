@@ -27,7 +27,7 @@
               !imageFile
                 ? removeProfileImage
                   ? ('' | photo)
-                  : (patient?.profile_image | photo)
+                  : (patient.profile_image | photo)
                 : imageFile
             "
             (onSelect)="onSelectFile($event)"
@@ -45,9 +45,9 @@
             <mat-icon mat-list-icon class="input__icon">persone</mat-icon>
             <mat-form-field class="input__field">
               <mat-label>Nombre</mat-label>
-              <input type="text" matInput autocomplete="off" formControlName="name" tabindex="1"/>
+              <input type="text" matInput autocomplete="off" formControlName="name" tabindex="1" />
               <mat-error *ngIf="form.controls['name'].hasError('required')"
-              >Nombre es <strong>obligatorio</strong></mat-error
+                >Nombre es <strong>obligatorio</strong></mat-error
               >
             </mat-form-field>
             <div class="fake__clear" *ngIf="!buttonClear.name"></div>
@@ -96,18 +96,17 @@
             <mat-icon mat-list-icon class="input__icon">mail</mat-icon>
             <mat-form-field class="input__field">
               <mat-label>Email</mat-label>
-              <input type="text" matInput autocomplete="off" formControlName="email" tabindex="3"/>
+              <input type="text" matInput autocomplete="off" formControlName="email" tabindex="3" />
               <mat-error *ngIf="form.controls['email'].hasError('required')"
-              >Email es <strong>obligatorio</strong></mat-error
+                >Email es <strong>obligatorio</strong></mat-error
               >
               <mat-error
                 *ngIf="
                   form.controls['email'].hasError('email') &&
                   !form.controls['email'].hasError('required')
                 "
-              >Por favor, introduce un email correcto
-              </mat-error
-              >
+                >Por favor, introduce un email correcto
+              </mat-error>
             </mat-form-field>
             <div class="fake__clear" *ngIf="!buttonClear.email"></div>
             <button
@@ -128,7 +127,7 @@
             <mat-icon mat-list-icon class="input__icon">phone</mat-icon>
             <mat-form-field class="input__field">
               <mat-label>Teléfono</mat-label>
-              <input type="text" matInput autocomplete="off" formControlName="phone" tabindex="4"/>
+              <input type="text" matInput autocomplete="off" formControlName="phone" tabindex="4" />
             </mat-form-field>
             <div class="fake__clear" *ngIf="!buttonClear.phone"></div>
             <button
@@ -176,11 +175,10 @@
             <mat-icon mat-list-icon class="input__icon">cake</mat-icon>
             <mat-form-field hintLabel="dd/mm/yyyy" class="input__field">
               <mat-label>Fecha de nacimiento</mat-label>
-              <input type="text" matInput autocomplete="off" formControlName="birth" tabindex="6"/>
+              <input type="text" matInput autocomplete="off" formControlName="birth" tabindex="6" />
               <mat-error *ngIf="form.controls['birth'].hasError('dateInvalid')"
-              >La fecha no es válida
-              </mat-error
-              >
+                >La fecha no es válida
+              </mat-error>
             </mat-form-field>
             <div class="fake__clear" *ngIf="!buttonClear.birth"></div>
             <button

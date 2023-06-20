@@ -47,13 +47,13 @@
           ></app-profile-picture>
           <p class="table__text" *ngSwitchDefault>
             {{
-            column.type === 'date'
-              ? (getValue(element, column.field) | date : 'dd/MM/yyyy')
-              : column.type === 'name'
+              column.type === 'date'
+                ? (getValue(element, column.field) | date : 'dd/MM/yyyy')
+                : column.type === 'name'
                 ? (getValue(element, column.field) | name)
                 : column.type === 'admin'
-                  ? (getValue(element, column.field) | admin)
-                  : getValue(element, column.field)
+                ? (getValue(element, column.field) | admin)
+                : getValue(element, column.field)
             }}
           </p>
         </td>
