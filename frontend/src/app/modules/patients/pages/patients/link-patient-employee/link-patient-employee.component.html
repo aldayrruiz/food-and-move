@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="crud__header">
+    <p class="header__subtitle" style="margin: 20px 0">Profesionales</p>
+  </div>
+
+  <mat-divider></mat-divider>
+  <app-autocomplete-field style="width: 500px" label="Profesional" [objectFields]="employeeObjectField" #employeeField>>
+  </app-autocomplete-field>
+  <div>
+    <button
+      mat-raised-button
+      color="primary"
+      tabindex="6"
+      (click)="linkEmployeeToPatient()"
+    >
+      Vincular
+    </button>
+    <button
+      style="margin-left: 20px;"
+      mat-raised-button
+      color="primary"
+      tabindex="6"
+      (click)="unlinkEmployeeToPatient()"
+    >
+      Desvincular
+    </button>
+  </div>
+  <div class="crud__main">
+    <app-table
+      [tableStructure]="tableStructure"
+      [indexDisplay]="indexDisplay"
+      [dataSource]="dataSource"
+      [loading]="isLoadingResults"
+      [limit]="limit"
+      [page]="page"
+      [total]="total"
+      [sortActive]="'name'"
+      [viewMenu]="false"
+      (onClick)="openInfoEmployee($event)"
+      (reset)="resetTable()"
+      (changePage)="changePage($event)"
+      (changeSort)="changeSort($event)"
+      (info)="openInfoEmployee($event)"
+    >
+    </app-table>
+  </div>
+</div>

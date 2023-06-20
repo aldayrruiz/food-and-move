@@ -8,5 +8,5 @@ export interface PatientModel {
   birth?: Date;
   height?: number;
   profile_image?: string;
-  employee: string;
+  employees: string[];
 }

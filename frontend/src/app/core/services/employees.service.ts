@@ -14,6 +14,10 @@ import { EmployeeModel } from '../models/employee.model';
 export class EmployeesService {
   constructor(private readonly http: HttpClient) {}
 
+  getAllEmployees(): Observable<EmployeeModel[]> {
+    return this.http.get<EmployeeModel[]>(`${environment.api}/employees`);
+  }
+
   getEmployee(id: string): Observable<EmployeeModel> {
     return this.http.get<EmployeeModel>(`${environment.api}/employees/${id}`);
   }

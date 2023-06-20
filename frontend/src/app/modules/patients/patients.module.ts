@@ -17,6 +17,7 @@ import { PhotoPipe } from '@shared/pipes/photo.pipe';
 import { SharedModule } from '@shared/shared.module';
 import { PatientsComponent } from '../patients/patients.component';
 import { InfoPatientComponent } from './components/info-patient/info-patient.component';
+import { LinkPatientEmployeeComponent } from './pages/patients/link-patient-employee/link-patient-employee.component';
 import { PatientsRoutingModule } from './patients-routing.module';
 
 @NgModule({
@@ -37,6 +38,7 @@ import { PatientsRoutingModule } from './patients-routing.module';
     // Moves
     MovesPageComponent,
     AddMovePageComponent,
+    LinkPatientEmployeeComponent,
   ],
   imports: [
     CommonModule,

@@ -81,4 +81,18 @@ export class PatientsService {
   generateRandomPassword(): Observable<{ password: string }> {
     return this.http.get<{ password: string }>(`${environment.api}/patients/randomPassword`);
   }
+
+  linkEmployeePatient(employeeId: string, patientId: string): Observable<PatientModel> {
+    return this.http.post<PatientModel>(`${environment.api}/patients/linkEmployeePatient`, {
+      employeeId,
+      patientId,
+    });
+  }
+
+  unlinkEmployeePatient(employeeId: string, patientId: string): Observable<PatientModel> {
+    return this.http.post<PatientModel>(`${environment.api}/patients/unlinkEmployeePatient`, {
+      employeeId,
+      patientId,
+    });
+  }
 }

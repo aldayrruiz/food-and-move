@@ -1,5 +1,3 @@
-import { AssignPatientDto } from '@modules/employees/dto/assignPatient.dto';
-import { PatientsService } from '@modules/patients/patients.service';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
@@ -27,9 +25,12 @@ export class EmployeesService {
     @InjectModel(Employee.name) private readonly employeeModel: Model<EmployeeDocument>,
     @Inject(MailService) private readonly mailService: MailService,
     private readonly jwtService: JwtService,
-    private readonly configService: ConfigService,
-    private readonly patientService: PatientsService
+    private readonly configService: ConfigService
   ) {}
+
+  async findAll() {
+    return this.employeeModel.find();
+  }
 
   async findOne(id: string) {
     const employee = await this.employeeModel.findById(id);
@@ -133,19 +134,5 @@ export class EmployeesService {
       console.log(error);
       throw new NotFoundException('Token no válido');
     }
-  }
-
-  async assignPatient(assignPatientDto: AssignPatientDto) {
-    const { patientId, employeeId } = assignPatientDto;
-    const employee = await this.employeeModel.findById(employeeId);
-    if (!employee) throw new NotFoundException('No se ha encontrado al profesional');
-    const patient = await this.patientService.findById(patientId);
-    if (!patient) throw new NotFoundException('No se ha encontrado al paciente');
-    const employeeAlreadyAssigned = patient.employees.indexOf(employee._id) >= 0;
-    if (employeeAlreadyAssigned) {
-      return;
-    }
-    patient.employees.push(employee._id);
-    await patient.save();
   }
 }

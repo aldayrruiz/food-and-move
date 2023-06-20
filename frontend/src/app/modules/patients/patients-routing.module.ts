@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ConsultResolver } from '@core/resolvers/consult.resolver';
+import { EmployeesResolver } from '@core/resolvers/employees.resolver';
 import { PatientResolver } from '@core/resolvers/patient.resolver';
 import { AddConsultPageComponent } from '@modules/patients/pages/consults/add-consult-page/add-consult-page.component';
 import { ConsultsPageComponent } from '@modules/patients/pages/consults/consults-page/consults-page.component';
@@ -28,7 +29,7 @@ const routes: Routes = [
       {
         path: 'edit-patient/:patientId',
         component: AddPatientPageComponent,
-        resolve: { patient: PatientResolver },
+        resolve: { patient: PatientResolver, employees: EmployeesResolver },
       },
       // Consults
       {

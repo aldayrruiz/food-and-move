@@ -1,3 +1,4 @@
+import { LinkPatientDto } from '@modules/employees/dto/link-patient.dto';
 import {
   Body,
   Controller,
@@ -82,5 +83,17 @@ export class PatientsController {
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return await this.patientsService.findById(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('linkEmployeePatient')
+  async linkPatient(@Body() linkPatientDto: LinkPatientDto) {
+    return await this.patientsService.linkEmployeePatient(linkPatientDto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('unlinkEmployeePatient')
+  async unlinkPatient(@Body() unlinkPatientDto: LinkPatientDto) {
+    return await this.patientsService.unlinkEmployeePatient(unlinkPatientDto);
   }
 }

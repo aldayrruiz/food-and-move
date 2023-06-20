@@ -22,8 +22,8 @@ import { finalize } from 'rxjs/operators';
 export class AddPatientPageComponent implements OnInit {
   form!: FormGroup;
   edit = false;
-  patient: PatientModel | null = null;
-  user: EmployeeModel | null = null;
+  patient!: PatientModel;
+  user!: EmployeeModel;
 
   buttonClear = {
     name: false,
@@ -71,7 +71,6 @@ export class AddPatientPageComponent implements OnInit {
         birthDateValidator(),
       ],
       height: [this.edit ? this.patient!.height : null],
-      employee: [this.edit ? this.patient!.employee : this.user?._id],
       password: [this.edit ? this.patient!.password : null],
     });
   }

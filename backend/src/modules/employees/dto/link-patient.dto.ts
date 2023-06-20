@@ -1,6 +1,6 @@
 import { IsMongoId, IsNotEmpty } from 'class-validator';
 
-export class AssignPatientDto {
+export class LinkPatientDto {
   @IsNotEmpty()
   @IsMongoId()
   employeeId: string;

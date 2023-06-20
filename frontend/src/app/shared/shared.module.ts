@@ -8,6 +8,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { AddAttachmentComponent } from './components/add-attachment/add-attachment.component';
 import { AttachmentInputComponent } from './components/attachment-input/attachment-input.component';
 import { AttachmentsDialogComponent } from './components/attachments-dialog/attachments-dialog.component';
+import { AutocompleteFieldComponent } from './components/autocomplete-field/autocomplete-field.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { GraphicComponent } from './components/graphic/graphic.component';
 import { HeaderPatientComponent } from './components/header-patient/header-patient.component';
@@ -61,6 +62,7 @@ import { RatingScrPipe } from './pipes/rating-scr.pipe';
     FoodIconPipe,
     FoodSortPipe,
     GraphicComponent,
+    AutocompleteFieldComponent,
   ],
   imports: [CommonModule, MatModule, FormsModule, ReactiveFormsModule, NgChartsModule],
   exports: [
@@ -84,6 +86,7 @@ import { RatingScrPipe } from './pipes/rating-scr.pipe';
     FoodIconPipe,
     FoodSortPipe,
     GraphicComponent,
+    AutocompleteFieldComponent,
   ],
   providers: [SnackerService, DialogService, NamePipe, OptionalPipe],
 })

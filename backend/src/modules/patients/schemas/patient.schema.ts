@@ -30,7 +30,7 @@ export class Patient {
   @Prop({ type: String, required: true })
   password: string;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'employees' }], required: true, default: [] })
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Employee' }], required: true, default: [] })
   employees: Employee[];
 }
 

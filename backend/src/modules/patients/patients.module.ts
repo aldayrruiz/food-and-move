@@ -1,3 +1,4 @@
+import { EmployeesModule } from '@modules/employees/employees.module';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConsultsModule } from 'src/modules/consults/consults.module';
@@ -20,6 +21,7 @@ import { PatientSchema } from './schemas/patient.schema';
     ConsultsModule,
     FoodsModule,
     MovesModule,
+    EmployeesModule,
   ],
   controllers: [PatientsController],
   providers: [PatientsService, CustomQueryService, FilesService],

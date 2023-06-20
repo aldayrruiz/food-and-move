@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 // Materials
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -56,6 +57,7 @@ const MatModules = [
   MatSortModule,
   MatMenuModule,
   MatBottomSheetModule,
+  MatAutocompleteModule,
 ];
 
 @NgModule({

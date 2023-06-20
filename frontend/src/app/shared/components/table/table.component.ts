@@ -24,6 +24,7 @@ export class TableComponent {
   @Input() keyOffItem = '';
   @Input() valueOffItem: any = null;
 
+  @Input() viewMenu = true;
   @Input() viewShow = false;
   @Input() viewInfo = true;
   @Input() viewEdit = true;

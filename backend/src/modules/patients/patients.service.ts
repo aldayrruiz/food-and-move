@@ -1,3 +1,5 @@
+import { LinkPatientDto } from '@modules/employees/dto/link-patient.dto';
+import { EmployeesService } from '@modules/employees/employees.service';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -21,7 +23,8 @@ export class PatientsService {
     @Inject(ConsultsService) private readonly consultsService: ConsultsService,
     @Inject(FoodsService) private readonly foodsService: FoodsService,
     @Inject(MovesService) private readonly movesService: MovesService,
-    @InjectModel('patients') private readonly patientModel: Model<PatientDocument>
+    @InjectModel('patients') private readonly patientModel: Model<PatientDocument>,
+    private readonly employeesService: EmployeesService
   ) {}
 
   async findById(id: string) {
@@ -94,5 +97,31 @@ export class PatientsService {
   async randomPassword() {
     const password = newRandomPassword();
     return { password };
+  }
+
+  async linkEmployeePatient(linkPatientDto: LinkPatientDto) {
+    const { patientId, employeeId } = linkPatientDto;
+    const employee = await this.employeesService.findOne(employeeId);
+    const patient = await this.findById(patientId);
+    const indexOfEmployee = patient.employees.indexOf(employee._id);
+    if (indexOfEmployee >= 0) {
+      // Already linked
+      return;
+    }
+    patient.employees.push(employee._id);
+    await patient.save();
+  }
+
+  async unlinkEmployeePatient(unlinkPatientDto: LinkPatientDto) {
+    const { patientId, employeeId } = unlinkPatientDto;
+    const employee = await this.employeesService.findOne(employeeId);
+    const patient = await this.findById(patientId);
+    const indexOfEmployee = patient.employees.indexOf(employee._id);
+    if (indexOfEmployee < 0) {
+      // Not linked
+      return;
+    }
+    patient.employees.splice(indexOfEmployee, 1);
+    await patient.save();
   }
 }

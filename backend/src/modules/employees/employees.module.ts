@@ -1,4 +1,3 @@
-import { PatientsModule } from '@modules/patients/patients.module';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -26,7 +25,6 @@ import { JwtForgotPasswordStrategy } from './strategys/jwt-forgot-password.strat
       signOptions: { expiresIn: jwtForgotPassword.expiresIn },
     }),
     MailModule,
-    PatientsModule,
   ],
   controllers: [EmployeesController],
   providers: [EmployeesService, FilesService, CustomQueryService, JwtForgotPasswordStrategy],
