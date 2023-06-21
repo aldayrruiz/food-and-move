@@ -49,7 +49,8 @@ export class AddPatientPageComponent implements OnInit {
     private readonly optionalPipe: OptionalPipe,
     private readonly routerService: RouterService,
     private readonly loaderService: LoaderService,
-    private readonly snackerService: SnackerService
+    private readonly snackerService: SnackerService,
+    private readonly photoPipe: PhotoPipe
   ) {}
 
   ngOnInit(): void {
@@ -255,15 +256,15 @@ export class AddPatientPageComponent implements OnInit {
 
   getImageProfile(): string {
     if (this.removeProfileImage) {
-      return new PhotoPipe().transform('');
+      return this.photoPipe.transform('');
     }
     if (this.patient?.profile_image) {
-      return new PhotoPipe().transform(this.patient?.profile_image || '');
+      return this.photoPipe.transform(this.patient?.profile_image || '');
     }
     if (this.imageFile) {
       return this.imageFile;
     }
-    return new PhotoPipe().transform('');
+    return this.photoPipe.transform('');
   }
 
   private initPatient() {

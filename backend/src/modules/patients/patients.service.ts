@@ -47,8 +47,7 @@ export class PatientsService {
     const { phone, password } = patientDto;
     const findPatient = await this.patientModel.findOne({ phone });
     if (findPatient) throw new NotFoundException('Ya existe un paciente con ese teléfono');
-    const createdPatient = await this.patientModel.create(patientDto);
-    return createdPatient;
+    return await this.patientModel.create({ ...patientDto, employees: [patientDto.owner] });
   }
 
   async update(id: string, updatePatientDto: UpdatePatientDto) {

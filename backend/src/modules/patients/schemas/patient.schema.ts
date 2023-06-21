@@ -12,7 +12,7 @@ export class Patient {
   @Prop({ type: String })
   surname: string;
 
-  @Prop({ type: String })
+  @Prop({ type: String, unique: false, required: false })
   email: string;
 
   @Prop({ type: String, unique: true, required: true })
@@ -32,6 +32,12 @@ export class Patient {
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Employee' }], required: true, default: [] })
   employees: Employee[];
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Employee' })
+  owner: Employee;
+
+  @Prop({ type: Date, default: Date.now })
+  created_at: Date;
 }
 
 export const PatientSchema = SchemaFactory.createForClass(Patient);

@@ -40,4 +40,9 @@ export class PatientDto {
   @IsMongoId({ each: true })
   @IsOptional()
   employees?: string[];
+
+  @IsString()
+  @IsMongoId()
+  @IsOptional()
+  owner?: string;
 }
