@@ -12,6 +12,7 @@ import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
 import { birthDateValidator } from '@modules/patients/validators/date.validator';
 import { OptionalPipe } from '@shared/pipes/optional.pipe';
+import { PhotoPipe } from '@shared/pipes/photo.pipe';
 import { finalize } from 'rxjs/operators';
 
 @Component({
@@ -245,13 +246,24 @@ export class AddPatientPageComponent implements OnInit {
   onRemoveProfileImage(): void {
     this.removeProfileImage = true;
     this.selectedFile = undefined;
-    this.imageFile = '';
   }
 
   onRecoverProfileImage(): void {
     this.removeProfileImage = false;
     this.selectedFile = undefined;
-    this.imageFile = '';
+  }
+
+  getImageProfile(): string {
+    if (this.removeProfileImage) {
+      return new PhotoPipe().transform('');
+    }
+    if (this.patient?.profile_image) {
+      return new PhotoPipe().transform(this.patient?.profile_image || '');
+    }
+    if (this.imageFile) {
+      return this.imageFile;
+    }
+    return new PhotoPipe().transform('');
   }
 
   private initPatient() {
