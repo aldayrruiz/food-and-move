@@ -13,7 +13,7 @@ import { FilterPatientDto } from './dto/filter-patient.dto';
 import { PatientDto } from './dto/patient.dto';
 import { QueryPatientDto } from './dto/query-patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
-import { PatientDocument } from './schemas/patient.schema';
+import { Patient, PatientDocument } from './schemas/patient.schema';
 
 @Injectable()
 export class PatientsService {
@@ -23,7 +23,7 @@ export class PatientsService {
     @Inject(ConsultsService) private readonly consultsService: ConsultsService,
     @Inject(FoodsService) private readonly foodsService: FoodsService,
     @Inject(MovesService) private readonly movesService: MovesService,
-    @InjectModel('patients') private readonly patientModel: Model<PatientDocument>,
+    @InjectModel(Patient.name) private readonly patientModel: Model<PatientDocument>,
     private readonly employeesService: EmployeesService
   ) {}
 

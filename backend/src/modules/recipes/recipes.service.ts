@@ -1,3 +1,4 @@
+import { Recipe, RecipeDocument } from '@modules/recipes/schemas/recipe.schema';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -6,13 +7,12 @@ import { FilterRecipeDto } from './dto/filter-recipe.dto';
 import { QueryRecipeDto } from './dto/query-recipe.dto';
 import { RecipeDto } from './dto/recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
-import { RecipeDocument } from './schemas/recipe.schemas';
 
 @Injectable()
 export class RecipesService {
   constructor(
     @Inject(CustomQueryService) private readonly customQueryService: CustomQueryService,
-    @InjectModel('recipes') private readonly recipeModel: Model<RecipeDocument>
+    @InjectModel(Recipe.name) private readonly recipeModel: Model<RecipeDocument>
   ) {}
 
   async findOne(id: string) {

@@ -9,13 +9,13 @@ import { DietDto } from './dto/diet.dto';
 import { FilterDietDto } from './dto/filter-diet.dto';
 import { QueryDietDto } from './dto/query-diet.dto';
 import { UpdateDietDto } from './dto/update-diet.dto';
-import { DietDocument } from './schemas/diet.schemas';
+import { Diet, DietDocument } from './schemas/diet.schema';
 
 @Injectable()
 export class DietsService {
   constructor(
     @Inject(CustomQueryService) private readonly customQueryService: CustomQueryService,
-    @InjectModel('diets') private readonly dietsModel: Model<DietDocument>
+    @InjectModel(Diet.name) private readonly dietsModel: Model<DietDocument>
   ) {}
 
   async findOne(id: string) {

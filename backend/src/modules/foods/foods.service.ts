@@ -1,20 +1,21 @@
+import { Diet } from '@modules/diets/schemas/diet.schema';
+import { Recipe } from '@modules/recipes/schemas/recipe.schema';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { DateRangeDto } from '@shared/dto/date-range.dto';
 import { Model } from 'mongoose';
 import { addDay, getDateRange } from 'src/utils/date-utils';
 import { getQueryDate } from 'src/utils/filter-dates.utils';
-import { asyncForEach } from 'src/utils/utils';
 import { DietsService } from '../diets/diets.service';
 import { FindFoodDto } from './dto/find-food.dto';
 import { FoodDto } from './dto/food.dto';
 import { UpdateFoodDto } from './dto/update-food.dto';
-import { FoodDocument } from './schemas/food.schemas';
+import { Food, FoodDocument } from './schemas/food.schema';
 
 @Injectable()
 export class FoodsService {
   constructor(
-    @InjectModel('foods') private readonly foodModel: Model<FoodDocument>,
+    @InjectModel(Food.name) private readonly foodModel: Model<FoodDocument>,
     @Inject(DietsService) private readonly dietsService: DietsService
   ) {}
 
@@ -95,58 +96,50 @@ export class FoodsService {
   }
 
   async importDiet(dietId: string, patientId: string, date: Date) {
-    const diet = await this.dietsService.findOne(dietId);
-    const range = getDateRange(date);
-    let indexDate = new Date(date);
-    let itemsDay = [];
-    for (let i = 0; i < 7; i++) {
-      indexDate = addDay(range.startDate, i);
-      switch (i) {
-        case 0: {
-          itemsDay = [...diet.monday];
-          break;
-        }
-        case 1: {
-          itemsDay = [...diet.tuesday];
-          break;
-        }
-        case 2: {
-          itemsDay = [...diet.wednesday];
-          break;
-        }
-        case 3: {
-          itemsDay = [...diet.thursday];
-          break;
-        }
-        case 4: {
-          itemsDay = [...diet.friday];
-          break;
-        }
-        case 5: {
-          itemsDay = [...diet.saturday];
-          break;
-        }
-        case 6: {
-          itemsDay = [...diet.sunday];
-          break;
-        }
-      }
-      await asyncForEach(itemsDay, async (recipe) => {
-        const food = {
-          title: recipe.title,
-          description: recipe.description,
-          meal: recipe.meal,
-          dish: recipe.dish,
-          links: recipe.links,
-          ingredients: recipe.ingredients,
-          patient: patientId,
-          comments: '',
-          date: indexDate,
-        };
-        await this.create(food as FoodDto);
-      });
+    const diet: Diet = await this.dietsService.findOne(dietId);
+    const dateRange: { startDate: Date; endDate: Date } = getDateRange(date);
+
+    for (let i: number = 0; i < 7; i++) {
+      const day: Date = addDay(dateRange.startDate, i);
+      const recipes: Recipe[] = this.getRecipesFromDietByIndexDay(diet, i);
+      await this.createFoodsForPatient(recipes, patientId, day);
     }
-    return await this.findByPatient(patientId, range);
+    return await this.findByPatient(patientId, dateRange);
+  }
+
+  getRecipesFromDietByIndexDay(diet: Diet, indexDay: number): Recipe[] {
+    const recipesByIndex = {
+      0: diet.monday,
+      1: diet.tuesday,
+      2: diet.wednesday,
+      3: diet.thursday,
+      4: diet.friday,
+      5: diet.saturday,
+      6: diet.sunday,
+    };
+    return recipesByIndex[indexDay];
+  }
+
+  async createFoodsForPatient(recipes: Recipe[], patientId: string, date: Date) {
+    if (recipes.length == 0) return;
+    for (const recipe of recipes) {
+      // Do not use "...recipe" because it is a mongoose object (not dto)
+      const food = {
+        title: recipe.title,
+        description: recipe.description,
+        meal: recipe.meal,
+        dish: recipe.dish,
+        links: recipe.links,
+        videos: recipe.videos,
+        ingredients: recipe.ingredients,
+        attachment: recipe.attachment,
+        patient: patientId,
+        comments: '',
+        date,
+      };
+      // @ts-ignore
+      await this.create(food as FoodDto);
+    }
   }
 
   async clearFoods(patientId: string, date: DateRangeDto) {

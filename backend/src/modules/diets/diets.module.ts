@@ -3,13 +3,13 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CustomQueryService } from 'src/services/custom-query.service';
 import { DietsController } from './diets.controller';
 import { DietsService } from './diets.service';
-import { DietSchema } from './schemas/diet.schemas';
+import { Diet, DietSchema } from './schemas/diet.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       {
-        name: 'diets',
+        name: Diet.name,
         schema: DietSchema,
       },
     ]),

@@ -10,6 +10,10 @@ export class ConsultDto {
   @IsMongoId()
   owner: string;
 
+  @IsMongoId()
+  @IsOptional()
+  diet?: string;
+
   @IsNumber()
   @IsOptional()
   masa?: number; // Masa [Kg]

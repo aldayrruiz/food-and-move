@@ -1,15 +1,15 @@
+import { Recipe, RecipeSchema } from '@modules/recipes/schemas/recipe.schema';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CustomQueryService } from '../../services/custom-query.service';
+import { CustomQueryService } from '@services/custom-query.service';
 import { RecipesController } from './recipes.controller';
 import { RecipesService } from './recipes.service';
-import { RecipeSchema } from './schemas/recipe.schemas';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       {
-        name: 'recipes',
+        name: Recipe.name,
         schema: RecipeSchema,
       },
     ]),

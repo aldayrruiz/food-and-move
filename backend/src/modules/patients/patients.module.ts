@@ -8,13 +8,13 @@ import { CustomQueryService } from 'src/services/custom-query.service';
 import { FilesService } from '../files/files.service';
 import { PatientsController } from './patients.controller';
 import { PatientsService } from './patients.service';
-import { PatientSchema } from './schemas/patient.schema';
+import { Patient, PatientSchema } from './schemas/patient.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       {
-        name: 'patients',
+        name: Patient.name,
         schema: PatientSchema,
       },
     ]),
