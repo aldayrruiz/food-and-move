@@ -14,6 +14,14 @@ import { PatientModel } from '../models/patient.model';
 export class PatientsService {
   constructor(private readonly http: HttpClient, private readonly patientPipe: PatientPipe) {}
 
+  getAll() {
+    return this.http.get<PatientModel[]>(`${environment.api}/patients`).pipe(
+      map((patients) => {
+        return patients.map((patient) => this.patientPipe.transform(patient));
+      })
+    );
+  }
+
   getPatient(id: string): Observable<PatientModel> {
     return this.http.get<PatientModel>(`${environment.api}/patients/${id}`).pipe(
       map((patient) => {

@@ -10,6 +10,7 @@ import { LoaderService } from '@core/services/loader.service';
 import { PatientsService } from '@core/services/patients.service';
 import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
+import { StorageService } from '@core/services/storage.service';
 import { birthDateValidator } from '@modules/patients/validators/date.validator';
 import { OptionalPipe } from '@shared/pipes/optional.pipe';
 import { PhotoPipe } from '@shared/pipes/photo.pipe';
@@ -50,10 +51,12 @@ export class AddPatientPageComponent implements OnInit {
     private readonly routerService: RouterService,
     private readonly loaderService: LoaderService,
     private readonly snackerService: SnackerService,
-    private readonly photoPipe: PhotoPipe
+    private readonly photoPipe: PhotoPipe,
+    private readonly storageService: StorageService
   ) {}
 
   ngOnInit(): void {
+    this.initMe();
     this.initPatient();
     this.initForm();
   }
@@ -265,6 +268,10 @@ export class AddPatientPageComponent implements OnInit {
       return this.imageFile;
     }
     return this.photoPipe.transform('');
+  }
+
+  private initMe() {
+    this.user = this.storageService.getUser();
   }
 
   private initPatient() {

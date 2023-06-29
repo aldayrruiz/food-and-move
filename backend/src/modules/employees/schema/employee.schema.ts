@@ -25,6 +25,9 @@ export class Employee {
 
   @Prop({ type: String, required: true })
   password: string;
+
+  @Prop()
+  refreshToken: string;
 }
 
 export const EmployeeSchema = SchemaFactory.createForClass(Employee);

@@ -18,7 +18,8 @@ import { UploadsService } from '@services/uploads.service';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseConfigService } from './db/mongoose.service';
-import { OwnerMiddleware } from './middlewares/owner.middleware';
+import { AddOwnerToBodyMiddleware } from './middlewares/add-owner-to-body.middleware';
+import { AddUserToRequestMiddleware } from './middlewares/add-user-to-request.middleware';
 
 @Module({
   imports: [
@@ -42,9 +43,29 @@ import { OwnerMiddleware } from './middlewares/owner.middleware';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(OwnerMiddleware).exclude({ path: 'api/auth/(.*)', method: RequestMethod.ALL }).forRoutes({
-      path: '*',
-      method: RequestMethod.POST,
-    });
+    consumer
+      .apply(AddOwnerToBodyMiddleware)
+      .exclude({
+        path: 'api/auth/(.*)',
+        method: RequestMethod.ALL,
+      })
+      .forRoutes({
+        path: '*',
+        method: RequestMethod.POST,
+      });
+
+    consumer
+      .apply(AddUserToRequestMiddleware)
+      .exclude(
+        {
+          path: 'api/auth/(.*)',
+          method: RequestMethod.ALL,
+        },
+        {
+          path: 'api/files/(.*)',
+          method: RequestMethod.ALL,
+        }
+      )
+      .forRoutes('*');
   }
 }

@@ -16,6 +16,7 @@ import { MatModule } from '@shared/modules/mat/mat.module';
 import { PhotoPipe } from '@shared/pipes/photo.pipe';
 import { SharedModule } from '@shared/shared.module';
 import { PatientsComponent } from '../patients/patients.component';
+import { ImportPatientDialogComponent } from './components/import-patient-dialog/import-patient-dialog.component';
 import { InfoPatientComponent } from './components/info-patient/info-patient.component';
 import { LinkPatientEmployeeComponent } from './pages/patients/link-patient-employee/link-patient-employee.component';
 import { PatientsRoutingModule } from './patients-routing.module';
@@ -39,6 +40,7 @@ import { PatientsRoutingModule } from './patients-routing.module';
     MovesPageComponent,
     AddMovePageComponent,
     LinkPatientEmployeeComponent,
+    ImportPatientDialogComponent,
   ],
   imports: [
     CommonModule,

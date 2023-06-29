@@ -38,6 +38,9 @@ export class Patient {
 
   @Prop({ type: Date, default: Date.now })
   created_at: Date;
+
+  @Prop()
+  refreshToken: string;
 }
 
 export const PatientSchema = SchemaFactory.createForClass(Patient);

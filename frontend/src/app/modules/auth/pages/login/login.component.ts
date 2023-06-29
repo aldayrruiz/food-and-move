@@ -43,18 +43,19 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     const user: AuthRequestModel = this.getAuthRequest();
     this.authService
-      .getNewToken(user)
+      .signIn(user.email, user.password)
       .pipe(finalize(() => (this.loading = false)))
-      .subscribe(
-        (res) => {
+      .subscribe({
+        next: async (jwt) => {
           this.loading = true;
-          this.authService.login(res);
+          await this.authService.storeImportantVariables(jwt);
+          await this.routerService.goToPatients();
         },
-        (err) => {
+        error: (err) => {
           console.log(err);
           this.snackerService.showError(err.error.message);
-        }
-      );
+        },
+      });
   }
 
   private getAuthRequest(): AuthRequestModel {

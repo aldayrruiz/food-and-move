@@ -5,6 +5,7 @@ import { EmployeeModel } from '@core/models/employee.model';
 import { AuthService } from '@core/services/auth.service';
 import { LoaderService } from '@core/services/loader.service';
 import { RouterService } from '@core/services/router.service';
+import { StorageService } from '@core/services/storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -24,18 +25,12 @@ export class NavbarComponent implements OnInit {
     private readonly breakpointObserver: BreakpointObserver,
     private readonly authService: AuthService,
     public readonly loaderService: LoaderService,
-    public readonly router: Router
+    private readonly router: Router,
+    private readonly storageService: StorageService
   ) {}
 
   ngOnInit(): void {
-    this.authService.user$.subscribe(
-      (res) => {
-        this.employee = res;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    this.employee = this.storageService.getUser();
     this.breakpointObserver.observe(['(max-width: 959px)']).subscribe((result) => {
       this.isSmall = false;
       if (result.matches) {

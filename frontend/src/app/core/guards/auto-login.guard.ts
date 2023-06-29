@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { AuthService } from '@core/services/auth.service';
-import { Observable } from 'rxjs';
+import { StorageService } from '@core/services/storage.service';
 import { RouterService } from '../services/router.service';
 
 @Injectable({
@@ -9,19 +8,20 @@ import { RouterService } from '../services/router.service';
 })
 export class AutoLoginGuard implements CanActivate {
   constructor(
-    private readonly authService: AuthService,
+    private readonly storageService: StorageService,
     private readonly routerService: RouterService
   ) {}
 
-  canActivate(
+  async canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const isLogin = this.authService.isLogin();
-    if (isLogin) {
-      this.authService.setSession();
-      this.routerService.goToPatients();
+  ): Promise<boolean | UrlTree> {
+    const user = await this.storageService.getUser();
+    const jwt = await this.storageService.getJWT();
+    if (user && jwt) {
+      await this.routerService.goToPatients();
+      return false;
     }
-    return !isLogin;
+    return true;
   }
 }

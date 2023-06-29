@@ -1,6 +1,6 @@
 import { LinkPatientDto } from '@modules/employees/dto/link-patient.dto';
 import { EmployeesService } from '@modules/employees/employees.service';
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ConsultsService } from 'src/modules/consults/consults.service';
@@ -18,14 +18,18 @@ import { Patient, PatientDocument } from './schemas/patient.schema';
 @Injectable()
 export class PatientsService {
   constructor(
-    @Inject(FilesService) private readonly filesService: FilesService,
-    @Inject(CustomQueryService) private readonly customQueryService: CustomQueryService,
-    @Inject(ConsultsService) private readonly consultsService: ConsultsService,
-    @Inject(FoodsService) private readonly foodsService: FoodsService,
-    @Inject(MovesService) private readonly movesService: MovesService,
     @InjectModel(Patient.name) private readonly patientModel: Model<PatientDocument>,
+    private readonly filesService: FilesService,
+    private readonly customQueryService: CustomQueryService,
+    private readonly consultsService: ConsultsService,
+    private readonly foodsService: FoodsService,
+    private readonly movesService: MovesService,
     private readonly employeesService: EmployeesService
   ) {}
+
+  async findAll() {
+    return this.patientModel.find();
+  }
 
   async findById(id: string) {
     const patient = await this.patientModel.findById(id);

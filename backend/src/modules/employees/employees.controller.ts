@@ -14,7 +14,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { ChangePasswordDto } from '@shared/dto/change-password.dto';
 import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 import { Storage } from 'src/constants/uploads.constants';
@@ -26,7 +26,6 @@ import { RecoverPasswordDto } from './dto/recover-password.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { EmployeesService } from './employees.service';
 
-@ApiBearerAuth()
 @ApiTags('employees')
 @Controller('employees')
 export class EmployeesController {

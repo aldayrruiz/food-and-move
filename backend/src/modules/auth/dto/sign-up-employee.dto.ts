@@ -1,6 +1,7 @@
+import { ApiHideProperty } from '@nestjs/swagger';
 import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 
-export class EmployeeDto {
+export class SignUpEmployeeDto {
   @IsNotEmpty()
   @IsString()
   @MaxLength(255, { message: 'El nombre no es válido, es muy largo' })
@@ -24,6 +25,6 @@ export class EmployeeDto {
   @IsOptional()
   admin?: boolean;
 
-  @IsString()
-  refreshToken?: string;
+  @ApiHideProperty()
+  readonly refreshToken?: string;
 }

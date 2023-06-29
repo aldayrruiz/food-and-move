@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { JWT } from '@core/models/jwt.model';
+import { StorageService } from '@core/services/storage.service';
+import { lastValueFrom, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { AuthRequestModel } from '../models/auth-request.model';
-import { AuthResponseModel } from '../models/auth-response.model';
 import { EmployeeModel } from '../models/employee.model';
 import { EmployeesService } from './employees.service';
 import { RouterService } from './router.service';
@@ -12,86 +12,42 @@ import { RouterService } from './router.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private userLogged = new BehaviorSubject<EmployeeModel | null>(null);
-  public user$: Observable<EmployeeModel | null> = this.userLogged;
-
   constructor(
-    private readonly http: HttpClient,
-    private readonly routerService: RouterService,
-    private readonly employeesService: EmployeesService
+    private storageService: StorageService,
+    private routerService: RouterService,
+    private employeesService: EmployeesService,
+    private http: HttpClient
   ) {}
 
-  getNewToken(user: AuthRequestModel): Observable<AuthResponseModel> {
-    return this.http.post<AuthResponseModel>(`${environment.api}/auth/loginEmployee`, user);
+  signIn(email: string, password: string) {
+    return this.http.post<JWT>(`${environment.api}/auth/employee/signIn`, { email, password });
   }
 
-  setSession(): void {
-    const myUser = this.userLogged.getValue();
-    if (!myUser && this.isLogin()) {
-      this.employeesService.getEmployeeByEmail(this.email!).subscribe(
-        (res) => {
-          this.userLogged.next(res);
-        },
-        (err) => {
-          console.log(err);
-          this.logout();
-        }
-      );
-    }
+  async logout() {
+    this.storageService.removeAll();
+    await this.routerService.goToLogin();
   }
 
-  refreshUser(): void {
-    this.employeesService.getEmployeeByEmail(this.email!).subscribe((res) => {
-      this.employeesService.getEmployeeByEmail(this.email!).subscribe(
-        (res) => {
-          this.userLogged.next(res);
-        },
-        (err) => {
-          console.log(err);
-          this.logout();
-        }
-      );
-    });
+  refreshToken() {
+    const refreshToken = this.storageService.getJWT().refreshToken;
+    const headers = { Authorization: `Bearer ${refreshToken}` };
+    return this.http.get<JWT>(`${environment.api}/auth/employee/refresh`, { headers });
   }
 
-  login(authResponse: AuthResponseModel): void {
-    this.setToken(authResponse.token);
-    this.setEmail(authResponse.user.email);
-    this.routerService.goToPatients();
-    this.setSession();
+  getPayloadFromJwt(jwtToken: string) {
+    const parts = jwtToken.split('.');
+    const payload = window.atob(parts[1]);
+    return JSON.parse(payload);
   }
 
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('email');
-    this.routerService.goToLogin();
-    this.userLogged.next(null);
-  }
+  async storeImportantVariables(jwt: JWT) {
+    // Store JWT
+    this.storageService.storeJWT(jwt);
 
-  isLogin(): boolean {
-    if (this.token) return true;
-    return false;
-  }
-
-  isAdmin(): boolean {
-    const myUser = this.userLogged.getValue();
-    return myUser ? myUser.admin : false;
-  }
-
-  get token(): string | null {
-    return localStorage.getItem('token');
-  }
-
-  setToken(token: string): void {
-    localStorage.setItem('token', token);
-  }
-
-  get email(): string | null {
-    return localStorage.getItem('email');
-  }
-
-  setEmail(email: string): void {
-    localStorage.setItem('email', email);
+    // Get and store user
+    const userId = this.getPayloadFromJwt(jwt.accessToken).sub;
+    const user = await lastValueFrom(this.employeesService.getEmployee(userId));
+    this.storageService.storeUser(user);
   }
 
   forgotPassword(email: string): Observable<boolean> {

@@ -33,7 +33,7 @@ export class EmployeesService {
   }
 
   async findOne(id: string) {
-    const employee = await this.employeeModel.findById(id);
+    const employee = await this.employeeModel.findById(id).exec();
     if (!employee) throw new NotFoundException('No se ha encontrado al profesional');
     return employee;
   }

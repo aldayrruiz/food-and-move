@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsArray, IsDate, IsEmail, IsMongoId, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 
-export class PatientDto {
+export class SignUpPatientDto {
   @IsNotEmpty()
   @IsString()
   @MaxLength(255, { message: 'El nombre no es válido, es muy largo' })
