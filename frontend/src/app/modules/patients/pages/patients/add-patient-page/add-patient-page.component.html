@@ -215,5 +215,8 @@
       </div>
     </div>
   </form>
-  <app-link-patient-employee *ngIf="edit && user.admin" [patient]="patient"></app-link-patient-employee>
+  <app-link-patient-employee
+    *ngIf="edit && user.admin"
+    [patient]="patient"
+  ></app-link-patient-employee>
 </div>

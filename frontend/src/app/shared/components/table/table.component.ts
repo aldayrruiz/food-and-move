@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { StorageService } from '@core/services/storage.service';
 import { TableStructure } from '@shared/components/table/interfaces/table-structure';
 
 @Component({
@@ -20,15 +21,14 @@ export class TableComponent {
   @Input() page = 0;
   @Input() sortActive = 'name';
 
-  @Input() offItem = false;
-  @Input() keyOffItem = '';
-  @Input() valueOffItem: any = null;
-
   @Input() viewMenu = true;
   @Input() viewShow = false;
   @Input() viewInfo = true;
   @Input() viewEdit = true;
   @Input() viewDelete = true;
+
+  // A function that is used to change color of the row if it is offline.
+  @Input() isRowOffline: (args: any) => boolean = () => false;
 
   @Output() onClick = new EventEmitter<any>();
   @Output() reset = new EventEmitter<boolean>();
@@ -39,7 +39,9 @@ export class TableComponent {
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
 
-  constructor() {}
+  // Some functions like isRowOffline are not used in this class, but they are used in parents classes.
+  // So, when we Input them, we need services used in the function of the parent.
+  constructor(private readonly storageService: StorageService) {}
 
   getColumnsToDisplay(): string[] {
     return [
@@ -84,10 +86,6 @@ export class TableComponent {
 
   deleteElement(element: any): void {
     this.delete.emit(element);
-  }
-
-  isOffItem(item: any): boolean {
-    return item[this.keyOffItem] != this.valueOffItem;
   }
 
   getValue(obj: any, path: string): any {

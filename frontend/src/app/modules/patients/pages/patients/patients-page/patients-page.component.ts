@@ -221,4 +221,9 @@ export class PatientsPageComponent implements OnInit {
   async viewPatient(patient: PatientModel): Promise<void> {
     await this.routerService.goToPatientDetails(patient._id);
   }
+
+  isRowOffline(patient: PatientModel): boolean {
+    this.user = this.storageService.getUser();
+    return patient.employees.includes(this.user?._id);
+  }
 }
