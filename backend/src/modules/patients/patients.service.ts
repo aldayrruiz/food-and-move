@@ -1,3 +1,4 @@
+import { HashingService } from '@modules/auth/services/hashing.service';
 import { LinkPatientDto } from '@modules/employees/dto/link-patient.dto';
 import { EmployeesService } from '@modules/employees/employees.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
@@ -24,7 +25,8 @@ export class PatientsService {
     private readonly consultsService: ConsultsService,
     private readonly foodsService: FoodsService,
     private readonly movesService: MovesService,
-    private readonly employeesService: EmployeesService
+    private readonly employeesService: EmployeesService,
+    private readonly hashingService: HashingService
   ) {}
 
   async findAll() {
@@ -62,6 +64,10 @@ export class PatientsService {
         if (findUser) throw new NotFoundException('Ya existe un usuario con ese teléfono');
       }
     }
+    if (updatePatientDto?.password) {
+      updatePatientDto.password = await this.hashingService.hash(updatePatientDto.password);
+    }
+
     const updatedPatient = await this.patientModel.findByIdAndUpdate(id, updatePatientDto, {
       new: true,
     });

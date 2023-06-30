@@ -33,13 +33,14 @@ export class AuthPatientService {
 
   async validate(phone: string, password: string) {
     try {
-      const employee = await this.patientsService.lookUp({ phone });
-      if (await this.hashingService.verify(password, employee.password)) {
-        return employee;
+      const patient = await this.patientsService.lookUp({ phone });
+      if (await this.hashingService.verify(password, patient.password)) {
+        return patient;
       }
     } catch (error: any) {
       throw new EmailOrPasswordIncorrect();
     }
+    throw new EmailOrPasswordIncorrect();
   }
 
   async logout(userId: string) {

@@ -1,6 +1,6 @@
 import { AuthEmployeeController } from '@modules/auth/controllers/auth-employee.controller';
+import { HashingModule } from '@modules/auth/hashing.module';
 import { AuthEmployeeService } from '@modules/auth/services/auth-employee.service';
-import { HashingService } from '@modules/auth/services/hashing.service';
 import { JwtAccessStrategy } from '@modules/auth/strategies/jwt.strategy';
 import { JwtRefreshStrategy } from '@modules/auth/strategies/refresh-token.strategy';
 import { Module } from '@nestjs/common';
@@ -14,11 +14,10 @@ import { AuthPatientController } from './controllers/auth-patient.controller';
 import { AuthPatientService } from './services/auth-patient.service';
 
 @Module({
-  imports: [PassportModule, JwtModule.register({}), PatientsModule, EmployeesModule],
+  imports: [PassportModule, JwtModule.register({}), PatientsModule, EmployeesModule, HashingModule],
   providers: [
     AuthPatientService,
     AuthEmployeeService,
-    HashingService,
     JwtAccessStrategy,
     JwtRefreshStrategy,
     {

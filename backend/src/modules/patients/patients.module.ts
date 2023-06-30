@@ -1,3 +1,4 @@
+import { HashingModule } from '@modules/auth/hashing.module';
 import { EmployeesModule } from '@modules/employees/employees.module';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -22,6 +23,7 @@ import { Patient, PatientSchema } from './schemas/patient.schema';
     FoodsModule,
     MovesModule,
     EmployeesModule,
+    HashingModule,
   ],
   controllers: [PatientsController],
   providers: [PatientsService, CustomQueryService, FilesService],
