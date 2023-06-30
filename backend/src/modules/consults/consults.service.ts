@@ -72,4 +72,8 @@ export class ConsultsService {
       })
       .sort((a, b) => (a.date > b.date ? -1 : a.date < b.date ? 1 : 0));
   }
+
+  getLastConsult(patientId: string, employeeId: string) {
+    return this.consultModel.find({ patient: patientId, owner: employeeId }).sort({ created_at: -1 }).limit(1);
+  }
 }

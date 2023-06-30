@@ -1,8 +1,10 @@
+import { SkipAuth } from '@modules/auth/constants';
 import { Controller, Get, Param, Res } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { DESTINATION_ATTACHMENTS, DESTINATION_PROFILE_IMAGE } from 'src/constants/uploads.constants';
 import { FilesService } from './files.service';
 
+@SkipAuth()
 @ApiBearerAuth()
 @ApiTags('files')
 @Controller('files')

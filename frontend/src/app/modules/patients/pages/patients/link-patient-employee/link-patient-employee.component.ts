@@ -55,7 +55,7 @@ export class LinkPatientEmployeeComponent implements OnInit {
   total = 0;
 
   employees!: EmployeeModel[];
-  employeeObjectField!: ObjectField[];
+  employeeObjectFields!: ObjectField[];
 
   constructor(
     private readonly dialog: MatDialog,
@@ -74,7 +74,7 @@ export class LinkPatientEmployeeComponent implements OnInit {
   initEmployees(): void {
     this.activatedRoute.data.subscribe((data) => {
       this.employees = data['employees'];
-      this.employeeObjectField = this.employees.map((employee) => ({
+      this.employeeObjectFields = this.employees.map((employee) => ({
         id: employee._id,
         value: `${employee.name} ${employee.surname}`,
       }));

@@ -38,7 +38,7 @@
             column__primary: column.index === 1,
             column__secondary: column.index === 2
           }"
-          [style]="isOffItem(element) ? 'background: rgba(0,0,0,0.07);' : ''"
+          [style]="isRowOffline(element) ? 'background: rgba(0,0,0,0.07);' : ''"
         >
           <app-profile-picture
             *ngSwitchCase="0"
@@ -71,7 +71,7 @@
           mat-cell
           *matCellDef="let element; let i = index"
           style="text-align: right"
-          [style]="isOffItem(element) ? 'background: rgba(0,0,0,0.07);' : ''"
+          [style]="isRowOffline(element) ? 'background: rgba(0,0,0,0.07);' : ''"
         >
           <button
             mat-icon-button

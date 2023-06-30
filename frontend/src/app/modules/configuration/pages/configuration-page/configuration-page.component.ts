@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeModel } from '@core/models/employee.model';
 import { AuthService } from '@core/services/auth.service';
+import { StorageService } from '@core/services/storage.service';
 
 @Component({
   selector: 'app-configuration-page',
@@ -10,17 +11,10 @@ import { AuthService } from '@core/services/auth.service';
 export class ConfigurationPageComponent implements OnInit {
   employee: EmployeeModel | null = null;
 
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService, private storageService: StorageService) {}
 
   ngOnInit(): void {
-    this.authService.user$.subscribe(
-      (res) => {
-        this.employee = res;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    this.employee = this.storageService.getUser();
   }
 
   setEmployee(employee: EmployeeModel | null): void {

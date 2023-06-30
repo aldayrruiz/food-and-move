@@ -103,49 +103,50 @@ export class ProfileSettingsComponent implements OnInit {
     const employee = this.getEmployeeRequest(true);
     this.employeesService
       .updateEmployee(this.employee!._id, employee)
-      .pipe(
-        finalize(() => {
-          this.loaderService.isLoading.next(false);
-        })
-      )
-      .subscribe(
-        (res) => {
+      .pipe(finalize(() => this.loaderService.isLoading.next(false)))
+      .subscribe({
+        next: (res) => {
           this.employee = res;
           this.setEmployee.emit(res);
           if (this.selectedFile) {
-            const fd = new FormData();
-            fd.append('file', this.selectedFile!, this.selectedFile?.name);
-            this.employeesService.uploadProfileImage(res._id, fd).subscribe(
-              (res) => {
-                this.snackerService.showSuccessful('Perfil editado con éxito');
-                this.authService.refreshUser();
-              },
-              (err) => {
-                console.log(err);
-                this.snackerService.showError('Error al subir la foto la foto de perfil');
-              }
-            );
+            this.updateProfileImage(res._id);
           } else if (this.removeProfileImage) {
-            this.employeesService.removeProfileImage(res._id).subscribe(
-              (res) => {
-                this.snackerService.showSuccessful('Perfil editado con éxito');
-                this.authService.refreshUser();
-              },
-              (err) => {
-                console.log(err);
-                this.snackerService.showError('Error al eliminar la foto de perfil');
-              }
-            );
+            this.deleteProfileImage(res._id);
           } else {
             this.snackerService.showSuccessful('Perfil editado con éxito');
-            this.authService.refreshUser();
           }
         },
-        (err) => {
+        error: (err) => {
           console.log(err);
           this.snackerService.showError(err.error.message);
-        }
-      );
+        },
+      });
+  }
+
+  private updateProfileImage(employeeId: string): void {
+    const fd = new FormData();
+    fd.append('file', this.selectedFile!, this.selectedFile?.name);
+    this.employeesService.uploadProfileImage(employeeId, fd).subscribe(
+      (res) => {
+        this.snackerService.showSuccessful('Perfil editado con éxito');
+      },
+      (err) => {
+        console.log(err);
+        this.snackerService.showError('Error al subir la foto la foto de perfil');
+      }
+    );
+  }
+
+  private deleteProfileImage(employeeId: string): void {
+    this.employeesService.removeProfileImage(employeeId).subscribe(
+      (res) => {
+        this.snackerService.showSuccessful('Perfil editado con éxito');
+      },
+      (err) => {
+        console.log(err);
+        this.snackerService.showError('Error al eliminar la foto de perfil');
+      }
+    );
   }
 
   private getEmployeeRequest(edit = false): EmployeeRequestModel {

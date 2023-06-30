@@ -1,6 +1,6 @@
+import { Recipe, RecipeSchema } from '@modules/recipes/schemas/recipe.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Recipe, RecipeSchema } from 'src/modules/recipes/schemas/recipe.schemas';
 
 export type DietDocument = Diet & Document;
 

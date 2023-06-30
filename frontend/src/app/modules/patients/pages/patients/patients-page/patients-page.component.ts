@@ -12,6 +12,8 @@ import { LoaderService } from '@core/services/loader.service';
 import { PatientsService } from '@core/services/patients.service';
 import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
+import { StorageService } from '@core/services/storage.service';
+import { ImportPatientDialogComponent } from '@modules/patients/components/import-patient-dialog/import-patient-dialog.component';
 import { InfoPatientComponent } from '@modules/patients/components/info-patient/info-patient.component';
 import { ColumnType } from '@shared/components/table/enums/column-type';
 import { TableStructure } from '@shared/components/table/interfaces/table-structure';
@@ -58,22 +60,14 @@ export class PatientsPageComponent implements OnInit {
     private readonly loaderService: LoaderService,
     private readonly snackerService: SnackerService,
     private readonly dialogService: DialogService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly storageService: StorageService
   ) {}
 
   ngOnInit(): void {
-    this.authService.user$.subscribe(
-      (res) => {
-        this.user = res;
-        this.loadPatients();
-        this.setColumnsBySize();
-      },
-      (err) => {
-        console.log(err);
-        this.authService.logout();
-        this.snackerService.showError('Algo no ha sucedido como se esperaba');
-      }
-    );
+    this.user = this.storageService.getUser();
+    this.loadPatients();
+    this.setColumnsBySize();
   }
 
   loadPatients(): void {
@@ -168,6 +162,16 @@ export class PatientsPageComponent implements OnInit {
     this.loadPatients();
   }
 
+  importPatient() {
+    const objectsFields = this.listPatients.map((patient) => {
+      return {
+        id: patient._id,
+        value: `${patient.name} ${patient.surname}`,
+      };
+    });
+    this.dialog.open(ImportPatientDialogComponent, { data: objectsFields });
+  }
+
   async addPatient() {
     await this.routerService.goToAddPatient();
   }
@@ -216,5 +220,10 @@ export class PatientsPageComponent implements OnInit {
 
   async viewPatient(patient: PatientModel): Promise<void> {
     await this.routerService.goToPatientDetails(patient._id);
+  }
+
+  isRowOffline(patient: PatientModel): boolean {
+    this.user = this.storageService.getUser();
+    return patient.employees.includes(this.user?._id);
   }
 }

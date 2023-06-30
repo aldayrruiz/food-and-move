@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { DateRangeDto } from '@shared/dto/date-range.dto';
 import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
@@ -48,5 +48,10 @@ export class ConsultsController {
   @Post('getValues/:id/:key')
   async getValues(@Param('id') id: string, @Param('key') key: string, @Body() dateRangeDto: DateRangeDto) {
     return await this.consultsService.getValues(id, key, dateRangeDto);
+  }
+
+  @Get('getLastConsult')
+  getLastConsult(@Query('patientId') patientId: string, @Query('employeeId') employeeId: string) {
+    return this.consultsService.getLastConsult(patientId, employeeId);
   }
 }

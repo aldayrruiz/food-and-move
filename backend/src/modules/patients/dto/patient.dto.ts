@@ -45,4 +45,8 @@ export class PatientDto {
   @IsMongoId()
   @IsOptional()
   owner?: string;
+
+  @IsString()
+  @IsOptional()
+  refreshToken?: string;
 }

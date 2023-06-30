@@ -23,4 +23,7 @@ export class EmployeeDto {
   @IsBoolean()
   @IsOptional()
   admin?: boolean;
+
+  @IsString()
+  refreshToken?: string;
 }

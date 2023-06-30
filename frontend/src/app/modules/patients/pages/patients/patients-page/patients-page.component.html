@@ -17,9 +17,15 @@
         [(ngModel)]="search"
       />
     </mat-form-field>
-    <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addPatient()">
-      Nuevo Paciente
-    </button>
+    <div>
+      <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="importPatient()">
+        Importar Paciente
+      </button>
+      <span style="margin-left: 20px"></span>
+      <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addPatient()">
+        Nuevo Paciente
+      </button>
+    </div>
   </div>
   <mat-divider></mat-divider>
   <div class="crud__main">
@@ -33,9 +39,7 @@
       [page]="page"
       [total]="total"
       [sortActive]="'name'"
-      [offItem]="true"
-      [keyOffItem]="'employee'"
-      [valueOffItem]="user?._id"
+      [isRowOffline]="isRowOffline"
       (onClick)="viewPatient($event)"
       (reset)="resetTable()"
       (changePage)="changePage($event)"

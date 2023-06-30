@@ -47,4 +47,10 @@ export class ConsultsService {
         })
       );
   }
+
+  getLastConsult(patientId: string, employeeId: string): Observable<ConsultModel> {
+    return this.http.get<ConsultModel>(`${environment.api}/consults/getLastConsult`, {
+      params: { patientId, employeeId },
+    });
+  }
 }

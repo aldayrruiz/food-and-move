@@ -2,7 +2,7 @@ import { Injectable, NestMiddleware } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
 
 @Injectable()
-export class OwnerMiddleware implements NestMiddleware {
+export class AddOwnerToBodyMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     const jwt = req.headers.authorization?.split(' ')[1];
     const payload = jwt?.split('.')[1];

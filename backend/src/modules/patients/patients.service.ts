@@ -1,6 +1,7 @@
+import { HashingService } from '@modules/auth/services/hashing.service';
 import { LinkPatientDto } from '@modules/employees/dto/link-patient.dto';
 import { EmployeesService } from '@modules/employees/employees.service';
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ConsultsService } from 'src/modules/consults/consults.service';
@@ -13,19 +14,24 @@ import { FilterPatientDto } from './dto/filter-patient.dto';
 import { PatientDto } from './dto/patient.dto';
 import { QueryPatientDto } from './dto/query-patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
-import { PatientDocument } from './schemas/patient.schema';
+import { Patient, PatientDocument } from './schemas/patient.schema';
 
 @Injectable()
 export class PatientsService {
   constructor(
-    @Inject(FilesService) private readonly filesService: FilesService,
-    @Inject(CustomQueryService) private readonly customQueryService: CustomQueryService,
-    @Inject(ConsultsService) private readonly consultsService: ConsultsService,
-    @Inject(FoodsService) private readonly foodsService: FoodsService,
-    @Inject(MovesService) private readonly movesService: MovesService,
-    @InjectModel('patients') private readonly patientModel: Model<PatientDocument>,
-    private readonly employeesService: EmployeesService
+    @InjectModel(Patient.name) private readonly patientModel: Model<PatientDocument>,
+    private readonly filesService: FilesService,
+    private readonly customQueryService: CustomQueryService,
+    private readonly consultsService: ConsultsService,
+    private readonly foodsService: FoodsService,
+    private readonly movesService: MovesService,
+    private readonly employeesService: EmployeesService,
+    private readonly hashingService: HashingService
   ) {}
+
+  async findAll() {
+    return this.patientModel.find();
+  }
 
   async findById(id: string) {
     const patient = await this.patientModel.findById(id);
@@ -58,6 +64,10 @@ export class PatientsService {
         if (findUser) throw new NotFoundException('Ya existe un usuario con ese teléfono');
       }
     }
+    if (updatePatientDto?.password) {
+      updatePatientDto.password = await this.hashingService.hash(updatePatientDto.password);
+    }
+
     const updatedPatient = await this.patientModel.findByIdAndUpdate(id, updatePatientDto, {
       new: true,
     });

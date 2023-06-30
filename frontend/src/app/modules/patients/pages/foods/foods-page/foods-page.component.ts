@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { DateRange } from '@core/interfaces/date-range';
+import { ConsultModel } from '@core/models/consult.model';
 import { DietModel } from '@core/models/diet';
+import { EmployeeModel } from '@core/models/employee.model';
 import { FoodModel } from '@core/models/food.model';
 import { PatientModel } from '@core/models/patient.model';
+import { ConsultsService } from '@core/services/consults.service';
 import { DialogService } from '@core/services/dialog.service';
 import { FoodsService } from '@core/services/foods.service';
 import { LoaderService } from '@core/services/loader.service';
-import { PatientsService } from '@core/services/patients.service';
 import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
 import { addDay, getDateRange, getDay } from '@core/utils/date-utils';
@@ -25,10 +27,12 @@ import { finalize } from 'rxjs';
   styleUrls: ['./foods-page.component.css'],
 })
 export class FoodsPageComponent implements OnInit {
+  consult!: ConsultModel;
+  employee!: EmployeeModel;
+  patient!: PatientModel;
+
   days: Day[] = daysInit;
   weeklyCalendarType = WeeklyCalendarType;
-
-  patient!: PatientModel;
   dateRange: DateRange = getDateRange(new Date());
 
   constructor(
@@ -38,8 +42,8 @@ export class FoodsPageComponent implements OnInit {
     private readonly snackerService: SnackerService,
     private readonly loaderService: LoaderService,
     private readonly dialogService: DialogService,
-    private readonly dialog: MatDialog,
-    private readonly patientsService: PatientsService
+    private readonly consultsService: ConsultsService,
+    private readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +53,7 @@ export class FoodsPageComponent implements OnInit {
     }
     this.initPatient();
     this.loadFoods();
+    this.initLastConsult();
   }
 
   changeDateRange(nWeeks: number): void {
@@ -180,5 +185,13 @@ export class FoodsPageComponent implements OnInit {
       .clearFoods(this.patient!._id, this.dateRange)
       .pipe(finalize(() => this.loaderService.isLoading.next(false)))
       .subscribe();
+  }
+
+  private initLastConsult() {
+    this.consultsService.getLastConsult(this.patient._id, this.employee._id).subscribe({
+      next: (res) => {
+        this.consult = res;
+      },
+    });
   }
 }

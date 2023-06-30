@@ -13,7 +13,7 @@ export class FoodDto extends RecipeDto {
   @IsString()
   @MaxLength(155, { message: 'Comentario no valido, demasiado largo' })
   @IsOptional()
-  comments: string;
+  comments?: string;
 
   @IsNotEmpty()
   @IsDate()
@@ -23,10 +23,10 @@ export class FoodDto extends RecipeDto {
   @ApiProperty({ default: false })
   @IsBoolean()
   @IsOptional()
-  done: boolean;
+  done?: boolean;
 
   @ApiProperty({ enum: Rating })
   @IsEnum(Rating)
   @IsOptional()
-  rating: Rating;
+  rating?: Rating;
 }

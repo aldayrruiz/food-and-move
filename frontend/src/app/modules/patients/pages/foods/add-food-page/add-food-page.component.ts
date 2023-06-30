@@ -167,53 +167,51 @@ export class AddFoodPageComponent implements OnInit {
       width: '800px',
       data: ImportType.Recipe,
     });
-    dialogRef.afterClosed().subscribe(
-      (res) => {
-        if (res) {
-          const recipe = res as RecipeModel;
-          this.form.setValue({
-            title: recipe.title,
-            description: recipe.description ? recipe.description : '',
-            comments: this.comments,
-          });
-          this.meal = recipe.meal;
-          this.changeMeal();
-          this.dish = recipe.dish;
-          this.links =
-            recipe.links.map((url, id) => {
-              return { id, url };
-            }) || [];
-          this.videos =
-            recipe.videos.map((url, id) => {
-              return { id, url };
-            }) || [];
-          this.ingredients =
-            recipe.ingredients.map((ingredient, id) => {
-              return { id, ingredient };
-            }) || [];
-          if (recipe.attachment) {
-            this.loaderService.isLoading.next(true);
-            this.attachmentsService
-              .getAttachment(recipe.attachment)
-              .pipe(finalize(() => this.loaderService.isLoading.next(false)))
-              .subscribe({
-                next: (res) => {
-                  this.attachment = res;
-                },
-                error: (err) => {
-                  this.attachment = null;
-                  console.log(err);
-                },
-              });
-          } else {
-            this.attachment = null;
-          }
+    dialogRef.afterClosed().subscribe({
+      next: (res) => {
+        const recipe = res as RecipeModel;
+        this.form.setValue({
+          title: recipe.title,
+          description: recipe.description ? recipe.description : '',
+          comments: this.comments,
+        });
+        this.meal = recipe.meal;
+        this.changeMeal();
+        this.dish = recipe.dish;
+        this.links =
+          recipe.links.map((url, id) => {
+            return { id, url };
+          }) || [];
+        this.videos =
+          recipe.videos.map((url, id) => {
+            return { id, url };
+          }) || [];
+        this.ingredients =
+          recipe.ingredients.map((ingredient, id) => {
+            return { id, ingredient };
+          }) || [];
+        if (recipe.attachment) {
+          this.loaderService.isLoading.next(true);
+          this.attachmentsService
+            .getAttachment(recipe.attachment)
+            .pipe(finalize(() => this.loaderService.isLoading.next(false)))
+            .subscribe({
+              next: (res) => {
+                this.attachment = res;
+              },
+              error: (err) => {
+                this.attachment = null;
+                console.log(err);
+              },
+            });
+        } else {
+          this.attachment = null;
         }
       },
-      (err) => {
+      error: (err) => {
         console.log(err);
-      }
-    );
+      },
+    });
   }
 
   addFood(): void {
