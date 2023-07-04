@@ -8,7 +8,7 @@ export class AddOwnerToBodyMiddleware implements NestMiddleware {
     const payload = jwt?.split('.')[1];
     const decodedPayload = Buffer.from(payload || '', 'base64').toString('utf-8');
     const parsedPayload = JSON.parse(decodedPayload);
-    req.body.owner = parsedPayload?.id;
+    req.body.owner = parsedPayload?.sub;
     next();
   }
 }
