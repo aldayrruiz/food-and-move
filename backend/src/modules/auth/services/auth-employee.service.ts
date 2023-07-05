@@ -1,11 +1,15 @@
+import { URL_FRONT_DEV, URL_FRONT_PROD } from '@constants/app.constants';
 import { SignInEmployeeDto } from '@modules/auth/dto/sign-in-employee.dto';
 import { SignUpEmployeeDto } from '@modules/auth/dto/sign-up-employee.dto';
 import { EmailOrPasswordIncorrect } from '@modules/auth/exceptions/email-or-password-incorrect.exception';
 import { HashingService } from '@modules/auth/services/hashing.service';
+import { JWT_FORGOT_PASSWORD_CONF } from '@modules/employees/constants/jwt-forgot-password.constants';
 import { EmployeesService } from '@modules/employees/employees.service';
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { MailService } from '@modules/mail/mail.service';
+import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { ChangePasswordDto } from '@shared/dto/change-password.dto';
 
 @Injectable()
 export class AuthEmployeeService {
@@ -13,7 +17,8 @@ export class AuthEmployeeService {
     private employeesService: EmployeesService,
     private hashingService: HashingService,
     private configService: ConfigService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private mailService: MailService
   ) {}
 
   /**
@@ -50,6 +55,42 @@ export class AuthEmployeeService {
 
   async logout(userId: string) {
     return this.employeesService.update(userId, { refreshToken: null });
+  }
+
+  async changePassword(id: string, changePasswordDto: ChangePasswordDto) {
+    const { password, newPassword } = changePasswordDto;
+    const employee = await this.employeesService.findOne(id);
+    const isMatch = await this.hashingService.verify(password, employee.password);
+    if (!isMatch) throw new NotFoundException('Contraseña incorrecta');
+    const hashPassword = await this.hashingService.hash(newPassword);
+    await this.employeesService.updatePassword(id, hashPassword);
+  }
+
+  async forgotPassword(email: string) {
+    const employee = await this.employeesService.lookUp({ email });
+    const token = await this.getForgotPasswordToken(employee.id, email);
+    const isProduction = this.configService.get<boolean>('production');
+    const baseUrl = isProduction ? URL_FRONT_PROD : URL_FRONT_DEV;
+    const url = baseUrl + 'auth/recoverPassword/' + token;
+    const time = JWT_FORGOT_PASSWORD_CONF.expiresIn;
+    await this.mailService.sendForgotPassword(email, url, time);
+    return true;
+  }
+
+  async recoverPassword(token: string, password: string) {
+    try {
+      const payload = await this.jwtService.verify(token, {
+        secret: this.configService.get<string>('JWT_FORGOT_PASSWORD_SECRET'),
+        ignoreExpiration: false,
+      });
+      const email = payload.email;
+      await this.employeesService.lookUp({ email });
+      const hashPassword = await this.hashingService.hash(password);
+      return await this.employeesService.updatePassword(payload.sub, hashPassword);
+    } catch (error) {
+      console.log(error);
+      throw new NotFoundException('Token no válido');
+    }
   }
 
   async updateRefreshToken(userId: string, refreshToken: string) {
@@ -89,6 +130,20 @@ export class AuthEmployeeService {
     ]);
 
     return { accessToken, refreshToken };
+  }
+
+  async getForgotPasswordToken(employeeId: string, email: string) {
+    return await this.jwtService.signAsync(
+      {
+        sub: employeeId,
+        email,
+        role: 'employee',
+      },
+      {
+        secret: this.configService.get<string>('JWT_FORGOT_PASSWORD_SECRET'),
+        expiresIn: '1h',
+      }
+    );
   }
 
   async refreshTokens(userId: string, refreshToken: string) {

@@ -1,3 +1,4 @@
+import { ApiHideProperty } from '@nestjs/swagger';
 import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class EmployeeDto {
@@ -25,5 +26,7 @@ export class EmployeeDto {
   admin?: boolean;
 
   @IsString()
+  @IsOptional()
+  @ApiHideProperty()
   refreshToken?: string;
 }

@@ -54,7 +54,7 @@ export class EmployeesService {
 
   changePassword(id: string, changePassword: ChangePassword): Observable<EmployeeModel> {
     return this.http.post<EmployeeModel>(
-      `${environment.api}/employees/change-password/${id}`,
+      `${environment.api}/auth/employee/change-password/${id}`,
       changePassword
     );
   }

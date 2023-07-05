@@ -51,11 +51,11 @@ export class AuthService {
   }
 
   forgotPassword(email: string): Observable<boolean> {
-    return this.http.get<boolean>(`${environment.api}/employees/forgotPassword/${email}`);
+    return this.http.get<boolean>(`${environment.api}/auth/employee/forgotPassword/${email}`);
   }
 
   recoverPassword(token: string, password: string): Observable<EmployeeModel> {
-    return this.http.post<EmployeeModel>(`${environment.api}/employees/recoverPassword`, {
+    return this.http.post<EmployeeModel>(`${environment.api}/auth/employee/recoverPassword`, {
       token,
       password,
     });
