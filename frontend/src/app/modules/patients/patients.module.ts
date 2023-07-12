@@ -18,6 +18,7 @@ import { SharedModule } from '@shared/shared.module';
 import { PatientsComponent } from '../patients/patients.component';
 import { ImportPatientDialogComponent } from './components/import-patient-dialog/import-patient-dialog.component';
 import { InfoPatientComponent } from './components/info-patient/info-patient.component';
+import { FeedbackPageComponent } from './pages/feedback-page/feedback-page.component';
 import { LinkPatientEmployeeComponent } from './pages/patients/link-patient-employee/link-patient-employee.component';
 import { PatientsRoutingModule } from './patients-routing.module';
 
@@ -41,6 +42,8 @@ import { PatientsRoutingModule } from './patients-routing.module';
     AddMovePageComponent,
     LinkPatientEmployeeComponent,
     ImportPatientDialogComponent,
+    // Feedback
+    FeedbackPageComponent,
   ],
   imports: [
     CommonModule,

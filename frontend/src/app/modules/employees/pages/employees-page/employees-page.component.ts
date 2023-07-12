@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { EmployeeModel } from '@core/models/employee.model';
+import { EmployeeModel } from '@core/models/employee/employee.model';
 import { DialogService } from '@core/services/dialog.service';
 import { EmployeesService } from '@core/services/employees.service';
 import { LoaderService } from '@core/services/loader.service';

@@ -1,6 +1,6 @@
-import { Dish } from '../enums/dish';
-import { Meal } from '../enums/meal';
-import { IngredientRequestModel } from './ingredient-request.model';
+import { Dish } from '../../enums/dish';
+import { Meal } from '../../enums/meal';
+import { IngredientRequestModel } from '../ingredient/ingredient-request.model';
 
 export interface RecipeRequestModel {
   title: string;

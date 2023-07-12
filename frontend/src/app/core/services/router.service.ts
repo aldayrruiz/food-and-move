@@ -102,6 +102,11 @@ export class RouterService {
     await this.router.navigate(['diets/edit-diet', dietId, 'edit-recipe', day, recipeId]);
   }
 
+  // Feedback
+  async goToFeedback(patientId: string): Promise<void> {
+    await this.router.navigate([`patients/${patientId}/feedback`]);
+  }
+
   // Patient
 
   async goToPatientDetails(patientId: string): Promise<void> {

@@ -6,7 +6,7 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { JWT } from '@core/models/jwt.model';
+import { JWT } from '@core/models/auth/jwt.model';
 import { StorageService } from '@core/services/storage.service';
 import { catchError, from, lastValueFrom, Observable, switchMap, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';

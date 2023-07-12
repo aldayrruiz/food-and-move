@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DayOfWeek } from '@core/enums/day-of-week';
-import { DietModel } from '@core/models/diet';
-import { RecipeModel } from '@core/models/recipe.model';
+import { DietModel } from '@core/models/diet/diet';
+import { RecipeModel } from '@core/models/recipe/recipe.model';
 import { DialogService } from '@core/services/dialog.service';
 import { DietsService } from '@core/services/diets.service';
 import { LoaderService } from '@core/services/loader.service';

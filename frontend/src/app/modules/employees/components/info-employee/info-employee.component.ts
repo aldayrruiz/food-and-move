@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EmployeeModel } from '@core/models/employee.model';
+import { EmployeeModel } from '@core/models/employee/employee.model';
 
 @Component({
   selector: 'app-info-employee',

@@ -5,8 +5,8 @@ import { PatientPipe } from '@shared/pipes/patient.pipe';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CustomResponse } from '../interfaces/custom-response';
-import { PatientRequestModel } from '../models/patient-request.model';
-import { PatientModel } from '../models/patient.model';
+import { PatientRequestModel } from '../models/patient/patient-request.model';
+import { PatientModel } from '../models/patient/patient.model';
 
 @Injectable({
   providedIn: 'root',

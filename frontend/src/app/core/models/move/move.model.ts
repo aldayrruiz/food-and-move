@@ -1,5 +1,5 @@
 import { Rating } from '@core/enums/rating';
-import { RoutineModel } from './routine.model';
+import { RoutineModel } from '../routine/routine.model';
 
 export interface MoveModel extends RoutineModel {
   patient: string;

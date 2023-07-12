@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { AttachmentModel } from '@core/models/attachment.model';
+import { AttachmentModel } from '@core/models/attachment/attachment.model';
 import { AttachmentsService } from '@core/services/attachments.service';
 import { DialogService } from '@core/services/dialog.service';
 import { LoaderService } from '@core/services/loader.service';

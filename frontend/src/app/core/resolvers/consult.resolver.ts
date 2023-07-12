@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { ConsultModel } from '@core/models/consult.model';
+import { ConsultModel } from '@core/models/consult/consult.model';
 import { ConsultsService } from '@core/services/consults.service';
 import { Observable } from 'rxjs';
 

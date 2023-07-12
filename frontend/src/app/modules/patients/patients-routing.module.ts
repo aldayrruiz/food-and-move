@@ -5,6 +5,7 @@ import { EmployeesResolver } from '@core/resolvers/employees.resolver';
 import { PatientResolver } from '@core/resolvers/patient.resolver';
 import { AddConsultPageComponent } from '@modules/patients/pages/consults/add-consult-page/add-consult-page.component';
 import { ConsultsPageComponent } from '@modules/patients/pages/consults/consults-page/consults-page.component';
+import { FeedbackPageComponent } from '@modules/patients/pages/feedback-page/feedback-page.component';
 import { AddFoodPageComponent } from '@modules/patients/pages/foods/add-food-page/add-food-page.component';
 import { FoodsPageComponent } from '@modules/patients/pages/foods/foods-page/foods-page.component';
 import { GraphicsPageComponent } from '@modules/patients/pages/graphics-page/graphics-page.component';
@@ -69,6 +70,12 @@ const routes: Routes = [
       { path: ':patientId/moves/:date', component: MovesPageComponent },
       { path: ':patientId/moves/add-move/:date', component: AddMovePageComponent },
       { path: ':patientId/moves/edit-move/:id', component: AddMovePageComponent },
+      // Feedback
+      {
+        path: ':patientId/feedback',
+        component: FeedbackPageComponent,
+        resolve: { patient: PatientResolver },
+      },
     ],
   },
 ];

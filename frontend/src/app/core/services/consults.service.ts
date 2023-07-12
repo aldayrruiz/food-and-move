@@ -6,8 +6,8 @@ import { DateRange } from '@core/interfaces/date-range';
 import { Measure } from '@core/interfaces/measure';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ConsultRequestModel } from '../models/consult-request.model';
-import { ConsultModel } from '../models/consult.model';
+import { ConsultRequestModel } from '../models/consult/consult-request.model';
+import { ConsultModel } from '../models/consult/consult.model';
 
 @Injectable({
   providedIn: 'root',

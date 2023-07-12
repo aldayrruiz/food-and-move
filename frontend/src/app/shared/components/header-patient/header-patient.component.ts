@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PatientModel } from '@core/models/patient.model';
+import { PatientModel } from '@core/models/patient/patient.model';
 import { RouterService } from '@core/services/router.service';
 
 @Component({
@@ -35,5 +35,10 @@ export class HeaderPatientComponent {
   goToMoves(): void {
     if (!this.patient) return;
     this.routerService.goToMoves(this.patient._id);
+  }
+
+  goToFeedback() {
+    if (!this.patient) return;
+    this.routerService.goToFeedback(this.patient._id);
   }
 }

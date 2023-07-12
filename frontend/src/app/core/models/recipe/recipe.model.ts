@@ -1,6 +1,6 @@
-import { Dish } from '../enums/dish';
-import { Meal } from '../enums/meal';
-import { IngredientModel } from './ingredient.model';
+import { Dish } from '../../enums/dish';
+import { Meal } from '../../enums/meal';
+import { IngredientModel } from '../ingredient/ingredient.model';
 
 export interface RecipeModel {
   _id: string;

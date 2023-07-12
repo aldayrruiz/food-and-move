@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AttachmentModel } from '@core/models/attachment.model';
-import { RoutineModel } from '@core/models/routine.model';
+import { AttachmentModel } from '@core/models/attachment/attachment.model';
+import { RoutineModel } from '@core/models/routine/routine.model';
 import { AttachmentsService } from '@core/services/attachments.service';
 import { LoaderService } from '@core/services/loader.service';
 import { finalize } from 'rxjs';

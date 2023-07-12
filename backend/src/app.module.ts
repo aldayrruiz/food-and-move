@@ -3,6 +3,7 @@ import { AuthModule } from '@modules/auth/auth.module';
 import { ConsultsModule } from '@modules/consults/consults.module';
 import { DietsModule } from '@modules/diets/diets.module';
 import { EmployeesModule } from '@modules/employees/employees.module';
+import { FeedbackModule } from '@modules/feedback/feedback.module';
 import { FilesModule } from '@modules/files/files.module';
 import { FoodsModule } from '@modules/foods/foods.module';
 import { MailModule } from '@modules/mail/mail.module';
@@ -37,6 +38,7 @@ import { AddUserToRequestMiddleware } from './middlewares/add-user-to-request.mi
     DietsModule,
     AttachmentsModule,
     MailModule,
+    FeedbackModule,
   ],
   controllers: [AppController],
   providers: [AppService, CustomQueryService, UploadsService],
@@ -52,6 +54,11 @@ export class AppModule implements NestModule {
       .forRoutes({
         path: '*',
         method: RequestMethod.POST,
+      })
+      .apply(AddOwnerToBodyMiddleware)
+      .forRoutes({
+        path: '*',
+        method: RequestMethod.PUT,
       });
 
     consumer

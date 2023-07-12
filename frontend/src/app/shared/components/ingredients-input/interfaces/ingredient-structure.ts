@@ -1,4 +1,4 @@
-import { IngredientRequestModel } from '@core/models/ingredient-request.model';
+import { IngredientRequestModel } from '@core/models/ingredient/ingredient-request.model';
 
 export interface IngredientStructure {
   id: number;

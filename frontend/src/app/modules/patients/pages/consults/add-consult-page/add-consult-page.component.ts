@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ConsultRequestModel } from '@core/models/consult-request.model';
-import { ConsultModel } from '@core/models/consult.model';
-import { PatientModel } from '@core/models/patient.model';
+import { ConsultRequestModel } from '@core/models/consult/consult-request.model';
+import { ConsultModel } from '@core/models/consult/consult.model';
+import { PatientModel } from '@core/models/patient/patient.model';
 import { ConsultsService } from '@core/services/consults.service';
 import { LoaderService } from '@core/services/loader.service';
 import { PatientsService } from '@core/services/patients.service';

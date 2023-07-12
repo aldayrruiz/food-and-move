@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { EmployeeModel } from '@core/models/employee.model';
-import { JWT } from '@core/models/jwt.model';
+import { JWT } from '@core/models/auth/jwt.model';
+import { EmployeeModel } from '@core/models/employee/employee.model';
 
 export const JWT_KEY = 'jwt';
 export const USER_KEY = 'user';

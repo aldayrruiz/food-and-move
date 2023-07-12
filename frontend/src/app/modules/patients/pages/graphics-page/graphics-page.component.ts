@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DateRange } from '@core/interfaces/date-range';
-import { PatientModel } from '@core/models/patient.model';
+import { PatientModel } from '@core/models/patient/patient.model';
 import { ConsultsService } from '@core/services/consults.service';
 import { LoaderService } from '@core/services/loader.service';
 import { PatientsService } from '@core/services/patients.service';

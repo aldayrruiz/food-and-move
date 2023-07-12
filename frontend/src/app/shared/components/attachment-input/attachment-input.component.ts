@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AttachmentModel } from '@core/models/attachment.model';
+import { AttachmentModel } from '@core/models/attachment/attachment.model';
 import { URL_ATTACHMENTS } from 'src/app/constants/app.constants';
 import { AttachmentsDialogComponent } from '../attachments-dialog/attachments-dialog.component';
 

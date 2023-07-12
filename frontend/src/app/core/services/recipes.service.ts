@@ -4,8 +4,8 @@ import { CustomQuery } from '@core/interfaces/custom-query';
 import { CustomResponse } from '@core/interfaces/custom-response';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { RecipeRequestModel } from '../models/recipe-request.model';
-import { RecipeModel } from '../models/recipe.model';
+import { RecipeRequestModel } from '../models/recipe/recipe-request.model';
+import { RecipeModel } from '../models/recipe/recipe.model';
 
 @Injectable({
   providedIn: 'root',

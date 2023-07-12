@@ -1,0 +1,143 @@
+<app-header-patient [patient]="patient" title="Feedback"></app-header-patient>
+<div class="container">
+  <!-- Pick a date to show feedback -->
+  <h2 class="title">Elige una fecha para mostrar feedback</h2>
+  <div class="form__main">
+    <div class="form__box box__shadow" style="margin: 10px">
+      <div class="main__primary" *ngIf="feedback; else noFeedback">
+        <div class="form__input padding-10">
+          <h2 class="no-margin question">¿Como te encuentras hoy?</h2>
+          <img class="icon-img" *ngIf="feedback?.howDoYouFeel" [src]="getIconByFeedbackInput(feedback?.howDoYouFeel)">
+        </div>
+        <mat-divider></mat-divider>
+        <div class="form__input padding-10">
+          <h2 class="no-margin question">¿Qué tal te ha ido el día de hoy?</h2>
+          <img class="icon-img" *ngIf="feedback?.howHaveYouFeel"
+               [src]="getIconByFeedbackInput(feedback?.howHaveYouFeel)">
+        </div>
+        <mat-divider></mat-divider>
+        <div class="form__input padding-10">
+          <h2 class="no-margin question">¿Qué tal te ha ido la dieta hoy?</h2>
+          <img class="icon-img" *ngIf="feedback?.howIsItGoingTheDiet"
+               [src]="getIconByFeedbackInput(feedback?.howIsItGoingTheDiet)">
+        </div>
+        <mat-divider></mat-divider>
+        <div class="form__input padding-10">
+          <h2 class="no-margin question">¿Qué tal te ha ido la rutina de ejercicios hoy?</h2>
+          <img class="icon-img" *ngIf="feedback?.howIsItGoingTheExercises"
+               [src]="getIconByFeedbackInput(feedback?.howIsItGoingTheExercises)">
+        </div>
+      </div>
+      <ng-template #noFeedback>
+        No ha habido feedback este día ó seleccione solo 1 día para ver esta información.
+      </ng-template>
+    </div>
+    <div class="main__secondary">
+      <div class="form__calendar" style="margin: 0">
+        <!--        <mat-card class="calendar">-->
+        <!--          <mat-calendar [(selected)]="created_at" (selectedChange)="selectedDateChanged($event)"></mat-calendar>-->
+        <!--        </mat-card>-->
+        <mat-card class="calendar">
+          <mat-calendar (selectedChange)="onSelectedDateRangeChanged($event)"
+                        [selected]="dateRange">
+          </mat-calendar>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <!--  Pick a range of date to show feedback-->
+  <h2 class="title">Elige un rango de fechas para mostrar feedback</h2>
+  <div class="form__main">
+    <div class="form__box box__shadow" style="margin: 10px">
+      <div class="main__primary" *ngIf="feedbacks.length > 0; else noFeedbacks">
+        <div class="container-cards">
+          <div class="box">
+            <mat-card class="statistic-card">
+              <mat-card-title>
+                <mat-card-title-group>
+                  <mat-card-title>
+                    <h1 style="font-size: 42px; font-weight: bold; padding: 10px">
+                      {{goodAnsweredPercentage | number: '1.0-0'}} %
+                    </h1>
+                  </mat-card-title>
+                  <img class="icon_img" src="assets/images/glad.png">
+                </mat-card-title-group>
+              </mat-card-title>
+              <mat-card-content>
+                Positivos
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <div class="box">
+            <mat-card class="statistic-card">
+              <mat-card-title>
+                <mat-card-title-group>
+                  <mat-card-title>
+                    <h1 style="font-size: 42px; font-weight: bold; padding: 10px">
+                      {{neutralAnsweredPercentage | number: '1.0-0'}} %
+                    </h1>
+                  </mat-card-title>
+                  <img class="icon_img" src="assets/images/normal.png">
+                </mat-card-title-group>
+              </mat-card-title>
+              <mat-card-content>
+                Neutrales
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <div class="box">
+            <mat-card class="statistic-card">
+              <mat-card-title>
+                <mat-card-title-group>
+                  <mat-card-title>
+                    <h1 style="font-size: 42px; font-weight: bold; padding: 10px">
+                      {{badAnsweredPercentage | number: '1.0-0'}} %
+                    </h1>
+                  </mat-card-title>
+                  <img class="icon_img" src="assets/images/sad.png">
+                </mat-card-title-group>
+              </mat-card-title>
+              <mat-card-content>
+                Negativos
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <div class="box">
+            <mat-card class="statistic-card">
+              <mat-card-title>
+                <mat-card-title-group>
+                  <mat-card-title>
+                    <h1 style="font-size: 42px; font-weight: bold; padding: 10px">
+                      {{notAnsweredPercentage | number: '1.0-0'}} %
+                    </h1>
+                  </mat-card-title>
+                  <img class="icon_img" src="assets/images/glad.png">
+                </mat-card-title-group>
+              </mat-card-title>
+              <mat-card-content>
+                No feedback
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+
+
+      </div>
+      <ng-template #noFeedbacks>
+          No ha habido feedback en este rango de fechas.
+      </ng-template>
+    </div>
+    <div class="main__secondary">
+      <div class="form__calendar" style="margin: 0">
+        <!--        <mat-card class="calendar">-->
+        <!--          <mat-calendar (selectedChange)="onSelectedDateRangeChanged($event)"-->
+        <!--                        [selected]="dateRange">-->
+        <!--          </mat-calendar>-->
+        <!--        </mat-card>-->
+      </div>
+    </div>
+
+
+  </div>
+</div>

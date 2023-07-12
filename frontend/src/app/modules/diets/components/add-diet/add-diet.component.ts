@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { DietRequest } from '@core/models/diet-request.model';
+import { DietRequest } from '@core/models/diet/diet-request.model';
 import { DietsService } from '@core/services/diets.service';
 import { LoaderService } from '@core/services/loader.service';
 import { RouterService } from '@core/services/router.service';

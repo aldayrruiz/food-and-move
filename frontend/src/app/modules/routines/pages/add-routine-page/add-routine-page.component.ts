@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AttachmentModel } from '@core/models/attachment.model';
-import { RoutineRequestModel } from '@core/models/routine-request.model';
-import { RoutineModel } from '@core/models/routine.model';
+import { AttachmentModel } from '@core/models/attachment/attachment.model';
+import { RoutineRequestModel } from '@core/models/routine/routine-request.model';
+import { RoutineModel } from '@core/models/routine/routine.model';
 import { AttachmentsService } from '@core/services/attachments.service';
 import { LoaderService } from '@core/services/loader.service';
 import { RouterService } from '@core/services/router.service';

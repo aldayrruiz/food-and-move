@@ -1,4 +1,4 @@
-import { RecipeModel } from './recipe.model';
+import { RecipeModel } from '../recipe/recipe.model';
 
 export interface DietModel {
   _id: string;

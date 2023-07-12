@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DateRange } from '@core/interfaces/date-range';
-import { MoveModel } from '@core/models/move.model';
-import { PatientModel } from '@core/models/patient.model';
+import { MoveModel } from '@core/models/move/move.model';
+import { PatientModel } from '@core/models/patient/patient.model';
 import { DialogService } from '@core/services/dialog.service';
 import { LoaderService } from '@core/services/loader.service';
 import { MovesService } from '@core/services/moves.service';

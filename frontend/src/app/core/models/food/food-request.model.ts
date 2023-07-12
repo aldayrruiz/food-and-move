@@ -1,5 +1,5 @@
 import { Rating } from '@core/enums/rating';
-import { RecipeRequestModel } from './recipe-request.model';
+import { RecipeRequestModel } from '../recipe/recipe-request.model';
 
 export interface FoodRequestModel extends RecipeRequestModel {
   patient: string;

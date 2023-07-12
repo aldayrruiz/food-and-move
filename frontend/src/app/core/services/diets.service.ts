@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { DayOfWeek } from '@core/enums/day-of-week';
 import { CustomQuery } from '@core/interfaces/custom-query';
 import { CustomResponse } from '@core/interfaces/custom-response';
-import { DietModel } from '@core/models/diet';
-import { DietRequest } from '@core/models/diet-request.model';
-import { RecipeRequestModel } from '@core/models/recipe-request.model';
+import { DietModel } from '@core/models/diet/diet';
+import { DietRequest } from '@core/models/diet/diet-request.model';
+import { RecipeRequestModel } from '@core/models/recipe/recipe-request.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { RecipeModel } from '../models/recipe.model';
+import { RecipeModel } from '../models/recipe/recipe.model';
 
 @Injectable({
   providedIn: 'root',

@@ -4,8 +4,8 @@ import { DateRange } from '@core/interfaces/date-range';
 import { MovePipe } from '@shared/pipes/move.pipe';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { MoveRequestModel } from '../models/move-request.model';
-import { MoveModel } from '../models/move.model';
+import { MoveRequestModel } from '../models/move/move-request.model';
+import { MoveModel } from '../models/move/move.model';
 
 @Injectable({
   providedIn: 'root',

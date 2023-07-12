@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FoodModel } from '@core/models/food.model';
+import { FoodModel } from '@core/models/food/food.model';
 import { FoodPipe } from '@shared/pipes/food.pipe';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { DateRange } from '../interfaces/date-range';
-import { FoodRequestModel } from '../models/food-request.model';
+import { FoodRequestModel } from '../models/food/food-request.model';
 
 @Injectable({
   providedIn: 'root',

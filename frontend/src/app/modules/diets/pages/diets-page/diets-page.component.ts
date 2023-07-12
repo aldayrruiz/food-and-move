@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DietModel } from '@core/models/diet';
+import { DietModel } from '@core/models/diet/diet';
 import { DialogService } from '@core/services/dialog.service';
 import { DietsService } from '@core/services/diets.service';
 import { LoaderService } from '@core/services/loader.service';

@@ -4,8 +4,8 @@ import { CustomQuery } from '@core/interfaces/custom-query';
 import { CustomResponse } from '@core/interfaces/custom-response';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { RoutineRequestModel } from '../models/routine-request.model';
-import { RoutineModel } from '../models/routine.model';
+import { RoutineRequestModel } from '../models/routine/routine-request.model';
+import { RoutineModel } from '../models/routine/routine.model';
 
 @Injectable({
   providedIn: 'root',

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { MoveModel } from '@core/models/move.model';
+import { MoveModel } from '@core/models/move/move.model';
 
 @Pipe({
   name: 'move',

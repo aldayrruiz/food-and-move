@@ -1,7 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { EmployeeModel } from '@core/models/employee.model';
+import { EmployeeModel } from '@core/models/employee/employee.model';
 import { AuthService } from '@core/services/auth.service';
 import { LoaderService } from '@core/services/loader.service';
 import { RouterService } from '@core/services/router.service';
