@@ -14,11 +14,11 @@
 
 .title {
   text-align: center;
-  margin: 20px
+  margin: 20px;
 }
 
 .question {
-  flex: 1
+  flex: 1;
 }
 
 .container-cards {
@@ -50,7 +50,6 @@ mat-calendar {
   width: 100%;
   height: 350px;
 }
-
 
 .icon_img {
   width: 50px;

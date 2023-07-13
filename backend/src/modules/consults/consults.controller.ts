@@ -15,6 +15,11 @@ import { UpdateConsultDto } from './dto/update-consult.dto';
 export class ConsultsController {
   constructor(private readonly consultsService: ConsultsService) {}
 
+  @Get('getLastConsult')
+  getLastConsult(@Query('patientId') patientId: string, @Query('employeeId') employeeId: string) {
+    return this.consultsService.getLastConsult(patientId, employeeId);
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return await this.consultsService.findOne(id);
@@ -35,6 +40,11 @@ export class ConsultsController {
     return await this.consultsService.create(consultDto);
   }
 
+  @Post('getValues/:id/:key')
+  async getValues(@Param('id') id: string, @Param('key') key: string, @Body() dateRangeDto: DateRangeDto) {
+    return await this.consultsService.getValues(id, key, dateRangeDto);
+  }
+
   @Patch('update/:id')
   async update(@Param('id') id: string, @Body() updateConsultDto: UpdateConsultDto) {
     return await this.consultsService.update(id, updateConsultDto);
@@ -43,15 +53,5 @@ export class ConsultsController {
   @Delete('remove/:id')
   async remove(@Param('id') id: string) {
     return await this.consultsService.remove(id);
-  }
-
-  @Post('getValues/:id/:key')
-  async getValues(@Param('id') id: string, @Param('key') key: string, @Body() dateRangeDto: DateRangeDto) {
-    return await this.consultsService.getValues(id, key, dateRangeDto);
-  }
-
-  @Get('getLastConsult')
-  getLastConsult(@Query('patientId') patientId: string, @Query('employeeId') employeeId: string) {
-    return this.consultsService.getLastConsult(patientId, employeeId);
   }
 }

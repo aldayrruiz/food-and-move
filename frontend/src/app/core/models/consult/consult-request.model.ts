@@ -1,5 +1,5 @@
 export interface ConsultRequestModel {
-  patient: string;
+  patient?: string;
   masa?: number;
   imc?: number;
   per_abdominal?: number;
@@ -9,6 +9,7 @@ export interface ConsultRequestModel {
   ldl?: number;
   hemoglobina?: number;
   glucosa?: number;
-  comments: string;
-  created_at: Date;
+  comments?: string;
+  created_at?: Date;
+  diet?: string;
 }

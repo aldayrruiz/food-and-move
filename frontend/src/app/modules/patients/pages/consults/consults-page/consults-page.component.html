@@ -11,7 +11,7 @@
         </button>
       </div>
     </div>
-    <app-table
+    <app-consults-table
       [tableStructure]="tableStructure"
       [indexDisplay]="indexDisplay"
       [dataSource]="dataSource"
@@ -20,7 +20,6 @@
       [page]="page"
       [total]="total"
       [sortActive]="'created_at'"
-      (onClick)="openInfoConsult($event)"
       (reset)="resetTable()"
       (changePage)="changePage($event)"
       (changeSort)="changeSort($event)"
@@ -28,6 +27,6 @@
       (edit)="editConsult($event)"
       (delete)="deleteConsult($event)"
     >
-    </app-table>
+    </app-consults-table>
   </div>
 </div>

@@ -36,6 +36,7 @@ export class ConsultsPageComponent implements OnInit {
   tableStructure: TableStructure[] = [
     { index: 1, field: 'created_at', header: 'Fecha', sort: true, type: ColumnType.DATE },
     { index: 2, field: 'owner', header: 'Profesional', sort: true, type: ColumnType.NAME },
+    { index: 3, field: 'diet.title', header: 'Dieta', sort: true },
   ];
   indexDisplay = 10;
 
@@ -139,7 +140,7 @@ export class ConsultsPageComponent implements OnInit {
         paging: { page: this.page + 1, limit: this.limit },
         sorting: [{ field: this.sortField, direction: this.sortDirection }],
         filter: { patient: this.patient?._id },
-        populate: ['owner'],
+        populate: ['owner', 'diet'],
       })
       .pipe(
         finalize(() => {
@@ -151,6 +152,7 @@ export class ConsultsPageComponent implements OnInit {
           this.total = res.total;
           this.listConsults = [...res.items];
           this.dataSource = new MatTableDataSource(this.listConsults);
+          console.log(this.dataSource);
         },
         error: (err) => console.log(err),
       });

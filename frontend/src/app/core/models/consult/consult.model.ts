@@ -12,4 +12,5 @@ export interface ConsultModel {
   glucosa?: number;
   comments: string;
   created_at: Date;
+  diet: string;
 }

@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { DateRangeDto } from '@shared/dto/date-range.dto';
 import { Model } from 'mongoose';
@@ -13,8 +13,8 @@ import { Consult, ConsultDocument } from './schemas/consult.schema';
 @Injectable()
 export class ConsultsService {
   constructor(
-    @Inject(CustomQueryService) private readonly customQueryService: CustomQueryService,
-    @InjectModel(Consult.name) private readonly consultModel: Model<ConsultDocument>
+    @InjectModel(Consult.name) private readonly consultModel: Model<ConsultDocument>,
+    private readonly customQueryService: CustomQueryService
   ) {}
 
   async findOne(id: string) {
@@ -74,6 +74,6 @@ export class ConsultsService {
   }
 
   getLastConsult(patientId: string, employeeId: string) {
-    return this.consultModel.find({ patient: patientId, owner: employeeId }).sort({ created_at: -1 }).limit(1);
+    return this.consultModel.findOne({ patient: patientId, employee: employeeId }).sort({ created_at: -1 });
   }
 }

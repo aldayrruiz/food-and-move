@@ -41,7 +41,7 @@ export class TableComponent {
 
   // Some functions like isRowOffline are not used in this class, but they are used in parents classes.
   // So, when we Input them, we need services used in the function of the parent.
-  constructor(private readonly storageService: StorageService) {}
+  constructor(public storageService: StorageService) {}
 
   getColumnsToDisplay(): string[] {
     return [

@@ -10,6 +10,7 @@ import { AttachmentInputComponent } from './components/attachment-input/attachme
 import { AttachmentsDialogComponent } from './components/attachments-dialog/attachments-dialog.component';
 import { AutocompleteFieldComponent } from './components/autocomplete-field/autocomplete-field.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ConsultsTableComponent } from './components/consults-table/consults-table.component';
 import { GraphicComponent } from './components/graphic/graphic.component';
 import { HeaderPatientComponent } from './components/header-patient/header-patient.component';
 import { ImportDialogComponent } from './components/import-dialog/import-dialog.component';
@@ -63,6 +64,7 @@ import { RatingScrPipe } from './pipes/rating-scr.pipe';
     FoodSortPipe,
     GraphicComponent,
     AutocompleteFieldComponent,
+    ConsultsTableComponent,
   ],
   imports: [CommonModule, MatModule, FormsModule, ReactiveFormsModule, NgChartsModule],
   exports: [
@@ -87,6 +89,7 @@ import { RatingScrPipe } from './pipes/rating-scr.pipe';
     FoodSortPipe,
     GraphicComponent,
     AutocompleteFieldComponent,
+    ConsultsTableComponent,
   ],
   providers: [SnackerService, DialogService, NamePipe, OptionalPipe],
 })

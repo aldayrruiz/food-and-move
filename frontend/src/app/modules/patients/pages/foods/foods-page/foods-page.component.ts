@@ -13,6 +13,7 @@ import { FoodsService } from '@core/services/foods.service';
 import { LoaderService } from '@core/services/loader.service';
 import { RouterService } from '@core/services/router.service';
 import { SnackerService } from '@core/services/snacker.service';
+import { StorageService } from '@core/services/storage.service';
 import { addDay, getDateRange, getDay } from '@core/utils/date-utils';
 import { ImportType } from '@shared/components/import-dialog/enums/import-type';
 import { ImportDialogComponent } from '@shared/components/import-dialog/import-dialog.component';
@@ -43,7 +44,8 @@ export class FoodsPageComponent implements OnInit {
     private readonly loaderService: LoaderService,
     private readonly dialogService: DialogService,
     private readonly consultsService: ConsultsService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly storageService: StorageService
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class FoodsPageComponent implements OnInit {
       this.dateRange = getDateRange(new Date(params['date']));
     }
     this.initPatient();
+    this.initEmployee();
     this.loadFoods();
     this.initLastConsult();
   }
@@ -148,6 +151,7 @@ export class FoodsPageComponent implements OnInit {
         if (diet) {
           this.clearFoods();
           this.loadDiet(diet);
+          this.setDietToLastConsult(diet._id);
         }
       },
       error: (err) => {
@@ -156,9 +160,13 @@ export class FoodsPageComponent implements OnInit {
     });
   }
 
-  private initPatient() {
-    this.activatedRoute.data.subscribe((data) => {
-      this.patient = data['patient'];
+  private setDietToLastConsult(dietId: string) {
+    // console.log(this.consult);
+    this.consultsService.updateConsult(this.consult._id, { diet: dietId }).subscribe({
+      next: () => {},
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
@@ -185,6 +193,16 @@ export class FoodsPageComponent implements OnInit {
       .clearFoods(this.patient!._id, this.dateRange)
       .pipe(finalize(() => this.loaderService.isLoading.next(false)))
       .subscribe();
+  }
+
+  private initPatient() {
+    this.activatedRoute.data.subscribe((data) => {
+      this.patient = data['patient'];
+    });
+  }
+
+  private initEmployee() {
+    this.employee = this.storageService.getUser();
   }
 
   private initLastConsult() {
