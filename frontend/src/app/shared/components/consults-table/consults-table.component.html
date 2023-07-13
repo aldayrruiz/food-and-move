@@ -47,13 +47,13 @@
           ></app-profile-picture>
           <p class="table__text" *ngSwitchDefault>
             {{
-            column.type === 'date'
-              ? (getValue(element, column.field) | date : 'dd/MM/yyyy')
-              : column.type === 'name'
+              column.type === 'date'
+                ? (getValue(element, column.field) | date : 'dd/MM/yyyy')
+                : column.type === 'name'
                 ? (getValue(element, column.field) | name)
                 : column.type === 'admin'
-                  ? (getValue(element, column.field) | admin)
-                  : getValue(element, column.field)
+                ? (getValue(element, column.field) | admin)
+                : getValue(element, column.field)
             }}
           </p>
         </td>
@@ -61,14 +61,11 @@
 
       <!--      Button info-->
       <ng-container matColumnDef="info">
-        <th mat-header-cell class="table__header" *matHeaderCellDef>
-          info
-        </th>
+        <th mat-header-cell class="table__header" *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
           <mat-icon (click)="infoElement(element)">info</mat-icon>
         </td>
       </ng-container>
-
 
       <!--      Button actions -->
       <ng-container matColumnDef="actions">

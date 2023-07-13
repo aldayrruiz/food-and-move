@@ -152,7 +152,6 @@ export class ConsultsPageComponent implements OnInit {
           this.total = res.total;
           this.listConsults = [...res.items];
           this.dataSource = new MatTableDataSource(this.listConsults);
-          console.log(this.dataSource);
         },
         error: (err) => console.log(err),
       });
