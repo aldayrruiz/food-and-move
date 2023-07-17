@@ -48,6 +48,7 @@ export class FeedbackPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.initPatient();
+    this.calculateStats();
   }
 
   getIconByFeedbackInput(input: FeedbackInput | undefined) {

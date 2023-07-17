@@ -1,0 +1,21 @@
+.no-margin {
+  margin: 0;
+}
+
+.icon-img {
+  width: 30px;
+  height: 30px;
+  padding-right: 20px;
+}
+
+.question {
+  flex: 1;
+}
+
+.column {
+  width: 40px;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  flex: 1
+}
