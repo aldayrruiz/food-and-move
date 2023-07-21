@@ -75,3 +75,7 @@ table {
   text-align: center;
   color: grey;
 }
+
+.column_end {
+  text-align: end;
+}
