@@ -1,24 +1,18 @@
 <div *ngIf="showImportRoutine" class="header__date">
   <p class="form__date"></p>
-  <button mat-stroked-button color="primary" type="button" (click)="importRoutine()">
-    Importar Rutina
-  </button>
+  <button mat-stroked-button color="primary" type="button" (click)="importRoutine()">Importar Rutina</button>
 </div>
 <form [formGroup]="form">
   <div class="form__main">
     <div class="form__box box__shadow">
       <div class="main__primary">
-        <div
-          class="form__input"
-          (mouseenter)="buttonClear.title = true"
-          (mouseleave)="buttonClear.title = false"
-        >
+        <div class="form__input" (mouseenter)="buttonClear.title = true" (mouseleave)="buttonClear.title = false">
           <mat-icon mat-list-icon class="input__icon">fastfood</mat-icon>
           <mat-form-field class="input__field">
             <mat-label>Título</mat-label>
-            <input type="text" matInput autocomplete="off" formControlName="title" tabindex="1"/>
+            <input type="text" matInput autocomplete="off" formControlName="title" tabindex="1" />
             <mat-error *ngIf="form.controls['title'].hasError('required')"
-            >Título es <strong>obligatorio</strong></mat-error
+              >Título es <strong>obligatorio</strong></mat-error
             >
           </mat-form-field>
           <div class="fake__clear" *ngIf="!buttonClear.title"></div>
@@ -68,10 +62,7 @@
     <div class="main__secondary">
       <app-links-input [links]="links" (setLinks)="links = $event"></app-links-input>
       <app-videos-input [videos]="videos" (setVideos)="videos = $event"></app-videos-input>
-      <app-attachment-input
-        [attachment]="attachment"
-        (setAttachment)="attachment = $event"
-      ></app-attachment-input>
+      <app-attachment-input [attachment]="attachment" (setAttachment)="attachment = $event"></app-attachment-input>
     </div>
   </div>
 </form>

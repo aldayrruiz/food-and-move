@@ -22,15 +22,13 @@ export class MovesService {
   }
 
   getMoves(patient: string, dateRange: DateRange): Observable<MoveModel[]> {
-    return this.http
-      .post<MoveModel[]>(`${environment.api}/moves/findByPatient/${patient}`, dateRange)
-      .pipe(
-        map((data) => {
-          return data.map((food: MoveModel) => {
-            return this.movePipe.transform(food);
-          });
-        })
-      );
+    return this.http.post<MoveModel[]>(`${environment.api}/moves/findByPatient/${patient}`, dateRange).pipe(
+      map((data) => {
+        return data.map((food: MoveModel) => {
+          return this.movePipe.transform(food);
+        });
+      })
+    );
   }
 
   createMove(foodRequest: MoveRequestModel): Observable<MoveModel> {

@@ -120,10 +120,7 @@ export class WeekRoutinesPageComponent implements OnInit {
 
   deleteWeekRoutine(weekRoutine: WeekRoutineModel) {
     this.dialogService
-      .openConfirmDialog(
-        'Eliminar rutina semanal',
-        'Seguro que quieres eliminar ' + weekRoutine.title + '?'
-      )
+      .openConfirmDialog('Eliminar rutina semanal', 'Seguro que quieres eliminar ' + weekRoutine.title + '?')
       .subscribe((res) => {
         if (res) {
           this.loaderService.isLoading.next(true);

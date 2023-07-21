@@ -54,9 +54,7 @@
     <div class="list" *ngSwitchDefault>
       <div *ngFor="let ingredient of recipe.ingredients" class="list__item list__item-between">
         <p class="text">{{ ingredient.name }}</p>
-        <p class="text">
-          {{ ingredient.quantity != 0 ? ingredient.quantity : '' }} {{ ingredient.unit }}
-        </p>
+        <p class="text">{{ ingredient.quantity != 0 ? ingredient.quantity : '' }} {{ ingredient.unit }}</p>
       </div>
     </div>
   </div>

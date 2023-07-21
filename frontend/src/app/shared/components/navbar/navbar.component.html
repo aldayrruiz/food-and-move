@@ -1,9 +1,5 @@
 <div class="navbar">
-  <mat-progress-bar
-    mode="query"
-    color="primary"
-    *ngIf="loaderService.isLoading | async"
-  ></mat-progress-bar>
+  <mat-progress-bar mode="query" color="primary" *ngIf="loaderService.isLoading | async"></mat-progress-bar>
   <p>
     <mat-toolbar color="primary">
       <button mat-icon-button (click)="onToggleSidenav()" *ngIf="isSmall">
@@ -66,19 +62,12 @@
       <span class="spacer" *ngIf="!isSmall"></span>
       <a class="profile pointer" (click)="showProfilePanel = !showProfilePanel" *ngIf="!isSmall">
         <p class="profile__name">{{ employee | name }}</p>
-        <app-profile-picture
-          [url]="employee?.profile_image | photo"
-          size="40px"
-        ></app-profile-picture>
+        <app-profile-picture [url]="employee?.profile_image | photo" size="40px"></app-profile-picture>
       </a>
     </mat-toolbar>
   </p>
 </div>
-<div
-  class="click__out"
-  *ngIf="showProfilePanel && !isSmall"
-  (click)="showProfilePanel = false"
-></div>
+<div class="click__out" *ngIf="showProfilePanel && !isSmall" (click)="showProfilePanel = false"></div>
 <div class="profile__panel" *ngIf="showProfilePanel">
   <div class="profile__buttons">
     <button mat-icon-button (click)="goToConfiguration()">

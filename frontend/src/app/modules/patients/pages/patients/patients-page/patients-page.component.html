@@ -8,23 +8,12 @@
     <p class="header__subtitle">Pacientes</p>
     <mat-form-field appearance="standard" class="input__search">
       <mat-label>Buscar</mat-label>
-      <input
-        matInput
-        (keyup)="applyFilter()"
-        placeholder="Ej. Juan"
-        #input
-        autocomplete="off"
-        [(ngModel)]="search"
-      />
+      <input matInput (keyup)="applyFilter()" placeholder="Ej. Juan" #input autocomplete="off" [(ngModel)]="search" />
     </mat-form-field>
     <div>
-      <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="importPatient()">
-        Importar Paciente
-      </button>
+      <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="importPatient()">Importar Paciente</button>
       <span style="margin-left: 20px"></span>
-      <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addPatient()">
-        Nuevo Paciente
-      </button>
+      <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addPatient()">Nuevo Paciente</button>
     </div>
   </div>
   <mat-divider></mat-divider>

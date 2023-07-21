@@ -42,11 +42,7 @@
         <!--          <mat-calendar [(selected)]="created_at" (selectedChange)="selectedDateChanged($event)"></mat-calendar>-->
         <!--        </mat-card>-->
         <mat-card class="calendar">
-          <mat-calendar
-            (selectedChange)="onSelectedDateRangeChanged($event)"
-            [selected]="dateRange"
-          >
-          </mat-calendar>
+          <mat-calendar (selectedChange)="onSelectedDateRangeChanged($event)" [selected]="dateRange"> </mat-calendar>
         </mat-card>
       </div>
     </div>

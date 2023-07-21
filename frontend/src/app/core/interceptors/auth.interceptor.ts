@@ -1,10 +1,4 @@
-import {
-  HttpErrorResponse,
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-} from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JWT } from '@core/models/auth/jwt.model';
 import { StorageService } from '@core/services/storage.service';
@@ -35,11 +29,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       // @ts-ignore
       catchError((error) => {
-        if (
-          error instanceof HttpErrorResponse &&
-          !req.url.includes('auth/employee/signIn') &&
-          error.status === 401
-        ) {
+        if (error instanceof HttpErrorResponse && !req.url.includes('auth/employee/signIn') && error.status === 401) {
           from(this.handle401Error(req, next));
         }
       })

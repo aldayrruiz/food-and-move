@@ -47,15 +47,10 @@ export class EmployeesService {
   }
 
   removeProfileImage(id: string): Observable<EmployeeModel> {
-    return this.http.delete<EmployeeModel>(
-      `${environment.api}/employees/remove-profile-image/${id}`
-    );
+    return this.http.delete<EmployeeModel>(`${environment.api}/employees/remove-profile-image/${id}`);
   }
 
   changePassword(id: string, changePassword: ChangePassword): Observable<EmployeeModel> {
-    return this.http.post<EmployeeModel>(
-      `${environment.api}/auth/employee/change-password/${id}`,
-      changePassword
-    );
+    return this.http.post<EmployeeModel>(`${environment.api}/auth/employee/change-password/${id}`, changePassword);
   }
 }

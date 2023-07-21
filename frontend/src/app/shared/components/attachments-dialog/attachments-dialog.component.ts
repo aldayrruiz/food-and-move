@@ -86,30 +86,28 @@ export class AttachmentsDialogComponent implements OnInit {
 
   deletePDF(event: MouseEvent, attachment: AttachmentModel): void {
     event.stopPropagation();
-    this.dialogService
-      .openConfirmDialog('Eliminar pdf', 'Seguro que quieres eliminar el pdf?')
-      .subscribe(
-        (res) => {
-          if (res) {
-            if (attachment._id == this.selected?._id) this.selected = null;
-            this.loaderService.isLoading.next(true);
-            this.attachmentsService
-              .remove(attachment._id)
-              .pipe(finalize(() => this.loaderService.isLoading.next(false)))
-              .subscribe(
-                (res) => {
-                  this.loadItems();
-                },
-                (err) => {
-                  this.snackerService.showError(err.error);
-                  console.log(err);
-                }
-              );
-          }
-        },
-        (err) => {
-          console.log(err);
+    this.dialogService.openConfirmDialog('Eliminar pdf', 'Seguro que quieres eliminar el pdf?').subscribe(
+      (res) => {
+        if (res) {
+          if (attachment._id == this.selected?._id) this.selected = null;
+          this.loaderService.isLoading.next(true);
+          this.attachmentsService
+            .remove(attachment._id)
+            .pipe(finalize(() => this.loaderService.isLoading.next(false)))
+            .subscribe(
+              (res) => {
+                this.loadItems();
+              },
+              (err) => {
+                this.snackerService.showError(err.error);
+                console.log(err);
+              }
+            );
         }
-      );
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

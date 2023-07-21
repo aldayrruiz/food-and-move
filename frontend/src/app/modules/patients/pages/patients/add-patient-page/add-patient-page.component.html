@@ -7,15 +7,7 @@
         </button>
         <p class="header__subtitle">{{ edit ? 'Editar ' : 'Agregar ' }} Paciente</p>
       </div>
-      <button
-        type="submit"
-        mat-raised-button
-        color="primary"
-        [disabled]="form.invalid"
-        tabindex="6"
-      >
-        Guardar
-      </button>
+      <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid" tabindex="6">Guardar</button>
     </div>
     <mat-divider></mat-divider>
     <div class="form__main">
@@ -31,11 +23,7 @@
           <p>Foto de Perfil</p>
         </div>
         <div class="main__primary">
-          <div
-            class="form__input"
-            (mouseenter)="buttonClear.name = true"
-            (mouseleave)="buttonClear.name = false"
-          >
+          <div class="form__input" (mouseenter)="buttonClear.name = true" (mouseleave)="buttonClear.name = false">
             <mat-icon mat-list-icon class="input__icon">persone</mat-icon>
             <mat-form-field class="input__field">
               <mat-label>Nombre</mat-label>
@@ -55,21 +43,11 @@
               <mat-icon mat-list-icon>clear</mat-icon>
             </button>
           </div>
-          <div
-            class="form__input"
-            (mouseenter)="buttonClear.surname = true"
-            (mouseleave)="buttonClear.surname = false"
-          >
+          <div class="form__input" (mouseenter)="buttonClear.surname = true" (mouseleave)="buttonClear.surname = false">
             <div class="fake__icon"></div>
             <mat-form-field class="input__field">
               <mat-label>Apellido</mat-label>
-              <input
-                type="text"
-                matInput
-                autocomplete="off"
-                formControlName="surname"
-                tabindex="2"
-              />
+              <input type="text" matInput autocomplete="off" formControlName="surname" tabindex="2" />
             </mat-form-field>
             <div class="fake__clear" *ngIf="!buttonClear.surname"></div>
             <button
@@ -82,11 +60,7 @@
               <mat-icon mat-list-icon>clear</mat-icon>
             </button>
           </div>
-          <div
-            class="form__input"
-            (mouseenter)="buttonClear.email = true"
-            (mouseleave)="buttonClear.email = false"
-          >
+          <div class="form__input" (mouseenter)="buttonClear.email = true" (mouseleave)="buttonClear.email = false">
             <mat-icon mat-list-icon class="input__icon">mail</mat-icon>
             <mat-form-field class="input__field">
               <mat-label>Email</mat-label>
@@ -95,10 +69,7 @@
                 >Email es <strong>obligatorio</strong></mat-error
               >
               <mat-error
-                *ngIf="
-                  form.controls['email'].hasError('email') &&
-                  !form.controls['email'].hasError('required')
-                "
+                *ngIf="form.controls['email'].hasError('email') && !form.controls['email'].hasError('required')"
                 >Por favor, introduce un email correcto
               </mat-error>
             </mat-form-field>
@@ -113,11 +84,7 @@
               <mat-icon mat-list-icon>clear</mat-icon>
             </button>
           </div>
-          <div
-            class="form__input"
-            (mouseenter)="buttonClear.phone = true"
-            (mouseleave)="buttonClear.phone = false"
-          >
+          <div class="form__input" (mouseenter)="buttonClear.phone = true" (mouseleave)="buttonClear.phone = false">
             <mat-icon mat-list-icon class="input__icon">phone</mat-icon>
             <mat-form-field class="input__field">
               <mat-label>Teléfono</mat-label>
@@ -134,21 +101,11 @@
               <mat-icon mat-list-icon>clear</mat-icon>
             </button>
           </div>
-          <div
-            class="form__input"
-            (mouseenter)="buttonClear.height = true"
-            (mouseleave)="buttonClear.height = false"
-          >
+          <div class="form__input" (mouseenter)="buttonClear.height = true" (mouseleave)="buttonClear.height = false">
             <mat-icon mat-list-icon class="input__icon">straighten</mat-icon>
             <mat-form-field class="input__field">
               <mat-label>Altura (cm)</mat-label>
-              <input
-                type="number"
-                matInput
-                autocomplete="off"
-                formControlName="height"
-                tabindex="5"
-              />
+              <input type="number" matInput autocomplete="off" formControlName="height" tabindex="5" />
             </mat-form-field>
             <div class="fake__clear" *ngIf="!buttonClear.height"></div>
             <button
@@ -161,18 +118,12 @@
               <mat-icon mat-list-icon>clear</mat-icon>
             </button>
           </div>
-          <div
-            class="form__input"
-            (mouseenter)="buttonClear.birth = true"
-            (mouseleave)="buttonClear.birth = false"
-          >
+          <div class="form__input" (mouseenter)="buttonClear.birth = true" (mouseleave)="buttonClear.birth = false">
             <mat-icon mat-list-icon class="input__icon">cake</mat-icon>
             <mat-form-field hintLabel="dd/mm/yyyy" class="input__field">
               <mat-label>Fecha de nacimiento</mat-label>
               <input type="text" matInput autocomplete="off" formControlName="birth" tabindex="6" />
-              <mat-error *ngIf="form.controls['birth'].hasError('dateInvalid')"
-                >La fecha no es válida
-              </mat-error>
+              <mat-error *ngIf="form.controls['birth'].hasError('dateInvalid')">La fecha no es válida </mat-error>
             </mat-form-field>
             <div class="fake__clear" *ngIf="!buttonClear.birth"></div>
             <button
@@ -193,13 +144,7 @@
             <mat-icon mat-list-icon class="input__icon">password</mat-icon>
             <mat-form-field class="input__field">
               <mat-label>Contraseña</mat-label>
-              <input
-                type="text"
-                matInput
-                autocomplete="off"
-                formControlName="password"
-                tabindex="7"
-              />
+              <input type="text" matInput autocomplete="off" formControlName="password" tabindex="7" />
             </mat-form-field>
             <button
               type="button"
@@ -215,8 +160,5 @@
       </div>
     </div>
   </form>
-  <app-link-patient-employee
-    *ngIf="edit && user.admin"
-    [patient]="patient"
-  ></app-link-patient-employee>
+  <app-link-patient-employee *ngIf="edit && user.admin" [patient]="patient"></app-link-patient-employee>
 </div>

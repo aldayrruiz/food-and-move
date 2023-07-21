@@ -11,13 +11,6 @@ import { RecoverPasswordComponent } from './pages/recover-password/recover-passw
 
 @NgModule({
   declarations: [AuthComponent, LoginComponent, ForgotPasswordComponent, RecoverPasswordComponent],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatModule,
-    SharedModule,
-  ],
+  imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule, MatModule, SharedModule],
 })
 export class AuthModule {}

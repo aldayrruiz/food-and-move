@@ -4,9 +4,7 @@
     <button mat-icon-button class="btn__date" (click)="changeDateRange(-1)">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
-    <p class="date">
-      {{ dateRange.startDate | date : 'dd/MM/yy' }} - {{ dateRange.endDate | date : 'dd/MM/yy' }}
-    </p>
+    <p class="date">{{ dateRange.startDate | date : 'dd/MM/yy' }} - {{ dateRange.endDate | date : 'dd/MM/yy' }}</p>
     <button mat-icon-button class="btn__date" (click)="changeDateRange(1)">
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>

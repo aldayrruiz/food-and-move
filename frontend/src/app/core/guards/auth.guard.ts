@@ -14,10 +14,7 @@ export class AuthGuard implements CanActivate {
     private routerService: RouterService
   ) {}
 
-  async canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Promise<boolean | UrlTree> {
+  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
     const user = this.storageService.getUser();
     const jwt = this.storageService.getJWT();
     if (user && jwt) {

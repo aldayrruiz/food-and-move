@@ -2,9 +2,7 @@
 <div class="container">
   <div class="crud__main">
     <div class="main__header">
-      <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addConsult()">
-        Agregar Consulta
-      </button>
+      <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addConsult()">Agregar Consulta</button>
       <div class="btn__add" *ngIf="isSmall">
         <button mat-fab color="primary" (click)="addConsult()">
           <mat-icon>add</mat-icon>

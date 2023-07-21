@@ -113,20 +113,16 @@ export class PatientsPageComponent implements OnInit {
         this.isSmall = true;
       }
     });
-    this.breakpointObserver
-      .observe(['(max-width: 900px)', '(min-width:651px)'])
-      .subscribe((result) => {
-        if (result.matches) {
-          this.indexDisplay = 3;
-        }
-      });
-    this.breakpointObserver
-      .observe(['(max-width: 650px)', '(min-width:551px)'])
-      .subscribe((result) => {
-        if (result.matches) {
-          this.indexDisplay = 2;
-        }
-      });
+    this.breakpointObserver.observe(['(max-width: 900px)', '(min-width:651px)']).subscribe((result) => {
+      if (result.matches) {
+        this.indexDisplay = 3;
+      }
+    });
+    this.breakpointObserver.observe(['(max-width: 650px)', '(min-width:551px)']).subscribe((result) => {
+      if (result.matches) {
+        this.indexDisplay = 2;
+      }
+    });
     this.breakpointObserver.observe(['(max-width: 550px)']).subscribe((result) => {
       if (result.matches) {
         this.indexDisplay = 1;

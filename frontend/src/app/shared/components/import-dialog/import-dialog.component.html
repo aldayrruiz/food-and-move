@@ -41,17 +41,13 @@
     <div class="bottom">
       <p class="selected">
         <span style="font-weight: bold"
-          >{{
-            type == importType.Recipe ? 'Receta' : type == importType.Routine ? 'Rutina' : 'Dieta'
-          }}:</span
+          >{{ type == importType.Recipe ? 'Receta' : type == importType.Routine ? 'Rutina' : 'Dieta' }}:</span
         >
         {{ selected?.title }}
       </p>
       <div class="buttons">
         <button mat-button (click)="exit()">Cancelar</button>
-        <button mat-button color="primary" [mat-dialog-close]="selected" [disabled]="!selected">
-          Importar
-        </button>
+        <button mat-button color="primary" [mat-dialog-close]="selected" [disabled]="!selected">Importar</button>
         <button mat-button color="primary" [mat-dialog-close]="custom">Personalizar</button>
       </div>
     </div>

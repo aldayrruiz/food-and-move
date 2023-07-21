@@ -10,8 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'employees',
-    loadChildren: () =>
-      import('@modules/employees/employees.module').then((x) => x.EmployeesModule),
+    loadChildren: () => import('@modules/employees/employees.module').then((x) => x.EmployeesModule),
     canActivate: [AdminGuard],
   },
   {
@@ -28,13 +27,11 @@ const routes: Routes = [
   },
   {
     path: 'week-routines',
-    loadChildren: () =>
-      import('@modules/week-routines/week-routines.module').then((x) => x.WeekRoutinesModule),
+    loadChildren: () => import('@modules/week-routines/week-routines.module').then((x) => x.WeekRoutinesModule),
   },
   {
     path: 'configuration',
-    loadChildren: () =>
-      import('@modules/configuration/configuration.module').then((x) => x.ConfigurationModule),
+    loadChildren: () => import('@modules/configuration/configuration.module').then((x) => x.ConfigurationModule),
   },
 ];
 

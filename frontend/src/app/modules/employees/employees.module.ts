@@ -11,19 +11,7 @@ import { AddEmployeePageComponent } from './pages/add-employee-page/add-employee
 import { EmployeesPageComponent } from './pages/employees-page/employees-page.component';
 
 @NgModule({
-  declarations: [
-    EmployeesPageComponent,
-    EmployeesComponent,
-    InfoEmployeeComponent,
-    AddEmployeePageComponent,
-  ],
-  imports: [
-    CommonModule,
-    EmployeesRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatModule,
-    SharedModule,
-  ],
+  declarations: [EmployeesPageComponent, EmployeesComponent, InfoEmployeeComponent, AddEmployeePageComponent],
+  imports: [CommonModule, EmployeesRoutingModule, FormsModule, ReactiveFormsModule, MatModule, SharedModule],
 })
 export class EmployeesModule {}

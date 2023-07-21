@@ -4,22 +4,10 @@
     <mat-label>Título</mat-label>
     <input type="text" matInput autocomplete="off" formControlName="title" tabindex="1" />
   </mat-form-field>
-  <input
-    type="file"
-    class="file-input"
-    (change)="onFileSelected($event)"
-    #fileUpload
-    accept=".pdf"
-  />
+  <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload accept=".pdf" />
   <div class="file-upload">
     <p>{{ selectedFile?.name || 'Ningún archivo seleccionado' }}</p>
-    <button
-      type="button"
-      mat-mini-fab
-      color="primary"
-      class="upload-btn"
-      (click)="fileUpload.click()"
-    >
+    <button type="button" mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
       <mat-icon>attach_file</mat-icon>
     </button>
   </div>

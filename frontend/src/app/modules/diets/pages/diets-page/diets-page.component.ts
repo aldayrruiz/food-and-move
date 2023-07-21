@@ -140,10 +140,7 @@ export class DietsPageComponent implements OnInit {
 
   deleteDiet(diet: DietModel) {
     this.dialogService
-      .openConfirmDialog(
-        'Eliminar dieta semanal',
-        'Seguro que quieres eliminar ' + diet.title + '?'
-      )
+      .openConfirmDialog('Eliminar dieta semanal', 'Seguro que quieres eliminar ' + diet.title + '?')
       .subscribe((res) => {
         if (res) {
           this.loaderService.isLoading.next(true);

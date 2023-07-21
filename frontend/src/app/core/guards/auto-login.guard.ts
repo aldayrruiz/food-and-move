@@ -7,15 +7,9 @@ import { RouterService } from '../services/router.service';
   providedIn: 'root',
 })
 export class AutoLoginGuard implements CanActivate {
-  constructor(
-    private readonly storageService: StorageService,
-    private readonly routerService: RouterService
-  ) {}
+  constructor(private readonly storageService: StorageService, private readonly routerService: RouterService) {}
 
-  async canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Promise<boolean | UrlTree> {
+  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
     const user = await this.storageService.getUser();
     const jwt = await this.storageService.getJWT();
     if (user && jwt) {

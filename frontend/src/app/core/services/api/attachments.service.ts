@@ -23,10 +23,7 @@ export class AttachmentsService {
   }
 
   update(id: string, title: string): Observable<AttachmentModel> {
-    return this.http.patch<AttachmentModel>(
-      `${environment.api}/attachments/update/${id}/${title}`,
-      null
-    );
+    return this.http.patch<AttachmentModel>(`${environment.api}/attachments/update/${id}/${title}`, null);
   }
 
   remove(id: string): Observable<AttachmentModel> {

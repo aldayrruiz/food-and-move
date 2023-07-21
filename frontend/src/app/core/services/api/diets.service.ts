@@ -37,20 +37,11 @@ export class DietsService {
   }
 
   getRecipe(dietId: string, day: DayOfWeek, recipeId: string): Observable<RecipeModel> {
-    return this.http.get<RecipeModel>(
-      `${environment.api}/diets/getRecipe/${dietId}/${day}/${recipeId}`
-    );
+    return this.http.get<RecipeModel>(`${environment.api}/diets/getRecipe/${dietId}/${day}/${recipeId}`);
   }
 
-  addRecipe(
-    dietId: string,
-    day: DayOfWeek,
-    recipeRequest: RecipeRequestModel
-  ): Observable<DietModel> {
-    return this.http.post<DietModel>(
-      `${environment.api}/diets/addRecipe/${dietId}/${day}`,
-      recipeRequest
-    );
+  addRecipe(dietId: string, day: DayOfWeek, recipeRequest: RecipeRequestModel): Observable<DietModel> {
+    return this.http.post<DietModel>(`${environment.api}/diets/addRecipe/${dietId}/${day}`, recipeRequest);
   }
 
   updateRecipe(
@@ -66,8 +57,6 @@ export class DietsService {
   }
 
   removeRecipe(dietId: string, day: DayOfWeek, recipeId: string): Observable<DietModel> {
-    return this.http.delete<DietModel>(
-      `${environment.api}/diets/removeRecipe/${dietId}/${day}/${recipeId}`
-    );
+    return this.http.delete<DietModel>(`${environment.api}/diets/removeRecipe/${dietId}/${day}/${recipeId}`);
   }
 }

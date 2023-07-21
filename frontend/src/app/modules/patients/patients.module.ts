@@ -47,14 +47,7 @@ import { PatientsRoutingModule } from './patients-routing.module';
     FeedbackPageComponent,
     FeedbackRowComponent,
   ],
-  imports: [
-    CommonModule,
-    PatientsRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatModule,
-    SharedModule,
-  ],
+  imports: [CommonModule, PatientsRoutingModule, FormsModule, ReactiveFormsModule, MatModule, SharedModule],
   providers: [DatePipe, PhotoPipe],
 })
 export class PatientsModule {}

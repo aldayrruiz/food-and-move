@@ -8,18 +8,9 @@
     <p class="header__subtitle">Dietas Semanales</p>
     <mat-form-field appearance="standard" class="input__search">
       <mat-label>Buscar</mat-label>
-      <input
-        matInput
-        (keyup)="applyFilter()"
-        placeholder="Ej. Menu 1"
-        #input
-        autocomplete="off"
-        [(ngModel)]="search"
-      />
+      <input matInput (keyup)="applyFilter()" placeholder="Ej. Menu 1" #input autocomplete="off" [(ngModel)]="search" />
     </mat-form-field>
-    <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addDiet()">
-      Agregar Dieta Semanal
-    </button>
+    <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addDiet()">Agregar Dieta Semanal</button>
   </div>
   <mat-divider></mat-divider>
   <div class="crud__main">

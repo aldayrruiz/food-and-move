@@ -7,10 +7,7 @@
     [type]="lineChartType"
     [style]="loading ? 'opacity: 0;' : 'opacity: 1;'"
   ></canvas>
-  <p
-    *ngIf="(timeData ? (timeData.data ? timeData.data.length == 0 : true) : true) && !loading"
-    class="notdata"
-  >
+  <p *ngIf="(timeData ? (timeData.data ? timeData.data.length == 0 : true) : true) && !loading" class="notdata">
     No hay datos
   </p>
   <div class="spinner" *ngIf="loading">

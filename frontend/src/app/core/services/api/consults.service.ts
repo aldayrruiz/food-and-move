@@ -37,15 +37,13 @@ export class ConsultsService {
   }
 
   getValues(id: string, key: string, dateRange: DateRange): Observable<Measure[]> {
-    return this.http
-      .post<Measure[]>(`${environment.api}/consults/getValues/${id}/${key}`, dateRange)
-      .pipe(
-        map((data) => {
-          return data.map((measure) => {
-            return { ...measure, date: new Date(measure.date) };
-          });
-        })
-      );
+    return this.http.post<Measure[]>(`${environment.api}/consults/getValues/${id}/${key}`, dateRange).pipe(
+      map((data) => {
+        return data.map((measure) => {
+          return { ...measure, date: new Date(measure.date) };
+        });
+      })
+    );
   }
 
   getLastConsult(patientId: string, employeeId: string): Observable<ConsultModel> {

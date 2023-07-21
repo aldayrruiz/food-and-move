@@ -16,38 +16,22 @@
       >
         <mat-icon class="item__icon">{{ food.meal | foodIcon }}</mat-icon>
         <p class="item__title">{{ food.title }}</p>
-        <img
-          [src]="food.rating | ratingScr"
-          class="item__rating"
-          *ngIf="showRating && food.rating"
-        />
-        <a class="item__delete" (click)="$event.stopPropagation(); deleteItem(day, food)"
-          ><mat-icon>close</mat-icon></a
-        >
+        <img [src]="food.rating | ratingScr" class="item__rating" *ngIf="showRating && food.rating" />
+        <a class="item__delete" (click)="$event.stopPropagation(); deleteItem(day, food)"><mat-icon>close</mat-icon></a>
       </div>
       <div class="add__day" *ngIf="day.items.length == 0">
-        <button *ngIf="showAdd" mat-stroked-button color="primary" (click)="addItem(day)">
-          Agregar Comida
-        </button>
+        <button *ngIf="showAdd" mat-stroked-button color="primary" (click)="addItem(day)">Agregar Comida</button>
       </div>
     </div>
     <div class="day__main" *ngIf="type == weeklyCalendarType.Move">
       <div class="day__item" *ngFor="let move of day.items" (click)="editItem(day, move)">
         <mat-icon class="item__icon">fitness_center</mat-icon>
         <p class="item__title">{{ move.title }}</p>
-        <img
-          [src]="move.rating | ratingScr"
-          class="item__rating"
-          *ngIf="showRating && move.rating"
-        />
-        <a class="item__delete" (click)="$event.stopPropagation(); deleteItem(day, move)"
-          ><mat-icon>close</mat-icon></a
-        >
+        <img [src]="move.rating | ratingScr" class="item__rating" *ngIf="showRating && move.rating" />
+        <a class="item__delete" (click)="$event.stopPropagation(); deleteItem(day, move)"><mat-icon>close</mat-icon></a>
       </div>
       <div class="add__day" *ngIf="day.items.length == 0">
-        <button *ngIf="showAdd" mat-stroked-button color="primary" (click)="addItem(day)">
-          Agregar Ejercicio
-        </button>
+        <button *ngIf="showAdd" mat-stroked-button color="primary" (click)="addItem(day)">Agregar Ejercicio</button>
       </div>
     </div>
   </div>

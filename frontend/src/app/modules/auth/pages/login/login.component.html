@@ -18,11 +18,7 @@
           <mat-error *ngIf="form.controls['email'].hasError('required')"
             >Email es <strong>obligatorio</strong></mat-error
           >
-          <mat-error
-            *ngIf="
-              form.controls['email'].hasError('email') &&
-              !form.controls['email'].hasError('required')
-            "
+          <mat-error *ngIf="form.controls['email'].hasError('email') && !form.controls['email'].hasError('required')"
             >Por favor, introduce un email correcto</mat-error
           >
         </mat-form-field>
@@ -31,25 +27,13 @@
         <mat-icon mat-list-icon class="input__icon">lock_outline</mat-icon>
         <mat-form-field class="input__field">
           <mat-label>Contraseña</mat-label>
-          <input
-            type="password"
-            matInput
-            autocomplete="off"
-            formControlName="password"
-            tabindex="2"
-          />
+          <input type="password" matInput autocomplete="off" formControlName="password" tabindex="2" />
           <mat-error *ngIf="form.controls['password'].hasError('required')"
             >Contraseña es <strong>obligatoria</strong></mat-error
           >
         </mat-form-field>
       </div>
-      <button
-        type="submit"
-        mat-raised-button
-        color="primary"
-        tabindex="3"
-        [disabled]="form.invalid || loading"
-      >
+      <button type="submit" mat-raised-button color="primary" tabindex="3" [disabled]="form.invalid || loading">
         Iniciar Sesión
       </button>
       <div class="forgot_password">

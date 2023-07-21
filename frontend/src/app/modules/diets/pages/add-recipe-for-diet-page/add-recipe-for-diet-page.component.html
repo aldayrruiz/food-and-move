@@ -6,20 +6,8 @@
       </button>
       <p class="header__subtitle">{{ edit ? 'Editar ' : 'Agregar ' }} Receta</p>
     </div>
-    <button
-      (click)="edit ? editRecipe() : addRecipe()"
-      mat-raised-button
-      color="primary"
-      tabindex="6"
-    >
-      Guardar
-    </button>
+    <button (click)="edit ? editRecipe() : addRecipe()" mat-raised-button color="primary" tabindex="6">Guardar</button>
   </div>
   <mat-divider></mat-divider>
-  <app-form-recipe
-    [recipe]="recipe"
-    [edit]="edit"
-    [showImportRecipe]="true"
-    #formRecipe
-  ></app-form-recipe>
+  <app-form-recipe [recipe]="recipe" [edit]="edit" [showImportRecipe]="true" #formRecipe></app-form-recipe>
 </div>

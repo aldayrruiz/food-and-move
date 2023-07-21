@@ -16,10 +16,7 @@ export class IngredientsInputComponent implements OnInit {
   ngOnInit(): void {}
 
   addIngredient(name: string, quantity: number, unit: string): void {
-    const id =
-      this.ingredients.length > 0
-        ? Math.max(...this.ingredients.map((ingredient) => ingredient.id)) + 1
-        : 0;
+    const id = this.ingredients.length > 0 ? Math.max(...this.ingredients.map((ingredient) => ingredient.id)) + 1 : 0;
     const ingredient = { id, ingredient: { name, quantity, unit } };
     this.setIngredients.emit([...this.ingredients, ingredient]);
   }

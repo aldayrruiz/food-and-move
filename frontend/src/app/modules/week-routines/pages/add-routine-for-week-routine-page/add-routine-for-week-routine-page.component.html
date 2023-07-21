@@ -6,20 +6,10 @@
       </button>
       <p class="header__subtitle">{{ edit ? 'Editar ' : 'Agregar ' }} Rutina</p>
     </div>
-    <button
-      (click)="edit ? editRoutine() : addRoutine()"
-      mat-raised-button
-      color="primary"
-      tabindex="6"
-    >
+    <button (click)="edit ? editRoutine() : addRoutine()" mat-raised-button color="primary" tabindex="6">
       Guardar
     </button>
   </div>
   <mat-divider></mat-divider>
-  <app-form-routine
-    [routine]="routine"
-    [edit]="edit"
-    [showImportRoutine]="true"
-    #formRoutine
-  ></app-form-routine>
+  <app-form-routine [routine]="routine" [edit]="edit" [showImportRoutine]="true" #formRoutine></app-form-routine>
 </div>

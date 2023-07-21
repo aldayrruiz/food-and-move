@@ -12,17 +12,11 @@ export class FeedbackService {
 
   getFeedbackByDay(patientId: string, createdAt: string): Observable<FeedbackModel> {
     const options = { params: { createdAt: createdAt.slice(0, 10) } };
-    return this.http.get<FeedbackModel>(
-      `${environment.api}/feedback/byPatientAndDay/${patientId}`,
-      options
-    );
+    return this.http.get<FeedbackModel>(`${environment.api}/feedback/byPatientAndDay/${patientId}`, options);
   }
 
   getFeedbackByRange(patientId: string, start: string, end: string) {
     const options = { params: { start, end } };
-    return this.http.get<FeedbackModel[]>(
-      `${environment.api}/feedback/byPatientAndRange/${patientId}`,
-      options
-    );
+    return this.http.get<FeedbackModel[]>(`${environment.api}/feedback/byPatientAndRange/${patientId}`, options);
   }
 }

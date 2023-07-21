@@ -102,20 +102,16 @@ export class EmployeesPageComponent implements OnInit {
         this.isSmall = true;
       }
     });
-    this.breakpointObserver
-      .observe(['(max-width: 900px)', '(min-width:651px)'])
-      .subscribe((result) => {
-        if (result.matches) {
-          this.indexDisplay = 3;
-        }
-      });
-    this.breakpointObserver
-      .observe(['(max-width: 650px)', '(min-width:551px)'])
-      .subscribe((result) => {
-        if (result.matches) {
-          this.indexDisplay = 2;
-        }
-      });
+    this.breakpointObserver.observe(['(max-width: 900px)', '(min-width:651px)']).subscribe((result) => {
+      if (result.matches) {
+        this.indexDisplay = 3;
+      }
+    });
+    this.breakpointObserver.observe(['(max-width: 650px)', '(min-width:551px)']).subscribe((result) => {
+      if (result.matches) {
+        this.indexDisplay = 2;
+      }
+    });
     this.breakpointObserver.observe(['(max-width: 550px)']).subscribe((result) => {
       if (result.matches) {
         this.indexDisplay = 1;
@@ -157,10 +153,7 @@ export class EmployeesPageComponent implements OnInit {
 
   deleteEmployee(employee: EmployeeModel): void {
     this.dialogService
-      .openConfirmDialog(
-        'Eliminar personal',
-        'Seguro que quieres eliminar a ' + employee.name + '?'
-      )
+      .openConfirmDialog('Eliminar personal', 'Seguro que quieres eliminar a ' + employee.name + '?')
       .subscribe((res) => {
         if (res) {
           this.loaderService.isLoading.next(true);

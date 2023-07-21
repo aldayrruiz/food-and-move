@@ -17,13 +17,6 @@ import { ConfigurationPageComponent } from './pages/configuration-page/configura
     ProfileSettingsComponent,
     ChangePasswordSettingsComponent,
   ],
-  imports: [
-    CommonModule,
-    ConfigurationRoutingModule,
-    MatModule,
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, ConfigurationRoutingModule, MatModule, SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class ConfigurationModule {}

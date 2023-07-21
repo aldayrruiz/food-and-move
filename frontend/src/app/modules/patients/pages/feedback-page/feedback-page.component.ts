@@ -75,11 +75,7 @@ export class FeedbackPageComponent implements OnInit {
     }
 
     // Start and end date are the same day so .
-    if (
-      this.dateRange?.start &&
-      this.dateRange?.end &&
-      isSameDay(this.dateRange.start, this.dateRange.end)
-    ) {
+    if (this.dateRange?.start && this.dateRange?.end && isSameDay(this.dateRange.start, this.dateRange.end)) {
       this.fetchFeedbacksByDay(format(date, 'yyyy-MM-dd'));
     }
 

@@ -9,9 +9,7 @@
         <mat-label>Filtrar</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. archivo 1" #input />
       </mat-form-field>
-      <button type="button" mat-stroked-button color="primary" (click)="addPDF()">
-        Agregar PDF
-      </button>
+      <button type="button" mat-stroked-button color="primary" (click)="addPDF()">Agregar PDF</button>
     </div>
     <div class="list__box">
       <div class="alert__list" *ngIf="dataSource.length == 0">

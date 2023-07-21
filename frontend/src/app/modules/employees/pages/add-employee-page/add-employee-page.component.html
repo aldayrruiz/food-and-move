@@ -7,15 +7,7 @@
         </button>
         <p class="header__subtitle">{{ edit ? 'Editar ' : 'Agregar ' }} Profesionales</p>
       </div>
-      <button
-        type="submit"
-        mat-raised-button
-        color="primary"
-        [disabled]="form.invalid"
-        tabindex="6"
-      >
-        Guardar
-      </button>
+      <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid" tabindex="6">Guardar</button>
     </div>
     <mat-divider></mat-divider>
     <div class="form__main">
@@ -23,13 +15,7 @@
         <div class="form__profile-image">
           <app-input-profile-image
             [size]="'170px'"
-            [url]="
-              !imageFile
-                ? removeProfileImage
-                  ? ('' | photo)
-                  : (employee?.profile_image | photo)
-                : imageFile
-            "
+            [url]="!imageFile ? (removeProfileImage ? ('' | photo) : (employee?.profile_image | photo)) : imageFile"
             (onSelect)="onSelectFile($event)"
             (onRemove)="onRemoveProfileImage()"
             (onRecover)="onRecoverProfileImage()"
@@ -38,11 +24,7 @@
           <p>Foto de Perfil</p>
         </div>
         <div class="main__primary">
-          <div
-            class="form__input"
-            (mouseenter)="buttonClear.name = true"
-            (mouseleave)="buttonClear.name = false"
-          >
+          <div class="form__input" (mouseenter)="buttonClear.name = true" (mouseleave)="buttonClear.name = false">
             <mat-icon mat-list-icon class="input__icon">persone</mat-icon>
             <mat-form-field class="input__field">
               <mat-label>Nombre</mat-label>
@@ -62,21 +44,11 @@
               <mat-icon mat-list-icon>clear</mat-icon>
             </button>
           </div>
-          <div
-            class="form__input"
-            (mouseenter)="buttonClear.surname = true"
-            (mouseleave)="buttonClear.surname = false"
-          >
+          <div class="form__input" (mouseenter)="buttonClear.surname = true" (mouseleave)="buttonClear.surname = false">
             <div class="fake__icon"></div>
             <mat-form-field class="input__field">
               <mat-label>Apellido</mat-label>
-              <input
-                type="text"
-                matInput
-                autocomplete="off"
-                formControlName="surname"
-                tabindex="2"
-              />
+              <input type="text" matInput autocomplete="off" formControlName="surname" tabindex="2" />
             </mat-form-field>
             <div class="fake__clear" *ngIf="!buttonClear.surname"></div>
             <button
@@ -89,11 +61,7 @@
               <mat-icon mat-list-icon>clear</mat-icon>
             </button>
           </div>
-          <div
-            class="form__input"
-            (mouseenter)="buttonClear.email = true"
-            (mouseleave)="buttonClear.email = false"
-          >
+          <div class="form__input" (mouseenter)="buttonClear.email = true" (mouseleave)="buttonClear.email = false">
             <mat-icon mat-list-icon class="input__icon">mail</mat-icon>
             <mat-form-field class="input__field">
               <mat-label>Email</mat-label>
@@ -102,10 +70,7 @@
                 >Email es <strong>obligatorio</strong></mat-error
               >
               <mat-error
-                *ngIf="
-                  form.controls['email'].hasError('email') &&
-                  !form.controls['email'].hasError('required')
-                "
+                *ngIf="form.controls['email'].hasError('email') && !form.controls['email'].hasError('required')"
                 >Por favor, introduce un email correcto</mat-error
               >
             </mat-form-field>
@@ -120,11 +85,7 @@
               <mat-icon mat-list-icon>clear</mat-icon>
             </button>
           </div>
-          <div
-            class="form__input"
-            (mouseenter)="buttonClear.phone = true"
-            (mouseleave)="buttonClear.phone = false"
-          >
+          <div class="form__input" (mouseenter)="buttonClear.phone = true" (mouseleave)="buttonClear.phone = false">
             <mat-icon mat-list-icon class="input__icon">phone</mat-icon>
             <mat-form-field class="input__field">
               <mat-label>Teléfono</mat-label>
@@ -143,9 +104,7 @@
           </div>
           <div class="slide">
             <mat-slide-toggle formControlName="admin" color="accent" tabindex="5"
-              ><p style="color: #999; margin-top: 12px; margin-left: 10px">
-                Administrador
-              </p></mat-slide-toggle
+              ><p style="color: #999; margin-top: 12px; margin-left: 10px">Administrador</p></mat-slide-toggle
             >
           </div>
         </div>
