@@ -2,8 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AttachmentModel } from '@core/models/attachment/attachment.model';
 import { RecipeModel } from '@core/models/recipe/recipe.model';
-import { AttachmentsService } from '@core/services/attachments.service';
-import { LoaderService } from '@core/services/loader.service';
+import { AttachmentsService } from '@core/services/api/attachments.service';
+import { LoaderService } from '@core/services/gui/loader.service';
 import { finalize } from 'rxjs';
 import { URL_ATTACHMENTS } from 'src/app/constants/app.constants';
 

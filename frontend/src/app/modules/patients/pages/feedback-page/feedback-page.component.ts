@@ -8,8 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FeedbackModel } from '@core/models/feedback/feedback.model';
 import { FeedbackInput } from '@core/models/feedback/input.model';
 import { PatientModel } from '@core/models/patient/patient.model';
-import { FeedbackService } from '@core/services/feedback.service';
-import { PatientsService } from '@core/services/patients.service';
+import { FeedbackService } from '@core/services/api/feedback.service';
+import { PatientsService } from '@core/services/api/patients.service';
 import { addDay, getDateUTC } from '@core/utils/date-utils';
 import { differenceInCalendarDays, format, isSameDay } from 'date-fns';
 

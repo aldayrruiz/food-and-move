@@ -5,11 +5,11 @@ import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { RecipeModel } from '@core/models/recipe/recipe.model';
-import { DialogService } from '@core/services/dialog.service';
-import { LoaderService } from '@core/services/loader.service';
-import { RecipesService } from '@core/services/recipes.service';
+import { RecipesService } from '@core/services/api/recipes.service';
+import { DialogService } from '@core/services/gui/dialog.service';
+import { LoaderService } from '@core/services/gui/loader.service';
+import { SnackerService } from '@core/services/gui/snacker.service';
 import { RouterService } from '@core/services/router.service';
-import { SnackerService } from '@core/services/snacker.service';
 import { InfoRecipeComponent } from '@modules/recipes/components/info-recipe/info-recipe.component';
 import { TableStructure } from '@shared/components/table/interfaces/table-structure';
 import { finalize } from 'rxjs/operators';
@@ -57,7 +57,6 @@ export class RecipesPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadRecipes();
-    this.setColumnsBySize();
   }
 
   loadRecipes(): void {
@@ -77,47 +76,14 @@ export class RecipesPageComponent implements OnInit {
           this.isLoadingResults = false;
         })
       )
-      .subscribe(
-        (res) => {
+      .subscribe({
+        next: (res) => {
           this.total = res.total;
           this.listRecipes = [...res.items];
           this.dataSource = new MatTableDataSource(this.listRecipes);
         },
-        (err) => console.log(err)
-      );
-  }
-
-  setColumnsBySize(): void {
-    this.breakpointObserver.observe(['(max-width: 959px)']).subscribe((result) => {
-      this.isSmall = false;
-      if (result.matches) {
-        this.isSmall = true;
-      }
-    });
-    this.breakpointObserver.observe(['(max-width: 550px)']).subscribe((result) => {
-      if (result.matches) {
-        this.indexDisplay = 1;
-      }
-    });
-    this.breakpointObserver
-      .observe(['(max-width: 650px)', '(min-width:551px)'])
-      .subscribe((result) => {
-        if (result.matches) {
-          this.indexDisplay = 2;
-        }
+        error: (err) => console.log(err),
       });
-    this.breakpointObserver
-      .observe(['(max-width: 1100px)', '(min-width:651px)'])
-      .subscribe((result) => {
-        if (result.matches) {
-          this.indexDisplay = 3;
-        }
-      });
-    this.breakpointObserver.observe(['(min-width: 1101px)']).subscribe((result) => {
-      if (result.matches) {
-        this.indexDisplay = 4;
-      }
-    });
   }
 
   changeSort(sort: Sort) {
@@ -164,16 +130,16 @@ export class RecipesPageComponent implements OnInit {
                 this.loaderService.isLoading.next(false);
               })
             )
-            .subscribe(
-              (res) => {
+            .subscribe({
+              next: () => {
                 this.snackerService.showSuccessful('Receta eliminada con éxito');
                 this.loadRecipes();
               },
-              (err) => {
+              error: (err) => {
                 console.log(err);
                 this.snackerService.showError(err.error.message);
-              }
-            );
+              },
+            });
         }
       });
   }

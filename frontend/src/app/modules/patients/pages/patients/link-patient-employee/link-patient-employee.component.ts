@@ -7,9 +7,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeModel } from '@core/models/employee/employee.model';
 import { PatientModel } from '@core/models/patient/patient.model';
-import { EmployeesService } from '@core/services/employees.service';
-import { PatientsService } from '@core/services/patients.service';
-import { SnackerService } from '@core/services/snacker.service';
+import { EmployeesService } from '@core/services/api/employees.service';
+import { PatientsService } from '@core/services/api/patients.service';
+import { SnackerService } from '@core/services/gui/snacker.service';
 import { InfoEmployeeComponent } from '@modules/employees/components/info-employee/info-employee.component';
 import {
   AutocompleteFieldComponent,

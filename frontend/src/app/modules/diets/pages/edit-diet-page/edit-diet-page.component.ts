@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { DayOfWeek } from '@core/enums/day-of-week';
 import { DietModel } from '@core/models/diet/diet';
 import { RecipeModel } from '@core/models/recipe/recipe.model';
-import { DialogService } from '@core/services/dialog.service';
-import { DietsService } from '@core/services/diets.service';
-import { LoaderService } from '@core/services/loader.service';
+import { DietsService } from '@core/services/api/diets.service';
+import { DialogService } from '@core/services/gui/dialog.service';
+import { LoaderService } from '@core/services/gui/loader.service';
+import { SnackerService } from '@core/services/gui/snacker.service';
 import { RouterService } from '@core/services/router.service';
-import { SnackerService } from '@core/services/snacker.service';
+import { ImportType } from '@shared/components/import-dialog/enums/import-type';
+import { ImportDialogComponent } from '@shared/components/import-dialog/import-dialog.component';
 import { daysInit } from '@shared/components/weekly-calendar/constant/days-init';
 import { WeeklyCalendarType } from '@shared/components/weekly-calendar/enums/weekly-calendar-type';
 import { Day } from '@shared/components/weekly-calendar/interfaces/day';
@@ -21,8 +24,7 @@ import { finalize } from 'rxjs';
 export class EditDietPageComponent implements OnInit {
   days: Day[] = daysInit;
   weeklyCalendarType = WeeklyCalendarType;
-
-  diet: DietModel | null = null;
+  diet!: DietModel;
 
   constructor(
     private readonly dietsService: DietsService,
@@ -31,35 +33,11 @@ export class EditDietPageComponent implements OnInit {
     private readonly snackerService: SnackerService,
     private readonly loaderService: LoaderService,
     private readonly dialogService: DialogService,
-    private readonly router: Router
+    private readonly matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    const params = this.activatedRoute.snapshot.params;
-    if (params['dietId']) {
-      this.loaderService.isLoading.next(true);
-      this.dietsService
-        .getDiet(params['dietId'])
-        .pipe(
-          finalize(() => {
-            this.loaderService.isLoading.next(false);
-          })
-        )
-        .subscribe(
-          (res) => {
-            this.diet = res;
-            this.initDays();
-          },
-          (err) => {
-            console.log(err);
-            this.exit();
-            this.snackerService.showError('No se ha encontrado la dieta semanal');
-          }
-        );
-    } else {
-      this.exit();
-      this.snackerService.showError('No se ha encontrado la dieta semanal');
-    }
+    this.initDiet();
   }
 
   initDays(): void {
@@ -107,11 +85,38 @@ export class EditDietPageComponent implements OnInit {
   }
 
   addRecipe(day: Day): void {
-    this.routerService.goToAddRecipeForDiet(this.diet!._id, day.day);
+    const dialogRef = this.matDialog.open(ImportDialogComponent, {
+      width: '800px',
+      data: ImportType.Recipe,
+    });
+    dialogRef.afterClosed().subscribe({
+      next: (res: RecipeModel | string) => {
+        if (res === 'CUSTOM') {
+          this.routerService.goToAddRecipeForDiet(this.diet._id, day.day);
+        } else {
+          this.importRecipe(res as RecipeModel, day);
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  importRecipe(recipe: RecipeModel, day: Day) {
+    this.dietsService.addRecipe(this.diet._id, day.day, recipe).subscribe({
+      next: () => {
+        this.snackerService.showSuccessful('Receta importada con éxito');
+        this.refreshUI();
+      },
+      error: () => {
+        this.snackerService.showError('No se ha podido importar la receta');
+      },
+    });
   }
 
   editRecipe(day: Day, recipe: RecipeModel): void {
-    this.routerService.goToEditRecipeForDiet(this.diet!._id, day.day, recipe._id);
+    this.routerService.goToEditRecipeForDiet(this.diet._id, day.day, recipe._id);
   }
 
   deleteRecipe(day: Day, recipe: RecipeModel): void {
@@ -127,18 +132,37 @@ export class EditDietPageComponent implements OnInit {
                 this.loaderService.isLoading.next(false);
               })
             )
-            .subscribe(
-              (res) => {
+            .subscribe({
+              next: (res) => {
                 this.snackerService.showSuccessful('Receta eliminada con éxito');
                 this.diet = res;
                 this.initDays();
               },
-              (err) => {
+              error: (err) => {
                 console.log(err);
                 this.snackerService.showError(err.error.message);
-              }
-            );
+              },
+            });
         }
       });
+  }
+
+  private initDiet() {
+    this.activatedRoute.data.subscribe((data) => {
+      this.diet = data.diet;
+      this.initDays();
+    });
+  }
+
+  private refreshUI() {
+    this.dietsService.getDiet(this.diet!._id).subscribe({
+      next: (diet: DietModel) => {
+        this.diet = diet;
+        this.initDays();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

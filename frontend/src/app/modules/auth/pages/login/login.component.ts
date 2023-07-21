@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthRequestModel } from '@core/models/auth/auth-request.model';
-import { AuthService } from '@core/services/auth.service';
-import { EmployeesService } from '@core/services/employees.service';
+import { AuthService } from '@core/services/api/auth.service';
+import { EmployeesService } from '@core/services/api/employees.service';
+import { SnackerService } from '@core/services/gui/snacker.service';
 import { RouterService } from '@core/services/router.service';
-import { SnackerService } from '@core/services/snacker.service';
 import { finalize } from 'rxjs/operators';
 
 @Component({

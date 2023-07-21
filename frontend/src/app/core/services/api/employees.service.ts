@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { CustomQuery } from '@core/interfaces/custom-query';
 import { ChangePassword } from '@core/models/auth/change-password';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { CustomResponse } from '../interfaces/custom-response';
-import { EmployeeRequestModel } from '../models/employee/employee-request.model';
-import { EmployeeModel } from '../models/employee/employee.model';
+import { environment } from '../../../../environments/environment';
+import { CustomResponse } from '../../interfaces/custom-response';
+import { EmployeeRequestModel } from '../../models/employee/employee-request.model';
+import { EmployeeModel } from '../../models/employee/employee.model';
 
 @Injectable({
   providedIn: 'root',

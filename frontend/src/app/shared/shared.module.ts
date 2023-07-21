@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DialogService } from '@core/services/dialog.service';
-import { SnackerService } from '@core/services/snacker.service';
+import { DialogService } from '@core/services/gui/dialog.service';
+import { SnackerService } from '@core/services/gui/snacker.service';
 import { NgChartsModule } from 'ng2-charts';
 import { AddAttachmentComponent } from './components/add-attachment/add-attachment.component';
 import { AttachmentInputComponent } from './components/attachment-input/attachment-input.component';

@@ -2,8 +2,8 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmployeeModel } from '@core/models/employee/employee.model';
-import { AuthService } from '@core/services/auth.service';
-import { LoaderService } from '@core/services/loader.service';
+import { AuthService } from '@core/services/api/auth.service';
+import { LoaderService } from '@core/services/gui/loader.service';
 import { RouterService } from '@core/services/router.service';
 import { StorageService } from '@core/services/storage.service';
 
@@ -69,6 +69,10 @@ export class NavbarComponent implements OnInit {
 
   goToRoutines(): void {
     this.routerService.goToRoutines();
+  }
+
+  goToWeekRoutines(): void {
+    this.routerService.goToWeekRoutines();
   }
 
   goToConfiguration(): void {

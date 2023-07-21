@@ -6,13 +6,13 @@ import { FilterRoutineDto } from './dto/filter-routine.dto';
 import { QueryRoutineDto } from './dto/query-routine.dto';
 import { RoutineDto } from './dto/routine.dto';
 import { UpdateRoutineDto } from './dto/update-routine.dto';
-import { RoutineDocument } from './schemas/routine.schemas';
+import { Routine, RoutineDocument } from './schemas/routine.schema';
 
 @Injectable()
 export class RoutinesService {
   constructor(
     @Inject(CustomQueryService) private readonly customQueryService: CustomQueryService,
-    @InjectModel('routines') private readonly routineModel: Model<RoutineDocument>
+    @InjectModel(Routine.name) private readonly routineModel: Model<RoutineDocument>
   ) {}
 
   async findOne(id: string) {

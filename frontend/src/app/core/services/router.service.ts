@@ -84,6 +84,20 @@ export class RouterService {
     await this.router.navigate(['routines/edit-routine', id]);
   }
 
+  // Week Routines
+
+  async goToWeekRoutines(): Promise<void> {
+    await this.router.navigate(['week-routines']);
+  }
+
+  async goToAddWeekRoutine(): Promise<void> {
+    await this.router.navigate(['week-routines/add']);
+  }
+
+  async goToEditWeekRoutine(id: string): Promise<void> {
+    await this.router.navigate(['week-routines/edit', id]);
+  }
+
   // Diets
 
   async goToDiet(): Promise<void> {
@@ -117,6 +131,8 @@ export class RouterService {
     await this.router.navigate([`patients/${patientId}/graphics`]);
   }
 
+  // Consults
+
   async goToConsults(patientId: string): Promise<void> {
     await this.router.navigate([`patients/${patientId}/consults`]);
   }
@@ -128,6 +144,8 @@ export class RouterService {
   async goToEditConsult(patientId: string, consultId: string): Promise<void> {
     await this.router.navigate([`patients/${patientId}/consults/edit-consult`, consultId]);
   }
+
+  // Foods
 
   async goToFoods(patientId: string, date?: Date): Promise<void> {
     const urlDate = date ? date.toDateString() : new Date().toDateString();
@@ -142,6 +160,8 @@ export class RouterService {
   async goToEditFood(patientId: string, foodId: string): Promise<void> {
     await this.router.navigate([`patients/${patientId}/foods/edit-food/${foodId}`]);
   }
+
+  // Moves
 
   async goToMoves(patientId: string, date?: Date): Promise<void> {
     const dateUrl = date ? date.toDateString() : new Date().toDateString();

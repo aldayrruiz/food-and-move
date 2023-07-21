@@ -28,6 +28,7 @@ export class RecipesService {
   }
 
   async filter(queryRecipeDto: QueryRecipeDto) {
+    console.log(queryRecipeDto);
     return await this.customQueryService.filter(queryRecipeDto, this.recipeModel);
   }
 

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EmployeeModel } from '@core/models/employee/employee.model';
-import { AuthService } from '@core/services/auth.service';
+import { AuthService } from '@core/services/api/auth.service';
 import { RouterService } from '@core/services/router.service';
 import { StorageService } from '@core/services/storage.service';
 

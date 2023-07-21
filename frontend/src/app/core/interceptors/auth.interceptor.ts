@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 import { JWT } from '@core/models/auth/jwt.model';
 import { StorageService } from '@core/services/storage.service';
 import { catchError, from, lastValueFrom, Observable, switchMap, throwError } from 'rxjs';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../services/api/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

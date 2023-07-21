@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { JWT } from '@core/models/auth/jwt.model';
 import { StorageService } from '@core/services/storage.service';
 import { lastValueFrom, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { EmployeeModel } from '../models/employee/employee.model';
+import { environment } from '../../../../environments/environment';
+import { EmployeeModel } from '../../models/employee/employee.model';
+import { RouterService } from '../router.service';
 import { EmployeesService } from './employees.service';
-import { RouterService } from './router.service';
 
 @Injectable({
   providedIn: 'root',

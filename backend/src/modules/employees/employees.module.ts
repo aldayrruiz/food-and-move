@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
-import { CustomQueryService } from '@services/custom-query.service';
 import { FilesService } from '../files/files.service';
 import { MailModule } from '../mail/mail.module';
 import { EmployeesController } from './employees.controller';
@@ -20,7 +19,7 @@ import { Employee, EmployeeSchema } from './schema/employee.schema';
     MailModule,
   ],
   controllers: [EmployeesController],
-  providers: [EmployeesService, FilesService, CustomQueryService],
+  providers: [EmployeesService, FilesService],
   exports: [EmployeesService],
 })
 export class EmployeesModule {}

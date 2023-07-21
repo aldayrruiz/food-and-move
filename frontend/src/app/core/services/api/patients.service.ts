@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { CustomQuery } from '@core/interfaces/custom-query';
 import { PatientPipe } from '@shared/pipes/patient.pipe';
 import { map, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { CustomResponse } from '../interfaces/custom-response';
-import { PatientRequestModel } from '../models/patient/patient-request.model';
-import { PatientModel } from '../models/patient/patient.model';
+import { environment } from '../../../../environments/environment';
+import { CustomResponse } from '../../interfaces/custom-response';
+import { PatientRequestModel } from '../../models/patient/patient-request.model';
+import { PatientModel } from '../../models/patient/patient.model';
 
 @Injectable({
   providedIn: 'root',

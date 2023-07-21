@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AttachmentsService } from '@core/services/attachments.service';
-import { LoaderService } from '@core/services/loader.service';
-import { SnackerService } from '@core/services/snacker.service';
+import { AttachmentsService } from '@core/services/api/attachments.service';
+import { LoaderService } from '@core/services/gui/loader.service';
+import { SnackerService } from '@core/services/gui/snacker.service';
 import { finalize } from 'rxjs';
 
 @Component({

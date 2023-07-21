@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeRequestModel } from '@core/models/employee/employee-request.model';
 import { EmployeeModel } from '@core/models/employee/employee.model';
-import { EmployeesService } from '@core/services/employees.service';
-import { LoaderService } from '@core/services/loader.service';
+import { EmployeesService } from '@core/services/api/employees.service';
+import { LoaderService } from '@core/services/gui/loader.service';
+import { SnackerService } from '@core/services/gui/snacker.service';
 import { RouterService } from '@core/services/router.service';
-import { SnackerService } from '@core/services/snacker.service';
 import { OptionalPipe } from '@shared/pipes/optional.pipe';
 import { finalize } from 'rxjs/operators';
 

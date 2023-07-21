@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { EmployeeModel } from '@core/models/employee/employee.model';
-import { EmployeesService } from '@core/services/employees.service';
+import { EmployeesService } from '@core/services/api/employees.service';
 import { Observable } from 'rxjs';
 
 @Injectable({

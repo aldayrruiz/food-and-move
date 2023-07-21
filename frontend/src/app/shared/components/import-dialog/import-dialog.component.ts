@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DietsService } from '@core/services/diets.service';
-import { RecipesService } from '@core/services/recipes.service';
-import { RoutinesService } from '@core/services/routines.service';
+import { DietsService } from '@core/services/api/diets.service';
+import { RecipesService } from '@core/services/api/recipes.service';
+import { RoutinesService } from '@core/services/api/routines.service';
 import { ImportType } from './enums/import-type';
 
 @Component({
@@ -16,6 +16,7 @@ export class ImportDialogComponent implements OnInit {
   dataSource: any[] = [];
   items: any[] = [];
   selected: any | null = null;
+  custom = 'CUSTOM';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public type: ImportType,

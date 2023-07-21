@@ -4,19 +4,33 @@
   <div class="form__main">
     <div class="form__box box__shadow" style="margin: 10px">
       <div class="main__primary">
-        <app-feedback-row text="¿Qué tal te has despertado" [feedbacks]="feedbacks" [dateRange]="dateRange"
-
-                          fieldInput="howDoYouFeel"></app-feedback-row>
+        <app-feedback-row
+          text="¿Qué tal te has despertado"
+          [feedbacks]="feedbacks"
+          [dateRange]="dateRange"
+          fieldInput="howDoYouFeel"
+        ></app-feedback-row>
         <mat-divider></mat-divider>
-        <app-feedback-row text="¿Qué tal te ha ido el día de hoy?" [feedbacks]="feedbacks" [dateRange]="dateRange"
-
-                          fieldInput="howIsItGoingTheDiet"></app-feedback-row>
+        <app-feedback-row
+          text="¿Qué tal te ha ido el día de hoy?"
+          [feedbacks]="feedbacks"
+          [dateRange]="dateRange"
+          fieldInput="howIsItGoingTheDiet"
+        ></app-feedback-row>
         <mat-divider></mat-divider>
-        <app-feedback-row text="¿Qué tal te ha ido con la dieta" [feedbacks]="feedbacks" [dateRange]="dateRange"
-                          fieldInput="howIsItGoingTheExercises"></app-feedback-row>
+        <app-feedback-row
+          text="¿Qué tal te ha ido con la dieta"
+          [feedbacks]="feedbacks"
+          [dateRange]="dateRange"
+          fieldInput="howIsItGoingTheExercises"
+        ></app-feedback-row>
         <mat-divider></mat-divider>
-        <app-feedback-row text="¿Qué tal te ha ido con los ejercicios?" [feedbacks]="feedbacks" [dateRange]="dateRange"
-                          fieldInput="howHaveYouFeel"></app-feedback-row>
+        <app-feedback-row
+          text="¿Qué tal te ha ido con los ejercicios?"
+          [feedbacks]="feedbacks"
+          [dateRange]="dateRange"
+          fieldInput="howHaveYouFeel"
+        ></app-feedback-row>
       </div>
       <ng-template #noFeedback>
         No ha habido feedback este día ó seleccione solo 1 día para ver esta información.
@@ -52,7 +66,7 @@
                       {{ goodAnsweredPercentage | number : '1.0-0' }} %
                     </h1>
                   </mat-card-title>
-                  <img class="icon_img" src="assets/images/glad.png"/>
+                  <img class="icon_img" src="assets/images/glad.png" />
                 </mat-card-title-group>
               </mat-card-title>
               <mat-card-content> Positivos</mat-card-content>
@@ -67,7 +81,7 @@
                       {{ neutralAnsweredPercentage | number : '1.0-0' }} %
                     </h1>
                   </mat-card-title>
-                  <img class="icon_img" src="assets/images/normal.png"/>
+                  <img class="icon_img" src="assets/images/normal.png" />
                 </mat-card-title-group>
               </mat-card-title>
               <mat-card-content> Neutrales</mat-card-content>
@@ -82,7 +96,7 @@
                       {{ badAnsweredPercentage | number : '1.0-0' }} %
                     </h1>
                   </mat-card-title>
-                  <img class="icon_img" src="assets/images/sad.png"/>
+                  <img class="icon_img" src="assets/images/sad.png" />
                 </mat-card-title-group>
               </mat-card-title>
               <mat-card-content> Negativos</mat-card-content>
@@ -97,7 +111,7 @@
                       {{ notAnsweredPercentage | number : '1.0-0' }} %
                     </h1>
                   </mat-card-title>
-                  <img class="icon_img" src="assets/images/no-feedback.png"/>
+                  <img class="icon_img" src="assets/images/no-feedback.png" />
                 </mat-card-title-group>
               </mat-card-title>
               <mat-card-content> No feedback</mat-card-content>

@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="btn__add" *ngIf="isSmall">
+    <button mat-fab color="primary" (click)="addWeekRoutines()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="crud__header">
+    <p class="header__subtitle">Rutinas Semanales</p>
+    <mat-form-field appearance="standard" class="input__search">
+      <mat-label>Buscar</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter()"
+        placeholder="Ej. Rutina semanal 1"
+        #input
+        autocomplete="off"
+        [(ngModel)]="search"
+      />
+    </mat-form-field>
+    <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addWeekRoutines()">
+      Agregar Rutina Semanal
+    </button>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="crud__main">
+    <app-table
+      [tableStructure]="tableStructure"
+      [indexDisplay]="indexDisplay"
+      [dataSource]="dataSource"
+      [loading]="isLoadingResults"
+      [limit]="limit"
+      [page]="page"
+      [total]="total"
+      [sortActive]="'title'"
+      [viewInfo]="false"
+      (onClick)="editWeekRoutine($event)"
+      (reset)="resetTable()"
+      (changePage)="changePage($event)"
+      (changeSort)="changeSort($event)"
+      (info)="openInfoWeekRoutine($event)"
+      (edit)="editWeekRoutine($event)"
+      (delete)="deleteWeekRoutine($event)"
+    >
+    </app-table>
+  </div>
+</div>

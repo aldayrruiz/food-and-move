@@ -54,6 +54,14 @@
         >
           Rutinas
         </button>
+        <button
+          mat-button
+          (click)="goToWeekRoutines()"
+          [style.background]="isActive('week-routines') ? 'rgba(0,0,0,0.1)' : ''"
+          style="transition: all 0.3s"
+        >
+          Rutinas Semanales
+        </button>
       </div>
       <span class="spacer" *ngIf="!isSmall"></span>
       <a class="profile pointer" (click)="showProfilePanel = !showProfilePanel" *ngIf="!isSmall">

@@ -1,7 +1,6 @@
 import { Recipe, RecipeSchema } from '@modules/recipes/schemas/recipe.schema';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CustomQueryService } from '@services/custom-query.service';
 import { RecipesController } from './recipes.controller';
 import { RecipesService } from './recipes.service';
 
@@ -15,6 +14,6 @@ import { RecipesService } from './recipes.service';
     ]),
   ],
   controllers: [RecipesController],
-  providers: [RecipesService, CustomQueryService],
+  providers: [RecipesService],
 })
 export class RecipesModule {}

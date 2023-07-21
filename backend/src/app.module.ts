@@ -11,10 +11,11 @@ import { MovesModule } from '@modules/moves/moves.module';
 import { PatientsModule } from '@modules/patients/patients.module';
 import { RecipesModule } from '@modules/recipes/recipes.module';
 import { RoutinesModule } from '@modules/routines/routines.module';
+import { WeekRoutinesModule } from '@modules/week-routines/week-routines.module';
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CustomQueryService } from '@services/custom-query.service';
+import { GlobalModule } from '@services/global.module';
 import { UploadsService } from '@services/uploads.service';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -24,6 +25,7 @@ import { AddUserToRequestMiddleware } from './middlewares/add-user-to-request.mi
 
 @Module({
   imports: [
+    GlobalModule,
     MongooseModule.forRootAsync({ useClass: MongooseConfigService }),
     ConfigModule.forRoot({ isGlobal: true }),
     EmployeesModule,
@@ -39,9 +41,10 @@ import { AddUserToRequestMiddleware } from './middlewares/add-user-to-request.mi
     AttachmentsModule,
     MailModule,
     FeedbackModule,
+    WeekRoutinesModule,
   ],
   controllers: [AppController],
-  providers: [AppService, CustomQueryService, UploadsService],
+  providers: [AppService, UploadsService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

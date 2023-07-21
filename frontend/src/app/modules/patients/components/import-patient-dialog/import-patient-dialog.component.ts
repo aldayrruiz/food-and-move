@@ -1,7 +1,7 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PatientsService } from '@core/services/patients.service';
-import { SnackerService } from '@core/services/snacker.service';
+import { PatientsService } from '@core/services/api/patients.service';
+import { SnackerService } from '@core/services/gui/snacker.service';
 import { StorageService } from '@core/services/storage.service';
 import {
   AutocompleteFieldComponent,

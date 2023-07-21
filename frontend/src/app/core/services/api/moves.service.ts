@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { DateRange } from '@core/interfaces/date-range';
 import { MovePipe } from '@shared/pipes/move.pipe';
 import { map, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { MoveRequestModel } from '../models/move/move-request.model';
-import { MoveModel } from '../models/move/move.model';
+import { environment } from '../../../../environments/environment';
+import { MoveRequestModel } from '../../models/move/move-request.model';
+import { MoveModel } from '../../models/move/move.model';
 
 @Injectable({
   providedIn: 'root',

@@ -29,10 +29,10 @@ export class RecipeDto {
   description?: string;
 
   @IsEnum(Meal)
-  meal: Meal = Meal.Almuerzo;
+  meal: Meal;
 
   @IsEnum(Dish)
-  dish: Dish = Dish.Primero;
+  dish: Dish;
 
   @IsArray()
   @Type(() => String)

@@ -19,12 +19,17 @@ const routes: Routes = [
     loadChildren: () => import('@modules/recipes/recipes.module').then((x) => x.RecipesModule),
   },
   {
+    path: 'diets',
+    loadChildren: () => import('@modules/diets/diets.module').then((x) => x.DietsModule),
+  },
+  {
     path: 'routines',
     loadChildren: () => import('@modules/routines/routines.module').then((x) => x.RoutinesModule),
   },
   {
-    path: 'diets',
-    loadChildren: () => import('@modules/diets/diets.module').then((x) => x.DietsModule),
+    path: 'week-routines',
+    loadChildren: () =>
+      import('@modules/week-routines/week-routines.module').then((x) => x.WeekRoutinesModule),
   },
   {
     path: 'configuration',

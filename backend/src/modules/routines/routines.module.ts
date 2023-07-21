@@ -1,20 +1,19 @@
+import { Routine, RoutineSchema } from '@modules/routines/schemas/routine.schema';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CustomQueryService } from '../../services/custom-query.service';
 import { RoutinesController } from './routines.controller';
 import { RoutinesService } from './routines.service';
-import { RoutineSchema } from './schemas/routine.schemas';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       {
-        name: 'routines',
+        name: Routine.name,
         schema: RoutineSchema,
       },
     ]),
   ],
   controllers: [RoutinesController],
-  providers: [RoutinesService, CustomQueryService],
+  providers: [RoutinesService],
 })
 export class RoutinesModule {}

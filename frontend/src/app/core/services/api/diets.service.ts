@@ -7,8 +7,8 @@ import { DietModel } from '@core/models/diet/diet';
 import { DietRequest } from '@core/models/diet/diet-request.model';
 import { RecipeRequestModel } from '@core/models/recipe/recipe-request.model';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { RecipeModel } from '../models/recipe/recipe.model';
+import { environment } from '../../../../environments/environment';
+import { RecipeModel } from '../../models/recipe/recipe.model';
 
 @Injectable({
   providedIn: 'root',
@@ -45,11 +45,11 @@ export class DietsService {
   addRecipe(
     dietId: string,
     day: DayOfWeek,
-    recipeRequeset: RecipeRequestModel
+    recipeRequest: RecipeRequestModel
   ): Observable<DietModel> {
     return this.http.post<DietModel>(
       `${environment.api}/diets/addRecipe/${dietId}/${day}`,
-      recipeRequeset
+      recipeRequest
     );
   }
 
