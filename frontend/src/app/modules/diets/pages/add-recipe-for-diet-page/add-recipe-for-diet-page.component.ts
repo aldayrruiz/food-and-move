@@ -25,11 +25,6 @@ export class AddRecipeForDietPageComponent implements OnInit {
   day!: DayOfWeek;
   edit = false;
 
-  buttonClear = {
-    title: false,
-    description: false,
-  };
-
   constructor(
     private readonly attachmentsService: AttachmentsService,
     private readonly activatedRoute: ActivatedRoute,
@@ -94,7 +89,6 @@ export class AddRecipeForDietPageComponent implements OnInit {
   private initDiet() {
     this.activatedRoute.data.subscribe((data) => {
       this.diet = data.diet;
-      this.day = data.day;
     });
   }
 

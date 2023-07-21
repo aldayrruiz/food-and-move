@@ -1,7 +1,7 @@
-<div *ngIf="showImportRecipe" class="header__date">
+<div *ngIf="showImportRoutine" class="header__date">
   <p class="form__date"></p>
-  <button mat-stroked-button color="primary" type="button" (click)="importRecipe()">
-    Importar Receta
+  <button mat-stroked-button color="primary" type="button" (click)="importRoutine()">
+    Importar Rutina
   </button>
 </div>
 <form [formGroup]="form">
@@ -16,9 +16,9 @@
           <mat-icon mat-list-icon class="input__icon">fastfood</mat-icon>
           <mat-form-field class="input__field">
             <mat-label>Título</mat-label>
-            <input type="text" matInput autocomplete="off" formControlName="title" tabindex="1" />
-            <mat-error *ngIf="title.errors?.required"
-              >Título es <strong>obligatorio</strong></mat-error
+            <input type="text" matInput autocomplete="off" formControlName="title" tabindex="1"/>
+            <mat-error *ngIf="form.controls['title'].hasError('required')"
+            >Título es <strong>obligatorio</strong></mat-error
             >
           </mat-form-field>
           <div class="fake__clear" *ngIf="!buttonClear.title"></div>
@@ -43,6 +43,7 @@
             <textarea
               matInput
               type="text"
+              matInput
               autocomplete="off"
               formControlName="description"
               tabindex="2"
@@ -62,39 +63,11 @@
             <mat-icon mat-list-icon>clear</mat-icon>
           </button>
         </div>
-        <div class="form__input" style="margin-top: 15px">
-          <mat-icon mat-list-icon class="input__icon">restaurant</mat-icon>
-          <mat-form-field class="input__field">
-            <mat-label>Tipo de Comida</mat-label>
-            <mat-select [(value)]="meal" (selectionChange)="changeMeal()">
-              <mat-option *ngFor="let option of availableMeal" [value]="option">{{
-                option
-              }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <div class="fake__clear"></div>
-        </div>
-        <div class="form__input" style="margin-top: 15px">
-          <div class="fake__icon"></div>
-          <mat-form-field class="input__field">
-            <mat-label>Plato</mat-label>
-            <mat-select [(value)]="dish">
-              <mat-option *ngFor="let option of availableDish" [value]="option">{{
-                option
-              }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <div class="fake__clear"></div>
-        </div>
       </div>
     </div>
     <div class="main__secondary">
       <app-links-input [links]="links" (setLinks)="links = $event"></app-links-input>
       <app-videos-input [videos]="videos" (setVideos)="videos = $event"></app-videos-input>
-      <app-ingredients-input
-        [ingredients]="ingredients"
-        (setIngredients)="ingredients = $event"
-      ></app-ingredients-input>
       <app-attachment-input
         [attachment]="attachment"
         (setAttachment)="attachment = $event"

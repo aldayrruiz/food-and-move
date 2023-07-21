@@ -98,6 +98,14 @@ export class RouterService {
     await this.router.navigate(['week-routines/edit', id]);
   }
 
+  async goToAddRoutineForWeekRoutine(weekRoutineId: string, day: DayOfWeek): Promise<void> {
+    await this.router.navigate(['week-routines/edit', weekRoutineId, 'add-routine', day]);
+  }
+
+  async goToEditRoutineForWeekRoutine(weekRoutineId: string, day: DayOfWeek, routineId: string): Promise<void> {
+    await this.router.navigate(['week-routines/edit', weekRoutineId, 'edit-routine', day, routineId]);
+  }
+
   // Diets
 
   async goToDiet(): Promise<void> {
@@ -105,15 +113,15 @@ export class RouterService {
   }
 
   async goToEditDiet(dietId: string): Promise<void> {
-    await this.router.navigate(['diets/edit-diet', dietId]);
+    await this.router.navigate(['diets/edit', dietId]);
   }
 
   async goToAddRecipeForDiet(dietId: string, day: DayOfWeek): Promise<void> {
-    await this.router.navigate(['diets/edit-diet', dietId, 'add-recipe', day]);
+    await this.router.navigate(['diets/edit', dietId, 'add-recipe', day]);
   }
 
   async goToEditRecipeForDiet(dietId: string, day: DayOfWeek, recipeId: string): Promise<void> {
-    await this.router.navigate(['diets/edit-diet', dietId, 'edit-recipe', day, recipeId]);
+    await this.router.navigate(['diets/edit', dietId, 'edit-recipe', day, recipeId]);
   }
 
   // Feedback

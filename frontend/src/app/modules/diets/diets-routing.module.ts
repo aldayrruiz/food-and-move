@@ -14,21 +14,21 @@ const routes: Routes = [
     children: [
       { path: '', component: DietsPageComponent },
       {
-        path: 'edit-diet/:dietId',
+        path: 'edit/:dietId',
         component: EditDietPageComponent,
         resolve: {
           diet: DietResolver,
         },
       },
       {
-        path: 'edit-diet/:dietId/add-recipe/:day',
+        path: 'edit/:dietId/add-recipe/:day',
         component: AddRecipeForDietPageComponent,
         resolve: {
           diet: DietResolver,
         },
       },
       {
-        path: 'edit-diet/:dietId/edit-recipe/:day/:recipeId',
+        path: 'edit/:dietId/edit-recipe/:day/:recipeId',
         component: AddRecipeForDietPageComponent,
         resolve: {
           diet: DietResolver,

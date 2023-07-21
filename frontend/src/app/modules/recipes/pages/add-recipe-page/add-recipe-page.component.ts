@@ -31,11 +31,11 @@ export class AddRecipePageComponent implements OnInit {
     private readonly routerService: RouterService,
     private readonly snackerService: SnackerService,
     private readonly loaderService: LoaderService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.initRecipe();
   }
-
-  ngOnInit(): void {}
 
   async exit() {
     await this.routerService.goToRecipes();

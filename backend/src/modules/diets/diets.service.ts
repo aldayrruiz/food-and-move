@@ -108,7 +108,7 @@ export class DietsService {
     const dayItems = this.getDayItems(day, diet);
     dayItems.push(recipe);
     const update = this.getUpdateDayItems(day, dayItems);
-    return await this.dietsModel.findByIdAndUpdate(dietId, update, { new: true });
+    return this.dietsModel.findByIdAndUpdate(dietId, update, { new: true });
   }
 
   async updateRecipe(dietId: string, day: DayOfWeek, recipeId: string, updateRecipe: UpdateRecipeDto) {
@@ -122,7 +122,7 @@ export class DietsService {
       ...updateRecipe,
     };
     const update = this.getUpdateDayItems(day, dayItems);
-    return await this.dietsModel.findByIdAndUpdate(dietId, update, { new: true });
+    return this.dietsModel.findByIdAndUpdate(dietId, update, { new: true });
   }
 
   async removeRecipe(dietId: string, day: DayOfWeek, recipeId: string) {
@@ -133,7 +133,7 @@ export class DietsService {
     if (index !== -1) {
       dayItems.splice(index, 1);
       const update = this.getUpdateDayItems(day, dayItems);
-      return await this.dietsModel.findByIdAndUpdate(dietId, update, { new: true });
+      return this.dietsModel.findByIdAndUpdate(dietId, update, { new: true });
     } else {
       return diet;
     }
