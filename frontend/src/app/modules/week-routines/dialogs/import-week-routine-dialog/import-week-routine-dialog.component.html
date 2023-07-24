@@ -1,8 +1,7 @@
 <div class="container">
   <div class="header">
     <p class="title">
-      Importar
-      {{ type === importType.Recipe ? 'Receta' : type === importType.Routine ? 'Rutina' : 'Dieta' }}
+      Importar Rutina Semanal
     </p>
     <button mat-icon-button matTooltip="Salir" (click)="exit()">
       <mat-icon>close</mat-icon>
@@ -27,24 +26,15 @@
           [style.background]="item._id === selected?._id ? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0)'"
         >
           <div class="item__main">
-            <mat-icon class="item__icon">{{
-              type === importType.Recipe
-                ? (item.meal | foodIcon)
-                : type === importType.Routine
-                  ? 'fitness_center'
-                  : 'calendar_today'
-              }}</mat-icon>
+            <mat-icon class="item__icon">fitness_center</mat-icon>
             <div class="item__title">{{ item.title }}</div>
           </div>
-          <p class="item__type" *ngIf="type === importType.Recipe">{{ item.dish }}</p>
         </a>
       </div>
     </div>
     <div class="bottom">
       <p class="selected">
-        <span style="font-weight: bold"
-        >{{ type === importType.Recipe ? 'Receta' : type === importType.Routine ? 'Rutina' : 'Dieta' }}:</span
-        >
+        <span style="font-weight: bold">Rutina Semanal:</span>
         {{ selected?.title }}
       </p>
       <div class="buttons">

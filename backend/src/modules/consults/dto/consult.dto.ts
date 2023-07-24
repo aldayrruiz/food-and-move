@@ -14,6 +14,10 @@ export class ConsultDto {
   @IsOptional()
   diet?: string;
 
+  @IsMongoId()
+  @IsOptional()
+  weekRoutine?: string;
+
   @IsNumber()
   @IsOptional()
   masa?: number; // Masa [Kg]

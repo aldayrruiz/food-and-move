@@ -67,9 +67,21 @@ const routes: Routes = [
         resolve: { patient: PatientResolver },
       },
       // Moves
-      { path: ':patientId/moves/:date', component: MovesPageComponent },
-      { path: ':patientId/moves/add-move/:date', component: AddMovePageComponent },
-      { path: ':patientId/moves/edit-move/:id', component: AddMovePageComponent },
+      {
+        path: ':patientId/moves/:date',
+        component: MovesPageComponent,
+        resolve: { patient: PatientResolver },
+      },
+      {
+        path: ':patientId/moves/add-move/:date',
+        component: AddMovePageComponent,
+        resolve: { patient: PatientResolver },
+      },
+      {
+        path: ':patientId/moves/edit-move/:id',
+        component: AddMovePageComponent,
+        resolve: { patient: PatientResolver },
+      },
       // Feedback
       {
         path: ':patientId/feedback',

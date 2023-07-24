@@ -12,6 +12,7 @@ import { AddMovePageComponent } from '@modules/patients/pages/moves/add-move-pag
 import { MovesPageComponent } from '@modules/patients/pages/moves/moves-page/moves-page.component';
 import { AddPatientPageComponent } from '@modules/patients/pages/patients/add-patient-page/add-patient-page.component';
 import { PatientsPageComponent } from '@modules/patients/pages/patients/patients-page/patients-page.component';
+import { WeekRoutinesDialogsModule } from '@modules/week-routines/dialogs/week-routines-dialogs.module';
 import { MatModule } from '@shared/modules/mat/mat.module';
 import { PhotoPipe } from '@shared/pipes/photo.pipe';
 import { SharedModule } from '@shared/shared.module';
@@ -47,7 +48,15 @@ import { PatientsRoutingModule } from './patients-routing.module';
     FeedbackPageComponent,
     FeedbackRowComponent,
   ],
-  imports: [CommonModule, PatientsRoutingModule, FormsModule, ReactiveFormsModule, MatModule, SharedModule],
+  imports: [
+    CommonModule,
+    PatientsRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatModule,
+    SharedModule,
+    WeekRoutinesDialogsModule,
+  ],
   providers: [DatePipe, PhotoPipe],
 })
 export class PatientsModule {}

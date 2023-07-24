@@ -54,4 +54,20 @@ export class MovesService {
       })
     );
   }
+
+  clearMoves(patientId: string, dateRange: DateRange): Observable<MoveModel[]> {
+    return this.http.post<MoveModel[]>(`${environment.api}/moves/clearMoves/${patientId}`, dateRange);
+  }
+
+  importWeekRoutine(weekRoutineId: string, patientId: string, date: Date): Observable<MoveModel[]> {
+    return this.http
+      .get<MoveModel[]>(`${environment.api}/moves/importWeekRoutine/${weekRoutineId}/${patientId}/${date}`)
+      .pipe(
+        map((data) => {
+          return data.map((food: MoveModel) => {
+            return this.movePipe.transform(food);
+          });
+        })
+      );
+  }
 }

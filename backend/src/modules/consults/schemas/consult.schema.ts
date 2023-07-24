@@ -1,6 +1,7 @@
 import { Diet } from '@modules/diets/schemas/diet.schema';
 import { Employee } from '@modules/employees/schema/employee.schema';
 import { Patient } from '@modules/patients/schemas/patient.schema';
+import { WeekRoutine } from '@modules/week-routines/schemas/week-routine.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
@@ -17,6 +18,9 @@ export class Consult {
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Diet' })
   diet: Diet;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'WeekRoutine' })
+  weekRoutine: WeekRoutine;
 
   @Prop({ type: Number })
   masa: number;

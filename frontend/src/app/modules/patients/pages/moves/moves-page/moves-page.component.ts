@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { DateRange } from '@core/interfaces/date-range';
+import { ConsultModel } from '@core/models/consult/consult.model';
+import { EmployeeModel } from '@core/models/employee/employee.model';
 import { MoveModel } from '@core/models/move/move.model';
 import { PatientModel } from '@core/models/patient/patient.model';
+import { WeekRoutineModel } from '@core/models/week-routine/week-routine';
+import { ConsultsService } from '@core/services/api/consults.service';
 import { MovesService } from '@core/services/api/moves.service';
 import { PatientsService } from '@core/services/api/patients.service';
 import { DialogService } from '@core/services/gui/dialog.service';
 import { LoaderService } from '@core/services/gui/loader.service';
 import { SnackerService } from '@core/services/gui/snacker.service';
 import { RouterService } from '@core/services/router.service';
+import { StorageService } from '@core/services/storage.service';
 import { addDay, getDateRange, getDay } from '@core/utils/date-utils';
+import { ImportWeekRoutineDialogComponent } from '@modules/week-routines/dialogs/import-week-routine-dialog/import-week-routine-dialog.component';
 import { daysInit } from '@shared/components/weekly-calendar/constant/days-init';
 import { WeeklyCalendarType } from '@shared/components/weekly-calendar/enums/weekly-calendar-type';
 import { Day } from '@shared/components/weekly-calendar/interfaces/day';
@@ -23,29 +30,31 @@ import { finalize } from 'rxjs/operators';
 export class MovesPageComponent implements OnInit {
   days: Day[] = daysInit;
   weeklyCalendarType = WeeklyCalendarType;
-
+  employee!: EmployeeModel;
   patient!: PatientModel;
+  consult!: ConsultModel;
   dateRange: DateRange = getDateRange(new Date());
 
   constructor(
     private readonly patientsService: PatientsService,
+    private readonly consultsService: ConsultsService,
     private readonly movesService: MovesService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly routerService: RouterService,
     private readonly snackerService: SnackerService,
     private readonly loaderService: LoaderService,
-    private readonly dialogService: DialogService
+    private readonly dialogService: DialogService,
+    private readonly storageService: StorageService,
+    private readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.patientsService.getPatient(this.activatedRoute.snapshot.params['patientId']).subscribe({
-      next: (patient) => {
-        this.patient = patient;
-        const params = this.activatedRoute.snapshot.params;
-        if (params['date']) this.dateRange = getDateRange(new Date(params['date']));
-        this.loadMoves();
-      },
-    });
+    const params = this.activatedRoute.snapshot.params;
+    if (params['date']) this.dateRange = getDateRange(new Date(params['date']));
+    this.initPatient();
+    this.initEmployee();
+    this.loadMoves();
+    this.initLastConsult();
   }
 
   changeDateRange(nWeeks: number): void {
@@ -95,17 +104,60 @@ export class MovesPageComponent implements OnInit {
                 this.loaderService.isLoading.next(false);
               })
             )
-            .subscribe(
-              (res) => {
+            .subscribe({
+              next: (res) => {
                 this.snackerService.showSuccessful('Ejercicio eliminada con éxito');
                 this.loadMoves();
               },
-              (err) => {
+              error: (err) => {
                 console.log(err);
                 this.snackerService.showError(err.error.message);
-              }
-            );
+              },
+            });
         }
       });
+  }
+
+  importWeekRoutine() {
+    const dialogRef = this.dialog.open(ImportWeekRoutineDialogComponent, {
+      width: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe({
+      next: (weekRoutine: WeekRoutineModel) => {
+        if (weekRoutine) {
+          this.clearMoves();
+          this.loadMoves();
+        }
+      },
+    });
+  }
+
+  private clearMoves() {
+    this.loaderService.isLoading.next(true);
+    this.movesService
+      .clearMoves(this.patient._id, this.dateRange)
+      .pipe(finalize(() => this.loaderService.isLoading.next(false)))
+      .subscribe();
+  }
+
+  private initPatient() {
+    this.activatedRoute.data.subscribe({
+      next: (data) => {
+        this.patient = data.patient;
+      },
+    });
+  }
+
+  private initEmployee() {
+    this.employee = this.storageService.getUser();
+  }
+
+  private initLastConsult() {
+    this.consultsService.getLastConsult(this.patient._id, this.employee._id).subscribe({
+      next: (res) => {
+        this.consult = res;
+      },
+    });
   }
 }

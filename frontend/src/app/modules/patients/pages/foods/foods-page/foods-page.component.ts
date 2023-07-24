@@ -161,7 +161,6 @@ export class FoodsPageComponent implements OnInit {
   }
 
   private setDietToLastConsult(dietId: string) {
-    // console.log(this.consult);
     this.consultsService.updateConsult(this.consult._id, { diet: dietId }).subscribe({
       next: () => {},
       error: (err) => {
@@ -188,7 +187,7 @@ export class FoodsPageComponent implements OnInit {
   }
 
   private clearFoods() {
-    this.loaderService.isLoading.next(false);
+    this.loaderService.isLoading.next(true);
     this.foodsService
       .clearFoods(this.patient!._id, this.dateRange)
       .pipe(finalize(() => this.loaderService.isLoading.next(false)))

@@ -42,7 +42,7 @@
         <!--          <mat-calendar [(selected)]="created_at" (selectedChange)="selectedDateChanged($event)"></mat-calendar>-->
         <!--        </mat-card>-->
         <mat-card class="calendar">
-          <mat-calendar (selectedChange)="onSelectedDateRangeChanged($event)" [selected]="dateRange"> </mat-calendar>
+          <mat-calendar (selectedChange)="onSelectedDateRangeChanged($event)" [selected]="dateRange"></mat-calendar>
         </mat-card>
       </div>
     </div>
@@ -55,62 +55,54 @@
         <div class="container-cards">
           <div class="box">
             <mat-card class="statistic-card">
-              <mat-card-title>
-                <mat-card-title-group>
-                  <mat-card-title>
-                    <h1 style="font-size: 42px; font-weight: bold; padding: 10px">
-                      {{ goodAnsweredPercentage | number : '1.0-0' }} %
-                    </h1>
-                  </mat-card-title>
-                  <img class="icon_img" src="assets/images/glad.png" />
-                </mat-card-title-group>
-              </mat-card-title>
-              <mat-card-content> Positivos</mat-card-content>
+              <mat-card-content>
+                <div class="statistic-content">
+                  <p class="statistic-card-title">
+                    {{ goodAnsweredPercentage | number : '1.0-0' }} %
+                  </p>
+                  <img class="icon_img" src="assets/images/glad.png"/>
+                </div>
+                Positivos
+              </mat-card-content>
             </mat-card>
           </div>
           <div class="box">
             <mat-card class="statistic-card">
-              <mat-card-title>
-                <mat-card-title-group>
-                  <mat-card-title>
-                    <h1 style="font-size: 42px; font-weight: bold; padding: 10px">
-                      {{ neutralAnsweredPercentage | number : '1.0-0' }} %
-                    </h1>
-                  </mat-card-title>
-                  <img class="icon_img" src="assets/images/normal.png" />
-                </mat-card-title-group>
-              </mat-card-title>
-              <mat-card-content> Neutrales</mat-card-content>
+              <mat-card-content>
+                <div class="statistic-content">
+                  <p class="statistic-card-title">
+                    {{ neutralAnsweredPercentage | number : '1.0-0' }} %
+                  </p>
+                  <img class="icon_img" src="assets/images/normal.png"/>
+                </div>
+                Neutrales
+              </mat-card-content>
             </mat-card>
           </div>
           <div class="box">
             <mat-card class="statistic-card">
-              <mat-card-title>
-                <mat-card-title-group>
-                  <mat-card-title>
-                    <h1 style="font-size: 42px; font-weight: bold; padding: 10px">
-                      {{ badAnsweredPercentage | number : '1.0-0' }} %
-                    </h1>
-                  </mat-card-title>
-                  <img class="icon_img" src="assets/images/sad.png" />
-                </mat-card-title-group>
-              </mat-card-title>
-              <mat-card-content> Negativos</mat-card-content>
+              <mat-card-content>
+                <div class="statistic-content">
+                  <p class="statistic-card-title">
+                    {{ badAnsweredPercentage | number : '1.0-0' }} %
+                  </p>
+                  <img class="icon_img" src="assets/images/sad.png"/>
+                </div>
+                Negativos
+              </mat-card-content>
             </mat-card>
           </div>
           <div class="box">
             <mat-card class="statistic-card">
-              <mat-card-title>
-                <mat-card-title-group>
-                  <mat-card-title>
-                    <h1 style="font-size: 42px; font-weight: bold; padding: 10px">
-                      {{ notAnsweredPercentage | number : '1.0-0' }} %
-                    </h1>
-                  </mat-card-title>
-                  <img class="icon_img" src="assets/images/no-feedback.png" />
-                </mat-card-title-group>
-              </mat-card-title>
-              <mat-card-content> No feedback</mat-card-content>
+              <mat-card-content>
+                <div class="statistic-content">
+                  <p class="statistic-card-title">
+                    {{ notAnsweredPercentage | number : '1.0-0' }} %
+                  </p>
+                  <img class="icon_img" src="assets/images/no-feedback.png"/>
+                </div>
+                No feedback
+              </mat-card-content>
             </mat-card>
           </div>
         </div>
