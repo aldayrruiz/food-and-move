@@ -161,7 +161,7 @@ export class FormRecipeComponent implements OnInit {
   importRecipe(): void {
     const dialogRef = this.dialog.open(ImportDialogComponent, {
       width: '800px',
-      data: ImportType.Recipe,
+      data: { type: ImportType.Recipe, showCustom: this.edit },
     });
     dialogRef.afterClosed().subscribe(
       (res) => {

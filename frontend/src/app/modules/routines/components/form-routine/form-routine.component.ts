@@ -118,7 +118,7 @@ export class FormRoutineComponent implements OnInit {
   importRoutine() {
     const dialogRef = this.dialog.open(ImportDialogComponent, {
       width: '800px',
-      data: ImportType.Routine,
+      data: { type: ImportType.Routine, showCustom: this.edit },
     });
 
     dialogRef.afterClosed().subscribe({

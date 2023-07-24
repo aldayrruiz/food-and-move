@@ -87,14 +87,16 @@ export class EditWeekRoutinePageComponent implements OnInit {
   async addRoutine(day: Day) {
     const dialogRef = this.dialog.open(ImportDialogComponent, {
       width: '800px',
-      data: ImportType.Routine,
+      data: { type: ImportType.Routine, showCustom: true },
     });
 
     dialogRef.afterClosed().subscribe({
       next: async (res: RoutineModel | string) => {
         if (res === 'CUSTOM') {
           await this.routerService.goToAddRoutineForWeekRoutine(this.weekRoutine._id, day.day);
-        } else {
+          return;
+        }
+        if (res) {
           this.importRoutine(res as RoutineModel, day);
         }
       },

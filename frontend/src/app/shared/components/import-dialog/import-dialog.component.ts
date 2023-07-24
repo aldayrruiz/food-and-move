@@ -12,6 +12,9 @@ import { ImportType } from './enums/import-type';
 })
 export class ImportDialogComponent implements OnInit {
   importType = ImportType;
+  // data
+  type: ImportType;
+  showCustom = true;
 
   dataSource: any[] = [];
   items: any[] = [];
@@ -19,12 +22,15 @@ export class ImportDialogComponent implements OnInit {
   custom = 'CUSTOM';
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public type: ImportType,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private readonly recipesService: RecipesService,
     private readonly routinesService: RoutinesService,
     private readonly dietsService: DietsService,
     private readonly dialogRef: MatDialogRef<ImportDialogComponent>
-  ) {}
+  ) {
+    this.type = data.type;
+    this.showCustom = data.showCustom;
+  }
 
   ngOnInit(): void {
     this.loadItems();

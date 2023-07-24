@@ -165,7 +165,7 @@ export class AddFoodPageComponent implements OnInit {
   importRecipe(): void {
     const dialogRef = this.dialog.open(ImportDialogComponent, {
       width: '800px',
-      data: ImportType.Recipe,
+      data: { type: ImportType.Recipe, showCustom: true },
     });
     dialogRef.afterClosed().subscribe({
       next: (res) => {

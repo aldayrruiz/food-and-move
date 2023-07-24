@@ -1,6 +1,8 @@
+import { Food, FoodDocument } from '@modules/foods/schemas/food.schema';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { DateRangeDto } from '@shared/dto/date-range.dto';
+import { nextMonday, previousSunday } from 'date-fns';
 import { Model } from 'mongoose';
 import { CustomQueryService } from 'src/services/custom-query.service';
 import { getQueryDate } from 'src/utils/filter-dates.utils';
@@ -14,6 +16,7 @@ import { Consult, ConsultDocument } from './schemas/consult.schema';
 export class ConsultsService {
   constructor(
     @InjectModel(Consult.name) private readonly consultModel: Model<ConsultDocument>,
+    @InjectModel(Food.name) private readonly foodModel: Model<FoodDocument>,
     private readonly customQueryService: CustomQueryService
   ) {}
 
@@ -51,9 +54,12 @@ export class ConsultsService {
   }
 
   async remove(id: string) {
-    const deletedConsult = await this.consultModel.findByIdAndDelete(id);
-    if (!deletedConsult) throw new NotFoundException('No se ha encontrado la consulta');
-    return deletedConsult;
+    // Find consult
+    const consult = await this.consultModel.findById(id);
+    if (!consult) throw new NotFoundException('No se ha encontrado la consulta');
+    await this.removeFoodsAssignedToConsult(consult);
+    // Delete consult
+    return this.consultModel.findByIdAndDelete(id);
   }
 
   async removeByPatient(patientId: string) {
@@ -75,5 +81,20 @@ export class ConsultsService {
 
   getLastConsult(patientId: string, employeeId: string) {
     return this.consultModel.findOne({ patient: patientId, employee: employeeId }).sort({ created_at: -1 });
+  }
+
+  private async removeFoodsAssignedToConsult(consult: ConsultDocument) {
+    const patient = consult.patient;
+    const previousConsult = await this.consultModel
+      .findOne({ patient, created_at: { $lt: consult.created_at } })
+      .sort({ created_at: -1 })
+      .exec();
+    const nextConsult = await this.consultModel
+      .findOne({ patient, created_at: { $gt: consult.created_at } })
+      .sort({ created_at: 1 })
+      .exec();
+    const deleteFoodsStart = nextMonday(previousConsult.created_at) ?? undefined;
+    const deleteFoodsEnd = previousSunday(nextConsult.created_at) ?? undefined;
+    await this.foodModel.deleteMany({ patient, date: { $gte: deleteFoodsStart, $lte: deleteFoodsEnd } });
   }
 }

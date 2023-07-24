@@ -5,18 +5,17 @@ import { FoodsController } from './foods.controller';
 import { FoodsService } from './foods.service';
 import { Food, FoodSchema } from './schemas/food.schema';
 
+const foodMongooseModule = MongooseModule.forFeature([
+  {
+    name: Food.name,
+    schema: FoodSchema,
+  },
+]);
+
 @Module({
-  imports: [
-    MongooseModule.forFeature([
-      {
-        name: Food.name,
-        schema: FoodSchema,
-      },
-    ]),
-    DietsModule,
-  ],
+  imports: [foodMongooseModule, DietsModule],
   controllers: [FoodsController],
   providers: [FoodsService],
-  exports: [FoodsService],
+  exports: [foodMongooseModule, FoodsService],
 })
 export class FoodsModule {}

@@ -12,7 +12,7 @@
     <div class="filter">
       <mat-form-field class="input">
         <mat-label>Filtrar</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Macarrones" #input/>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Macarrones" #input />
       </mat-form-field>
     </div>
     <div class="list__box">
@@ -31,9 +31,9 @@
               type === importType.Recipe
                 ? (item.meal | foodIcon)
                 : type === importType.Routine
-                  ? 'fitness_center'
-                  : 'calendar_today'
-              }}</mat-icon>
+                ? 'fitness_center'
+                : 'calendar_today'
+            }}</mat-icon>
             <div class="item__title">{{ item.title }}</div>
           </div>
           <p class="item__type" *ngIf="type === importType.Recipe">{{ item.dish }}</p>
@@ -43,14 +43,14 @@
     <div class="bottom">
       <p class="selected">
         <span style="font-weight: bold"
-        >{{ type === importType.Recipe ? 'Receta' : type === importType.Routine ? 'Rutina' : 'Dieta' }}:</span
+          >{{ type === importType.Recipe ? 'Receta' : type === importType.Routine ? 'Rutina' : 'Dieta' }}:</span
         >
         {{ selected?.title }}
       </p>
       <div class="buttons">
         <button mat-button (click)="exit()">Cancelar</button>
         <button mat-button color="primary" [mat-dialog-close]="selected" [disabled]="!selected">Importar</button>
-        <button mat-button color="primary" [mat-dialog-close]="custom">Personalizar</button>
+        <button mat-button color="primary" [mat-dialog-close]="custom" *ngIf="showCustom">Personalizar</button>
       </div>
     </div>
   </div>

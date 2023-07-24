@@ -87,7 +87,10 @@ export class EditDietPageComponent implements OnInit {
   addRecipe(day: Day): void {
     const dialogRef = this.matDialog.open(ImportDialogComponent, {
       width: '800px',
-      data: ImportType.Recipe,
+      data: {
+        type: ImportType.Recipe,
+        showCustom: true,
+      },
     });
     dialogRef.afterClosed().subscribe({
       next: (res: RecipeModel | string) => {

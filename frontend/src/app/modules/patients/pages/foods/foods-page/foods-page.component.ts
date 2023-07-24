@@ -144,7 +144,7 @@ export class FoodsPageComponent implements OnInit {
   importDiet(): void {
     const dialogRef = this.dialog.open(ImportDialogComponent, {
       width: '800px',
-      data: ImportType.Diet,
+      data: { showCustom: false, type: ImportType.Diet },
     });
     dialogRef.afterClosed().subscribe({
       next: (diet: DietModel) => {

@@ -126,7 +126,7 @@ export class AddMovePageComponent implements OnInit {
   importRoutine(): void {
     const dialogRef = this.dialog.open(ImportDialogComponent, {
       width: '800px',
-      data: ImportType.Routine,
+      data: { type: ImportType.Routine, showCustom: false },
     });
     dialogRef.afterClosed().subscribe(
       (res) => {
