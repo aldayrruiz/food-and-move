@@ -12,4 +12,5 @@ export interface ConsultRequestModel {
   comments?: string;
   created_at?: Date;
   diet?: string;
+  weekRoutine?: string;
 }

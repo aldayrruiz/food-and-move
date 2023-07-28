@@ -91,7 +91,7 @@ export class FoodsPageComponent implements OnInit {
         this.setFoods(res);
       },
       error: (err) => {
-        console.log(err);
+        this.setFoods([]);
       },
     });
   }
@@ -110,7 +110,6 @@ export class FoodsPageComponent implements OnInit {
   }
 
   async editFood(food: FoodModel) {
-    console.log(`Edit food ${food._id}`);
     await this.routerService.goToEditFood(this.patient._id, food._id);
   }
 
@@ -160,13 +159,12 @@ export class FoodsPageComponent implements OnInit {
     });
   }
 
-  private setDietToLastConsult(dietId: string) {
-    this.consultsService.updateConsult(this.consult._id, { diet: dietId }).subscribe({
-      next: () => {},
-      error: (err) => {
-        console.log(err);
-      },
-    });
+  private clearFoods() {
+    this.loaderService.isLoading.next(true);
+    this.foodsService
+      .clearFoods(this.patient!._id, this.dateRange)
+      .pipe(finalize(() => this.loaderService.isLoading.next(false)))
+      .subscribe();
   }
 
   private loadDiet(diet: DietModel) {
@@ -186,12 +184,13 @@ export class FoodsPageComponent implements OnInit {
       });
   }
 
-  private clearFoods() {
-    this.loaderService.isLoading.next(true);
-    this.foodsService
-      .clearFoods(this.patient!._id, this.dateRange)
-      .pipe(finalize(() => this.loaderService.isLoading.next(false)))
-      .subscribe();
+  private setDietToLastConsult(dietId: string) {
+    this.consultsService.updateConsult(this.consult._id, { diet: dietId }).subscribe({
+      next: () => {},
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   private initPatient() {

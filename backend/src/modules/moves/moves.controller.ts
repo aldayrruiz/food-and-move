@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { DateRangeDto } from '@shared/dto/date-range.dto';
 import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
@@ -14,7 +14,7 @@ import { MovesService } from './moves.service';
 export class MovesController {
   constructor(private readonly movesService: MovesService) {}
 
-  @Post('create')
+  @Post()
   async create(@Body() moveDto: MoveDto) {
     return await this.movesService.create(moveDto);
   }
@@ -22,6 +22,11 @@ export class MovesController {
   @Get('findAll')
   async findAll() {
     return await this.movesService.findAll();
+  }
+
+  @Get('lastAssigned/:patientId')
+  async lastMovesAssigned(@Param('patientId') patientId: string, @Query('limitDate') limitDate: string) {
+    return await this.movesService.lastMovesAssigned(patientId, limitDate);
   }
 
   @Get(':id')
@@ -39,13 +44,23 @@ export class MovesController {
     return await this.movesService.findByPatient(id, dateRangeDto);
   }
 
-  @Patch('update/:id')
+  @Patch(':id')
   async update(@Param('id') id: string, @Body() updateMoveDto: UpdateMoveDto) {
     return await this.movesService.update(id, updateMoveDto);
   }
 
-  @Delete('remove/:id')
+  @Delete(':id')
   async remove(@Param('id') id: string) {
     return await this.movesService.remove(id);
+  }
+
+  @Post('clearMoves/:patientId')
+  async clearMoves(@Param('patientId') patientId: string, @Body() dateRangeDto: DateRangeDto) {
+    return await this.movesService.clearMoves(patientId, dateRangeDto);
+  }
+
+  @Post('importWeekRoutine')
+  async importWeekRoutine(@Query('weekRoutineId') weekRoutineId, @Query('patientId') patientId, @Query('date') date: Date) {
+    return await this.movesService.importWeekRoutine(weekRoutineId, patientId, date);
   }
 }

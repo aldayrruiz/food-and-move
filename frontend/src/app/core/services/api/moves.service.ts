@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DateRange } from '@core/interfaces/date-range';
 import { MovePipe } from '@shared/pipes/move.pipe';
@@ -31,8 +31,18 @@ export class MovesService {
     );
   }
 
+  getLastAssignedMoves(patient: string, limitDate: string): Observable<MoveModel[]> {
+    return this.http.get<MoveModel[]>(`${environment.api}/moves/lastAssigned/${patient}?limitDate=${limitDate}`).pipe(
+      map((data) => {
+        return data.map((move: MoveModel) => {
+          return this.movePipe.transform(move);
+        });
+      })
+    );
+  }
+
   createMove(foodRequest: MoveRequestModel): Observable<MoveModel> {
-    return this.http.post<MoveModel>(`${environment.api}/moves/create`, foodRequest).pipe(
+    return this.http.post<MoveModel>(`${environment.api}/moves`, foodRequest).pipe(
       map((move) => {
         return this.movePipe.transform(move);
       })
@@ -40,7 +50,7 @@ export class MovesService {
   }
 
   updateMove(id: string, foodRequest: MoveRequestModel): Observable<MoveModel> {
-    return this.http.patch<MoveModel>(`${environment.api}/moves/update/${id}`, foodRequest).pipe(
+    return this.http.patch<MoveModel>(`${environment.api}/moves/${id}`, foodRequest).pipe(
       map((move) => {
         return this.movePipe.transform(move);
       })
@@ -48,7 +58,7 @@ export class MovesService {
   }
 
   removeMove(id: string): Observable<MoveModel> {
-    return this.http.delete<MoveModel>(`${environment.api}/moves/remove/${id}`).pipe(
+    return this.http.delete<MoveModel>(`${environment.api}/moves/${id}`).pipe(
       map((move) => {
         return this.movePipe.transform(move);
       })
@@ -60,14 +70,18 @@ export class MovesService {
   }
 
   importWeekRoutine(weekRoutineId: string, patientId: string, date: Date): Observable<MoveModel[]> {
-    return this.http
-      .get<MoveModel[]>(`${environment.api}/moves/importWeekRoutine/${weekRoutineId}/${patientId}/${date}`)
-      .pipe(
-        map((data) => {
-          return data.map((food: MoveModel) => {
-            return this.movePipe.transform(food);
-          });
-        })
-      );
+    const url = `${environment.api}/moves/importWeekRoutine`;
+    const params = new HttpParams()
+      .set('weekRoutineId', weekRoutineId)
+      .set('patientId', patientId)
+      .set('date', date.toISOString());
+
+    return this.http.post<MoveModel[]>(url, null, { params }).pipe(
+      map((data) => {
+        return data.map((move: MoveModel) => {
+          return this.movePipe.transform(move);
+        });
+      })
+    );
   }
 }

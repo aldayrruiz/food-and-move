@@ -15,5 +15,6 @@ import { WeekRoutinesService } from './week-routines.service';
   ],
   controllers: [WeekRoutinesController],
   providers: [WeekRoutinesService],
+  exports: [WeekRoutinesService],
 })
 export class WeekRoutinesModule {}

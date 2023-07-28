@@ -68,27 +68,47 @@ export class MovesPageComponent implements OnInit {
     this.movesService
       .getMoves(this.patient!._id, this.dateRange)
       .pipe(finalize(() => this.loaderService.isLoading.next(false)))
-      .subscribe(
-        (res) => {
-          this.days.forEach((_, i) => {
-            this.days[i].items = res.filter((moveItem) => {
-              return getDay(moveItem.date) - 1 == i;
-            });
-            this.days[i].date = addDay(this.dateRange.startDate!, i);
-          });
+      .subscribe({
+        next: (res) => {
+          if (res.length === 0) {
+            this.loadLastAssignedMoves();
+          } else {
+            this.setMoves(res);
+          }
         },
-        (err) => {
+        error: (err) => {
           console.log(err);
-        }
-      );
+        },
+      });
   }
 
-  addMove(date: Date): void {
-    this.routerService.goToAddMove(this.patient._id, date);
+  loadLastAssignedMoves(): void {
+    const limitDate = this.dateRange.startDate.toJSON();
+    this.movesService.getLastAssignedMoves(this.patient?._id, limitDate).subscribe({
+      next: (res) => {
+        this.setMoves(res);
+      },
+      error: (err) => {
+        this.setMoves([]);
+      },
+    });
   }
 
-  editMove(move: MoveModel): void {
-    this.routerService.goToEditMove(this.patient._id, move._id);
+  setMoves(moves: MoveModel[]): void {
+    this.days.forEach((_, i) => {
+      this.days[i].items = moves.filter((moveItem) => {
+        return getDay(moveItem.date) - 1 == i;
+      });
+      this.days[i].date = addDay(this.dateRange.startDate, i);
+    });
+  }
+
+  async addMove(date: Date) {
+    await this.routerService.goToAddMove(this.patient._id, date);
+  }
+
+  async editMove(move: MoveModel) {
+    await this.routerService.goToEditMove(this.patient._id, move._id);
   }
 
   deleteMove(move: MoveModel): void {
@@ -121,13 +141,15 @@ export class MovesPageComponent implements OnInit {
   importWeekRoutine() {
     const dialogRef = this.dialog.open(ImportWeekRoutineDialogComponent, {
       width: '800px',
+      data: { showCustom: false },
     });
 
     dialogRef.afterClosed().subscribe({
       next: (weekRoutine: WeekRoutineModel) => {
         if (weekRoutine) {
           this.clearMoves();
-          this.loadMoves();
+          this.loadWeekRoutine(weekRoutine);
+          this.setWeekRoutineToLastConsult(weekRoutine._id);
         }
       },
     });
@@ -139,6 +161,31 @@ export class MovesPageComponent implements OnInit {
       .clearMoves(this.patient._id, this.dateRange)
       .pipe(finalize(() => this.loaderService.isLoading.next(false)))
       .subscribe();
+  }
+
+  private loadWeekRoutine(weekRoutine: WeekRoutineModel) {
+    this.loaderService.isLoading.next(true);
+    this.movesService
+      .importWeekRoutine(weekRoutine._id, this.patient._id, this.dateRange.startDate)
+      .pipe(finalize(() => this.loaderService.isLoading.next(false)))
+      .subscribe({
+        next: (res: MoveModel[]) => {
+          this.setMoves(res);
+        },
+        error: (err) => {
+          console.log(err);
+          this.snackerService.showError(err.error.message);
+        },
+      });
+  }
+
+  private setWeekRoutineToLastConsult(weekRoutineId: string) {
+    this.consultsService.updateConsult(this.consult._id, { weekRoutine: weekRoutineId }).subscribe({
+      next: (res) => {},
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   private initPatient() {

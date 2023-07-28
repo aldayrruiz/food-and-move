@@ -80,7 +80,7 @@ export class PatientsService {
     if (!deletedPatient) throw new NotFoundException('No se ha encontrado al paciente');
     await this.consultsService.removeByPatient(deletedPatient._id);
     await this.foodsService.removeByPatient(deletedPatient._id);
-    await this.movesService.removeByPatient(deletedPatient._id);
+    await this.movesService.clearMoves(deletedPatient._id);
     return deletedPatient;
   }
 

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { WeekRoutineModel } from '@core/models/week-routine/week-routine';
 import { WeekRoutinesService } from '@core/services/api/week-routines.service';
 
@@ -13,13 +13,16 @@ export class ImportWeekRoutineDialogComponent implements OnInit {
   items: WeekRoutineModel[] = [];
   selected: any;
   custom = 'CUSTOM';
+  showCustom = true;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private readonly weekRoutinesService: WeekRoutinesService,
     private readonly dialogRef: MatDialogRef<ImportWeekRoutineDialogComponent>
   ) {}
 
   ngOnInit(): void {
+    this.showCustom = this.data.showCustom;
     this.loadItems();
   }
 

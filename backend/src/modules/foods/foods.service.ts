@@ -99,7 +99,7 @@ export class FoodsService {
     const diet: Diet = await this.dietsService.findOne(dietId);
     const dateRange: { startDate: Date; endDate: Date } = getDateRange(date);
 
-    for (let i: number = 0; i < 7; i++) {
+    for (let i = 0; i < 7; i++) {
       const day: Date = addDay(dateRange.startDate, i);
       const recipes: Recipe[] = this.getRecipesFromDietByIndexDay(diet, i);
       await this.createFoodsForPatient(recipes, patientId, day);
@@ -137,6 +137,7 @@ export class FoodsService {
         comments: '',
         date,
       };
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       await this.create(food as FoodDto);
     }
@@ -144,9 +145,9 @@ export class FoodsService {
 
   async clearFoods(patientId: string, date: DateRangeDto) {
     const foods = await this.findByPatient(patientId, date);
-    foods.forEach(async (food) => {
+    for (const food of foods) {
       await this.remove(food._id);
-    });
+    }
   }
 
   async lastFoodsAssigned(patientId: string, limitDate: string) {

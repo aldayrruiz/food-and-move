@@ -17,6 +17,9 @@
   <app-weekly-calendar
     [days]="days"
     [type]="weeklyCalendarType.Move"
+    [showAdd]="false"
+    [showEdit]="false"
+    [showDelete]="false"
     (add)="addMove($event.date)"
     (edit)="editMove($event.item)"
     (delete)="deleteMove($event.item)"

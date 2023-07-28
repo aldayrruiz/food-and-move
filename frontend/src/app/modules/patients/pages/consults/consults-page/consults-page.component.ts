@@ -37,6 +37,7 @@ export class ConsultsPageComponent implements OnInit {
     { index: 1, field: 'created_at', header: 'Fecha', sort: true, type: ColumnType.DATE },
     { index: 2, field: 'owner', header: 'Profesional', sort: true, type: ColumnType.NAME },
     { index: 3, field: 'diet.title', header: 'Dieta', sort: true },
+    { index: 4, field: 'weekRoutine.title', header: 'Rutina semanal', sort: true },
   ];
   indexDisplay = 10;
 
@@ -140,7 +141,7 @@ export class ConsultsPageComponent implements OnInit {
         paging: { page: this.page + 1, limit: this.limit },
         sorting: [{ field: this.sortField, direction: this.sortDirection }],
         filter: { patient: this.patient?._id },
-        populate: ['owner', 'diet'],
+        populate: ['owner', 'diet', 'weekRoutine'],
       })
       .pipe(
         finalize(() => {

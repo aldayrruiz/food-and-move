@@ -1,20 +1,21 @@
+import { WeekRoutinesModule } from '@modules/week-routines/week-routines.module';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MovesController } from './moves.controller';
 import { MovesService } from './moves.service';
-import { MoveSchema } from './schemas/move.schemas';
+import { Move, MoveSchema } from './schemas/move.schemas';
+
+const moveMongooseModule = MongooseModule.forFeature([
+  {
+    name: Move.name,
+    schema: MoveSchema,
+  },
+]);
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([
-      {
-        name: 'moves',
-        schema: MoveSchema,
-      },
-    ]),
-  ],
+  imports: [moveMongooseModule, WeekRoutinesModule],
   controllers: [MovesController],
   providers: [MovesService],
-  exports: [MovesService],
+  exports: [moveMongooseModule, MovesService],
 })
 export class MovesModule {}

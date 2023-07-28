@@ -1,4 +1,5 @@
 import { FoodsModule } from '@modules/foods/foods.module';
+import { MovesModule } from '@modules/moves/moves.module';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConsultsController } from './consults.controller';
@@ -13,7 +14,7 @@ const consultMongooseModule = MongooseModule.forFeature([
 ]);
 
 @Module({
-  imports: [consultMongooseModule, FoodsModule],
+  imports: [consultMongooseModule, FoodsModule, MovesModule],
   controllers: [ConsultsController],
   providers: [ConsultsService],
   exports: [ConsultsService],
