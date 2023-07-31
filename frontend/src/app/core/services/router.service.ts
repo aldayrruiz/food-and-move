@@ -187,4 +187,9 @@ export class RouterService {
     const url = `patients/${patientId}/moves/edit-move/${moveId}`;
     await this.router.navigate([url]);
   }
+
+  // Admin
+  async goToLinkPatientsToEmployees() {
+    await this.router.navigate(['admin/link-patients-to-employees']);
+  }
 }

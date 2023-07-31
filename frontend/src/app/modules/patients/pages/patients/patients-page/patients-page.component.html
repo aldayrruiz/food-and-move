@@ -1,9 +1,4 @@
 <div class="container">
-  <div class="btn__add" *ngIf="isSmall">
-    <button mat-fab color="primary" (click)="addPatient()">
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
   <div class="crud__header">
     <p class="header__subtitle">Pacientes</p>
     <mat-form-field appearance="standard" class="input__search">
@@ -11,9 +6,9 @@
       <input matInput (keyup)="applyFilter()" placeholder="Ej. Juan" #input autocomplete="off" [(ngModel)]="search" />
     </mat-form-field>
     <div>
-      <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="importPatient()">Importar Paciente</button>
-      <span style="margin-left: 20px"></span>
-      <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addPatient()">Nuevo Paciente</button>
+      <button class="margin-button" mat-raised-button color="primary" (click)="goToLinkPatientsToEmployees()">Vincular Muchos</button>
+      <button class="margin-button" mat-raised-button color="primary" (click)="importPatient()">Importar Paciente</button>
+      <button class="margin-button" mat-raised-button color="primary" (click)="addPatient()">Nuevo Paciente</button>
     </div>
   </div>
   <mat-divider></mat-divider>

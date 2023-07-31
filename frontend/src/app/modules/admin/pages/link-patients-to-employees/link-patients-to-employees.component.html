@@ -1,0 +1,47 @@
+<div>
+  <app-autocomplete-field
+    class="autocomplete"
+    *ngIf="patientObjects"
+    label="Paciente"
+    [objectFields]="patientObjects"
+    #autocompletePatients
+  >
+  </app-autocomplete-field>
+  <button class="margin-button" mat-raised-button color="primary" (click)="addPatientToTable()"
+          [disabled]="isAddPatientButtonDisabled()">Añadir
+  </button>
+</div>
+
+<app-link-table [tableStructure]="patientsTableStructure" [items]="patients"
+                [objectFields]="patientObjects" [dataSource]="patientsDataSource"
+                (itemRemovedEvent)="removePatientFromTable()" #patientsTable></app-link-table>
+
+
+<div>
+  <app-autocomplete-field
+    class="autocomplete"
+    *ngIf="employeeObjects"
+    label="Profesional"
+    [objectFields]="employeeObjects"
+    #autocompleteEmployees
+  >
+  </app-autocomplete-field>
+  <button class="margin-button" mat-raised-button color="primary" (click)="addEmployeeToTable()"
+          [disabled]="isAddEmployeeButtonDisabled()">Añadir
+  </button>
+</div>
+
+<app-link-table [tableStructure]="employeesTableStructure" [items]="employees"
+                [objectFields]="employeeObjects" [dataSource]="employeesDataSource"
+                (itemRemovedEvent)="removeEmployeeFromTable()" #employeesTable></app-link-table>
+<div class="container-link-button">
+  <button class="margin-link-button" mat-raised-button color="primary" (click)="linkAll()"
+          [disabled]="isDisabledLinkAllButton()" >
+    Vincular todos
+  </button>
+  <button class="margin-link-button" mat-raised-button color="primary" (click)="unlinkAll()"
+          [disabled]="isDisabledLinkAllButton()" >
+    Desvincular todos
+  </button>
+</div>
+

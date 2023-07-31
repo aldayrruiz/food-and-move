@@ -1,15 +1,17 @@
-<h2 mat-dialog-title>Importar paciente</h2>
-<mat-dialog-content class="mat-typography">
-  <app-autocomplete-field
-    *ngIf="patientObjectFields"
-    style="width: 500px"
-    label="Paciente"
-    [objectFields]="patientObjectFields"
-    #autocompleteFieldComponent
-  >
-  </app-autocomplete-field>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="importPatient()">Importar</button>
-</mat-dialog-actions>
+<div style="width: 600px">
+  <h2 mat-dialog-title>Importar paciente</h2>
+  <mat-dialog-content class="mat-typography">
+    <app-autocomplete-field
+      *ngIf="patientObjectFields"
+      style="width: 500px"
+      label="Paciente"
+      [objectFields]="patientObjectFields"
+      #autocompleteFieldComponent
+    >
+    </app-autocomplete-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="importPatient()">Importar</button>
+  </mat-dialog-actions>
+</div>

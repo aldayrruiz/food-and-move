@@ -27,7 +27,6 @@ import { DEFAULT_LIMIT } from '../../../../../constants/app.constants';
 })
 export class PatientsPageComponent implements OnInit {
   listPatients: PatientModel[] = [];
-  isSmall = false;
   isLoadingResults = false;
   user: EmployeeModel | null = null;
 
@@ -67,7 +66,6 @@ export class PatientsPageComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.storageService.getUser();
     this.loadPatients();
-    this.setColumnsBySize();
   }
 
   loadPatients(): void {
@@ -106,35 +104,6 @@ export class PatientsPageComponent implements OnInit {
       );
   }
 
-  setColumnsBySize(): void {
-    this.breakpointObserver.observe(['(max-width: 959px)']).subscribe((result) => {
-      this.isSmall = false;
-      if (result.matches) {
-        this.isSmall = true;
-      }
-    });
-    this.breakpointObserver.observe(['(max-width: 900px)', '(min-width:651px)']).subscribe((result) => {
-      if (result.matches) {
-        this.indexDisplay = 3;
-      }
-    });
-    this.breakpointObserver.observe(['(max-width: 650px)', '(min-width:551px)']).subscribe((result) => {
-      if (result.matches) {
-        this.indexDisplay = 2;
-      }
-    });
-    this.breakpointObserver.observe(['(max-width: 550px)']).subscribe((result) => {
-      if (result.matches) {
-        this.indexDisplay = 1;
-      }
-    });
-    this.breakpointObserver.observe(['(min-width:901px)']).subscribe((result) => {
-      if (result.matches) {
-        this.indexDisplay = 4;
-      }
-    });
-  }
-
   changeSort(sort: Sort) {
     this.sortDirection = sort.direction;
     this.sortField = sort.active;
@@ -156,6 +125,10 @@ export class PatientsPageComponent implements OnInit {
     this.search = '';
     this.page = 0;
     this.loadPatients();
+  }
+
+  async goToLinkPatientsToEmployees() {
+    await this.routerService.goToLinkPatientsToEmployees();
   }
 
   importPatient() {

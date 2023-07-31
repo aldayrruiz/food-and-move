@@ -1,0 +1,16 @@
+.autocomplete {
+  width: 50%;
+}
+
+.margin-button {
+  margin-bottom: 20px;
+}
+
+.container-link-button {
+  display: flex;
+  justify-content: center;
+}
+
+.margin-link-button {
+  margin: 20px;
+}
