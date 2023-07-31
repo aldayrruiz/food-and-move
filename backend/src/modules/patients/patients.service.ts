@@ -124,13 +124,6 @@ export class PatientsService {
   async unlinkEmployeePatient(unlinkPatientDto: LinkPatientDto) {
     const { patientId, employeeId } = unlinkPatientDto;
     const employee = await this.employeesService.findOne(employeeId);
-    const patient = await this.findById(patientId);
-    const indexOfEmployee = patient.employees.indexOf(employee._id);
-    if (indexOfEmployee < 0) {
-      // Not linked
-      return;
-    }
-    patient.employees.splice(indexOfEmployee, 1);
-    await patient.save();
+    await this.patientModel.findByIdAndUpdate(patientId, { $pull: { employees: employee._id } }).exec();
   }
 }

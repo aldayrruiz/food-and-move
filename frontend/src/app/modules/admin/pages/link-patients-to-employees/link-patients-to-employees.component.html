@@ -7,15 +7,25 @@
     #autocompletePatients
   >
   </app-autocomplete-field>
-  <button class="margin-button" mat-raised-button color="primary" (click)="addPatientToTable()"
-          [disabled]="isAddPatientButtonDisabled()">Añadir
+  <button
+    class="margin-button"
+    mat-raised-button
+    color="primary"
+    (click)="addPatientToTable()"
+    [disabled]="isAddPatientButtonDisabled()"
+  >
+    Añadir
   </button>
 </div>
 
-<app-link-table [tableStructure]="patientsTableStructure" [items]="patients"
-                [objectFields]="patientObjects" [dataSource]="patientsDataSource"
-                (itemRemovedEvent)="removePatientFromTable()" #patientsTable></app-link-table>
-
+<app-link-table
+  [tableStructure]="patientsTableStructure"
+  [items]="patients"
+  [objectFields]="patientObjects"
+  [dataSource]="patientsDataSource"
+  (itemRemovedEvent)="removePatientFromTable()"
+  #patientsTable
+></app-link-table>
 
 <div>
   <app-autocomplete-field
@@ -26,22 +36,42 @@
     #autocompleteEmployees
   >
   </app-autocomplete-field>
-  <button class="margin-button" mat-raised-button color="primary" (click)="addEmployeeToTable()"
-          [disabled]="isAddEmployeeButtonDisabled()">Añadir
+  <button
+    class="margin-button"
+    mat-raised-button
+    color="primary"
+    (click)="addEmployeeToTable()"
+    [disabled]="isAddEmployeeButtonDisabled()"
+  >
+    Añadir
   </button>
 </div>
 
-<app-link-table [tableStructure]="employeesTableStructure" [items]="employees"
-                [objectFields]="employeeObjects" [dataSource]="employeesDataSource"
-                (itemRemovedEvent)="removeEmployeeFromTable()" #employeesTable></app-link-table>
+<app-link-table
+  [tableStructure]="employeesTableStructure"
+  [items]="employees"
+  [objectFields]="employeeObjects"
+  [dataSource]="employeesDataSource"
+  (itemRemovedEvent)="removeEmployeeFromTable()"
+  #employeesTable
+></app-link-table>
 <div class="container-link-button">
-  <button class="margin-link-button" mat-raised-button color="primary" (click)="linkAll()"
-          [disabled]="isDisabledLinkAllButton()" >
+  <button
+    class="margin-link-button"
+    mat-raised-button
+    color="primary"
+    (click)="linkAll()"
+    [disabled]="isDisabledLinkAllButton()"
+  >
     Vincular todos
   </button>
-  <button class="margin-link-button" mat-raised-button color="primary" (click)="unlinkAll()"
-          [disabled]="isDisabledLinkAllButton()" >
+  <button
+    class="margin-link-button"
+    mat-raised-button
+    color="primary"
+    (click)="unlinkAll()"
+    [disabled]="isDisabledLinkAllButton()"
+  >
     Desvincular todos
   </button>
 </div>
-
