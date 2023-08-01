@@ -28,7 +28,7 @@ import { DEFAULT_LIMIT } from '../../../../../constants/app.constants';
 export class PatientsPageComponent implements OnInit {
   listPatients: PatientModel[] = [];
   isLoadingResults = false;
-  user: EmployeeModel | null = null;
+  user!: EmployeeModel;
 
   dataSource!: MatTableDataSource<any>;
 

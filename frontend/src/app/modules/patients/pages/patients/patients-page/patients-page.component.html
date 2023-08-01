@@ -6,7 +6,7 @@
       <input matInput (keyup)="applyFilter()" placeholder="Ej. Juan" #input autocomplete="off" [(ngModel)]="search" />
     </mat-form-field>
     <div>
-      <button class="margin-button" mat-raised-button color="primary" (click)="goToLinkPatientsToEmployees()">
+      <button class="margin-button" mat-raised-button color="primary" (click)="goToLinkPatientsToEmployees()" *ngIf="user.admin">
         Vincular Muchos
       </button>
       <button class="margin-button" mat-raised-button color="primary" (click)="importPatient()">
