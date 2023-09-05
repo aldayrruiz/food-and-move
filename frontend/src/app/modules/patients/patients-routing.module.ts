@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ConsultResolver } from '@core/resolvers/consult.resolver';
 import { EmployeesResolver } from '@core/resolvers/employees.resolver';
+import { FoodResolver } from '@core/resolvers/food.resolver';
+import { MoveResolver } from '@core/resolvers/move.resolver';
 import { PatientResolver } from '@core/resolvers/patient.resolver';
 import { AddConsultPageComponent } from '@modules/patients/pages/consults/add-consult-page/add-consult-page.component';
 import { ConsultsPageComponent } from '@modules/patients/pages/consults/consults-page/consults-page.component';
@@ -64,7 +66,7 @@ const routes: Routes = [
       {
         path: ':patientId/foods/edit-food/:foodId',
         component: AddFoodPageComponent,
-        resolve: { patient: PatientResolver },
+        resolve: { patient: PatientResolver, food: FoodResolver },
       },
       // Moves
       {
@@ -78,9 +80,9 @@ const routes: Routes = [
         resolve: { patient: PatientResolver },
       },
       {
-        path: ':patientId/moves/edit-move/:id',
+        path: ':patientId/moves/edit-move/:moveId',
         component: AddMovePageComponent,
-        resolve: { patient: PatientResolver },
+        resolve: { patient: PatientResolver, move: MoveResolver },
       },
       // Feedback
       {

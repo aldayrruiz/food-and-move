@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { EmployeeModel } from '@core/models/employee/employee.model';
 import { PatientModel } from '@core/models/patient/patient.model';
 import { PatientsService } from '@core/services/api/patients.service';
+import { SnackerService } from '@core/services/gui/snacker.service';
 import { LinkTableComponent } from '@modules/admin/components/link-table/link-table.component';
 import {
   AutocompleteFieldComponent,
@@ -11,6 +12,7 @@ import {
 } from '@shared/components/autocomplete-field/autocomplete-field.component';
 import { ColumnType } from '@shared/components/table/enums/column-type';
 import { TableStructure } from '@shared/components/table/interfaces/table-structure';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-link-patients-to-employees',
@@ -48,7 +50,12 @@ export class LinkPatientsToEmployeesComponent implements OnInit {
     { index: 3, field: 'phone', header: 'Teléfono', sort: true },
     { index: 4, field: 'admin', header: '', sort: true, type: ColumnType.ADMIN },
   ];
-  constructor(private readonly activatedRoute: ActivatedRoute, private readonly patientsService: PatientsService) {}
+
+  constructor(
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly patientsService: PatientsService,
+    private readonly snackerService: SnackerService
+  ) {}
 
   ngOnInit(): void {
     this.initPatients();
@@ -99,21 +106,31 @@ export class LinkPatientsToEmployeesComponent implements OnInit {
   linkAll() {
     const patients = this.patientsTable?.dataSource?.data;
     const employees = this.employeesTable?.dataSource?.data;
+    const requests = [];
     for (const patient of patients) {
       for (const employee of employees) {
-        this.patientsService.linkEmployeePatient(employee._id, patient._id).subscribe();
+        requests.push(this.patientsService.linkEmployeePatient(employee._id, patient._id));
       }
     }
+    forkJoin(requests).subscribe({
+      next: () => this.snackerService.showSuccessful('Vinculados correctamente'),
+      error: () => this.snackerService.showError('Error al vincular'),
+    });
   }
 
   async unlinkAll() {
     const patients = this.patientsTable?.dataSource?.data;
     const employees = this.employeesTable?.dataSource?.data;
+    const requests = [];
     for (const patient of patients) {
       for (const employee of employees) {
-        this.patientsService.unlinkEmployeePatient(employee._id, patient._id).subscribe();
+        requests.push(this.patientsService.unlinkEmployeePatient(employee._id, patient._id));
       }
     }
+    forkJoin(requests).subscribe({
+      next: () => this.snackerService.showSuccessful('Desvinculados correctamente'),
+      error: () => this.snackerService.showError('Error al desvincular'),
+    });
   }
 
   private initPatients() {

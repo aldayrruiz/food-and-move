@@ -4,7 +4,7 @@
   </div>
   <h1 class="title text-center">{{ employee | name }}</h1>
   <mat-divider></mat-divider>
-  <div class="section section-top">
+  <div class="section section-top" style="margin-bottom: 15px">
     <div class="item">
       <mat-icon class="icon">email</mat-icon>
       <p class="text">{{ employee.email }}</p>
@@ -16,6 +16,16 @@
     <div class="item" *ngIf="employee.admin">
       <mat-icon class="icon">assignment_ind</mat-icon>
       <p class="text">Administrador</p>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="section section-top">
+    <div class="item" *ngFor="let patient of patients">
+      <mat-icon class="icon">person</mat-icon>
+      <p class="text">{{patient.name}} {{patient.surname}}</p>
+    </div>
+    <div class="item" *ngIf="patients.length === 0">
+      <p class="text">No tiene asignado ningún paciente</p>
     </div>
   </div>
 </div>

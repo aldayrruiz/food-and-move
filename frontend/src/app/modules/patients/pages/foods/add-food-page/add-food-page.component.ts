@@ -11,7 +11,6 @@ import { PatientModel } from '@core/models/patient/patient.model';
 import { RecipeModel } from '@core/models/recipe/recipe.model';
 import { AttachmentsService } from '@core/services/api/attachments.service';
 import { FoodsService } from '@core/services/api/foods.service';
-import { PatientsService } from '@core/services/api/patients.service';
 import { LoaderService } from '@core/services/gui/loader.service';
 import { SnackerService } from '@core/services/gui/snacker.service';
 import { RouterService } from '@core/services/router.service';
@@ -56,7 +55,6 @@ export class AddFoodPageComponent implements OnInit {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly patientsService: PatientsService,
     private readonly foodsService: FoodsService,
     private readonly attachmentsService: AttachmentsService,
     private readonly optionalPipe: OptionalPipe,
@@ -291,9 +289,9 @@ export class AddFoodPageComponent implements OnInit {
       return;
     }
     this.edit = true;
-    this.foodsService.getFood(foodId).subscribe((res) => {
-      this.food = res;
-      this.date = res.date;
+    this.activatedRoute.data.subscribe((data) => {
+      this.food = data['food'];
+      this.date = this.food.date;
     });
   }
 }

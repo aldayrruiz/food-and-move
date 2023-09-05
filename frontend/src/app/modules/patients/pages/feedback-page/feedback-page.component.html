@@ -1,6 +1,7 @@
-<app-header-patient [patient]="patient" title="Feedback"></app-header-patient>
+<app-header-patient [patient]="patient" title="Comentarios"></app-header-patient>
 <div class="container">
   <!-- Pick a date to show feedback -->
+  <h3 style="text-align: center; margin-top: 20px">Seleccione un día o un rango de fechas</h3>
   <div class="form__main">
     <div class="form__box box__shadow" style="margin: 10px">
       <div class="main__primary">
@@ -93,7 +94,7 @@
                   <p class="statistic-card-title">{{ notAnsweredPercentage | number : '1.0-0' }} %</p>
                   <img class="icon_img" src="assets/images/no-feedback.png" />
                 </div>
-                No feedback
+                Sin comentarios
               </mat-card-content>
             </mat-card>
           </div>

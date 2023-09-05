@@ -150,7 +150,7 @@ export class RoutinesPageComponent implements OnInit {
             )
             .subscribe(
               (res) => {
-                this.snackerService.showSuccessful('Rutina eliminada con éxito');
+                this.snackerService.showSuccessful('Ejercicio eliminada con éxito');
                 this.loadRoutines();
               },
               (err) => {

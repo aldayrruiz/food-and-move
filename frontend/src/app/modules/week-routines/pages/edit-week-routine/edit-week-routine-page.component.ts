@@ -110,7 +110,7 @@ export class EditWeekRoutinePageComponent implements OnInit {
   importRoutine(routine: RoutineModel, day: Day) {
     this.weekRoutinesService.addRoutine(this.weekRoutine._id, day.day, routine).subscribe({
       next: (res) => {
-        this.snackerService.showSuccessful('Rutina importada con éxito');
+        this.snackerService.showSuccessful('Ejercicio importada con éxito');
         this.refreshUI();
       },
       error: (err) => {
@@ -139,7 +139,7 @@ export class EditWeekRoutinePageComponent implements OnInit {
             )
             .subscribe({
               next: (res) => {
-                this.snackerService.showSuccessful('Rutina eliminada con éxito');
+                this.snackerService.showSuccessful('Ejercicio eliminada con éxito');
                 this.weekRoutine = res;
                 this.initDays();
               },

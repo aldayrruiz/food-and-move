@@ -1,10 +1,10 @@
 <div class="container">
-  <h1>Agregar Dieta Semanal</h1>
+  <h1>Nuevo</h1>
   <form [formGroup]="form" (ngSubmit)="addDiet()">
     <div class="form__inputs">
       <mat-form-field class="input__field">
         <mat-label>Título</mat-label>
-        <input type="text" matInput autocomplete="off" formControlName="title" tabindex="4" />
+        <input type="text" matInput autocomplete="off" formControlName="title" tabindex="4" (keyup)="changeToTitleCase($event)" />
       </mat-form-field>
       <mat-form-field class="input__field">
         <mat-label>Descripción</mat-label>

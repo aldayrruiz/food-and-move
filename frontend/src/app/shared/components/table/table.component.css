@@ -17,7 +17,7 @@
 
 .table__container {
   min-height: 200px;
-  max-height: 50vh;
+  max-height: 60vh;
   overflow: auto;
 }
 

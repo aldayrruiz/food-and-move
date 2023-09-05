@@ -20,7 +20,7 @@
         <a class="item__delete" (click)="$event.stopPropagation(); deleteItem(day, food)"><mat-icon>close</mat-icon></a>
       </div>
       <div class="add__day" *ngIf="day.items.length == 0">
-        <button *ngIf="showAdd" mat-stroked-button color="primary" (click)="addItem(day)">Agregar Comida</button>
+        <button *ngIf="showAdd" mat-stroked-button color="primary" (click)="addItem(day)">Nuevo</button>
       </div>
     </div>
     <div class="day__main" *ngIf="type == weeklyCalendarType.Move">
@@ -31,7 +31,7 @@
         <a class="item__delete" (click)="$event.stopPropagation(); deleteItem(day, move)"><mat-icon>close</mat-icon></a>
       </div>
       <div class="add__day" *ngIf="day.items.length == 0">
-        <button *ngIf="showAdd" mat-stroked-button color="primary" (click)="addItem(day)">Agregar Ejercicio</button>
+        <button *ngIf="showAdd" mat-stroked-button color="primary" (click)="addItem(day)">Nuevo</button>
       </div>
     </div>
   </div>

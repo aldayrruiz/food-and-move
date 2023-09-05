@@ -2,14 +2,14 @@
   <div class="header">
     <p class="title">PDF</p>
     <p class="subtitle">Agregar archivo</p>
-    <mat-icon class="icon">insert_drive_file</mat-icon>
+    <mat-icon class="icon">picture_as_pdf</mat-icon>
   </div>
   <div *ngIf="!attachment" class="import__pdf">
     <button type="button" mat-stroked-button color="primary" (click)="importPDF()">Importar PDF</button>
   </div>
   <div *ngIf="attachment" class="attachment">
     <div class="attachment__main">
-      <mat-icon class="icon">insert_drive_file</mat-icon>
+      <mat-icon class="icon">picture_as_pdf</mat-icon>
       <p class="attachment__title">{{ attachment.title }}</p>
     </div>
     <div class="attachemnt__buttons">

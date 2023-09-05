@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormRoutineComponent } from '@modules/routines/components/form-routine/form-routine.component';
@@ -10,5 +10,6 @@ import { SharedModule } from '@shared/shared.module';
   declarations: [InfoRoutineComponent, FormRoutineComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MatModule, SharedModule],
   exports: [InfoRoutineComponent, FormRoutineComponent],
+  providers: [TitleCasePipe],
 })
 export class RoutineComponentsModule {}

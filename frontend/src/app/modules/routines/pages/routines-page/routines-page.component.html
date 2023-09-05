@@ -5,7 +5,7 @@
     </button>
   </div>
   <div class="crud__header">
-    <p class="header__subtitle">Rutinas</p>
+    <p class="header__subtitle">Ejercicios</p>
     <mat-form-field appearance="standard" class="input__search">
       <mat-label>Buscar</mat-label>
       <input
@@ -17,7 +17,7 @@
         [(ngModel)]="search"
       />
     </mat-form-field>
-    <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addRoutine()">Agregar Rutina</button>
+    <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addRoutine()">Nuevo</button>
   </div>
   <mat-divider></mat-divider>
   <div class="crud__main">

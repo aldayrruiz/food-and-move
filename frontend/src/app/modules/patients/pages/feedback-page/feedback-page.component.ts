@@ -122,7 +122,6 @@ export class FeedbackPageComponent implements OnInit {
     this.neutralAnsweredPercentage = (mapper.NEUTRAL / totalQuestionsAsked) * 100;
     this.badAnsweredPercentage = (mapper.BAD / totalQuestionsAsked) * 100;
     this.notAnsweredPercentage = (totalQuestionNotAnswered / totalQuestionsAsked) * 100;
-    console.log(mapper);
   }
 
   private getTotalQuestionsAnswered() {

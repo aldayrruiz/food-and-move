@@ -54,7 +54,7 @@
     <div class="list" *ngSwitchDefault>
       <div *ngFor="let ingredient of recipe.ingredients" class="list__item list__item-between">
         <p class="text">{{ ingredient.name }}</p>
-        <p class="text">{{ ingredient.quantity != 0 ? ingredient.quantity : '' }} {{ ingredient.unit }}</p>
+        <p class="text">{{ ingredient.quantity !== 0 ? ingredient.quantity : '' }} {{ ingredient.unit }}</p>
       </div>
     </div>
   </div>
@@ -68,7 +68,7 @@
     </div>
     <div class="list" *ngSwitchDefault>
       <a [href]="getAttachmentUrl()" class="list__item list__item-normal">
-        <mat-icon class="icon">video_library</mat-icon>
+        <mat-icon class="icon">picture_as_pdf</mat-icon>
         <p class="url text">{{ attachment?.title || 'archivo' }}</p>
       </a>
     </div>

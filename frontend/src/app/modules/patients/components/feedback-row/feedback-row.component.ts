@@ -36,7 +36,6 @@ export class FeedbackRowComponent implements OnInit, OnChanges {
     const daysAnswered = this.feedbacks.length;
     // @ts-ignore
     const good = this.feedbacks.filter((f) => f[this.fieldInput] === FeedbackInput.GOOD).length;
-    console.log(good);
     // @ts-ignore
     const neutral = this.feedbacks.filter(
       // @ts-ignore

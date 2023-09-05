@@ -1,3 +1,4 @@
+import { TitleCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -22,7 +23,8 @@ export class AddDietComponent implements OnInit {
     private readonly optionalPipe: OptionalPipe,
     private readonly dietsService: DietsService,
     private readonly loaderService: LoaderService,
-    private readonly routerService: RouterService
+    private readonly routerService: RouterService,
+    private readonly titleCasePipe: TitleCasePipe
   ) {}
 
   ngOnInit(): void {
@@ -73,5 +75,9 @@ export class AddDietComponent implements OnInit {
       sunday: [],
     };
     return this.optionalPipe.transform(request);
+  }
+
+  changeToTitleCase(event: any) {
+    event.target.value = this.titleCasePipe.transform(event.target.value);
   }
 }

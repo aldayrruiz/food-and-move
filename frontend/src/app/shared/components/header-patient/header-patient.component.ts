@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { PatientModel } from '@core/models/patient/patient.model';
 import { RouterService } from '@core/services/router.service';
 
@@ -11,7 +12,7 @@ export class HeaderPatientComponent {
   @Input() patient?: PatientModel;
   @Input() title = '';
 
-  constructor(private readonly routerService: RouterService) {}
+  constructor(private readonly routerService: RouterService, private readonly router: Router) {}
 
   exit(): void {
     this.routerService.goToPatients();
@@ -40,5 +41,9 @@ export class HeaderPatientComponent {
   goToFeedback() {
     if (!this.patient) return;
     this.routerService.goToFeedback(this.patient._id);
+  }
+
+  buttonDisabled(route: string): boolean {
+    return this.router.url.includes(`/${route}`);
   }
 }

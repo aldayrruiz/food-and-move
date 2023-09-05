@@ -3,6 +3,7 @@ import { PatientsService } from '@modules/patients/patients.service';
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
 
+// THIS IS NOT USED BECAUSE IT IS REPLACED BY JWT, BUT IT IS A GOOD EXAMPLE OF HOW TO USE MIDDLEWARES
 @Injectable()
 export class AddUserToRequestMiddleware implements NestMiddleware {
   constructor(private readonly employeeService: EmployeesService, private readonly patientsService: PatientsService) {}

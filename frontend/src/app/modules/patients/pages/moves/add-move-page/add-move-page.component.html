@@ -5,14 +5,14 @@
         <button type="button" mat-icon-button matTooltip="Volver" (click)="exit()">
           <mat-icon>clear</mat-icon>
         </button>
-        <p class="header__subtitle">{{ edit ? 'Editar ' : 'Agregar ' }} Rutina</p>
+        <p class="header__subtitle">{{ edit ? 'Editar ' : 'Agregar ' }} Ejercicio</p>
       </div>
       <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid" tabindex="6">Guardar</button>
     </div>
     <mat-divider></mat-divider>
     <div class="header__date">
       <p class="form__date">{{ this.date | date : 'dd/MM/yyyy' }}</p>
-      <button mat-stroked-button color="primary" type="button" (click)="importRoutine()">Importar Rutina</button>
+      <button mat-stroked-button color="primary" type="button" (click)="importRoutine()">Importar Ejercicio</button>
     </div>
     <div class="form__main">
       <div class="form__box box__shadow">
@@ -48,7 +48,6 @@
               <textarea
                 matInput
                 type="text"
-                matInput
                 autocomplete="off"
                 formControlName="description"
                 tabindex="2"
@@ -79,7 +78,6 @@
               <textarea
                 matInput
                 type="text"
-                matInput
                 autocomplete="off"
                 formControlName="comments"
                 tabindex="2"

@@ -45,8 +45,16 @@ export class PatientsService {
     return patient;
   }
 
-  async filter(queryPatientDto: QueryPatientDto) {
+  async filter(requester: any, queryPatientDto: QueryPatientDto) {
+    const requesterId = requester.sub;
+    const employee = await this.employeesService.findOne(requesterId);
+    if (employee.admin) return await this.customQueryService.filter(queryPatientDto, this.patientModel);
+    queryPatientDto.filter.employees = { $elemMatch: { $eq: employee._id } };
     return await this.customQueryService.filter(queryPatientDto, this.patientModel);
+  }
+
+  async filterByEmployee(employeeId: string) {
+    return this.patientModel.find({ employees: { $elemMatch: { $eq: employeeId } } });
   }
 
   async create(patientDto: PatientDto) {

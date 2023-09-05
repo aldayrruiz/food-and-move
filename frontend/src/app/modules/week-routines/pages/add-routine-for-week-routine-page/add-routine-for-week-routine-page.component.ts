@@ -59,7 +59,7 @@ export class AddRoutineForWeekRoutinePageComponent implements OnInit {
       .subscribe({
         next: async () => {
           await this.exit();
-          this.snackerService.showSuccessful('Rutina añadida con éxito');
+          this.snackerService.showSuccessful('Ejercicio añadida con éxito');
         },
         error: (err) => {
           this.snackerService.showError(err.error.message);
@@ -76,7 +76,7 @@ export class AddRoutineForWeekRoutinePageComponent implements OnInit {
       .subscribe({
         next: async () => {
           await this.exit();
-          this.snackerService.showSuccessful('Rutina editada con éxito');
+          this.snackerService.showSuccessful('Ejercicio editada con éxito');
         },
         error: (err) => {
           this.snackerService.showError(err.error.message);

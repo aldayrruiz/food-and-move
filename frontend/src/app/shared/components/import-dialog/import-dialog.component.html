@@ -2,7 +2,7 @@
   <div class="header">
     <p class="title">
       Importar
-      {{ type === importType.Recipe ? 'Receta' : type === importType.Routine ? 'Rutina' : 'Dieta' }}
+      {{ type === importType.Recipe ? 'Receta' : type === importType.Routine ? 'Ejercicio' : 'Dieta' }}
     </p>
     <button mat-icon-button matTooltip="Salir" (click)="exit()">
       <mat-icon>close</mat-icon>
@@ -43,7 +43,7 @@
     <div class="bottom">
       <p class="selected">
         <span style="font-weight: bold"
-          >{{ type === importType.Recipe ? 'Receta' : type === importType.Routine ? 'Rutina' : 'Dieta' }}:</span
+          >{{ type === importType.Recipe ? 'Receta' : type === importType.Routine ? 'Ejercicio' : 'Dieta' }}:</span
         >
         {{ selected?.title }}
       </p>

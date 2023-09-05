@@ -16,6 +16,7 @@ import {
 import { UseInterceptors } from '@nestjs/common/decorators';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { User } from '@shared/decorators/user.decorator';
 import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 import { Storage } from 'src/constants/uploads.constants';
 import { FilterPatientDto } from './dto/filter-patient.dto';
@@ -42,8 +43,13 @@ export class PatientsController {
   }
 
   @Post('filter')
-  async filter(@Body() queryPatientDto: QueryPatientDto) {
-    return await this.patientsService.filter(queryPatientDto);
+  async filter(@User() requester: any, @Body() queryPatientDto: QueryPatientDto) {
+    return await this.patientsService.filter(requester, queryPatientDto);
+  }
+
+  @Get('filter-by-employee/:employeeId')
+  async filterByEmployee(@Param('employeeId') id: string) {
+    return await this.patientsService.filterByEmployee(id);
   }
 
   @Post('create')

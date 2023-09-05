@@ -20,7 +20,7 @@ import { ImportDialogComponent } from '@shared/components/import-dialog/import-d
 import { daysInit } from '@shared/components/weekly-calendar/constant/days-init';
 import { WeeklyCalendarType } from '@shared/components/weekly-calendar/enums/weekly-calendar-type';
 import { Day } from '@shared/components/weekly-calendar/interfaces/day';
-import { finalize } from 'rxjs';
+import { finalize, lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-foods-page',
@@ -146,9 +146,9 @@ export class FoodsPageComponent implements OnInit {
       data: { showCustom: false, type: ImportType.Diet },
     });
     dialogRef.afterClosed().subscribe({
-      next: (diet: DietModel) => {
+      next: async (diet: DietModel) => {
         if (diet) {
-          this.clearFoods();
+          await this.clearFoods();
           this.loadDiet(diet);
           this.setDietToLastConsult(diet._id);
         }
@@ -161,10 +161,11 @@ export class FoodsPageComponent implements OnInit {
 
   private clearFoods() {
     this.loaderService.isLoading.next(true);
-    this.foodsService
-      .clearFoods(this.patient!._id, this.dateRange)
-      .pipe(finalize(() => this.loaderService.isLoading.next(false)))
-      .subscribe();
+    return lastValueFrom(
+      this.foodsService
+        .clearFoods(this.patient!._id, this.dateRange)
+        .pipe(finalize(() => this.loaderService.isLoading.next(false)))
+    );
   }
 
   private loadDiet(diet: DietModel) {

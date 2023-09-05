@@ -10,4 +10,7 @@ export class FilterPatientDto extends PartialType(OmitType(PatientDto, ['passwor
 
   @IsOptional()
   name?: string;
+
+  @IsOptional()
+  employees?: any;
 }

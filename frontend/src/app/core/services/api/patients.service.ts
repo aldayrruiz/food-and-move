@@ -42,6 +42,14 @@ export class PatientsService {
     );
   }
 
+  getPatientsByEmployee(employeeId: string): Observable<PatientModel[]> {
+    return this.http.get<PatientModel[]>(`${environment.api}/patients/filter-by-employee/${employeeId}`).pipe(
+      map((patients) => {
+        return patients.map((patient) => this.patientPipe.transform(patient));
+      })
+    );
+  }
+
   filter(customQuery: CustomQuery): Observable<CustomResponse> {
     return this.http.post<CustomResponse>(`${environment.api}/patients/filter`, customQuery).pipe(
       map((data) => {

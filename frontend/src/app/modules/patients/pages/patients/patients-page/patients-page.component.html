@@ -6,13 +6,19 @@
       <input matInput (keyup)="applyFilter()" placeholder="Ej. Juan" #input autocomplete="off" [(ngModel)]="search" />
     </mat-form-field>
     <div>
-      <button class="margin-button" mat-raised-button color="primary" (click)="goToLinkPatientsToEmployees()" *ngIf="user.admin">
-        Vincular Muchos
+      <button
+        class="margin-button"
+        mat-raised-button
+        color="primary"
+        (click)="goToLinkPatientsToEmployees()"
+        *ngIf="user.admin"
+      >
+        Vincular
       </button>
       <button class="margin-button" mat-raised-button color="primary" (click)="importPatient()">
-        Importar Paciente
+        Importar
       </button>
-      <button class="margin-button" mat-raised-button color="primary" (click)="addPatient()">Nuevo Paciente</button>
+      <button class="margin-button" mat-raised-button color="primary" (click)="addPatient()">Nuevo</button>
     </div>
   </div>
   <mat-divider></mat-divider>

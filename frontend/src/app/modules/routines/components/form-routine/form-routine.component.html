@@ -1,6 +1,6 @@
 <div *ngIf="showImportRoutine" class="header__date">
   <p class="form__date"></p>
-  <button mat-stroked-button color="primary" type="button" (click)="importRoutine()">Importar Rutina</button>
+  <button mat-stroked-button color="primary" type="button" (click)="importRoutine()">Importar Ejercicio</button>
 </div>
 <form [formGroup]="form">
   <div class="form__main">
@@ -10,7 +10,7 @@
           <mat-icon mat-list-icon class="input__icon">fastfood</mat-icon>
           <mat-form-field class="input__field">
             <mat-label>Título</mat-label>
-            <input type="text" matInput autocomplete="off" formControlName="title" tabindex="1" />
+            <input type="text" matInput autocomplete="off" formControlName="title" tabindex="1" (keyup)="changeToTitleCase($event)" />
             <mat-error *ngIf="form.controls['title'].hasError('required')"
               >Título es <strong>obligatorio</strong></mat-error
             >

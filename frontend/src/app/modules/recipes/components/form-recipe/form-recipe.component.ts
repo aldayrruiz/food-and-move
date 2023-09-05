@@ -1,3 +1,4 @@
+import { TitleCasePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -54,6 +55,7 @@ export class FormRecipeComponent implements OnInit {
     private readonly snackerService: SnackerService,
     private readonly routerService: RouterService,
     private readonly loaderService: LoaderService,
+    private readonly titleCasePipe: TitleCasePipe,
     private readonly optionalPipe: OptionalPipe,
     private readonly dialog: MatDialog,
     private readonly fb: FormBuilder
@@ -209,5 +211,9 @@ export class FormRecipeComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  changeToTitleCase(event: any) {
+    event.target.value = this.titleCasePipe.transform(event.target.value);
   }
 }

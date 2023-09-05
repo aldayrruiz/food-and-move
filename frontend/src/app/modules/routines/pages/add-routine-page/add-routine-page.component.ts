@@ -42,7 +42,7 @@ export class AddRoutinePageComponent implements OnInit {
   }
 
   async exit() {
-    await this.routerService.goToEditRoutine(this.routine._id);
+    await this.routerService.goToRoutines();
   }
 
   addRoutine(): void {
@@ -54,7 +54,8 @@ export class AddRoutinePageComponent implements OnInit {
       .subscribe({
         next: async () => {
           await this.exit();
-          this.snackerService.showSuccessful('Rutina añadida con éxito');
+          this.snackerService.showSuccessful('Ejercicio añadida con éxito');
+          await this.routerService.goToRoutines();
         },
         error: (err) => {
           this.snackerService.showError(err.error.message);
@@ -71,7 +72,8 @@ export class AddRoutinePageComponent implements OnInit {
       .subscribe({
         next: async () => {
           await this.exit();
-          this.snackerService.showSuccessful('Rutina editada con éxito');
+          this.snackerService.showSuccessful('Ejercicio editada con éxito');
+          await this.routerService.goToRoutines();
         },
         error: (err) => {
           this.snackerService.showError(err.error.message);
@@ -83,6 +85,7 @@ export class AddRoutinePageComponent implements OnInit {
     this.activatedRoute.data.subscribe((data) => {
       this.routine = data.routine;
       this.edit = !!this.routine;
+      console.log(this.routine, this.edit);
     });
   }
 }

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,5 +29,6 @@ import { EditDietPageComponent } from './pages/edit-diet-page/edit-diet-page.com
     SharedModule,
     RecipeComponentsModule,
   ],
+  providers: [TitleCasePipe],
 })
 export class DietsModule {}

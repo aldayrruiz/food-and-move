@@ -10,7 +10,7 @@
           <mat-icon mat-list-icon class="input__icon">fastfood</mat-icon>
           <mat-form-field class="input__field">
             <mat-label>Título</mat-label>
-            <input type="text" matInput autocomplete="off" formControlName="title" tabindex="1" />
+            <input type="text" matInput autocomplete="off" formControlName="title" tabindex="1" (keyup)="changeToTitleCase($event)"/>
             <mat-error *ngIf="title.errors?.required">Título es <strong>obligatorio</strong></mat-error>
           </mat-form-field>
           <div class="fake__clear" *ngIf="!buttonClear.title"></div>

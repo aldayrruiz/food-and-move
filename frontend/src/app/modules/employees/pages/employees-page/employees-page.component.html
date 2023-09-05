@@ -10,7 +10,7 @@
       <mat-label>Buscar</mat-label>
       <input matInput (keyup)="applyFilter()" placeholder="Ej. Juan" #input autocomplete="off" [(ngModel)]="search" />
     </mat-form-field>
-    <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addEmployee()">Agregar Profesional</button>
+    <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addEmployee()">Nuevo</button>
   </div>
   <mat-divider></mat-divider>
   <div class="crud__main">

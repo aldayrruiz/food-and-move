@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,5 +21,6 @@ import { RecipesRoutingModule } from './recipes-routing.module';
     SharedModule,
     RecipeComponentsModule,
   ],
+  providers: [TitleCasePipe],
 })
 export class RecipesModule {}

@@ -1,3 +1,4 @@
+import { TitleCasePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -46,7 +47,8 @@ export class FormRoutineComponent implements OnInit {
     private readonly loaderService: LoaderService,
     private readonly snackerService: SnackerService,
     private readonly routerService: RouterService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly titleCasePipe: TitleCasePipe
   ) {}
 
   ngOnInit(): void {
@@ -159,5 +161,9 @@ export class FormRoutineComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  changeToTitleCase(event: any) {
+    event.target.value = this.titleCasePipe.transform(event.target.value);
   }
 }

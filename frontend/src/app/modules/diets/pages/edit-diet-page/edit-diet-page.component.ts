@@ -118,10 +118,6 @@ export class EditDietPageComponent implements OnInit {
     });
   }
 
-  editRecipe(day: Day, recipe: RecipeModel): void {
-    this.routerService.goToEditRecipeForDiet(this.diet._id, day.day, recipe._id);
-  }
-
   deleteRecipe(day: Day, recipe: RecipeModel): void {
     this.dialogService
       .openConfirmDialog('Eliminar receta', 'Seguro que quieres eliminar ' + recipe.title + '?')

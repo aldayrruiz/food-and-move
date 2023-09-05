@@ -33,7 +33,7 @@ export class AddMovePageComponent implements OnInit {
 
   form!: FormGroup;
   edit = false;
-  move: MoveModel | null = null;
+  move!: MoveModel;
 
   links: Array<LinkStructure> = [];
   videos: Array<VideoStructure> = [];
@@ -250,9 +250,11 @@ export class AddMovePageComponent implements OnInit {
       return;
     }
     this.edit = true;
-    this.movesService.getMove(moveId).subscribe((res) => {
-      this.move = res;
-      this.date = this.move.date;
+    this.activatedRoute.data.subscribe({
+      next: (data) => {
+        this.move = data.move;
+        this.date = this.move.date;
+      },
     });
   }
 }
