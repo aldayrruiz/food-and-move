@@ -11,6 +11,7 @@ services:
       MONGODB_URI: mongodb://mongodb:27017/nestjs
       JWT_ACCESS_SECRET: your_access_secret
       JWT_REFRESH_SECRET: your_refresh_secret
+      JWT_FORGOT_PASSWORD_SECRET: your_forgot_secret
       MAIL_HOST: your_smpt_host
       MAIL_USER: your_sender_email
       MAIL_PASSWORD: your_sender_password

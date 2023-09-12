@@ -1,20 +1,35 @@
 import { Dish } from '@shared/enums/dish';
 import { Meal } from '@shared/enums/meal';
 import { Type } from 'class-transformer';
-import { IsArray, IsEnum, IsMongoId, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator';
+import {
+  IsArray,
+  IsBoolean,
+  IsEnum,
+  IsMongoId,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  MaxLength,
+  ValidateNested
+} from 'class-validator';
 
-class Ingredient {
+export class Ingredient {
   @IsNotEmpty()
   @IsString()
   name: string;
 
   @IsNumber()
   @IsOptional()
-  quantity: number;
+  quantity?: number;
 
   @IsString()
   @IsOptional()
-  unit: string;
+  unit?: string;
+
+  @IsBoolean()
+  @IsOptional()
+  isChecked: boolean;
 }
 
 export class RecipeDto {

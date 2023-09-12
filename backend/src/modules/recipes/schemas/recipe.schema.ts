@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Dish } from '@shared/enums/dish';
 import { Meal } from '@shared/enums/meal';
 import mongoose, { Document } from 'mongoose';
+import {Ingredient} from "@shared/classes/ingredient";
 
 export type RecipeDocument = Recipe & Document;
 
@@ -35,7 +36,7 @@ export class Recipe {
       },
     ],
   })
-  ingredients: { name: string; quantity: number; unit: string; isChecked: boolean }[];
+  ingredients: Ingredient[];
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'attachments' })
   attachment: mongoose.Schema.Types.ObjectId;

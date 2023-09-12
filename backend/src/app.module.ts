@@ -22,6 +22,7 @@ import { AppService } from './app.service';
 import { MongooseConfigService } from './db/mongoose.service';
 import { AddOwnerToBodyMiddleware } from './middlewares/add-owner-to-body.middleware';
 import { AddUserToRequestMiddleware } from './middlewares/add-user-to-request.middleware';
+import { ShoppingListsModule } from './modules/shopping-lists/shopping-lists.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { AddUserToRequestMiddleware } from './middlewares/add-user-to-request.mi
     MailModule,
     FeedbackModule,
     WeekRoutinesModule,
+    ShoppingListsModule,
   ],
   controllers: [AppController],
   providers: [AppService, UploadsService],
