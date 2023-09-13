@@ -15,6 +15,7 @@ import { daysInit } from '@shared/components/weekly-calendar/constant/days-init'
 import { WeeklyCalendarType } from '@shared/components/weekly-calendar/enums/weekly-calendar-type';
 import { Day } from '@shared/components/weekly-calendar/interfaces/day';
 import { finalize } from 'rxjs';
+import {InfoRecipeComponent} from "@modules/recipes/components/info-recipe/info-recipe.component";
 
 @Component({
   selector: 'app-edit-diet-page',
@@ -33,7 +34,7 @@ export class EditDietPageComponent implements OnInit {
     private readonly snackerService: SnackerService,
     private readonly loaderService: LoaderService,
     private readonly dialogService: DialogService,
-    private readonly matDialog: MatDialog
+    private readonly matDialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -116,6 +117,14 @@ export class EditDietPageComponent implements OnInit {
         this.snackerService.showError('No se ha podido importar la receta');
       },
     });
+  }
+
+  openInfoRecipe(recipe: RecipeModel): void {
+    const dialogRef = this.matDialog.open(InfoRecipeComponent, {
+      width: '800px',
+      data: recipe,
+    });
+    dialogRef.afterClosed();
   }
 
   deleteRecipe(day: Day, recipe: RecipeModel): void {

@@ -13,6 +13,7 @@
       [showRating]="false"
       [type]="weeklyCalendarType.Food"
       (add)="addRecipe($event)"
+      (edit)="openInfoRecipe($event.item)"
       (delete)="deleteRecipe($event.day, $event.item)"
     ></app-weekly-calendar>
   </div>

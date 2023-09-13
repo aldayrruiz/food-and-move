@@ -50,9 +50,6 @@ export class FormRecipeComponent implements OnInit {
 
   constructor(
     private readonly attachmentsService: AttachmentsService,
-    private readonly activatedRoute: ActivatedRoute,
-    private readonly recipesService: RecipesService,
-    private readonly snackerService: SnackerService,
     private readonly routerService: RouterService,
     private readonly loaderService: LoaderService,
     private readonly titleCasePipe: TitleCasePipe,

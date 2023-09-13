@@ -5,26 +5,39 @@
     <mat-icon class="icon">shopping_basket</mat-icon>
   </div>
   <div class="form__list">
+    <!--    <mat-form-field class="input">-->
+    <!--      <mat-label>Ingrediente</mat-label>-->
+    <!--      <input matInput #ingredient/>-->
+    <!--    </mat-form-field>-->
     <mat-form-field class="input">
       <mat-label>Ingrediente</mat-label>
-      <input matInput #ingredient />
+      <input type="text"
+             placeholder="Elige uno"
+             aria-label="Ingrediente"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
     <mat-form-field class="input">
       <mat-label>Cantidad</mat-label>
-      <input matInput type="number" #quantity />
+      <input matInput [value]="quantityValue" type="number" min="1" #quantity/>
     </mat-form-field>
     <mat-form-field class="input">
       <mat-label>Unidad</mat-label>
-      <input matInput #unit />
+      <mat-select [(value)]="unit">
+        <mat-option *ngFor="let unitOption of unitsOptions" [value]="unitOption">{{unitOption}}</mat-option>
+      </mat-select>
     </mat-form-field>
     <button
       mat-icon-button
       type="button"
       (click)="
-        addIngredient(ingredient.value, +quantity.value, unit.value);
-        ingredient.value = '';
-        quantity.value = '';
-        unit.value = ''
+        addIngredient(myControl.value, +quantity.value, unit);
       "
     >
       <mat-icon>add</mat-icon>
@@ -35,7 +48,7 @@
       <div class="item">
         <p>{{ ingredient.ingredient.name }}</p>
         <p>
-          {{ ingredient.ingredient.quantity != 0 ? ingredient.ingredient.quantity : '' }}
+          {{ ingredient.ingredient.quantity !== 0 ? ingredient.ingredient.quantity : '' }}
           {{ ingredient.ingredient.unit }}
         </p>
         <button mat-icon-button type="button" (click)="removeIngredient(ingredient.id)">
