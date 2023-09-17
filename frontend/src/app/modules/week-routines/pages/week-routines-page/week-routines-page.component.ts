@@ -14,6 +14,8 @@ import { AddWeekRoutineComponent } from '@modules/week-routines/components/add-w
 import { TableStructure } from '@shared/components/table/interfaces/table-structure';
 import { finalize } from 'rxjs';
 import { DEFAULT_LIMIT } from 'src/app/constants/app.constants';
+import {StorageService} from "@core/services/storage.service";
+import {EmployeeModel} from "@core/models/employee/employee.model";
 
 @Component({
   selector: 'app-week-routines-page',
@@ -24,6 +26,7 @@ export class WeekRoutinesPageComponent implements OnInit {
   listWeekRoutines: WeekRoutineModel[] = [];
   isSmall = false;
   isLoadingResults = false;
+  user!: EmployeeModel;
 
   dataSource!: MatTableDataSource<any>;
 
@@ -50,10 +53,12 @@ export class WeekRoutinesPageComponent implements OnInit {
     private readonly loaderService: LoaderService,
     private readonly dialogService: DialogService,
     private readonly routerService: RouterService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly storageService: StorageService
   ) {}
 
   ngOnInit(): void {
+    this.user = this.storageService.getUser();
     this.loadWeekRoutines();
   }
 

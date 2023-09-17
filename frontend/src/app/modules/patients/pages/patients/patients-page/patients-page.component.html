@@ -3,7 +3,7 @@
     <p class="header__subtitle">Pacientes</p>
     <mat-form-field appearance="standard" class="input__search">
       <mat-label>Buscar</mat-label>
-      <input matInput (keyup)="applyFilter()" placeholder="Ej. Juan" #input autocomplete="off" [(ngModel)]="search" />
+      <input matInput (keyup)="applyFilter()" placeholder="Ej. Juan" #input autocomplete="off" [(ngModel)]="search"/>
     </mat-form-field>
     <div>
       <button
@@ -15,10 +15,11 @@
       >
         Vincular
       </button>
-      <button class="margin-button" mat-raised-button color="primary" (click)="importPatient()">
+      <button *ngIf="user.admin" class="margin-button" mat-raised-button color="primary" (click)="importPatient()">
         Importar
       </button>
-      <button class="margin-button" mat-raised-button color="primary" (click)="addPatient()">Nuevo</button>
+      <button *ngIf="user.admin" class="margin-button" mat-raised-button color="primary" (click)="addPatient()">Nuevo
+      </button>
     </div>
   </div>
   <mat-divider></mat-divider>

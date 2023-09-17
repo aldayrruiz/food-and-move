@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="btn__add" *ngIf="isSmall">
+  <div class="btn__add" *ngIf="user.admin && isSmall">
     <button mat-fab color="primary" (click)="addRoutine()">
       <mat-icon>add</mat-icon>
     </button>
@@ -17,7 +17,7 @@
         [(ngModel)]="search"
       />
     </mat-form-field>
-    <button mat-raised-button color="primary" *ngIf="!isSmall" (click)="addRoutine()">Nuevo</button>
+    <button mat-raised-button color="primary" *ngIf="user.admin && !isSmall" (click)="addRoutine()">Nuevo</button>
   </div>
   <mat-divider></mat-divider>
   <div class="crud__main">

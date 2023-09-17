@@ -21,7 +21,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseConfigService } from './db/mongoose.service';
 import { AddOwnerToBodyMiddleware } from './middlewares/add-owner-to-body.middleware';
-import { AddUserToRequestMiddleware } from './middlewares/add-user-to-request.middleware';
 import { ShoppingListsModule } from './modules/shopping-lists/shopping-lists.module';
 
 @Module({
@@ -65,19 +64,5 @@ export class AppModule implements NestModule {
         path: '*',
         method: RequestMethod.PUT,
       });
-
-    consumer
-      .apply(AddUserToRequestMiddleware)
-      .exclude(
-        {
-          path: 'api/auth/(.*)',
-          method: RequestMethod.ALL,
-        },
-        {
-          path: 'api/files/(.*)',
-          method: RequestMethod.ALL,
-        }
-      )
-      .forRoutes('*');
   }
 }

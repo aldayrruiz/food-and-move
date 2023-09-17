@@ -9,6 +9,8 @@ import { DietDto } from './dto/diet.dto';
 import { FilterDietDto } from './dto/filter-diet.dto';
 import { QueryDietDto } from './dto/query-diet.dto';
 import { UpdateDietDto } from './dto/update-diet.dto';
+import {Roles} from "@modules/auth/roles.decorator";
+import {Role} from "@modules/auth/enums/role.enum";
 
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
@@ -32,16 +34,19 @@ export class DietsController {
     return await this.dietsService.filter(queryDietDto);
   }
 
+  @Roles(Role.Admin)
   @Post('create')
   async create(@Body() dietDto: DietDto) {
     return await this.dietsService.create(dietDto);
   }
 
+  @Roles(Role.Admin)
   @Patch('update/:id')
   async update(@Param('id') id: string, @Body() updateDietDto: UpdateDietDto) {
     return await this.dietsService.update(id, updateDietDto);
   }
 
+  @Roles(Role.Admin)
   @Delete('remove/:id')
   async remove(@Param('id') id: string) {
     return await this.dietsService.remove(id);

@@ -9,9 +9,9 @@ import {
   Param,
   ParseFilePipe,
   Patch,
-  Post,
+  Post, Req,
   UploadedFile,
-  UseGuards,
+  UseGuards
 } from '@nestjs/common';
 import { UseInterceptors } from '@nestjs/common/decorators';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -24,6 +24,9 @@ import { PatientDto } from './dto/patient.dto';
 import { QueryPatientDto } from './dto/query-patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
 import { PatientsService } from './patients.service';
+import { Request } from 'express';
+import {Role} from "@modules/auth/enums/role.enum";
+import {Roles} from "@modules/auth/roles.decorator";
 
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
@@ -42,6 +45,7 @@ export class PatientsController {
     return await this.patientsService.lookUp(filterPatientDto);
   }
 
+  @Roles(Role.Employee)
   @Post('filter')
   async filter(@User() requester: any, @Body() queryPatientDto: QueryPatientDto) {
     return await this.patientsService.filter(requester, queryPatientDto);
@@ -52,6 +56,7 @@ export class PatientsController {
     return await this.patientsService.filterByEmployee(id);
   }
 
+  @Roles(Role.Admin)
   @Post('create')
   async create(@Body() patientDto: PatientDto) {
     return await this.patientsService.create(patientDto);
@@ -92,17 +97,19 @@ export class PatientsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Req() req: Request, @Param('id') id: string) {
     return await this.patientsService.findById(id);
   }
 
   @UseGuards(JwtAuthGuard)
+  @Roles(Role.Admin)
   @Post('linkEmployeePatient')
   async linkPatient(@Body() linkPatientDto: LinkPatientDto) {
     return await this.patientsService.linkEmployeePatient(linkPatientDto);
   }
 
   @UseGuards(JwtAuthGuard)
+  @Roles(Role.Admin)
   @Post('unlinkEmployeePatient')
   async unlinkPatient(@Body() unlinkPatientDto: LinkPatientDto) {
     return await this.patientsService.unlinkEmployeePatient(unlinkPatientDto);

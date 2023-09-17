@@ -6,12 +6,15 @@ import { ApiTags } from '@nestjs/swagger';
 import { JwtRefreshGuard } from '@shared/guards/jwt-refresh.guard';
 import { Request } from 'express';
 import { AuthPatientService } from '../services/auth-patient.service';
+import {Roles} from "@modules/auth/roles.decorator";
+import {Role} from "@modules/auth/enums/role.enum";
 
 @ApiTags('auth')
 @Controller('auth/patient')
 export class AuthPatientController {
   constructor(private readonly authService: AuthPatientService) {}
 
+  @Roles(Role.Admin)
   @Post('signUp')
   signUp(@Body() signUpDto: SignUpPatientDto) {
     return this.authService.signUp(signUpDto);

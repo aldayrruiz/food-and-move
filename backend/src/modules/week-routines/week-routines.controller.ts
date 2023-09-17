@@ -6,6 +6,8 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { DayOfWeek } from '@shared/enums/day-of-week';
 import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 import { WeekRoutinesService } from './week-routines.service';
+import {Roles} from "@modules/auth/roles.decorator";
+import {Role} from "@modules/auth/enums/role.enum";
 
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
@@ -24,11 +26,13 @@ export class WeekRoutinesController {
     return await this.weekRoutineService.findOne(id);
   }
 
+  @Roles(Role.Admin)
   @Post()
   async create(@Body() weekRoutineDto: WeekRoutineDto) {
     return await this.weekRoutineService.create(weekRoutineDto);
   }
 
+  @Roles(Role.Admin)
   @Post('addRoutine')
   async addRoutine(@Query('weekRoutineId') weekRoutineId: string, @Query('day') day: DayOfWeek, @Body() routineDto: UpdateRoutineDto) {
     return await this.weekRoutineService.addRoutine(weekRoutineId, day, routineDto);
@@ -59,6 +63,7 @@ export class WeekRoutinesController {
     return await this.weekRoutineService.removeRoutine(weekRoutineId, day, routineId);
   }
 
+  @Roles(Role.Admin)
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return await this.weekRoutineService.remove(id);

@@ -14,6 +14,8 @@ import { InfoRoutineComponent } from '@modules/routines/components/info-routine/
 import { TableStructure } from '@shared/components/table/interfaces/table-structure';
 import { finalize } from 'rxjs/operators';
 import { DEFAULT_LIMIT } from 'src/app/constants/app.constants';
+import {EmployeeModel} from "@core/models/employee/employee.model";
+import {StorageService} from "@core/services/storage.service";
 
 @Component({
   selector: 'app-routines-page',
@@ -24,6 +26,7 @@ export class RoutinesPageComponent implements OnInit {
   listRoutines: RoutineModel[] = [];
   isSmall = false;
   isLoadingResults = false;
+  user!: EmployeeModel;
 
   dataSource!: MatTableDataSource<any>;
 
@@ -50,10 +53,12 @@ export class RoutinesPageComponent implements OnInit {
     private readonly routinesService: RoutinesService,
     private readonly loaderService: LoaderService,
     private readonly snackerService: SnackerService,
-    private readonly routerService: RouterService
+    private readonly routerService: RouterService,
+    private readonly storageService: StorageService
   ) {}
 
   ngOnInit(): void {
+    this.user = this.storageService.getUser();
     this.loadRoutines();
     this.setColumnsBySize();
   }

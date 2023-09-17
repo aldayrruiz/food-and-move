@@ -14,6 +14,7 @@ import { EmployeesModule } from '../employees/employees.module';
 import { PatientsModule } from '../patients/patients.module';
 import { AuthPatientController } from './controllers/auth-patient.controller';
 import { AuthPatientService } from './services/auth-patient.service';
+import {RolesGuard} from "@modules/auth/guards/role.guard";
 
 @Module({
   imports: [PassportModule, PatientsModule, EmployeesModule, HashingModule, MailModule, JwtModule.register({})],
@@ -26,6 +27,10 @@ import { AuthPatientService } from './services/auth-patient.service';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
   controllers: [AuthPatientController, AuthEmployeeController],

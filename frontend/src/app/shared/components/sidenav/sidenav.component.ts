@@ -62,6 +62,11 @@ export class SidenavComponent implements OnInit {
     this.onSidenavClose();
   }
 
+  goToWeekRoutines(): void {
+    this.routerService.goToWeekRoutines();
+    this.onSidenavClose();
+  }
+
   goToConfiguration(): void {
     this.routerService.goToConfiguration();
     this.onSidenavClose();

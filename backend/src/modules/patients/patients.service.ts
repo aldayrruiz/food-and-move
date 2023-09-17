@@ -46,7 +46,7 @@ export class PatientsService {
   }
 
   async filter(requester: any, queryPatientDto: QueryPatientDto) {
-    const requesterId = requester.sub;
+    const requesterId = requester._id;
     const employee = await this.employeesService.findOne(requesterId);
     if (employee.admin) return await this.customQueryService.filter(queryPatientDto, this.patientModel);
     queryPatientDto.filter.employees = { $elemMatch: { $eq: employee._id } };

@@ -14,6 +14,8 @@ import { InfoRecipeComponent } from '@modules/recipes/components/info-recipe/inf
 import { TableStructure } from '@shared/components/table/interfaces/table-structure';
 import { finalize } from 'rxjs/operators';
 import { DEFAULT_LIMIT } from 'src/app/constants/app.constants';
+import {EmployeeModel} from "@core/models/employee/employee.model";
+import {StorageService} from "@core/services/storage.service";
 
 @Component({
   selector: 'app-recipes-page',
@@ -24,7 +26,7 @@ export class RecipesPageComponent implements OnInit {
   listRecipes: RecipeModel[] = [];
   isSmall = false;
   isLoadingResults = false;
-
+  user!: EmployeeModel;
   dataSource!: MatTableDataSource<any>;
 
   tableStructure: TableStructure[] = [
@@ -52,10 +54,12 @@ export class RecipesPageComponent implements OnInit {
     private readonly dialogService: DialogService,
     private readonly routerService: RouterService,
     private readonly loaderService: LoaderService,
-    private readonly snackerService: SnackerService
+    private readonly snackerService: SnackerService,
+    private readonly storageService: StorageService
   ) {}
 
   ngOnInit(): void {
+    this.user = this.storageService.getUser();
     this.loadRecipes();
   }
 

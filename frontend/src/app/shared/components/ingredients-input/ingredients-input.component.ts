@@ -55,7 +55,6 @@ export class IngredientsInputComponent implements OnInit {
     const file = await fetch('assets/lists/ingredientes.txt')
     const text = await file.text()
     this.ingredientOptions = text.split('\n')
-    console.log(this.ingredientOptions)
   }
 
   private _filter(value: string): string[] {

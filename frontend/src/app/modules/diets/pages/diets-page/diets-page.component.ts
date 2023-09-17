@@ -14,6 +14,8 @@ import { AddDietComponent } from '@modules/diets/components/add-diet/add-diet.co
 import { TableStructure } from '@shared/components/table/interfaces/table-structure';
 import { finalize } from 'rxjs';
 import { DEFAULT_LIMIT } from 'src/app/constants/app.constants';
+import {EmployeeModel} from "@core/models/employee/employee.model";
+import {StorageService} from "@core/services/storage.service";
 
 @Component({
   selector: 'app-diets-page',
@@ -24,7 +26,7 @@ export class DietsPageComponent implements OnInit {
   listDiets: DietModel[] = [];
   isSmall = false;
   isLoadingResults = false;
-
+  user!: EmployeeModel;
   dataSource!: MatTableDataSource<any>;
 
   tableStructure: TableStructure[] = [
@@ -50,10 +52,12 @@ export class DietsPageComponent implements OnInit {
     private readonly snackerService: SnackerService,
     private readonly loaderService: LoaderService,
     private readonly dialogService: DialogService,
-    private readonly routerService: RouterService
+    private readonly routerService: RouterService,
+    private readonly storageService: StorageService
   ) {}
 
   ngOnInit(): void {
+    this.user = this.storageService.getUser();
     this.loadDiets();
     this.setColumnsBySize();
   }
